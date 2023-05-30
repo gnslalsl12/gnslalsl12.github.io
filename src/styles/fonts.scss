@@ -1,0 +1,32 @@
+@mixin montserratFont($name, $filename) {
+  @font-face {
+    font-family: $name;
+    src: url('../../public/fonts/#{$filename}') format('truetype');
+  }
+}
+
+// 필요한 폰트 믹스인들 추가
+@include montserratFont('Montserrat-Black', 'Montserrat-Black.ttf');
+@include montserratFont('Montserrat-BlackItalic', 'Montserrat-BlackItalic.ttf');
+@include montserratFont('Montserrat-Bold', 'Montserrat-Bold.ttf');
+@include montserratFont('Montserrat-BoldItalic', 'Montserrat-BoldItalic.ttf');
+@include montserratFont('Montserrat-ExtraBold', 'Montserrat-ExtraBold.ttf');
+@include montserratFont(
+  'Montserrat-ExtraBoldItalic',
+  'Montserrat-ExtraBoldItalic.ttf'
+);
+@include montserratFont('Montserrat-ExtraLight', 'Montserrat-ExtraLight.ttf');
+@include montserratFont(
+  'Montserrat-ExtraLightItalic',
+  'Montserrat-ExtraLightItalic.ttf'
+);
+@include montserratFont('Montserrat-Light', 'Montserrat-Light.ttf');
+@include montserratFont('Montserrat-LightItalic', 'Montserrat-LightItalic.ttf');
+@include montserratFont('Montserrat-Medium', 'Montserrat-Medium.ttf');
+@include montserratFont(
+  'Montserrat-MediumItalic',
+  'Montserrat-MediumItalic.ttf'
+);
+@include montserratFont('Montserrat-Regular', 'Montserrat-Regular.ttf');
+@include montserratFont('Montserrat-Italic', 'Montserrat-Italic.ttf');
+// 추가적인 폰트 믹스인들 작성

@@ -1,0 +1,110 @@
+@use 'var.scss';
+
+#component_navigationbar {
+  width: 100%;
+  height: var.$navigationbarH;
+  // border-bottom: 2px solid rgba(120, 120, 120, 0.4);
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  background: rgba(0, 0, 0, 0.176);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px var.$navigationbarPx;
+  animation: popdown 1s ease-out;
+}
+
+@keyframes popdown {
+  0% {
+    translate: 0 -100%;
+  }
+  100% {
+    translate: 0 0;
+  }
+}
+
+.navigationbar_logo {
+  height: 60%;
+}
+
+#navigationbar_spreadedmenu {
+  max-width: 700px;
+  width: 60%;
+  height: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 20px;
+  font-family: 'Montserrat-Light';
+  color: white;
+}
+
+#navigationbar_centermenu {
+  width: 50%;
+  height: 70%;
+  outline: 1px solid white;
+}
+
+#listedmenu-popdown {
+  position: absolute;
+  height: var.$screenH;
+  width: var.$screenW;
+  top: var.$navigationbarH;
+  left: 0px;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+}
+
+.listedmenu-list {
+  width: var.$screenW;
+  height: 80px;
+  display: grid;
+  place-content: center;
+  font-family: 'Montserrat-Light';
+  font-size: 20px;
+  color: white;
+  border-bottom: 3px solid rgba(255, 255, 255, 0.1);
+}
+
+.listedmenu-list:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  font-size: 24px;
+}
+
+@keyframes menuAnimation {
+  0% {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@mixin menuAnimation($duration) {
+  animation: menuAnimation $duration ease-out;
+}
+
+.lm-l-1 {
+  @include menuAnimation(0.2s);
+}
+.lm-l-2 {
+  @include menuAnimation(0.3s);
+}
+.lm-l-3 {
+  @include menuAnimation(0.4s);
+}
+.lm-l-4 {
+  @include menuAnimation(0.5s);
+}
+.lm-l-5 {
+  @include menuAnimation(0.6s);
+}
