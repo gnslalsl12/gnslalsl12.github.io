@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/static/css/main.cdce7dd0.css",
+    "main.js": "/static/js/main.a3297e4b.js",
+    "static/media/Montserrat-BoldItalic.ttf": "/static/media/Montserrat-BoldItalic.0a6d010e1ec6e5e4cf4a.ttf",
+    "static/media/Montserrat-MediumItalic.ttf": "/static/media/Montserrat-MediumItalic.6e2ff17c69b3f452003c.ttf",
+    "static/media/Montserrat-ExtraBoldItalic.ttf": "/static/media/Montserrat-ExtraBoldItalic.c2043c9dbf1877e0e17c.ttf",
+    "static/media/Montserrat-LightItalic.ttf": "/static/media/Montserrat-LightItalic.18c875645de283ce0f30.ttf",
+    "static/media/Montserrat-ExtraLightItalic.ttf": "/static/media/Montserrat-ExtraLightItalic.bd410a41c2091aba448f.ttf",
+    "static/media/Montserrat-BlackItalic.ttf": "/static/media/Montserrat-BlackItalic.8adefc8fa48e4e054b2a.ttf",
+    "static/media/Montserrat-Italic.ttf": "/static/media/Montserrat-Italic.a7d5a03d27419c868877.ttf",
+    "static/media/Montserrat-ExtraBold.ttf": "/static/media/Montserrat-ExtraBold.fdfc24b8a9e4e17fe907.ttf",
+    "static/media/Montserrat-Medium.ttf": "/static/media/Montserrat-Medium.a281f04d4c8926e7dea1.ttf",
+    "static/media/Montserrat-Bold.ttf": "/static/media/Montserrat-Bold.d0ca82d8ca07ba209aee.ttf",
+    "static/media/Montserrat-Light.ttf": "/static/media/Montserrat-Light.dfb04f69b77b88e22558.ttf",
+    "static/media/Montserrat-Regular.ttf": "/static/media/Montserrat-Regular.94bb495fba6077f669ed.ttf",
+    "static/media/Montserrat-Black.ttf": "/static/media/Montserrat-Black.d53bb0fb5b57ab742aae.ttf",
+    "static/media/Montserrat-ExtraLight.ttf": "/static/media/Montserrat-ExtraLight.41d61b3f1d94d1d526d8.ttf",
+    "index.html": "/index.html",
+    "main.cdce7dd0.css.map": "/static/css/main.cdce7dd0.css.map",
+    "main.a3297e4b.js.map": "/static/js/main.a3297e4b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.cdce7dd0.css",
+    "static/js/main.a3297e4b.js"
+  ]
+}
