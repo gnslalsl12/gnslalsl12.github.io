@@ -27,10 +27,6 @@ const NavigationBar = ({
     setHamOpenState(!hamOpenState);
   };
 
-  const CenterMenu = (): JSX.Element => {
-    return <div></div>;
-  };
-
   return (
     <div
       id='component_navigationbar'
@@ -41,7 +37,6 @@ const NavigationBar = ({
         src='images/HoonsTextLogoWhite.png'
         alt='LogoWhite'
       />
-      {hamOpenState && <CenterMenu />}
       {windowWidth > 900 ? (
         <SpreadedMenu />
       ) : (

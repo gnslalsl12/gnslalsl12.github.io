@@ -6,3 +6,10 @@ $screen2H: 200vh;
 $screen2W: 200vw;
 $duration: 5s;
 $navigationbarH: 60px;
+
+@mixin adjustScreenH($input) {
+  height: (100 * $input) vh;
+}
+@mixin adustSscreenW($input) {
+  width: (100 * $input) vw;
+}

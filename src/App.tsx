@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 
 import NavigationBar from './components/NavigationBar';
 import Main from './components/Main';
+import About from './components/About';
 
 function App() {
   const [windowWidth, setWindowWidth] = useState<number>(0);
@@ -29,6 +30,7 @@ function App() {
     <div id='page_index'>
       <NavigationBar windowWidth={windowWidth} />
       <Main windowWidth={windowWidth} />
+      <About windowWidth={windowWidth} />
     </div>
   );
 }

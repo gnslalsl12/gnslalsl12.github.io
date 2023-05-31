@@ -2,11 +2,16 @@
 @use 'hambutton.scss';
 @use 'navigationbar.scss';
 @use 'mainpage.scss';
+@use 'aboutpage.scss';
 @use 'var.scss';
 
 button {
   all: unset;
   cursor: pointer;
+}
+
+span {
+  all: unset;
 }
 
 body::-webkit-scrollbar {
