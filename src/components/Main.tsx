@@ -1,28 +1,10 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 
-const Main = (): JSX.Element => {
-  const [windowWidth, setWindowWidth] = useState<number>(0);
-
+const Main = ({ windowWidth }: { windowWidth: number }): JSX.Element => {
   useEffect(() => {
-    if (windowWidth === 0) setWindowWidth(window.innerWidth);
     setMainFontSize(Math.max(40, windowWidth * 0.07));
   }, [windowWidth]);
-
-  useEffect(() => {
-    // if (windowWidth === undefined) setWindowWidth(window.innerWidth);
-
-    const handleResizeWindowWidth = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener('resize', handleResizeWindowWidth);
-
-    return () => {
-      //컴포넌트 언마운트 시 리스너 제거용
-      window.removeEventListener('resize', handleResizeWindowWidth);
-    };
-  }, []);
 
   const [mainFontSize, setMainFontSize] = useState<number>(100);
 
@@ -39,6 +21,14 @@ const Main = (): JSX.Element => {
         >
           HOONS PORTFOLIO
         </span>
+      </div>
+      <div className='page_main_scrolldown_container'>
+        <span className='page_main_scrolldown_text'> Scroll Down</span>
+        <div className='page_main_scrolldown_arrow'>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </div>
     </div>
   );

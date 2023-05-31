@@ -1,36 +1,19 @@
 import { useEffect, useState } from 'react';
 import React from 'react';
 
-const NavigationBar = (): JSX.Element => {
-  const [windowWidth, setWindowWidth] = useState<number>(0);
-
-  useEffect(() => {
-    if (windowWidth === 0) setWindowWidth(window.innerWidth);
-  }, [windowWidth]);
-
-  useEffect(() => {
-    // if (windowWidth === undefined) setWindowWidth(window.innerWidth);
-
-    const handleResizeWindowWidth = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener('resize', handleResizeWindowWidth);
-
-    return () => {
-      //컴포넌트 언마운트 시 리스너 제거용
-      window.removeEventListener('resize', handleResizeWindowWidth);
-    };
-  }, []);
-
+const NavigationBar = ({
+  windowWidth,
+}: {
+  windowWidth: number;
+}): JSX.Element => {
   const SpreadedMenu = (): JSX.Element => {
     return (
       <div id='navigationbar_spreadedmenu'>
-        <div>Intro</div>
-        <div>About</div>
-        <div>Works</div>
-        <div>Stack</div>
-        <div>Contact</div>
+        <button>Intro</button>
+        <button>About</button>
+        <button>Works</button>
+        <button>Stack</button>
+        <button>Contact</button>
       </div>
     );
   };
