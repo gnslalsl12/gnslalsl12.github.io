@@ -3,6 +3,7 @@
 @use 'navigationbar.scss';
 @use 'mainpage.scss';
 @use 'aboutpage.scss';
+@use 'workspage.scss';
 @use 'var.scss';
 
 button {
@@ -18,8 +19,13 @@ body::-webkit-scrollbar {
   display: none; /* Chrome, Safari */
 }
 
-body {
+body,
+html {
   margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+
   -ms-overflow-style: none; /* IE, MsEdge */
   scrollbar-width: none; /* Firefox */
 }
@@ -38,6 +44,29 @@ body {
 
 #page_index {
   width: var.$screenW;
+  height: fit-content;
   position: relative;
+  // display: flex;
+  // flex-direction: column;
   z-index: 0;
+  overflow: auto;
+}
+
+#page_index_background {
+  // background: black;
+  width: max(var.$screen2H, var.$screen2W);
+  height: max(var.$screen2H, var.$screen2W);
+  animation: gradient-animation var.$duration linear infinite;
+  background: linear-gradient(to right, #456173 0%, #b4b4b4 50%, #45735c 100%);
+  position: fixed;
+  top: min(-50vh, -50vw);
+  left: min(-50vh, -50vw);
+  z-index: -5;
+}
+
+.temppage_temp {
+  width: var.$screenW;
+  height: var.$screenH;
+  outline: 1px solid red;
+  background: rgba(255, 255, 255, 0.3);
 }

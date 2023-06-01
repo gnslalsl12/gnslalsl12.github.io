@@ -1,35 +1,31 @@
 @use 'var.scss';
 
-.page_main_background {
-  width: max(var.$screen2H, var.$screen2W);
-  height: max(var.$screen2H, var.$screen2W);
-  animation: gradient-animation var.$duration linear infinite,
-    fadeIn 1s ease-out forwards;
-  background: linear-gradient(to right, #456173 0%, #b4b4b4 50%, #45735c 100%);
-  position: absolute;
-  top: min(-50vh, -50vw);
-  left: min(-50vh, -50vw);
-  z-index: -1;
-  opacity: 0;
-  animation-delay: 1s;
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
 #page_main {
   width: var.$screenW;
   height: var.$screenH;
   position: relative;
-  overflow: hidden;
+  // overflow: hidden;
   display: grid;
   place-content: center;
+}
+.page_main_background {
+  animation: fadeIn 1s ease-out forwards;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var.$screenW;
+  height: var.$screenH;
+  animation-delay: 1s;
+  background: white;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 @mixin adjustFontSize($containerWidth) {

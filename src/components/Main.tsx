@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 
 const Main = ({ windowWidth }: { windowWidth: number }): JSX.Element => {
   useEffect(() => {
-    setMainFontSize(Math.max(40, windowWidth * 0.07));
+    setMainFontSize(Math.max(35, windowWidth * 0.07));
   }, [windowWidth]);
 
   const [mainFontSize, setMainFontSize] = useState<number>(100);

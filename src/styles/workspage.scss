@@ -1,0 +1,14 @@
+@use 'var.scss';
+
+#page_works {
+  width: var.$screenW;
+  height: var.$screenH;
+  position: relative;
+  // overflow: clip;
+  //   display: grid;
+  //   place-content: center;
+  box-sizing: border-box;
+  background-color: rgba(44, 3, 59, 0.53);
+  outline: 1px solid white;
+  z-index: 1;
+}

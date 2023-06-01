@@ -13,3 +13,14 @@ $navigationbarH: 60px;
 @mixin adustSscreenW($input) {
   width: (100 * $input) vw;
 }
+
+@mixin WH($inputW, $inputH) {
+  width: (100 * $inputW) vw;
+  height: (100 * $inputH) vh;
+}
+
+@mixin adjustFontSize($minWidth, $maxWidth, $fontSize) {
+  @media screen and (min-width: $minWidth) and (max-width: $maxWidth) {
+    font-size: $fontSize;
+  }
+}
