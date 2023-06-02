@@ -11,7 +11,7 @@ import project3D_RendezBoo from '../images/project3D_RendezBoo.png';
 type WorksItemType = {
   projectTitle: string;
   projectType: string;
-  projectExplain: string;
+  projectExplain: JSX.Element;
   project2DSrc: string;
   project3DSrc: string;
   projectLink: string;
@@ -24,8 +24,7 @@ const Works = ({ windowWidth }: { windowWidth: number }): JSX.Element => {
     {
       projectTitle: 'Worldy',
       projectType: '팀 프로젝트 (웹)',
-      projectExplain:
-        '월디게임 어쩌구저쩌구 설명 어쩌구적ㅇ너미소ㅓㄴ이ㅗ서니소ㅓㅁ나솸놋니ㅗ서ㅣ나ㅚ',
+      projectExplain: <>디자인 맘에 안든다</>,
       project2DSrc: project2D_Worldy,
       project3DSrc: project3D_Worldy,
       projectLink: 'https://gnslalsl12.github/~',
@@ -35,8 +34,7 @@ const Works = ({ windowWidth }: { windowWidth: number }): JSX.Element => {
     {
       projectTitle: '이음',
       projectType: '팀 프로젝트 (모바일)',
-      projectExplain:
-        '월디게임 어쩌구저쩌구 설명 어쩌구적ㅇ너미소ㅓㄴ이ㅗ서니소ㅓㅁ나솸놋니ㅗ서ㅣ나ㅚ',
+      projectExplain: <>디자인 맘에 안든다</>,
       project2DSrc: project2D_Eeum,
       project3DSrc: project3D_Eeum,
       projectLink: 'https://gnslalsl12.github/~',
@@ -46,8 +44,7 @@ const Works = ({ windowWidth }: { windowWidth: number }): JSX.Element => {
     {
       projectTitle: 'Rendez-Boo',
       projectType: '팀 프로젝트 (웹)',
-      projectExplain:
-        '월디게임 어쩌구저쩌구 설명 어쩌구적ㅇ너미소ㅓㄴ이ㅗ서니소ㅓㅁ나솸놋니ㅗ서ㅣ나ㅚ',
+      projectExplain: <>디자인 맘에 안든다</>,
       project2DSrc: project2D_RendezBoo,
       project3DSrc: project3D_RendezBoo,
       projectLink: 'https://gnslalsl12.github/~',
@@ -94,9 +91,9 @@ const Works = ({ windowWidth }: { windowWidth: number }): JSX.Element => {
             Link <BsBoxArrowUpRight />
           </a>
         </div>
-        <div className='page_works_visuals tempboxB'>
+        <div className='page_works_visuals '>
           <div
-            className='project_image tempboxR'
+            className='project_image '
             onMouseEnter={() => setHoveredProject(selectedIndex)}
             onMouseLeave={() => setHoveredProject(-1)}
           >
@@ -158,7 +155,7 @@ const Works = ({ windowWidth }: { windowWidth: number }): JSX.Element => {
             })}
           </div>
         </div>
-        <div className='page_works_indexes tempboxR'>
+        <div className='page_works_indexes '>
           {ProjectList.map((item, index) => {
             return (
               <button key={index} onClick={() => setSelectedIndex(index)}>

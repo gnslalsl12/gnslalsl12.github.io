@@ -26,17 +26,13 @@
 }
 
 .about_bottomline {
-  height: 50%;
+  height: 30%;
   width: var.$screenW;
   position: absolute;
   bottom: 0;
   left: 0;
   z-index: -2;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.35),
-    rgba(255, 255, 255, 0)
-  );
+  background: linear-gradient(to top, #213b3257, rgba(255, 255, 255, 0));
 }
 
 .about_background {
