@@ -8,7 +8,108 @@
   //   display: grid;
   //   place-content: center;
   box-sizing: border-box;
-  background-color: rgba(44, 3, 59, 0.53);
-  outline: 1px solid white;
+  background-color: rgba(0, 0, 0, 0.35);
   z-index: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+///////////////
+
+.page_works_container {
+  position: relative;
+  box-sizing: border-box;
+  margin-top: 2%;
+  width: 75%;
+  min-width: 900px;
+  height: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(62, 62, 62, 0.545);
+}
+
+.page_works_texts {
+  width: 35%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: start;
+  padding: 3% 0 3% 3%;
+  color: white;
+
+  .project_type {
+    font-family: 'Pretendard-Regular';
+    @include var.adjustFontSize(
+      '900px',
+      var.$screenW,
+      max(15.6px, var.$screenW * 0.012)
+    );
+  }
+
+  .project_title {
+    font-family: 'Montserrat-ExtraBold';
+    @include var.adjustFontSize(
+      '900px',
+      var.$screenW,
+      max(39px, var.$screenW * 0.03)
+    );
+  }
+
+  .project_explain {
+    font-family: 'Pretendard-Light';
+    @include var.adjustFontSize(
+      '900px',
+      var.$screenW,
+      max(13px, var.$screenW * 0.01)
+    );
+    height: 50%;
+  }
+  .project_link {
+    all: unset;
+    cursor: pointer;
+    font-family: 'Montserrat-Medium';
+    @include var.adjustFontSize(
+      '900px',
+      var.$screenW,
+      max(13px, var.$screenW * 0.01)
+    );
+  }
+}
+
+.page_works_images {
+  width: 50%;
+  height: 100%;
+
+  .project_image {
+    width: 100%;
+    height: 70%;
+    position: relative;
+
+    .project_image_2d {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      max-width: 80%;
+      max-height: 100%;
+      transform: translateY(-50%);
+      z-index: 1;
+    }
+    .project_image_3d {
+      position: absolute;
+      bottom: 0;
+      left: 10%;
+      transform: translateX(-50%);
+      z-index: 2;
+    }
+  }
+}
+
+.page_works_indexes {
+  width: 15%;
+  height: 100%;
 }

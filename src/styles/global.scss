@@ -10,9 +10,12 @@ button {
   all: unset;
   cursor: pointer;
 }
-
 span {
   all: unset;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body::-webkit-scrollbar {
@@ -69,4 +72,15 @@ html {
   height: var.$screenH;
   outline: 1px solid red;
   background: rgba(255, 255, 255, 0.3);
+}
+
+.tempboxW {
+  outline: 1px solid white;
+}
+.tempboxR {
+  outline: 1px solid red;
+}
+
+.tempboxB {
+  outline: 1px solid blue;
 }

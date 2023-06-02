@@ -34,7 +34,7 @@
   z-index: -2;
   background: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0.25),
+    rgba(0, 0, 0, 0.35),
     rgba(255, 255, 255, 0)
   );
 }
@@ -96,8 +96,11 @@
   left: 5%;
   // color: rgb(246, 175, 255);
   animation: fontColor 10s infinite;
-  @include var.adjustFontSize('1300px', var.$screenW, var.$screenW * 0.03);
-  @include var.adjustFontSize('900px', '1299px', 39px);
+  @include var.adjustFontSize(
+    '900px',
+    var.$screenW,
+    max(39px, var.$screenW * 0.03)
+  );
   @include var.adjustFontSize('0px', '899px', var.$screenW * 0.05);
 }
 
@@ -111,8 +114,11 @@
   line-height: 130%;
   color: white;
 
-  @include var.adjustFontSize('1300px', var.$screenW, var.$screenW * 0.015);
-  @include var.adjustFontSize('900px', '1299px', 19.5px);
+  @include var.adjustFontSize(
+    '900px',
+    var.$screenW,
+    max(19.5px, var.$screenW * 0.015)
+  );
   @include var.adjustFontSize('0px', '899px', var.$screenW * 0.03);
 }
 

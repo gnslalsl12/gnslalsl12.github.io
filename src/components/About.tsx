@@ -53,7 +53,7 @@ const About = ({ windowWidth }: { windowWidth: number }): JSX.Element => {
             id='about_title'
             className={`${popupText ? 'about_text' : 'about_text_hide'}`}
           >
-            I'M READY TO FLIGHT
+            I'M READY TO FLIGHT!
             <br />
             JEONG HOON, {minimize && <br />}the FE Developer
           </span>
@@ -70,9 +70,9 @@ const About = ({ windowWidth }: { windowWidth: number }): JSX.Element => {
             <br />
             <br />
             아직 배워야 할 것이 많지만,
-            {minimize && <br />}그것이 저를 더욱 끌어당기는 이유입니다.
+            {minimize && <br />}그것이 저를 성장시키는 원동력입니다.
             <br />
-            항상 배움의 자세로, 저의 '이륙'을 위한 준비가 되어있습니다!
+            언제나 배움의 자세로, 저의 '이륙'을 위한 준비가 되어있습니다!
             <br />
             <br />
             <span className='about_explain_keyword'>#성장</span>
