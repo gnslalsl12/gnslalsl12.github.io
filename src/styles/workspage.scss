@@ -52,7 +52,7 @@
   }
 
   .project_title {
-    font-family: 'Montserrat-ExtraBold';
+    min-height: var.$screenW * 0.04;
     @include var.adjustFontSize(
       '900px',
       var.$screenW,
@@ -98,6 +98,7 @@
       max-height: 100%;
       transform: translateY(-50%);
       z-index: 1;
+      transition: all 1s ease-in-out;
     }
     .project_image_3d {
       position: absolute;
@@ -112,4 +113,6 @@
 .page_works_indexes {
   width: 15%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
