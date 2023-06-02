@@ -81,32 +81,126 @@
   }
 }
 
-.page_works_images {
-  width: 50%;
+.page_works_visuals {
+  width: 40%;
   height: 100%;
-
-  .project_image {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  .project_image:hover {
+    object-fit: contain;
     width: 100%;
+    height: 90%;
+  }
+  .project_image {
+    transition: all 0.3s ease-in-out;
+    width: 80%;
     height: 70%;
     position: relative;
+    overflow: clip;
+    // background: rgba(255, 255, 255, 0.7);
+    border-radius: 10%;
 
     .project_image_2d {
       position: absolute;
       top: 50%;
-      right: 0;
-      max-width: 80%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      // max-width: 100%;
+      width: 100%;
+
       max-height: 100%;
-      transform: translateY(-50%);
       z-index: 1;
-      transition: all 1s ease-in-out;
+      transition: all 0.3s ease-in-out;
+      filter: opacity(50%);
     }
+    .hovered2D {
+      filter: none;
+    }
+    .hovered3D {
+      opacity: 0;
+    }
+
+    .image_2d_appear {
+      animation: appear_2D 0.3s ease-out;
+    }
+
+    .image_2d_disappear {
+      opacity: 0;
+      animation: disappear_2D 0.2s ease-out;
+    }
+
     .project_image_3d {
       position: absolute;
-      bottom: 0;
-      left: 10%;
-      transform: translateX(-50%);
+      bottom: 7%;
+      left: 50%;
+      transform: translate(-50%, 5%);
+      max-width: 80%;
+      max-height: 80%;
       z-index: 2;
+      transition: all 0.2s ease-in-out;
+
+      filter: brightness(130%);
     }
+
+    .image_3d_appear {
+      animation: appear_3D 0.3s ease-out;
+    }
+
+    .image_3d_disappear {
+      opacity: 0;
+      animation: disappear_3D 0.2s ease-out;
+    }
+  }
+}
+
+@keyframes appear_2D {
+  0% {
+    opacity: 0;
+    transform: translate(-40%, -50%);
+  }
+  // 30% {
+  //   opacity: 0;
+  //   transform: translateX(10%);
+  // }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%, -50%);
+  }
+}
+@keyframes disappear_2D {
+  from {
+    opacity: 1;
+    // transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    // transform: translateX(10%);
+  }
+}
+@keyframes appear_3D {
+  0% {
+    opacity: 0;
+    transform: scale(95%) translate(-50%, 5%);
+  }
+  30% {
+    opacity: 0;
+    transform: scale(95%) translate(-50%, 5%);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(100%) translate(-50%, 5%);
+  }
+}
+@keyframes disappear_3D {
+  from {
+    opacity: 1;
+    transform: scale(100%) translate(-50%, 5%);
+  }
+  to {
+    opacity: 0;
+    transform: scale(90%) translate(-50%, 5%);
   }
 }
 

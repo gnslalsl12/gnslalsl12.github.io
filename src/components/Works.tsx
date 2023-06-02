@@ -4,6 +4,9 @@ import { BsBoxArrowUpRight } from 'react-icons/bs';
 import project2D_Worldy from '../images/project2D_Worldy.png';
 import project2D_Eeum from '../images/project2D_E-Eum.png';
 import project2D_RendezBoo from '../images/project2D_RendezBoo.png';
+import project3D_Worldy from '../images/project3D_Worldy.png';
+import project3D_Eeum from '../images/project3D_E-Eum.png';
+import project3D_RendezBoo from '../images/project3D_RendezBoo.png';
 
 type WorksItemType = {
   projectTitle: string;
@@ -24,7 +27,7 @@ const Works = ({ windowWidth }: { windowWidth: number }): JSX.Element => {
       projectExplain:
         '월디게임 어쩌구저쩌구 설명 어쩌구적ㅇ너미소ㅓㄴ이ㅗ서니소ㅓㅁ나솸놋니ㅗ서ㅣ나ㅚ',
       project2DSrc: project2D_Worldy,
-      project3DSrc: '../images/',
+      project3DSrc: project3D_Worldy,
       projectLink: 'https://gnslalsl12.github/~',
       myAfford: ['페이지 구성', '게임 디자인', '페이지 알고리즘'],
       projectSkills: ['TypeScript', 'React', 'Three.js'],
@@ -35,7 +38,7 @@ const Works = ({ windowWidth }: { windowWidth: number }): JSX.Element => {
       projectExplain:
         '월디게임 어쩌구저쩌구 설명 어쩌구적ㅇ너미소ㅓㄴ이ㅗ서니소ㅓㅁ나솸놋니ㅗ서ㅣ나ㅚ',
       project2DSrc: project2D_Eeum,
-      project3DSrc: '../images/',
+      project3DSrc: project3D_Eeum,
       projectLink: 'https://gnslalsl12.github/~',
       myAfford: ['페이지 구성', '게임 디자인', '페이지 알고리즘'],
       projectSkills: ['TypeScript', 'React', 'Three.js'],
@@ -46,7 +49,7 @@ const Works = ({ windowWidth }: { windowWidth: number }): JSX.Element => {
       projectExplain:
         '월디게임 어쩌구저쩌구 설명 어쩌구적ㅇ너미소ㅓㄴ이ㅗ서니소ㅓㅁ나솸놋니ㅗ서ㅣ나ㅚ',
       project2DSrc: project2D_RendezBoo,
-      project3DSrc: '../images/',
+      project3DSrc: project3D_RendezBoo,
       projectLink: 'https://gnslalsl12.github/~',
       myAfford: ['페이지 구성', '게임 디자인', '페이지 알고리즘'],
       projectSkills: ['TypeScript', 'React', 'Three.js'],
@@ -55,9 +58,17 @@ const Works = ({ windowWidth }: { windowWidth: number }): JSX.Element => {
 
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
 
+  const [hoveredProject, setHoveredProject] = useState<number>(-1);
+
+  useEffect(() => {
+    console.log(hoveredProject);
+  }, [hoveredProject]);
+
   return (
     <div id='page_works'>
       <div className='page_works_container'>
+        {/* {changeContent && (
+          <> */}
         <div className='page_works_texts'>
           <span className='project_type'>
             {ProjectList[selectedIndex].projectType}
@@ -83,17 +94,62 @@ const Works = ({ windowWidth }: { windowWidth: number }): JSX.Element => {
             Link <BsBoxArrowUpRight />
           </a>
         </div>
-        <div className='page_works_images tempboxB'>
-          <div className='project_image tempboxR'>
+        <div className='page_works_visuals tempboxB'>
+          <div
+            className='project_image tempboxR'
+            onMouseEnter={() => setHoveredProject(selectedIndex)}
+            onMouseLeave={() => setHoveredProject(-1)}
+          >
             <img
-              src={ProjectList[selectedIndex].project2DSrc}
+              src={ProjectList[0].project2DSrc}
               alt='Project 2D'
-              className='project_image_2d tempboxW'
+              className={`project_image_2d  ${
+                selectedIndex === 0 ? 'image_2d_appear' : 'image_2d_disappear'
+              }
+              ${hoveredProject === 0 ? 'hovered2D' : ''}`}
             />
             <img
-              src={ProjectList[selectedIndex].project3DSrc}
+              src={ProjectList[1].project2DSrc}
+              alt='Project 2D'
+              className={`project_image_2d  ${
+                selectedIndex === 1 ? 'image_2d_appear' : 'image_2d_disappear'
+              }
+                ${hoveredProject === 1 ? 'hovered2D' : ''}
+              `}
+            />
+            <img
+              src={ProjectList[2].project2DSrc}
+              alt='Project 2D'
+              className={`project_image_2d  ${
+                selectedIndex === 2 ? 'image_2d_appear' : 'image_2d_disappear'
+              } ${hoveredProject === 2 ? 'hovered2D' : ''}`}
+            />
+            <img
+              src={ProjectList[0].project3DSrc}
               alt='Project 3D'
-              className='project_image_3d'
+              className={`project_image_3d  ${
+                selectedIndex === 0 ? 'image_3d_appear' : 'image_3d_disappear'
+              }
+              ${hoveredProject === 0 ? 'hovered3D' : ''}
+              `}
+            />
+            <img
+              src={ProjectList[1].project3DSrc}
+              alt='Project 3D'
+              className={`project_image_3d  ${
+                selectedIndex === 1 ? 'image_3d_appear' : 'image_3d_disappear'
+              }
+              ${hoveredProject === 1 ? 'hovered3D' : ''}
+              `}
+            />
+            <img
+              src={ProjectList[2].project3DSrc}
+              alt='Project 3D'
+              className={`project_image_3d  ${
+                selectedIndex === 2 ? 'image_3d_appear' : 'image_3d_disappear'
+              }
+              ${hoveredProject === 2 ? 'hovered3D' : ''}
+              `}
             />
           </div>
           <div className='project_skill_box'>
@@ -111,6 +167,8 @@ const Works = ({ windowWidth }: { windowWidth: number }): JSX.Element => {
             );
           })}
         </div>
+        {/* </>
+        )} */}
       </div>
     </div>
   );
