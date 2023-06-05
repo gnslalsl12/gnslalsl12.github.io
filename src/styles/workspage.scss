@@ -5,13 +5,16 @@
   height: var.$screenH;
   position: relative;
   box-sizing: border-box;
-  background-color: #e6decf6e;
+  background-color: #ffffff57;
   z-index: 1;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   padding: 5% 3% 3% 3%;
+  * {
+    color: #1d291b;
+  }
 }
 
 #page_works_container {
@@ -199,10 +202,6 @@
   justify-content: space-between;
   align-items: end;
 
-  * {
-    @include var.tempborder(white);
-  }
-
   .menu_index {
     height: 10%;
     width: 100%;
@@ -222,7 +221,7 @@
     justify-content: center;
     align-items: center;
     font-family: 'Montserrat-Regular';
-    @include var.adjustFontSizeMax(0.01);
+    @include var.adjustFontSizeMax(0.014);
 
     .menu_list_item {
       margin: 3% 0%;
@@ -232,5 +231,57 @@
   .menu_buttons {
     height: 20%;
     width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    > button {
+      margin: 0 10%;
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      place-content: center;
+      padding: 3%;
+      border-radius: 100%;
+      outline: var.$screenW * 0.0015 solid black;
+      * {
+        font-size: var.$screenW * 0.015;
+      }
+    }
   }
+}
+
+.menu_buttons_previous:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 100%;
+  background: black;
+  transition: all 0.3s ease-out;
+  z-index: -1;
+}
+.menu_buttons_previous:hover::after {
+  left: 0;
+}
+.menu_buttons_previous:hover {
+  color: white;
+}
+.menu_buttons_next:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 100%;
+  background: black;
+  transition: all 0.3s ease-out;
+  z-index: -1;
+}
+.menu_buttons_next:hover::after {
+  right: 0;
+}
+.menu_buttons_next:hover {
+  color: white;
 }

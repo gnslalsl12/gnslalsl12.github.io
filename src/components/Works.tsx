@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { BsBoxArrowUpRight } from 'react-icons/bs';
+import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
 import project2D_Worldy from '../images/project2D_Worldy.png';
 import project2D_Eeum from '../images/project2D_E-Eum.png';
 import project2D_RendezBoo from '../images/project2D_RendezBoo.png';
@@ -25,8 +26,8 @@ const Works = ({ windowWidth }: { windowWidth: number }): JSX.Element => {
       type: 'Team Project (WEB)',
       title: 'Worldy',
       period: '2023.04~2023.05',
-      about_title: 'Worldy 게임 주제',
-      about_explain: 'Worldy 게임 소개',
+      about_title: 'Worldy 프로젝트 주제',
+      about_explain: 'Worldy 프로젝트 소개',
       link: 'https://',
       img_2d: project2D_Worldy,
       img_3d: project3D_Worldy,
@@ -36,6 +37,15 @@ const Works = ({ windowWidth }: { windowWidth: number }): JSX.Element => {
   const [imageHoverState, setImageHoverState] = useState<boolean>(false);
 
   const [menuIndex, setMenuIndex] = useState<number>(0);
+  const [tempMenuIndex, setTempMenuIndex] = useState<number>(0);
+  const [workChangeAni, setWorkChangeAni] = useState<boolean>(false);
+
+  const handleIndex = (input: boolean) => {
+    setMenuIndex((prev) => {
+      const increment = input ? 1 : WorksItemList.length - 1;
+      return (prev + increment) % WorksItemList.length;
+    });
+  };
 
   return (
     <div id='page_works'>
@@ -89,7 +99,20 @@ const Works = ({ windowWidth }: { windowWidth: number }): JSX.Element => {
             <button className='menu_list_item'>{WorksItemList[0].title}</button>
             <button className='menu_list_item'>{WorksItemList[0].title}</button>
           </div>
-          <div className='menu_buttons'></div>
+          <div className='menu_buttons'>
+            <button
+              className='menu_buttons_previous'
+              onClick={() => handleIndex(true)}
+            >
+              <BsArrowLeft />
+            </button>
+            <button
+              className='menu_buttons_next'
+              onClick={() => handleIndex(false)}
+            >
+              <BsArrowRight />
+            </button>
+          </div>
         </div>
       </div>
     </div>
