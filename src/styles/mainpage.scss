@@ -28,14 +28,6 @@
   }
 }
 
-@mixin adjustFontSize($containerWidth) {
-  font-size: 80%;
-
-  @media (min-width: $containerWidth) {
-    font-size: 100%;
-  }
-}
-
 .page_main_centercontent {
   width: var.$screenW;
   text-align: center;

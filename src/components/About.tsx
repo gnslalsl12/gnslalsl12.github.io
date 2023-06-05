@@ -7,7 +7,7 @@ const About = ({ windowWidth }: { windowWidth: number }): JSX.Element => {
   const aboutRef = useRef<HTMLDivElement>(null);
 
   const [popupText, setPopupText] = useState<boolean>(false);
-
+  const [fontColorAni, setFontColorAni] = useState<boolean>(false);
   useEffect(() => {
     const handleScroll = () => {
       if (aboutRef.current) {
@@ -20,7 +20,13 @@ const About = ({ windowWidth }: { windowWidth: number }): JSX.Element => {
         ) {
           console.log('딱');
           setPopupText(true);
+          setTimeout(() => {
+            setFontColorAni(true);
+          }, 750);
         } else {
+          // setTimeout(() => {
+          // }, 100);
+          setFontColorAni(false);
           setPopupText(false);
         }
       }
@@ -51,7 +57,9 @@ const About = ({ windowWidth }: { windowWidth: number }): JSX.Element => {
         <div>
           <span
             id='about_title'
-            className={`${popupText ? 'about_text' : 'about_text_hide'}`}
+            className={`${popupText ? 'about_text' : 'about_text_hide'} ${
+              fontColorAni ? 'about_title_color' : ''
+            }`}
           >
             I'M READY TO FLIGHT!
             <br />
@@ -59,7 +67,8 @@ const About = ({ windowWidth }: { windowWidth: number }): JSX.Element => {
           </span>
           <span
             id='about_explain'
-            className={`${popupText ? 'about_text' : 'about_text_hide'}`}
+            className={`${popupText ? 'about_text' : 'about_text_hide'}
+            `}
           >
             안녕하세요, 프론트엔드 개발의 비상을 꿈꾸는 정훈입니다.
             <br />

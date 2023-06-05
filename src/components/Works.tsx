@@ -9,163 +9,88 @@ import project3D_Eeum from '../images/project3D_E-Eum.png';
 import project3D_RendezBoo from '../images/project3D_RendezBoo.png';
 
 type WorksItemType = {
-  projectTitle: string;
-  projectType: string;
-  projectExplain: JSX.Element;
-  project2DSrc: string;
-  project3DSrc: string;
-  projectLink: string;
-  myAfford: string[];
-  projectSkills: string[];
+  type: string;
+  title: string;
+  period: string;
+  about_title: string;
+  about_explain: string;
+  link: string;
+  img_2d: string;
+  img_3d: string;
 };
 
 const Works = ({ windowWidth }: { windowWidth: number }): JSX.Element => {
-  const ProjectList: WorksItemType[] = [
+  const WorksItemList: WorksItemType[] = [
     {
-      projectTitle: 'Worldy',
-      projectType: '팀 프로젝트 (웹)',
-      projectExplain: <>디자인 맘에 안든다</>,
-      project2DSrc: project2D_Worldy,
-      project3DSrc: project3D_Worldy,
-      projectLink: 'https://gnslalsl12.github/~',
-      myAfford: ['페이지 구성', '게임 디자인', '페이지 알고리즘'],
-      projectSkills: ['TypeScript', 'React', 'Three.js'],
-    },
-    {
-      projectTitle: '이음',
-      projectType: '팀 프로젝트 (모바일)',
-      projectExplain: <>디자인 맘에 안든다</>,
-      project2DSrc: project2D_Eeum,
-      project3DSrc: project3D_Eeum,
-      projectLink: 'https://gnslalsl12.github/~',
-      myAfford: ['페이지 구성', '게임 디자인', '페이지 알고리즘'],
-      projectSkills: ['TypeScript', 'React', 'Three.js'],
-    },
-    {
-      projectTitle: 'Rendez-Boo',
-      projectType: '팀 프로젝트 (웹)',
-      projectExplain: <>디자인 맘에 안든다</>,
-      project2DSrc: project2D_RendezBoo,
-      project3DSrc: project3D_RendezBoo,
-      projectLink: 'https://gnslalsl12.github/~',
-      myAfford: ['페이지 구성', '게임 디자인', '페이지 알고리즘'],
-      projectSkills: ['TypeScript', 'React', 'Three.js'],
+      type: 'Team Project (WEB)',
+      title: 'Worldy',
+      period: '2023.04~2023.05',
+      about_title: 'Worldy 게임 주제',
+      about_explain: 'Worldy 게임 소개',
+      link: 'https://',
+      img_2d: project2D_Worldy,
+      img_3d: project3D_Worldy,
     },
   ];
 
-  const [selectedIndex, setSelectedIndex] = useState<number>(0);
+  const [imageHoverState, setImageHoverState] = useState<boolean>(false);
 
-  const [hoveredProject, setHoveredProject] = useState<number>(-1);
-
-  useEffect(() => {
-    console.log(hoveredProject);
-  }, [hoveredProject]);
+  const [menuIndex, setMenuIndex] = useState<number>(0);
 
   return (
     <div id='page_works'>
-      <div className='page_works_container'>
-        {/* {changeContent && (
-          <> */}
-        <div className='page_works_texts'>
-          <span className='project_type'>
-            {ProjectList[selectedIndex].projectType}
-          </span>
-          <span
-            className='project_title'
-            style={{
-              fontFamily:
-                selectedIndex === 1
-                  ? 'Pretendard-ExtraBold'
-                  : 'Montserrat-ExtraBold',
-            }}
-          >
-            {ProjectList[selectedIndex].projectTitle}
-          </span>
-          <span className='project_explain'>
-            {ProjectList[selectedIndex].projectExplain}
-          </span>
-          <a
-            className='project_link'
-            href={ProjectList[selectedIndex].projectLink}
-          >
-            Link <BsBoxArrowUpRight />
-          </a>
-        </div>
-        <div className='page_works_visuals '>
-          <div
-            className='project_image '
-            onMouseEnter={() => setHoveredProject(selectedIndex)}
-            onMouseLeave={() => setHoveredProject(-1)}
-          >
-            <img
-              src={ProjectList[0].project2DSrc}
-              alt='Project 2D'
-              className={`project_image_2d  ${
-                selectedIndex === 0 ? 'image_2d_appear' : 'image_2d_disappear'
-              }
-              ${hoveredProject === 0 ? 'hovered2D' : ''}`}
-            />
-            <img
-              src={ProjectList[1].project2DSrc}
-              alt='Project 2D'
-              className={`project_image_2d  ${
-                selectedIndex === 1 ? 'image_2d_appear' : 'image_2d_disappear'
-              }
-                ${hoveredProject === 1 ? 'hovered2D' : ''}
-              `}
-            />
-            <img
-              src={ProjectList[2].project2DSrc}
-              alt='Project 2D'
-              className={`project_image_2d  ${
-                selectedIndex === 2 ? 'image_2d_appear' : 'image_2d_disappear'
-              } ${hoveredProject === 2 ? 'hovered2D' : ''}`}
-            />
-            <img
-              src={ProjectList[0].project3DSrc}
-              alt='Project 3D'
-              className={`project_image_3d  ${
-                selectedIndex === 0 ? 'image_3d_appear' : 'image_3d_disappear'
-              }
-              ${hoveredProject === 0 ? 'hovered3D' : ''}
-              `}
-            />
-            <img
-              src={ProjectList[1].project3DSrc}
-              alt='Project 3D'
-              className={`project_image_3d  ${
-                selectedIndex === 1 ? 'image_3d_appear' : 'image_3d_disappear'
-              }
-              ${hoveredProject === 1 ? 'hovered3D' : ''}
-              `}
-            />
-            <img
-              src={ProjectList[2].project3DSrc}
-              alt='Project 3D'
-              className={`project_image_3d  ${
-                selectedIndex === 2 ? 'image_3d_appear' : 'image_3d_disappear'
-              }
-              ${hoveredProject === 2 ? 'hovered3D' : ''}
-              `}
-            />
+      <div id='page_works_container' className='tempboxW'>
+        <div id='container_texts' className='tempboxR'>
+          <div className='text_pj_top_container'>
+            <div className='text_pj_type'>{WorksItemList[0].type}</div>
+            <div className='text_pj_title'>{WorksItemList[0].title}</div>
+            <div className='text_pj_period'>{WorksItemList[0].period}</div>
           </div>
-          <div className='project_skill_box'>
-            {ProjectList[selectedIndex].projectSkills.map((item, index) => {
-              return <div key={index}>{item}</div>;
-            })}
+          <div className='text_pj_bottom_container'>
+            <div className='text_pj_about_title'>
+              {WorksItemList[0].about_title}
+            </div>
+            <div className='text_pj_about_explain'>
+              {WorksItemList[0].about_explain}
+            </div>
+            <a href={WorksItemList[0].link} className='text_pj_link'>
+              Link <BsBoxArrowUpRight style={{ marginLeft: '10px' }} />
+            </a>
           </div>
         </div>
-        <div className='page_works_indexes '>
-          {ProjectList.map((item, index) => {
-            return (
-              <button key={index} onClick={() => setSelectedIndex(index)}>
-                {item.projectTitle}
-              </button>
-            );
-          })}
+        <div
+          id='container_images'
+          className={`${imageHoverState ? 'spread_images' : 'shrink_images'}`}
+          onMouseEnter={() => setImageHoverState(true)}
+          onMouseLeave={() => setImageHoverState(false)}
+        >
+          <div className='images_2d_box'>
+            <img
+              src={WorksItemList[0].img_2d}
+              alt='2dImage'
+              className='images_2d_content'
+            />
+          </div>
+          <div className='images_3d_box'>
+            <div className='images_3d_shadow' />
+            <img
+              src={WorksItemList[0].img_3d}
+              alt='2dImage'
+              className='images_3d_content'
+            />
+          </div>
         </div>
-        {/* </>
-        )} */}
+        <div id='container_menu' className='tempboxR'>
+          <div className='menu_index'>
+            {menuIndex + 1} / {WorksItemList.length}
+          </div>
+          <div className='menu_list'>
+            <button className='menu_list_item'>{WorksItemList[0].title}</button>
+            <button className='menu_list_item'>{WorksItemList[0].title}</button>
+            <button className='menu_list_item'>{WorksItemList[0].title}</button>
+          </div>
+          <div className='menu_buttons'></div>
+        </div>
       </div>
     </div>
   );

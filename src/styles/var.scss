@@ -19,8 +19,25 @@ $navigationbarH: 60px;
   height: (100 * $inputH) vh;
 }
 
-@mixin adjustFontSize($minWidth, $maxWidth, $fontSize) {
-  @media screen and (min-width: $minWidth) and (max-width: $maxWidth) {
-    font-size: $fontSize;
+@mixin adjustFontSizeMax($fontSizeRatio) {
+  $fixedFontSize: 1300 * $fontSizeRatio;
+  $responsiveFontSize: 100 * $fontSizeRatio;
+
+  @media screen and (min-width: 900px) and (max-width: 1300px) {
+    font-size: #{$fixedFontSize}px;
   }
+
+  @media screen and (min-width: 1301px) {
+    font-size: calc(#{$responsiveFontSize}vw);
+  }
+}
+
+@mixin adjustFontSizeMin($fontSizeRatio) {
+  @media screen and (max-width: 899px) {
+    font-size: calc(#{100 * $fontSizeRatio}vw);
+  }
+}
+
+@mixin tempborder($color) {
+  outline: 1px solid $color;
 }

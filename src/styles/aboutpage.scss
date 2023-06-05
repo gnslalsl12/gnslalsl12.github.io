@@ -32,7 +32,7 @@
   bottom: 0;
   left: 0;
   z-index: -2;
-  background: linear-gradient(to top, #213b3257, rgba(255, 255, 255, 0));
+  background: linear-gradient(to top, #e6decf6e, rgba(255, 255, 255, 0));
 }
 
 .about_background {
@@ -66,6 +66,22 @@
   filter: brightness(50%) opacity(50%);
 }
 
+#about_title {
+  transition: all 0.5s ease-in-out;
+  font-family: 'Montserrat-Black';
+  position: absolute;
+  top: 10%;
+  left: 5%;
+  // color: rgb(246, 175, 255);
+  @include var.adjustFontSizeMax(0.03);
+  @include var.adjustFontSizeMin(0.05);
+  color: white;
+}
+
+.about_title_color {
+  animation: fontColor 10s infinite !important;
+}
+
 @keyframes fontColor {
   0% {
     color: rgba(255, 255, 255, 1);
@@ -84,22 +100,6 @@
   }
 }
 
-#about_title {
-  transition: all 0.5s ease-in-out;
-  font-family: 'Montserrat-Black';
-  position: absolute;
-  top: 10%;
-  left: 5%;
-  // color: rgb(246, 175, 255);
-  animation: fontColor 10s infinite;
-  @include var.adjustFontSize(
-    '900px',
-    var.$screenW,
-    max(39px, var.$screenW * 0.03)
-  );
-  @include var.adjustFontSize('0px', '899px', var.$screenW * 0.05);
-}
-
 #about_explain {
   transition: all 0.5s ease-in-out;
   font-family: 'Pretendard-Bold';
@@ -110,12 +110,14 @@
   line-height: 130%;
   color: white;
 
-  @include var.adjustFontSize(
-    '900px',
-    var.$screenW,
-    max(19.5px, var.$screenW * 0.015)
-  );
-  @include var.adjustFontSize('0px', '899px', var.$screenW * 0.03);
+  // @include var.adjustFontSize(
+  //   '900px',
+  //   var.$screenW,
+  //   max(19.5px, var.$screenW * 0.015)
+  // );
+
+  @include var.adjustFontSizeMax(0.015);
+  @include var.adjustFontSizeMin(0.025);
 }
 
 .about_explain_keyword {
@@ -135,6 +137,7 @@
 .about_text {
   animation: popupText 0.7s ease-out;
 }
+
 .about_text_hide {
   opacity: 0;
 }
@@ -142,7 +145,7 @@
 @keyframes popupText {
   from {
     opacity: 0;
-    transform: translateY(20%);
+    transform: translateY(var.$screenH * 0.1);
   }
   to {
     opacity: 1;
