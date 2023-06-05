@@ -32,7 +32,7 @@
   bottom: 0;
   left: 0;
   z-index: -2;
-  background: linear-gradient(to top, #ffffff57, rgba(255, 255, 255, 0));
+  // background: linear-gradient(to top, #f2e9d860, rgba(0, 0, 0, 0));
 }
 
 .about_background {
@@ -145,7 +145,7 @@
 @keyframes popupText {
   from {
     opacity: 0;
-    transform: translateY(var.$screenH * 0.1);
+    transform: translateY(4vh);
   }
   to {
     opacity: 1;
