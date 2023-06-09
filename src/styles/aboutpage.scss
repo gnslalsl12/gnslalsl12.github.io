@@ -1,4 +1,4 @@
-@use 'var.scss';
+@use "var.scss";
 
 #page_about {
   width: var.$screenW;
@@ -26,13 +26,13 @@
 }
 
 .about_bottomline {
-  height: 30%;
+  height: 20%;
   width: var.$screenW;
   position: absolute;
   bottom: 0;
   left: 0;
   z-index: -2;
-  // background: linear-gradient(to top, #f2e9d860, rgba(0, 0, 0, 0));
+  background: linear-gradient(to top, rgba(80, 80, 80, 0.4), rgba(0, 0, 0, 0));
 }
 
 .about_background {
@@ -68,7 +68,7 @@
 
 #about_title {
   transition: all 0.5s ease-in-out;
-  font-family: 'Montserrat-Black';
+  font-family: "Montserrat-Black";
   position: absolute;
   top: 10%;
   left: 5%;
@@ -102,7 +102,7 @@
 
 #about_explain {
   transition: all 0.5s ease-in-out;
-  font-family: 'Pretendard-Bold';
+  font-family: "Pretendard-Bold";
   position: absolute;
   bottom: 0%;
   right: 5%;
@@ -125,7 +125,7 @@
   border-radius: 10px;
   padding: 1% 3%;
   color: white;
-  font-family: 'Pretendard-Light';
+  font-family: "Pretendard-Light";
   font-size: 60%;
   margin-left: 10px;
 }
