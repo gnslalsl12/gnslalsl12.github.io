@@ -5,6 +5,7 @@ import NavigationBar from "./components/NavigationBar";
 import Main from "./components/Main";
 import About from "./components/About";
 import Works from "./components/Works";
+import Stack from "./components/Stack";
 
 function App() {
   const [windowWidth, setWindowWidth] = useState<number>(0);
@@ -80,6 +81,7 @@ function App() {
         <>
           <About windowWidth={windowWidth} />
           <Works windowWidth={windowWidth} />
+          <Stack windowWidth={windowWidth} />
         </>
       )}
     </div>

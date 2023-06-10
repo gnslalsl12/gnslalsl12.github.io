@@ -4,6 +4,7 @@
 @use "mainpage.scss";
 @use "aboutpage.scss";
 @use "workspage.scss";
+@use "stackpage.scss";
 @use "var.scss";
 
 button {
@@ -22,6 +23,16 @@ a {
   box-sizing: border-box;
 }
 
+::-webkit-scrollbar {
+  background-color: rgba(124, 124, 124, 0.1); /* 스크롤 바 배경색 */
+  width: 0.5vw; /* 스크롤 바의 너비 */
+  border-radius: 1vw; /* 스크롤 바의 모서리 둥글기 정도 */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(200, 200, 200, 0.1); /* 스크롤 바 핸들 색상 */
+  border-radius: 1vw; /* 스크롤 바의 모서리 둥글기 정도 */
+}
 body::-webkit-scrollbar {
   display: none; /* Chrome, Safari */
 }
