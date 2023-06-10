@@ -219,11 +219,11 @@ export default Works;
 
 
 //////////////
-@use 'var.scss';
+@use 'scss';
 
 #page_works {
-  width: var.$screenW;
-  height: var.$screenH;
+  width: $screenW;
+  height: $screenH;
   position: relative;
   box-sizing: border-box;
   // background-color: #ffffff57;
@@ -235,7 +235,7 @@ export default Works;
   align-items: center;
   padding: 5% 3% 3% 3%;
   // * {
-  //   @include var.tempborder(blue);
+  //   @include tempborder(blue);
   // }
 }
 
@@ -288,7 +288,7 @@ export default Works;
     .text_pj_type {
       height: 15%;
       font-family: 'Montserrat-MediumItalic';
-      @include var.adjustFontSizeMax(0.01);
+      @include adjustFontSizeMax(0.01);
       display: flex;
       flex-direction: row;
       justify-content: start;
@@ -302,7 +302,7 @@ export default Works;
       margin: 10% 0;
       white-space: pre-wrap;
       font-family: 'Montserrat-Bold';
-      @include var.adjustFontSizeMax(0.025);
+      @include adjustFontSizeMax(0.025);
       display: flex;
       flex-direction: row;
       justify-content: start;
@@ -311,7 +311,7 @@ export default Works;
     .text_pj_period {
       height: 20%;
       font-family: 'Montserrat-Regular';
-      @include var.adjustFontSizeMax(0.01);
+      @include adjustFontSizeMax(0.01);
       display: flex;
       flex-direction: row;
       justify-content: start;
@@ -326,19 +326,19 @@ export default Works;
     .text_pj_about_title {
       height: fit-content;
       font-family: 'Pretendard-Regular';
-      @include var.adjustFontSizeMax(0.015);
+      @include adjustFontSizeMax(0.015);
     }
 
     .text_pj_about_explain {
       height: fit-content;
       font-family: 'Pretendard-Light';
-      @include var.adjustFontSizeMax(0.012);
+      @include adjustFontSizeMax(0.012);
     }
 
     .text_pj_link {
       height: 15%;
       font-family: 'Montserrat-Italic';
-      @include var.adjustFontSizeMax(0.01);
+      @include adjustFontSizeMax(0.01);
       display: flex;
       flex-direction: row;
       justify-content: start;
@@ -361,7 +361,7 @@ export default Works;
   .images_2d_box {
     width: 90%;
     height: 90%;
-    // border-radius: var.$screenW * 0.5;
+    // border-radius: $screenW * 0.5;
     filter: opacity(60%) contrast(40%);
   }
   .images_3d_box {
@@ -465,7 +465,7 @@ export default Works;
     flex-direction: row;
     justify-content: end;
     align-items: start;
-    @include var.adjustFontSizeMax(0.012);
+    @include adjustFontSizeMax(0.012);
   }
 
   .menu_list {
@@ -476,7 +476,7 @@ export default Works;
     justify-content: center;
     align-items: center;
     font-family: 'Montserrat-Regular';
-    @include var.adjustFontSizeMax(0.014);
+    @include adjustFontSizeMax(0.014);
 
     .menu_list_item {
       margin: 3% 0%;
@@ -498,9 +498,9 @@ export default Works;
       place-content: center;
       padding: 3%;
       border-radius: 100%;
-      outline: var.$screenW * 0.0015 solid black;
+      outline: $screenW * 0.0015 solid black;
       * {
-        font-size: var.$screenW * 0.015;
+        font-size: $screenW * 0.015;
       }
     }
   }

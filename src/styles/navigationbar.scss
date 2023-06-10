@@ -1,4 +1,4 @@
-@use 'var.scss';
+@use "var.scss";
 
 #component_navigationbar {
   width: 100%;
@@ -40,7 +40,7 @@
   justify-content: space-between;
   align-items: center;
   font-size: 20px;
-  font-family: 'Montserrat-Light';
+  font-family: "Montserrat-Light";
   color: white;
 }
 
@@ -50,7 +50,7 @@
 
 #navigationbar_spreadedmenu button::after,
 #navigationbar_spreadedmenu button::before {
-  content: '';
+  content: "";
   width: 0%;
   height: 2px;
   background: rgba(255, 255, 255, 0.4);
@@ -87,7 +87,7 @@
   height: 80px;
   display: grid;
   place-content: center;
-  font-family: 'Montserrat-Light';
+  font-family: "Montserrat-Light";
   font-size: 20px;
   color: white;
   border-bottom: 3px solid rgba(255, 255, 255, 0.1);

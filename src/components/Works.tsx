@@ -71,11 +71,92 @@ const Works = ({ windowWidth }: { windowWidth: number }): JSX.Element => {
     },
   };
 
-  const [detailShowState, setDetailShowState] = useState<boolean>(false);
-  const [detailProject, setDetailProject] = useState<string>("");
-
+  const [detailProject, setDetailProject] = useState<string>("Worldy");
   const DetailModal = (): JSX.Element => {
-    return <div></div>;
+    const key = Object.keys(WorksItemList).find((key) => key === detailProject);
+    const item: WorksItemType = WorksItemList[key || ""];
+    const [selItem, setSelItem] = useState<number>(0);
+    return (
+      <div id="works_modal_container">
+        <div className="works_modal_box">
+          <div className="works_modal_top">
+            <img src={item.img_3d} alt="intro" className="works_modal_3D" />
+          </div>
+          <div className="works_modal_bottom">
+            <div className="works_modal_bottom_box">
+              {selItem === 0 && <ModalContent_1 item={item} />}
+              {selItem === 1 && <ModalContent_2 item={item} />}
+            </div>
+          </div>
+          <div className="works_modal_menu_container">
+            <button onClick={() => setSelItem(0)}>개요</button>
+            <button onClick={() => setSelItem(1)}>기술</button>
+            <button onClick={() => setDetailProject("")}>닫기</button>
+            <div className="background_full" />
+            <div className="background_splitted" />
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const ModalContent_1 = ({ item }: { item: WorksItemType }): JSX.Element => {
+    const [imgHoverState, setImgHoverState] = useState<boolean>(false);
+
+    return (
+      <div className="modal_content_1_container">
+        <div className="modal_1_logo">
+          <img
+            src={item.logo}
+            alt="logo"
+            className={`logo_img_left ${imgHoverState ? "blured" : ""}`}
+          />
+          <img
+            src={item.img_2d}
+            alt="logo"
+            onClick={() => setImgHoverState((prev) => !prev)}
+            className={`logo_img_right ${imgHoverState ? "logo_img_right_clicked" : ""}`}
+          />
+        </div>
+        <div className={`modal_1_outline ${imgHoverState ? "blured" : ""}`}>
+          <span className="title">프로젝트 타입</span>
+          <span className="content">{item.type}</span>
+        </div>
+        <div className={`modal_1_period ${imgHoverState ? "blured" : ""}`}>
+          <span className="title">프로젝트 기간</span>
+          <span className="content">{item.period}</span>
+        </div>
+      </div>
+    );
+  };
+  const ModalContent_2 = ({ item }: { item: WorksItemType }): JSX.Element => {
+    const [imgHoverState, setImgHoverState] = useState<boolean>(false);
+
+    return (
+      <div className="modal_content_1_container">
+        <div className="modal_1_logo">
+          <img
+            src={item.logo}
+            alt="logo"
+            className={`logo_img_left ${imgHoverState ? "blured" : ""}`}
+          />
+          <img
+            src={item.img_2d}
+            alt="logo"
+            onClick={() => setImgHoverState((prev) => !prev)}
+            className={`logo_img_right ${imgHoverState ? "logo_img_right_clicked" : ""}`}
+          />
+        </div>
+        <div className={`modal_1_outline ${imgHoverState ? "blured" : ""}`}>
+          <span className="title">프로젝트 타입</span>
+          <span className="content">{item.type}</span>
+        </div>
+        <div className={`modal_1_period ${imgHoverState ? "blured" : ""}`}>
+          <span className="title">프로젝트 기간</span>
+          <span className="content">{item.period}</span>
+        </div>
+      </div>
+    );
   };
 
   return (
@@ -92,7 +173,6 @@ const Works = ({ windowWidth }: { windowWidth: number }): JSX.Element => {
               className="work_box_web"
               onClick={() => {
                 setDetailProject("Worldy");
-                setDetailShowState(true);
               }}
             >
               <div className="work_text_box">
@@ -107,7 +187,6 @@ const Works = ({ windowWidth }: { windowWidth: number }): JSX.Element => {
               className="work_box_web"
               onClick={() => {
                 setDetailProject("RendezBoo");
-                setDetailShowState(true);
               }}
             >
               <div className="work_text_box">
@@ -127,7 +206,6 @@ const Works = ({ windowWidth }: { windowWidth: number }): JSX.Element => {
                 className="work_box"
                 onClick={() => {
                   setDetailProject("MyHome");
-                  setDetailShowState(true);
                 }}
               >
                 <div className="work_text_box">
@@ -148,7 +226,6 @@ const Works = ({ windowWidth }: { windowWidth: number }): JSX.Element => {
               className="work_box_mobile"
               onClick={() => {
                 setDetailProject("Eeum");
-                setDetailShowState(true);
               }}
             >
               <div className="work_text_box">

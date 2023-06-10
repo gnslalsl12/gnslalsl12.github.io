@@ -1,4 +1,4 @@
-@use 'var.scss';
+@use "var.scss";
 
 #page_main {
   width: var.$screenW;
@@ -32,7 +32,7 @@
   width: var.$screenW;
   text-align: center;
   span {
-    font-family: 'Montserrat-Bold';
+    font-family: "Montserrat-Bold";
     color: rgba(226, 226, 226, 0.589);
     white-space: nowrap;
   }
@@ -83,7 +83,7 @@
 }
 
 .page_main_scrolldown_text {
-  font-family: 'Montserrat-Regular';
+  font-family: "Montserrat-Regular";
   color: rgba(255, 255, 255, 0.4);
   font-size: 20px;
   cursor: default;
