@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.1c0eb929.css",
-    "main.js": "/static/js/main.7991e315.js",
+    "main.css": "/static/css/main.e8b716ff.css",
+    "main.js": "/static/js/main.3331713d.js",
     "static/media/project2D_E-Eum.png": "/static/media/project2D_E-Eum.004d6f041056e362e827.png",
     "static/media/project2D_Worldy.png": "/static/media/project2D_Worldy.bb28a37097221adb1cc8.png",
     "static/media/project2D_RendezBoo.png": "/static/media/project2D_RendezBoo.71d9985dc4b71634fba3.png",
@@ -39,11 +39,11 @@
     "static/media/Logo_RendezBoo.png": "/static/media/Logo_RendezBoo.f05d503315d7c9ce8436.png",
     "static/media/Logo_Eeum.png": "/static/media/Logo_Eeum.1dd94539d82b4b590626.png",
     "index.html": "/index.html",
-    "main.1c0eb929.css.map": "/static/css/main.1c0eb929.css.map",
-    "main.7991e315.js.map": "/static/js/main.7991e315.js.map"
+    "main.e8b716ff.css.map": "/static/css/main.e8b716ff.css.map",
+    "main.3331713d.js.map": "/static/js/main.3331713d.js.map"
   },
   "entrypoints": [
-    "static/css/main.1c0eb929.css",
-    "static/js/main.7991e315.js"
+    "static/css/main.e8b716ff.css",
+    "static/js/main.3331713d.js"
   ]
 }
