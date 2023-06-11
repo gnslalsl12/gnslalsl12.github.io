@@ -5,12 +5,12 @@
   height: var.$screenH;
   position: relative;
   box-sizing: border-box;
-  background-color: rgba(80, 80, 80, 0.4);
   z-index: 1;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
 .works_container {
@@ -31,13 +31,19 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-
+    position: relative;
     .works_top_text {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translate(-50%, 0);
       z-index: 1;
       color: white;
       font-family: "Montserrat-Medium";
-      @include var.adjustFontSizeMax(0.06);
-      padding-bottom: 2.2%;
+      @include var.adjustFontSizeMax(0.03);
+      // box-shadow: 5px 5px 20px rgba(100, 100, 100, 0.3);
+      // padding: 0.5% 1%;
+      // border-radius: 1vw;
     }
   }
 
@@ -45,21 +51,21 @@
     z-index: 0;
     width: 100%;
     aspect-ratio: 3/1;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.61);
     padding: 3% 8%;
 
     .bottom_box_flows {
       width: 100%;
       aspect-ratio: 3/1;
-      // // @include var.tempborder(white);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      align-content: start;
+      align-content: space-between;
       flex-wrap: wrap;
+      // box-shadow: 5px 5px 25px rgba(100, 100, 100, 0.4);
 
       > div {
-        outline: 3px solid black;
+        // outline: 1px solid rgb(255, 255, 255);
         text-align: start;
       }
 
@@ -67,8 +73,9 @@
         transition: all 0.3s ease;
       }
       .work_box {
-        background-color: rgba(41, 41, 41, 0.3);
-        outline: 3px solid black;
+        // margin: 3px;
+        background-color: rgba(36, 36, 36, 0.404);
+        // outline: 1px solid rgb(255, 255, 255);
 
         // background: linear-gradient(to right top, rgba(80, 80, 80, 0.5) 0%, black 30%, black);
 
@@ -76,13 +83,14 @@
         cursor: pointer;
         span {
           color: white;
-          font-family: "Montserrat-Medium";
+          font-family: "Montserrat-Regular", "Pretendard-Regular";
         }
         overflow: hidden;
       }
 
       .work_box:hover {
-        background-color: rgba(80, 80, 80, 0.1);
+        background-color: rgba(80, 80, 80, 0.288);
+        backdrop-filter: blur(3px);
 
         .work_text_box {
           z-index: 0;
@@ -100,22 +108,21 @@
       }
 
       .work_box_web {
-        background-color: rgba(41, 41, 41, 0.3);
-
+        background-color: rgba(36, 36, 36, 0.404);
         // background: linear-gradient(to left bottom, rgba(80, 80, 80, 0.5) 0%, black 30%, black);
 
         position: relative;
         cursor: pointer;
         span {
           color: white;
-          font-family: "Montserrat-Medium";
+          font-family: "Montserrat-Regular", "Pretendard-Regular";
         }
         overflow: hidden;
       }
 
       .work_box_web:hover {
-        background-color: rgba(80, 80, 80, 0.1);
-
+        background-color: rgba(80, 80, 80, 0.288);
+        backdrop-filter: blur(3px);
         // background: linear-gradient(to left bottom, rgba(80, 80, 80, 0.7) 0%, black 80%, black);
 
         .work_text_box {
@@ -134,20 +141,20 @@
       }
 
       .work_box_mobile {
-        background-color: rgba(41, 41, 41, 0.3);
-
+        background-color: rgba(36, 36, 36, 0.404);
         // background: linear-gradient(to right bottom, rgba(80, 80, 80, 0.5) 0%, black 30%, black);
 
         position: relative;
         cursor: pointer;
         span {
           color: white;
-          font-family: "Montserrat-Medium";
+          font-family: "Pretendard-Regular", "Montserrat-Regular";
         }
         overflow: hidden;
       }
       .work_box_mobile:hover {
-        background-color: rgba(80, 80, 80, 0.1);
+        background-color: rgba(80, 80, 80, 0.288);
+        backdrop-filter: blur(3px);
 
         // background: linear-gradient(to right bottom, rgba(80, 80, 80, 0.7) 0%, black 80%, black);
 
@@ -194,7 +201,7 @@
     place-content: center;
     z-index: 0;
     opacity: 30%;
-    filter: blur(3px);
+    filter: blur(2px);
 
     img {
       width: 100%;
@@ -214,7 +221,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    // // @include var.tempborder(white);
+    // @include var.tempborder(white);
   }
 
   .work_image_box {
@@ -228,7 +235,7 @@
     place-content: center;
     z-index: 0;
     opacity: 30%;
-    filter: blur(3px);
+    filter: blur(2px);
     img {
       width: 100%;
     }
@@ -257,7 +264,7 @@
     place-content: center;
     z-index: 0;
     opacity: 30%;
-    filter: blur(3px);
+    filter: blur(2px);
 
     img {
       width: 100%;
@@ -266,26 +273,26 @@
 }
 
 #work_box_Worldy {
-  width: 50%;
-  aspect-ratio: 6/4;
+  width: 49.5%;
+  height: 100%; // aspect-ratio: 6/4;
   // @include var.tempborder(red);
   @include var.adjustFontSizeMax(0.054);
 }
 
 #work_box_RendezBoo {
   width: 30%;
-  aspect-ratio: 6/4;
-  // @include var.tempborder(green);
+  height: 50%;
   @include var.adjustFontSizeMax(0.027);
 }
 
 #work_box_Olds {
-  flex-grow: 1;
   position: relative;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  height: 49.3%;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  // outline: 1px solid red;
   #work_box_MyHome {
     // @include var.tempborder(green);
     height: 100%;
@@ -295,6 +302,7 @@
   #work_box_More {
     // @include var.tempborder(white);
     height: 100%;
+
     // width: 50%;
     width: 100%;
     display: grid;
@@ -315,18 +323,16 @@
 #work_box_Eeum {
   width: 20%;
   height: 100%;
+
   // @include var.tempborder(blue);
   @include var.adjustFontSizeMax(0.035);
-  > div > span {
-    font-family: "Pretendard-Medium";
-  }
 }
 
 #works_modal_container {
   transition: none;
   width: var.$screenW;
   height: 100%;
-  backdrop-filter: blur(7px) brightness(30%);
+  backdrop-filter: blur(7px);
   position: absolute;
   top: 0;
   left: 0;
@@ -360,7 +366,7 @@
 .works_modal_bottom {
   width: 100%;
   height: 92%;
-  background: rgba(0, 0, 0, 0.37);
+  background: rgba(0, 0, 0, 0.548);
   outline: 0.2vw solid rgba(49, 49, 49, 0.5);
   border-radius: 1vw;
   display: flex;
@@ -431,7 +437,7 @@
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
-  background: rgba(117, 117, 117, 0.1);
+  background: rgba(92, 92, 92, 0.555);
   backdrop-filter: blur(100px);
   button {
     z-index: 2;
@@ -460,11 +466,11 @@
     color: rgba(211, 211, 211, 0.9) !important;
   }
   .close_button:hover {
-    color: rgba(100, 100, 100, 0.9) !important;
+    color: rgba(109, 109, 109, 0.9) !important;
   }
 }
 .works_modal_menu_container:hover {
-  background: rgba(117, 117, 117, 0.17);
+  background: rgba(65, 65, 65, 0.575);
   button {
     color: rgba(201, 200, 200, 0.7);
   }
@@ -702,7 +708,6 @@
       cursor: default;
       width: 100%;
       height: 87%;
-      background: rgba(0, 0, 0, 0.432);
       position: relative;
       overflow-y: scroll;
       div {
@@ -710,7 +715,7 @@
         width: 100%;
         padding: 3% 0;
         margin-bottom: 2px;
-        background-color: rgba(100, 100, 100, 0.13);
+        background-color: rgba(37, 37, 37, 0.466);
         display: flex;
         flex-direction: column;
         justify-content: start;

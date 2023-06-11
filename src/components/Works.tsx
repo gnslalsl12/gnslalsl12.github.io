@@ -14,6 +14,8 @@ import Logo_RendezBoo from "../images/Logo_RendezBoo.png";
 import project_Worldy_Intro from "../images/project_Worldy_Intro.png";
 import project_Eeum_Intro from "../images/project_Eeum_Intro.png";
 import project_RendezBoo_Intro from "../images/project_RendezBoo_Intro.png";
+import bg from "../images/works_background.png";
+import { Link } from "react-scroll";
 
 type WorksItemType = {
   type: string;
@@ -491,14 +493,18 @@ const Works = ({ windowWidth }: { windowWidth: number }): JSX.Element => {
 
   return (
     <div id="page_works" ref={workRef}>
+      <div id="page_effect_top" />
+      <img src={bg} alt="background" id="page_background" />
       {selProject !== -1 && <DetailModal />}
       <div className="works_container">
         <div className="works_top_box">
-          <span className="works_top_text">Works</span>
+          <span className="works_top_text">WORKS</span>
         </div>
         <div className="works_bottom_box">
           <div className="bottom_box_flows">
-            <div
+            <Link
+              to="page_works"
+              smooth={true}
               id="work_box_Worldy"
               className="work_box_web"
               onClick={() => {
@@ -511,8 +517,10 @@ const Works = ({ windowWidth }: { windowWidth: number }): JSX.Element => {
               <div className="work_image_box">
                 <img src={WorksItemList[0].intro} alt="intro" />
               </div>
-            </div>
-            <div
+            </Link>
+            <Link
+              to="page_works"
+              smooth={true}
               id="work_box_Eeum"
               className="work_box_mobile"
               onClick={() => {
@@ -525,8 +533,10 @@ const Works = ({ windowWidth }: { windowWidth: number }): JSX.Element => {
               <div className="work_image_box">
                 <img src={WorksItemList[1].intro} alt="intro" />
               </div>
-            </div>
-            <div
+            </Link>
+            <Link
+              to="page_works"
+              smooth={true}
               id="work_box_RendezBoo"
               className="work_box_web"
               onClick={() => {
@@ -543,7 +553,7 @@ const Works = ({ windowWidth }: { windowWidth: number }): JSX.Element => {
               <div className="work_image_box">
                 <img src={WorksItemList[2].intro} alt="intro" />
               </div>
-            </div>
+            </Link>
             <div id="work_box_Olds">
               {/* <div
                 id="work_box_MyHome"

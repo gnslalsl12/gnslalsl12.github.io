@@ -84,15 +84,15 @@
 
 .page_main_scrolldown_text {
   font-family: "Montserrat-Regular";
-  color: rgba(255, 255, 255, 0.4);
-  font-size: 20px;
-  cursor: default;
+  color: rgba(255, 255, 255, 0.575);
+  @include var.adjustFontSizeMax(0.012);
   animation: scrolldowntextpop 2s infinite;
+  cursor: default;
 }
 
 .page_main_scrolldown_arrow {
   //   transform: rotate(90deg);
-  cursor: pointer;
+  cursor: default;
   height: 50px;
 }
 
@@ -100,8 +100,8 @@
   display: block;
   width: 12px;
   height: 12px;
-  border-bottom: 3px solid rgba(255, 255, 255, 0.23);
-  border-right: 3px solid rgba(255, 255, 255, 0.23);
+  border-bottom: 3px solid rgba(255, 255, 255, 0.575);
+  border-right: 3px solid rgba(255, 255, 255, 0.575);
   transform: rotate(45deg);
   margin: -10px;
   animation: scrolldownanimate 2s infinite;

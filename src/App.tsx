@@ -6,6 +6,7 @@ import Main from "./components/Main";
 import About from "./components/About";
 import Works from "./components/Works";
 import Stack from "./components/Stack";
+import Contact from "./components/Contact";
 
 function App() {
   const [windowWidth, setWindowWidth] = useState<number>(0);
@@ -14,28 +15,28 @@ function App() {
     if (windowWidth === 0) setWindowWidth(window.innerWidth);
   }, [windowWidth]);
 
-  // const topRef = useRef<HTMLDivElement>(null);
+  const topRef = useRef<HTMLDivElement>(null);
 
-  // useEffect(() => {
-  //   if (topRef.current) {
-  //     topRef.current.scrollIntoView({ behavior: 'auto', block: 'start' });
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (topRef.current) {
+      topRef.current.scrollIntoView({ behavior: "auto", block: "start" });
+    }
+  }, []);
 
-  // useEffect(() => {
-  //   // if (windowWidth === undefined) setWindowWidth(window.innerWidth);
+  useEffect(() => {
+    // if (windowWidth === undefined) setWindowWidth(window.innerWidth);
 
-  //   const handleResizeWindowWidth = () => {
-  //     setWindowWidth(window.innerWidth);
-  //   };
+    const handleResizeWindowWidth = () => {
+      setWindowWidth(window.innerWidth);
+    };
 
-  //   window.addEventListener('resize', handleResizeWindowWidth);
+    window.addEventListener("resize", handleResizeWindowWidth);
 
-  //   return () => {
-  //     //컴포넌트 언마운트 시 리스너 제거용
-  //     window.removeEventListener('resize', handleResizeWindowWidth);
-  //   };
-  // }, []);
+    return () => {
+      //컴포넌트 언마운트 시 리스너 제거용
+      window.removeEventListener("resize", handleResizeWindowWidth);
+    };
+  }, []);
 
   // useEffect(() => {
   //   const handleScroll = (e: WheelEvent) => {
@@ -64,13 +65,13 @@ function App() {
   //   };
   // }, []);
 
-  const [loadOtherPages, setLoadOtherPages] = useState<boolean>(true);
+  const [loadOtherPages, setLoadOtherPages] = useState<boolean>(false);
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setLoadOtherPages(true);
-  //   }, 2000);
-  // }, []);
+  useEffect(() => {
+    setTimeout(() => {
+      setLoadOtherPages(true);
+    }, 2000);
+  }, []);
 
   return (
     <div id="page_index">
@@ -82,6 +83,7 @@ function App() {
           <About windowWidth={windowWidth} />
           <Works windowWidth={windowWidth} />
           <Stack windowWidth={windowWidth} />
+          <Contact windowWidth={windowWidth} />
         </>
       )}
     </div>

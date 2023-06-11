@@ -1,0 +1,107 @@
+@use "var.scss";
+
+#page_contact {
+  width: var.$screenW;
+  height: var.$screenH;
+  position: relative;
+  box-sizing: border-box;
+  // overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  // outline: 1px solid red;
+  backdrop-filter: brightness(0%);
+  overflow: hidden;
+}
+
+#contact_container {
+  z-index: 10;
+  width: 50%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  //   backdrop-filter: brightness(50%);
+  //   box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.8);
+  position: relative;
+  .page_contact_title {
+    height: 20%;
+    z-index: 1;
+    color: white;
+    font-family: "Montserrat-Medium";
+    @include var.adjustFontSizeMax(0.03);
+  }
+  .conatct_box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 5% 0;
+    align-items: start;
+    height: 100%;
+    span {
+      font-family: "Montserrat-Regular";
+      @include var.adjustFontSizeMax(0.02);
+      position: relative;
+      color: white;
+    }
+    a {
+      cursor: pointer;
+    }
+  }
+}
+.bright {
+  position: absolute;
+  z-index: 0;
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70vw;
+  height: 30vw;
+  overflow: hidden;
+  .bar {
+    width: 30%;
+    height: 5px;
+    background-color: white;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    border-radius: 100px;
+  }
+  .light {
+    height: 200%;
+    width: 80%;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    background: radial-gradient(
+      ellipse at center,
+      rgba(187, 187, 187, 0.63) 0%,
+      rgba(187, 187, 187, 0.041) 40%,
+      rgba(139, 139, 139, 0) 50%
+    );
+  }
+}
+
+#footer {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  @include var.adjustFontSizeMax(0.008);
+  font-family: "Montserrat-Light";
+  color: rgba(200, 200, 200, 0.8);
+}
+
+#page_effect_bottom_contact {
+  position: absolute;
+  z-index: 3;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.418), rgba(0, 0, 0, 0));
+}

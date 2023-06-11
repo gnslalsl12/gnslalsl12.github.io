@@ -5,6 +5,7 @@
 @use "aboutpage.scss";
 @use "workspage.scss";
 @use "stackpage.scss";
+@use "contactpage.scss";
 @use "var.scss";
 
 button {
@@ -60,12 +61,44 @@ html {
   }
 }
 
+#page_background {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: contain;
+  filter: brightness(50%);
+}
+
+#page_effect_top {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 15%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.623), rgba(0, 0, 0, 0));
+}
+#page_effect_bottom {
+  position: absolute;
+  z-index: 3;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 10%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.418), rgba(0, 0, 0, 0));
+}
+
 #page_index {
   width: var.$screenW;
   height: fit-content;
   position: relative;
   z-index: 0;
-  overflow: auto;
+  padding-bottom: none !important;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 #page_index_background {

@@ -3,6 +3,7 @@
 #component_navigationbar {
   width: 100%;
   height: var.$navigationbarH;
+  backdrop-filter: blur(5px) contrast(80%) brightness(80%);
   // border-bottom: 2px solid rgba(120, 120, 120, 0.4);
   box-sizing: border-box;
   position: fixed;
@@ -42,14 +43,17 @@
   font-size: 20px;
   font-family: "Montserrat-Light";
   color: white;
+  * {
+    cursor: pointer;
+  }
 }
 
-#navigationbar_spreadedmenu button::before {
+#navigationbar_spreadedmenu .linkcomp::before {
   margin-left: auto;
 }
 
-#navigationbar_spreadedmenu button::after,
-#navigationbar_spreadedmenu button::before {
+#navigationbar_spreadedmenu .linkcomp::after,
+#navigationbar_spreadedmenu .linkcomp::before {
   content: "";
   width: 0%;
   height: 2px;
@@ -58,8 +62,8 @@
   transition: 0.3s;
 }
 
-#navigationbar_spreadedmenu button:hover::after,
-#navigationbar_spreadedmenu button:hover::before {
+#navigationbar_spreadedmenu .linkcomp:hover::after,
+#navigationbar_spreadedmenu .linkcomp:hover::before {
   width: 100%;
 }
 
@@ -80,6 +84,7 @@
   flex-direction: column;
   justify-content: start;
   align-items: center;
+  cursor: pointer;
 }
 
 .listedmenu-list {

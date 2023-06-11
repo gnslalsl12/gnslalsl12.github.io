@@ -12,6 +12,7 @@
   justify-content: center;
   align-items: center;
   // outline: 1px solid red;
+  overflow: hidden;
 }
 
 #about_container {
@@ -25,15 +26,15 @@
   // outline: 1px solid white;
 }
 
-.about_bottomline {
-  height: 20%;
-  width: var.$screenW;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  z-index: -2;
-  background: linear-gradient(to top, rgba(80, 80, 80, 0.4), rgba(0, 0, 0, 0));
-}
+// .about_bottomline {
+//   height: 20%;
+//   width: var.$screenW;
+//   position: absolute;
+//   bottom: 0;
+//   left: 0;
+//   z-index: -2;
+//   background: linear-gradient(to top, rgba(80, 80, 80, 0.4), rgba(0, 0, 0, 0));
+// }
 
 .about_background {
   transition: opacity 300ms ease-in-out;
