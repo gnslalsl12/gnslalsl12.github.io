@@ -67,10 +67,60 @@ function App() {
 
   const [loadOtherPages, setLoadOtherPages] = useState<boolean>(false);
 
+  const preLoadImages: string[] = [
+    "./images/aboutBG.png",
+    "./images/contact_background.png",
+    "./images/works_background.png",
+    "./images/HoonsFavicon.png",
+    "./images/HoonsTextLogo.png",
+    "./images/HoonsTextLogoWhite.png",
+    "./images/Logo_Eeum.png",
+    "./images/Logo_RendezBoo.png",
+    "./images/Logo_Worldy.png",
+    "./images/profile.png",
+    "./images/profileImgBusiness.png",
+    "./images/project_Eeum_Intro.png",
+    "./images/project_RendezBoo_Intro.png",
+    "./images/project_Worldy_Intro.png",
+    "./images/project2D_E-Eum.png",
+    "./images/project2D_RendezBoo.png",
+    "./images/project2D_Worldy.png",
+    "./images/project3D_E-Eum.png",
+    "./images/project3D_RendezBoo.png",
+    "./images/project3D_Worldy.png",
+    "./images/tech_background.png",
+    "./images/tool_logo_blender.png",
+    "./images/tool_logo_css.png",
+    "./images/tool_logo_gitlab.png",
+    "./images/tool_logo_html.png",
+    "./images/tool_logo_java.png",
+    "./images/tool_logo_jira.png",
+    "./images/tool_logo_js.png",
+    "./images/tool_logo_mysql.png",
+    "./images/tool_logo_python.png",
+    "./images/tool_logo_react.png",
+    "./images/tool_logo_reactnative.png",
+    "./images/tool_logo_recoil.png",
+    "./images/tool_logo_redux.png",
+    "./images/tool_logo_sass.png",
+    "./images/tool_logo_sketchup.png",
+    "./images/tool_logo_spring.png",
+    "./images/tool_logo_styledcomponent.png",
+    "./images/tool_logo_tailwind.png",
+    "./images/tool_logo_three.png",
+    "./images/tool_logo_ts.png",
+    "./images/tool_logo_vue.png",
+  ];
+
   useEffect(() => {
     setTimeout(() => {
       setLoadOtherPages(true);
     }, 2000);
+  }, []);
+  useEffect(() => {
+    preLoadImages.forEach((image) => {
+      new Image().src = image;
+    });
   }, []);
 
   return (
