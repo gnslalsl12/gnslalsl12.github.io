@@ -1,0 +1,22 @@
+@import "variables.scss";
+
+.page_navbar {
+  background-color: colorNavy();
+  height: 64px;
+  width: 100%;
+}
+
+@keyframes navbarSlide {
+  from {
+    transform: translateY(-50px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.navbar_sticky {
+  position: fixed;
+  top: 0;
+  animation: navbarSlide 0.3s ease-out;
+}

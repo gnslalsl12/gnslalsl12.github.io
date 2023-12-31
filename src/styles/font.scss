@@ -1,0 +1,33 @@
+@mixin addCustomFonts($name, $filename) {
+  @font-face {
+    font-family: $name;
+    src: url("../assets/fonts/#{$filename}") format("truetype");
+  }
+}
+
+// 필요한 폰트 믹스인들 추가
+@include addCustomFonts("Montserrat-Black", "Montserrat-Black.ttf");
+@include addCustomFonts("Montserrat-BlackItalic", "Montserrat-BlackItalic.ttf");
+@include addCustomFonts("Montserrat-Bold", "Montserrat-Bold.ttf");
+@include addCustomFonts("Montserrat-BoldItalic", "Montserrat-BoldItalic.ttf");
+@include addCustomFonts("Montserrat-ExtraBold", "Montserrat-ExtraBold.ttf");
+@include addCustomFonts("Montserrat-ExtraBoldItalic", "Montserrat-ExtraBoldItalic.ttf");
+@include addCustomFonts("Montserrat-ExtraLight", "Montserrat-ExtraLight.ttf");
+@include addCustomFonts("Montserrat-ExtraLightItalic", "Montserrat-ExtraLightItalic.ttf");
+@include addCustomFonts("Montserrat-Light", "Montserrat-Light.ttf");
+@include addCustomFonts("Montserrat-LightItalic", "Montserrat-LightItalic.ttf");
+@include addCustomFonts("Montserrat-Medium", "Montserrat-Medium.ttf");
+@include addCustomFonts("Montserrat-MediumItalic", "Montserrat-MediumItalic.ttf");
+@include addCustomFonts("Montserrat-Regular", "Montserrat-Regular.ttf");
+@include addCustomFonts("Montserrat-Italic", "Montserrat-Italic.ttf");
+// 추가적인 폰트 믹스인들 작성
+
+@include addCustomFonts("Pretendard-Black", "Pretendard-Black.ttf");
+@include addCustomFonts("Pretendard-Bold", "Pretendard-Bold.ttf");
+@include addCustomFonts("Pretendard-ExtraBold", "Pretendard-ExtraBold.ttf");
+@include addCustomFonts("Pretendard-ExtraLight", "Pretendard-ExtraLight.ttf");
+@include addCustomFonts("Pretendard-Light", "Pretendard-Light.ttf");
+@include addCustomFonts("Pretendard-Medium", "Pretendard-Medium.ttf");
+@include addCustomFonts("Pretendard-Regular", "Pretendard-Regular.ttf");
+@include addCustomFonts("Pretendard-SemiBold", "Pretendard-SemiBold.ttf");
+@include addCustomFonts("Pretendard-Thin", "Pretendard-Thin.ttf");

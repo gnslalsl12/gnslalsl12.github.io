@@ -1,0 +1,22 @@
+/* 모든 브라우저에서 세로 스크롤바 숨기기 */
+html,
+body {
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+/* 웹킷 기반 브라우저 (예: Safari, Chrome) */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* 파이어폭스 */
+html {
+  scrollbar-width: none;
+}
+
+/* IE 및 엣지 */
+html {
+  -ms-overflow-style: none;
+}

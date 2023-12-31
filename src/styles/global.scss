@@ -1,0 +1,12 @@
+@use "font.scss";
+@use "noScroll.scss";
+@use "main.scss";
+@use "about.scss";
+@use "navBar.scss";
+
+@import "variables.scss";
+
+.page_app {
+  width: 100vw;
+  height: fit-content;
+}

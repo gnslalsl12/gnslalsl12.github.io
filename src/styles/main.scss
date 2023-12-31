@@ -1,0 +1,55 @@
+@import "variables.scss";
+
+.page_main {
+  @include full-screen;
+  background: colorBlack();
+  position: relative;
+  @include right;
+}
+
+.main_canvas {
+  @include full-screen;
+  position: absolute;
+  z-index: 1;
+}
+
+.main_infos {
+  // @include screen(82, 50);
+  @include responsiveSize(450, 900, 200, 400);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: end;
+  padding: 5%;
+  position: relative;
+  z-index: 2;
+  // @include tempBorder(white);
+}
+
+.main_infos > h1 {
+  font-family: "Montserrat-Medium";
+  text-align: end;
+  color: colorWhite();
+  @include responsiveFontSize(25, 50);
+  > strong {
+    color: colorYellow();
+  }
+  margin-bottom: 5%;
+}
+
+.main_infos > button {
+  font-family: "Montserrat-Light";
+  @include responsiveSize(120, 180, 40, 50);
+  @include responsiveFontSize(20, 30);
+  @include center;
+  @include tempBorder(colorWhite(70));
+  color: colorWhite(70);
+  width: 120px;
+  height: 50px;
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+  &:hover {
+    background-color: colorBlue(50);
+    border-color: colorBlue(50);
+    color: colorWhite();
+  }
+}
