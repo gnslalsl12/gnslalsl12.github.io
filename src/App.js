@@ -6,6 +6,7 @@ import { Skills } from "./components/Skills";
 import { Projects } from "./components/Projects";
 import { Extra } from "./components/Extra";
 import { Contact } from "./components/Contact";
+import { throttle } from "./utils/throttle";
 
 function App() {
   const [isSticky, setIsSticky] = useState(false);
@@ -16,6 +17,7 @@ function App() {
   useEffect(() => {
     const handleScroll = () => {
       //현재 스크롤의 위치 가져오기
+      console.log("스크롤");
       const currentScrollPosition = window.scrollY;
 
       //동적 뷰포트 높이(100vh) 가져오기
@@ -23,7 +25,7 @@ function App() {
 
       //Navbar Sticky 설정 useEffect
       //100vh 이상 움직였을 떄 sticky 처리
-      if (!isSticky && currentScrollPosition >= viewportHeight + 50) {
+      if (!isSticky && currentScrollPosition >= viewportHeight + 49) {
         setIsSticky(true);
       } else if (isSticky && currentScrollPosition < viewportHeight) {
         setIsSticky(false);
@@ -33,16 +35,17 @@ function App() {
       for (const section of sectionArray) {
         if (currentScrollPosition >= document.getElementById(section).offsetTop) {
           setActiveSection(section);
-          console.log(section);
           break;
         }
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    const throttleHandleScroll = throttle(handleScroll, 100);
+
+    window.addEventListener("scroll", throttleHandleScroll);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", throttleHandleScroll);
     };
   }, [isSticky, activeSection]);
 

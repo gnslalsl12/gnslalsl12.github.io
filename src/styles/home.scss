@@ -32,7 +32,7 @@
   color: colorWhite();
   @include responsiveFontSize(25, 50);
   > strong {
-    color: colorYellow();
+    color: colorA();
   }
   margin-bottom: 5%;
 }
@@ -48,8 +48,8 @@
   height: 50px;
   transition: background-color 0.3s, border-color 0.3s, color 0.3s;
   &:hover {
-    background-color: colorBlue(50);
-    border-color: colorBlue(50);
+    background-color: colorB(50);
+    border-color: colorB(50);
     color: colorWhite();
   }
 }

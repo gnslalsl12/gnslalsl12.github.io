@@ -1,10 +1,12 @@
 @import "variables.scss";
 
 .page_navbar {
-  background-color: colorNavy();
-  height: 50px;
+  background-color: colorBlack(90);
+  height: 53px;
   width: 100%;
-  @include center;
+  @include left;
+  box-sizing: content-box;
+  border-top: 3px solid colorA(90);
 }
 
 @keyframes navbarSlide {
@@ -28,11 +30,11 @@
   justify-content: space-around;
   align-items: center;
   height: 90%;
-  width: 80%;
-  @include tempBorder;
+  width: 50%;
+  // @include tempBorder;
 
   > li {
-    @include tempBorder(red);
+    // @include tempBorder(red);
     width: 10%;
     height: 70%;
     display: grid;
@@ -44,7 +46,10 @@
     transition: color 0.3s;
 
     &:hover {
-      color: colorWhite(100);
+      color: colorWhite();
     }
+  }
+  > .navbar_li_active {
+    color: colorA();
   }
 }

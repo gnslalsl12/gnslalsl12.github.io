@@ -1,35 +1,29 @@
-$colorBlack: rgb(17, 17, 17);
-$colorGray: rgb(47, 47, 47);
-$colorWhite: rgb(246, 246, 246);
-$colorYellow: rgb(255, 203, 116);
-$colorSand: rgb(217, 196, 156);
-$colorDeepNavy: rgba(23, 27, 38);
-$colorNavy: rgb(28, 54, 89);
-$colorBlue: rgb(7, 152, 242);
+// $colorBlack: #242220;
+// $colorWhite: #cfc1b2;
+// $colorA: #fdc137;
+// $colorB: #34ab65;
+// $colorC: #0c4d24;
+
+$colorBlack: #0d0d0d;
+$colorWhite: #f2f2f2;
+$colorA: #d9a91a;
+$colorB: #7eadbf;
+$colorC: #a6a08d;
 
 @function colorBlack($opacity: 100) {
   @return rgba($colorBlack, $opacity/100);
 }
-@function colorGray($opacity: 100) {
-  @return rgba($colorGray, $opacity/100);
-}
 @function colorWhite($opacity: 100) {
   @return rgba($colorWhite, $opacity/100);
 }
-@function colorYellow($opacity: 100) {
-  @return rgba($colorYellow, $opacity/100);
+@function colorA($opacity: 100) {
+  @return rgba($colorA, $opacity/100);
 }
-@function colorSand($opacity: 100) {
-  @return rgba($colorSand, $opacity/100);
+@function colorB($opacity: 100) {
+  @return rgba($colorB, $opacity/100);
 }
-@function colorDeepNavy($opacity: 100) {
-  @return rgba($colorDeepNavy, $opacity/100);
-}
-@function colorNavy($opacity: 100) {
-  @return rgba($colorNavy, $opacity/100);
-}
-@function colorBlue($opacity: 100) {
-  @return rgba($colorBlue, $opacity/100);
+@function colorC($opacity: 100) {
+  @return rgba($colorC, $opacity/100);
 }
 
 /* 

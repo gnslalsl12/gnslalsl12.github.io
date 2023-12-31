@@ -1,6 +1,8 @@
 import React from "react";
 
 export const NavBar = (props) => {
+  const sectionArray = ["home", "about", "skills", "projects", "extra", "contact"];
+
   const scrollToSection = (sectionId) => {
     const section = document.getElementById(sectionId);
     if (section) {
@@ -11,12 +13,15 @@ export const NavBar = (props) => {
   return (
     <div className={"page_navbar " + (props.isSticky ? "navbar_sticky" : "")}>
       <ul className="navbar_ul">
-        <li onClick={() => scrollToSection("home")}>Home</li>
-        <li onClick={() => scrollToSection("about")}>About</li>
-        <li onClick={() => scrollToSection("skills")}>Skills</li>
-        <li onClick={() => scrollToSection("projects")}>Projects</li>
-        <li onClick={() => scrollToSection("extra")}>Extra</li> {/* 예: 'Extra'라는 페이지 제목 */}
-        <li onClick={() => scrollToSection("contact")}>Contact</li>
+        {sectionArray.map((section) => (
+          <li
+            key={section}
+            onClick={() => scrollToSection(section)}
+            className={section === props.activeSection ? "navbar_li_active" : "navbar_li"}
+          >
+            {section.charAt(0).toUpperCase() + section.slice(1)}
+          </li>
+        ))}
       </ul>
     </div>
   );
