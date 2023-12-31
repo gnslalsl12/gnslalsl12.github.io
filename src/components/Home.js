@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from "react";
-import { HomeInfos } from "../functions/HomeInfos";
+import React, { useContext, useEffect, useRef } from "react";
+import HomeInfos from "./HomeInfos";
 
 const Home = () => {
   const canvasRef = useRef(null);

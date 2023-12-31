@@ -1,23 +1,24 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import ActiveSectionContext from "../contexts/ActiveSectionContext";
+import ScrollToSectionContext from "../contexts/ScrollToSectionContext";
 
-export const NavBar = (props) => {
+const NavBar = ({ isSticky }) => {
   const sectionArray = ["home", "about", "skills", "projects", "extra", "contact"];
+  const { activeSection, setActiveSection } = useContext(ActiveSectionContext);
 
-  const scrollToSection = (sectionId) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  const { scrollToSection } = useContext(ScrollToSectionContext);
 
   return (
-    <div className={"page_navbar " + (props.isSticky ? "navbar_sticky" : "")}>
+    <div className={"page_navbar " + (isSticky ? "navbar_sticky" : "")}>
       <ul className="navbar_ul">
         {sectionArray.map((section) => (
           <li
             key={section}
-            onClick={() => scrollToSection(section)}
-            className={section === props.activeSection ? "navbar_li_active" : "navbar_li"}
+            onClick={() => {
+              scrollToSection(section);
+              setActiveSection(section);
+            }}
+            className={section === activeSection ? "navbar_li_active" : "navbar_li"}
           >
             {section.charAt(0).toUpperCase() + section.slice(1)}
           </li>
@@ -26,3 +27,5 @@ export const NavBar = (props) => {
     </div>
   );
 };
+
+export default NavBar;

@@ -1,4 +1,4 @@
-export const throttle = (func, limit) => {
+const throttle = (func, limit) => {
   let lastFunc; //마지막으로 실행된 함수
   let lastRan; //마지막으로 함수가 실행된 시간
 
@@ -29,3 +29,5 @@ export const throttle = (func, limit) => {
     }
   };
 };
+
+export default throttle;

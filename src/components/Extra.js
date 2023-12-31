@@ -1,5 +1,7 @@
 import React from "react";
 
-export const Extra = () => {
+const Extra = () => {
   return <div>Extra</div>;
 };
+
+export default Extra;
