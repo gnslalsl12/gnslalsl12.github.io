@@ -9,6 +9,9 @@ import { Contact } from "./components/Contact";
 
 function App() {
   const [isSticky, setIsSticky] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
+
+  const sectionArray = ["contact", "extra", "projects", "skills", "about", "home"];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,11 +21,21 @@ function App() {
       //동적 뷰포트 높이(100vh) 가져오기
       const viewportHeight = window.innerHeight;
 
+      //Navbar Sticky 설정 useEffect
       //100vh 이상 움직였을 떄 sticky 처리
       if (!isSticky && currentScrollPosition >= viewportHeight + 50) {
         setIsSticky(true);
       } else if (isSticky && currentScrollPosition < viewportHeight) {
         setIsSticky(false);
+      }
+
+      //Navbar Text 효과 설정 useEffect
+      for (const section of sectionArray) {
+        if (currentScrollPosition >= document.getElementById(section).offsetTop) {
+          setActiveSection(section);
+          console.log(section);
+          break;
+        }
       }
     };
 
@@ -31,14 +44,14 @@ function App() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [isSticky]);
+  }, [isSticky, activeSection]);
 
   return (
     <div className="page_app">
       <div id="home">
         <Home />
       </div>
-      <NavBar isSticky={isSticky} />
+      <NavBar isSticky={isSticky} activeSection={activeSection} />
       <div id="about">
         <About />
       </div>

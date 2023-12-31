@@ -1,6 +1,6 @@
 import React from "react";
 
-export const NavBar = ({ isSticky }) => {
+export const NavBar = (props) => {
   const scrollToSection = (sectionId) => {
     const section = document.getElementById(sectionId);
     if (section) {
@@ -9,7 +9,7 @@ export const NavBar = ({ isSticky }) => {
   };
 
   return (
-    <div className={"page_navbar " + (isSticky ? "navbar_sticky" : "")}>
+    <div className={"page_navbar " + (props.isSticky ? "navbar_sticky" : "")}>
       <ul className="navbar_ul">
         <li onClick={() => scrollToSection("home")}>Home</li>
         <li onClick={() => scrollToSection("about")}>About</li>
