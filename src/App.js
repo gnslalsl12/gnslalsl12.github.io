@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import { About } from "./components/About";
-import Main from "./components/Main";
+import Home from "./components/Home";
 import { NavBar } from "./components/NavBar";
+import { Skills } from "./components/Skills";
+import { Projects } from "./components/Projects";
+import { Extra } from "./components/Extra";
+import { Contact } from "./components/Contact";
 
 function App() {
   const [isSticky, setIsSticky] = useState(false);
@@ -31,9 +35,25 @@ function App() {
 
   return (
     <div className="page_app">
-      <Main />
+      <div id="home">
+        <Home />
+      </div>
       <NavBar isSticky={isSticky} />
-      <About />
+      <div id="about">
+        <About />
+      </div>
+      <div id="skills">
+        <Skills />
+      </div>
+      <div id="projects">
+        <Projects />
+      </div>
+      <div id="extra">
+        <Extra />
+      </div>
+      <div id="contact">
+        <Contact />
+      </div>
     </div>
   );
 }

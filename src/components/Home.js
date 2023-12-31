@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
-import { MainInfos } from "../functions/MainInfos";
+import { HomeInfos } from "../functions/HomeInfos";
 
-const Main = () => {
+const Home = () => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -160,11 +160,11 @@ const Main = () => {
   }, []);
 
   return (
-    <div className="page_main">
-      <canvas id="canvas" ref={canvasRef} className="main_canvas" />
-      <MainInfos />;
+    <div className="page_home">
+      <canvas id="canvas" ref={canvasRef} className="home_canvas" />
+      <HomeInfos />;
     </div>
   );
 };
 
-export default Main;
+export default Home;

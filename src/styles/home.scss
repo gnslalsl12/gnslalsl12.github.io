@@ -1,19 +1,19 @@
 @import "variables.scss";
 
-.page_main {
+.page_home {
   @include full-screen;
   background: colorBlack();
   position: relative;
   @include right;
 }
 
-.main_canvas {
+.home_canvas {
   @include full-screen;
   position: absolute;
   z-index: 1;
 }
 
-.main_infos {
+.home_infos {
   // @include screen(82, 50);
   @include responsiveSize(450, 900, 200, 400);
   display: flex;
@@ -26,7 +26,7 @@
   // @include tempBorder(white);
 }
 
-.main_infos > h1 {
+.home_infos > h1 {
   font-family: "Montserrat-Medium";
   text-align: end;
   color: colorWhite();
@@ -37,7 +37,7 @@
   margin-bottom: 5%;
 }
 
-.main_infos > button {
+.home_infos > button {
   font-family: "Montserrat-Light";
   @include responsiveSize(120, 180, 40, 50);
   @include responsiveFontSize(20, 30);

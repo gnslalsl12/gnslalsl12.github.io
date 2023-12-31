@@ -1,8 +1,8 @@
 import React from "react";
 
-export const MainInfos = () => {
+export const HomeInfos = () => {
   return (
-    <div className="main_infos">
+    <div className="home_infos">
       <h1>
         Hi, I'm <strong>Jeong Hoon</strong>
         .<br />

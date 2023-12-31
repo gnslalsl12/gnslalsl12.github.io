@@ -2,8 +2,9 @@
 
 .page_navbar {
   background-color: colorNavy();
-  height: 64px;
+  height: 50px;
   width: 100%;
+  @include center;
 }
 
 @keyframes navbarSlide {
@@ -19,4 +20,31 @@
   position: fixed;
   top: 0;
   animation: navbarSlide 0.3s ease-out;
+}
+
+.navbar_ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 90%;
+  width: 80%;
+  @include tempBorder;
+
+  > li {
+    @include tempBorder(red);
+    width: 10%;
+    height: 60%;
+    display: grid;
+    place-content: center;
+    color: colorWhite(70);
+    font-family: "Montserrat-Medium";
+    cursor: pointer;
+
+    transition: color 0.3s;
+
+    &:hover {
+      color: colorWhite(100);
+    }
+  }
 }
