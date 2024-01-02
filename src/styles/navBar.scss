@@ -7,6 +7,9 @@
   @include left;
   box-sizing: content-box;
   border-top: 3px solid colorA(90);
+  z-index: 100;
+  position: absolute;
+  top: 100vh;
 }
 
 @keyframes navbarSlide {
@@ -19,8 +22,8 @@
 }
 
 .navbar_sticky {
-  position: fixed;
-  top: 0;
+  position: fixed !important;
+  top: 0 !important;
   animation: navbarSlide 0.3s ease-out;
 }
 

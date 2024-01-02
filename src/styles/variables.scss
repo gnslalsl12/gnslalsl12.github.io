@@ -44,25 +44,23 @@ $colorC: #a6a08d;
 //   height: $height-percentage * 1vh;
 // }
 
-@mixin responsiveSize($minWidth, $maxWidth, $minHeight, $maxHeight) {
+@mixin responsiveSize($fullWidth, $fullHeight) {
   // 600px 이하일 때
   @media (max-width: 899px) {
-    width: #{$minWidth}px;
-    height: #{$minHeight}px;
+    width: #{$fullWidth/2}px;
+    height: #{$fullHeight/2}px;
   }
 
   // 1300px 이상일 때
   @media (min-width: 1300px) {
-    width: #{$maxWidth}px;
-    height: #{$maxHeight}px;
+    width: #{$fullWidth}px;
+    height: #{$fullHeight}px;
   }
 
   // 600px과 1300px 사이일 때
   @media (min-width: 900px) and (max-width: 1299px) {
-    $widDiff: $maxWidth - $minWidth;
-    $heiDiff: $maxHeight - $minHeight;
-    width: calc(#{$minWidth}px + #{$widDiff}* ((100vw - 900px) / 399));
-    height: calc(#{$minHeight}px + #{$heiDiff}* ((100vw - 900px) / 399));
+    width: calc(#{$fullWidth/2}px + #{$fullWidth/2}* ((100vw - 900px) / 399));
+    height: calc(#{$fullHeight/2}px + #{$fullHeight/2}* ((100vw - 900px) / 399));
   }
 }
 
@@ -87,21 +85,16 @@ $colorC: #a6a08d;
   border: 1px solid $color;
 }
 
-@mixin responsiveFontSize($minFontSize, $maxFontSize) {
+@mixin responsiveFontSize($fullFontSize) {
   @media (max-width: 899px) {
-    font-size: #{$minFontSize}px;
+    font-size: #{$fullFontSize / 2}px;
   }
 
   @media (min-width: 1300px) {
-    font-size: #{$maxFontSize}px;
+    font-size: #{$fullFontSize}px;
   }
 
   @media (min-width: 900px) and (max-width: 1299px) {
-    // 최소 폰트 사이즈와 최대 폰트 사이즈 사이의 차이를 계산
-    $sizeDifference: $maxFontSize - $minFontSize;
-
-    // 뷰포트 폭에 따른 폰트 사이즈 조정 계산
-    // 900px 에서는 최소 폰트 사이즈, 1299px 에서는 최대 폰트 사이즈가 되도록 설정
-    font-size: calc(#{$minFontSize}px + #{$sizeDifference} * ((100vw - 900px) / 399));
+    font-size: calc(#{$fullFontSize/2}px + #{$fullFontSize/2} * ((100vw - 900px) / 399));
   }
 }

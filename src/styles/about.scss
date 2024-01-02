@@ -1,6 +1,82 @@
 @import "variables.scss";
 
 .page_about {
-  height: 200vh;
+  height: fit-content;
   background-color: colorWhite();
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 7%;
+  padding-bottom: 7%;
+}
+
+.about_title {
+  @include tempBorder(black);
+  @include responsiveSize(160, 60);
+  display: grid;
+  place-content: center;
+  > span {
+    color: $colorBlack;
+    font-family: "Montserrat-Bold";
+    @include responsiveFontSize(30);
+  }
+}
+
+.about_info {
+  @include tempBorder(black);
+  @include responsiveSize(1000, 450);
+  margin-top: 4%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  > .about_info_leftBox {
+    @include tempBorder(red);
+    width: 33%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    > .about_info_leftBox_img {
+      @include tempBorder(green);
+      border-radius: 8%;
+      width: fit-content;
+      height: 60%;
+    }
+    > .about_info_leftBox_text {
+      height: 35%;
+      font-family: "Pretendard-Regular";
+      text-align: center;
+      padding-top: 3%;
+      padding-bottom: 3%;
+      @include responsiveFontSize(16);
+      @include tempBorder(green);
+    }
+  }
+  > .about_info_rightBox {
+    @include tempBorder(blue);
+    width: 60%;
+    height: 100%;
+    > ul {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      > li {
+        @include tempBorder(green);
+        background-color: colorB(70);
+        > .about_info_rightBox_skills_name {
+          background-color: $colorB;
+          color: $colorWhite;
+          @include tempBorder(black);
+          width: 20%;
+          font-family: "Montserrat-Bold";
+          text-align: center;
+          @include responsiveFontSize(15);
+        }
+      }
+    }
+  }
 }
