@@ -9,11 +9,11 @@ const About = () => {
       { name: "CSS", exp: 90 },
       { name: "React", exp: 90 },
       { name: "ReactNative", exp: 70 },
+      { name: "TypeScript", exp: 70 },
       { name: "Java", exp: 70 },
       { name: "Figma", exp: 70 },
-      { name: "Blender", exp: 70 },
-      { name: "Vue", exp: 50 },
       { name: "MySQL", exp: 50 },
+      { name: "Blender", exp: 50 },
     ];
 
     return (
@@ -31,8 +31,8 @@ const About = () => {
   };
 
   return (
-    <div className="page_about">
-      <div className="about_title">
+    <div className="page_global_background page_about">
+      <div className="page_global_title">
         <span>ABOUT</span>
       </div>
       <div className="about_info">
