@@ -2,7 +2,7 @@ import React from "react";
 import profileImage from "../assets/images/profileImage.jpg";
 
 const About = () => {
-  const skillContents = () => {
+  const aboutContent = () => {
     const skillsArray = [
       { name: "JavaScript", exp: 90 },
       { name: "HTML", exp: 90 },
@@ -35,7 +35,7 @@ const About = () => {
       <div className="page_global_title">
         <span>ABOUT</span>
       </div>
-      <div className="about_info">
+      <div className="page_global_topBox about_info">
         <div className="about_info_leftBox">
           <img src={profileImage} alt="프로필 이미지" className="about_info_leftBox_img" />
           <div className="about_info_leftBox_text">
@@ -47,7 +47,7 @@ const About = () => {
             직관적인 사용 환경 구성에 깊은 열정이 있습니다.
           </div>
         </div>
-        <div className="about_info_rightBox">{skillContents()}</div>
+        <div className="about_info_rightBox">{aboutContent()}</div>
       </div>
     </div>
   );

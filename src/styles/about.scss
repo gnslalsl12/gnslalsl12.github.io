@@ -7,11 +7,7 @@
 .about_info {
   // @include tempBorder(black);
   @include responsiveSize(1000, 430);
-  margin-top: 4%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+
   > .about_info_leftBox {
     // @include tempBorder(red);
     width: 33%;
@@ -21,7 +17,7 @@
     justify-content: space-between;
     align-items: center;
     > .about_info_leftBox_img {
-      border-radius: 8%;
+      border-radius: 15%;
       width: fit-content;
       height: 60%;
     }

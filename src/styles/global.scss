@@ -33,3 +33,14 @@
     @include responsiveFontSize(30);
   }
 }
+
+.page_global_topBox {
+  margin-top: 4%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.page_skills_summaries {
+}
