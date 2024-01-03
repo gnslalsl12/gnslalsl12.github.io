@@ -22,7 +22,7 @@ const About = () => {
           return (
             <li key={index}>
               <div className="about_info_rightBox_skills_name">{item.name}</div>
-              <div className={`about_info_rightBox_skills_percent_${item.exp}`} />
+              <div className={`about_info_rightBox_skills_percent percent_${item.exp}`} />
             </li>
           );
         })}
@@ -39,9 +39,7 @@ const About = () => {
         <div className="about_info_leftBox">
           <img src={profileImage} alt="프로필 이미지" className="about_info_leftBox_img" />
           <div className="about_info_leftBox_text">
-            <strong> Front-End </strong>
-            개발자 정훈입니다.
-            <br />
+            <div>Front-End 개발자 정훈입니다.</div>
             사용자 중심의 개발 방향성을 강화한 역량으로
             <br />
             다양한 UI/UX 설계, 다이나믹 에니메이션 구현,
