@@ -37,46 +37,4 @@
       }
     }
   }
-  > .about_info_rightBox {
-    // @include tempBorder(blue);
-    width: 60%;
-    height: 100%;
-    > ul {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      > li {
-        // @include tempBorder(green);
-        background-color: colorC(23);
-        display: flex;
-        width: 100%;
-        height: 7%;
-        flex-direction: row;
-        > .about_info_rightBox_skills_name {
-          // @include tempBorder(black);
-          background-color: colorBlack(70);
-          color: $colorWhite;
-          width: 20%;
-          height: 100%;
-          font-family: "Montserrat-Medium";
-          @include responsiveFontSize(14);
-          @include center;
-        }
-        > .about_info_rightBox_skills_percent {
-          background-color: colorA(80);
-          height: 100%;
-        }
-        > .percent_90 {
-          width: 72%;
-        }
-        > .percent_70 {
-          width: 56%;
-        }
-        > .percent_50 {
-          width: 40%;
-        }
-      }
-    }
-  }
 }

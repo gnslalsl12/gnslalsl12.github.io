@@ -2,34 +2,6 @@ import React from "react";
 import profileImage from "../assets/images/profileImage.jpg";
 
 const About = () => {
-  const aboutContent = () => {
-    const skillsArray = [
-      { name: "JavaScript", exp: 90 },
-      { name: "HTML", exp: 90 },
-      { name: "CSS", exp: 90 },
-      { name: "React", exp: 90 },
-      { name: "ReactNative", exp: 70 },
-      { name: "TypeScript", exp: 70 },
-      { name: "Java", exp: 70 },
-      { name: "Figma", exp: 70 },
-      { name: "MySQL", exp: 50 },
-      { name: "Blender", exp: 50 },
-    ];
-
-    return (
-      <ul>
-        {skillsArray.map((item, index) => {
-          return (
-            <li key={index}>
-              <div className="about_info_rightBox_skills_name">{item.name}</div>
-              <div className={`about_info_rightBox_skills_percent percent_${item.exp}`} />
-            </li>
-          );
-        })}
-      </ul>
-    );
-  };
-
   return (
     <div className="page_global_background page_about">
       <div className="page_global_title">
@@ -47,7 +19,7 @@ const About = () => {
             직관적인 사용 환경 구성에 깊은 열정이 있습니다.
           </div>
         </div>
-        <div className="about_info_rightBox">{aboutContent()}</div>
+        <div className="about_info_rightBox"></div>
       </div>
     </div>
   );
