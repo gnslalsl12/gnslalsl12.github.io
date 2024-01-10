@@ -4,7 +4,7 @@ import { MdDevices } from "react-icons/md";
 import { FiFeather } from "react-icons/fi";
 import { IoRocketOutline } from "react-icons/io5";
 import { TbBulb } from "react-icons/tb";
-import skillImages from "../assets/images/skills/*";
+// import skillImages from "../assets/images/skills";
 
 const Skills = () => {
   const skillsArray = [
