@@ -28,7 +28,7 @@ const Skills = () => {
       img: "",
       exp: 90,
       type: 0,
-      explain: "컴포넌트 생명주기, 상태 관리 및 훅스 활용 능력.",
+      explain: "컴포넌트 생명주기, 상태 관리 및 Hooks 활용 능력.",
     },
     {
       name: "ReactNative",
