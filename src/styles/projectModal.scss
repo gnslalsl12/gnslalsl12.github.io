@@ -1,0 +1,21 @@
+@import "variables.scss";
+
+.modal_wholePage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: colorBlack(20);
+  backdrop-filter: blur(3px);
+}
+.modal_container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  width: 80%;
+  height: 70%;
+  @include tempBorder(white);
+}

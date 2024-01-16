@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import Worldy_Overview from "../assets/images/projects/Worldy_Overview.png";
 import Eeum_Overview from "../assets/images/projects/Eeum_Overview.png";
 import Rendez_Overview from "../assets/images/projects/Rendez_Overview.png";
+import ProjectModal from "./ProjectModal";
 
 const Projects = () => {
   const [filtered, setFiltered] = useState(0);
+  const [openProject, setOpenProject] = useState(null);
 
   const filterButtons = () => {
     const filters = ["ALL", "REACT", "JAVASCRIPT"];
@@ -18,29 +20,28 @@ const Projects = () => {
     });
   };
 
+  const projectList = [
+    {
+      title: "WORLDY",
+      period: "23-04-10 ~ 23-05-26",
+      imgSrc: Worldy_Overview,
+      skills: "React & Three.js",
+    },
+    {
+      title: "이음",
+      period: "23-02-20 ~ 23-04-07",
+      imgSrc: Eeum_Overview,
+      skills: "ReactNative",
+    },
+    {
+      title: "Rendez-Boo",
+      period: "23-01-03 ~ 23-02-17",
+      imgSrc: Rendez_Overview,
+      skills: "React & WebRTC",
+    },
+  ];
   const projectsCardList = () => {
-    const projects = [
-      {
-        title: "WORLDY",
-        period: "23-04-10 ~ 23-05-26",
-        imgSrc: Worldy_Overview,
-        skills: "React & Three.js",
-      },
-      {
-        title: "이음",
-        period: "23-02-20 ~ 23-04-07",
-        imgSrc: Eeum_Overview,
-        skills: "ReactNative",
-      },
-      {
-        title: "Rendez-Boo",
-        period: "23-01-03 ~ 23-02-17",
-        imgSrc: Rendez_Overview,
-        skills: "React & WebRTC",
-      },
-    ];
-
-    return projects.map((value, index) => {
+    return projectList.map((value, index) => {
       return (
         <li key={index}>
           <div className="projects_imgBox">
@@ -84,6 +85,7 @@ const Projects = () => {
           <ul>{projectsCardList()}</ul>
         </div>
       </div>
+      <ProjectModal project={projectList[openProject]} />
     </div>
   );
 };
