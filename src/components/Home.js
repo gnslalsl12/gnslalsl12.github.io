@@ -117,7 +117,7 @@ const Home = () => {
 
           // 아래로 뻗어나가는 선 그리기
           context.moveTo(this.x, this.y);
-          context.lineTo(this.x - this.lineLength, this.y - this.lineLength * 0.5);
+          context.lineTo(this.x - this.lineLength, this.y - this.lineLength * 1);
           context.stroke();
         }
       }

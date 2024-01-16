@@ -12,7 +12,7 @@ import ActiveSectionContext from "./contexts/ActiveSectionContext";
 function App() {
   const [isSticky, setIsSticky] = useState(false);
   const { activeSection, setActiveSection } = useContext(ActiveSectionContext);
-  const sectionArray = ["contact", "extra", "projects", "skills", "about", "home"];
+  const sectionArray = ["contact", "extra", "projects", "about", "home"];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -63,9 +63,9 @@ function App() {
       <div id="about">
         <About />
       </div>
-      <div id="skills">
+      {/* <div id="skills">
         <Skills />
-      </div>
+      </div> */}
       <div id="projects">
         <Projects />
       </div>
