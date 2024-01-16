@@ -1,97 +1,174 @@
 @import "variables.scss";
 
 .page_projects {
-  background-color: colorWhite(80);
+  background-color: colorWhite(100);
 }
 
 .projects_container {
   //   @include responsiveSize(1100, 500);
-  @include responsiveSize(1100, 450);
-  @include tempBorder(black);
+  @include responsiveSize(1200, 300);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  > .projects_container_topBox {
-    @include tempBorder(red);
-    height: 10%;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+  //   > .projects_container_topBox {
+  //     height: 10%;
+  //     width: 100%;
+  //     display: flex;
+  //     flex-direction: row;
+  //     align-items: center;
+  //     justify-content: center;
+  //     position: relative;
 
-    > .projects_filter_floating {
-      @include tempBorder(blue);
-      z-index: 0;
-      position: absolute;
-      width: 80%;
-      height: 80%;
-      > .floating_bar {
-        position: absolute;
-        width: 15%;
-        height: 100%;
-        background-color: colorA(70);
-      }
-      > .moveTo_0 {
-        left: 0;
-      }
-      > .moveTo_1 {
-        left: 30%;
-      }
-      > .moveTo_2 {
-      }
-      > .moveTo_3 {
-      }
-    }
+  //     > .projects_filter_floating {
+  //       z-index: 0;
+  //       position: absolute;
+  //       width: 80%;
+  //       height: 80%;
+  //       > .floating_bar {
+  //         position: absolute;
+  //         width: 15%;
+  //         height: 100%;
+  //         background-color: colorA(70);
+  //       }
+  //       > .moveTo_0 {
+  //         left: 0;
+  //       }
+  //       > .moveTo_1 {
+  //         left: 30%;
+  //       }
+  //       > .moveTo_2 {
+  //       }
+  //       > .moveTo_3 {
+  //       }
+  //     }
 
-    > .projects_filter_array {
-      z-index: 1;
-      @include tempBorder(green);
-      width: 80%;
-      height: 80%;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      > button {
-        font-family: "Montserrat-Medium";
-        @include responsiveFontSize(15);
-        display: grid;
-        place-content: center;
-        @include tempBorder(red);
-        width: 15%;
-        height: 100%;
-      }
-    }
-  }
+  //     > .projects_filter_array {
+  //       z-index: 1;
+  //       width: 80%;
+  //       height: 80%;
+  //       display: flex;
+  //       flex-direction: row;
+  //       justify-content: space-between;
+  //       align-items: center;
+  //       > button {
+  //         font-family: "Montserrat-Medium";
+  //         @include responsiveFontSize(15);
+  //         display: grid;
+  //         place-content: center;
+  //         width: 15%;
+  //         height: 100%;
+  //       }
+  //     }
+  //   }
   > .projects_container_bottomBox {
-    @include tempBorder(blue);
     height: fit-content;
     width: 100%;
 
     > ul {
-      @include tempBorder(green);
       width: 100%;
-      height: 100%;
+      height: fit-content;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
       align-items: start;
+      position: relative;
       > li {
-        @include tempBorder(blue);
-        @include responsiveSize(340, 420);
-        $heightRatio: 17/21;
-        > img {
-          @include tempBorder(green);
+        position: relative;
+        @include responsiveSize(400, 300);
+        overflow: hidden;
+        background-color: white;
+        &:hover {
+          > .projects_imgBox {
+            opacity: 0;
+          }
+          .projects_summary_topBox {
+            top: 0 !important;
+            opacity: 1 !important;
+          }
+          .projects_summary_bottomBox {
+            bottom: 0 !important;
+            opacity: 1 !important;
+          }
+        }
+        > .projects_imgBox {
           width: 100%;
-          height: $heightRatio * 100%;
+          height: 100%;
+          background-color: colorB(40);
+          z-index: 0;
+          transition: opacity 0.3s ease-in-out;
+          > img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+          }
         }
 
         > .projects_summary {
+          position: absolute;
+          top: 0;
+          left: 0;
           width: 100%;
-          height: (1-$heightRatio) * 100%;
+          height: 100%;
+          > .projects_summary_topBox {
+            opacity: 0;
+            position: absolute;
+            top: -20%;
+            left: 0;
+            transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            width: 100%;
+            height: 50%;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            > .projects_summary_title {
+              width: 100%;
+              height: 60%;
+              margin-top: 10%;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              @include responsiveFontSize(30);
+              font-family: "Pretendard-Bold";
+              > span {
+                font-family: "Pretendard-Regular";
+                @include responsiveFontSize(18);
+                color: $colorA;
+              }
+            }
+          }
+          > .projects_summary_bottomBox {
+            opacity: 0;
+            position: absolute;
+            bottom: -20%;
+            left: 0;
+            transition: bottom 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            width: 100%;
+            height: 50%;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: start;
+            > .projects_summary_button {
+              font-family: "Montserrat-Regular";
+              @include responsiveFontSize(20);
+              display: grid;
+              place-content: center;
+              height: 28%;
+              width: 33%;
+              margin-top: 10%;
+              border: 2px solid $colorA;
+              transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+
+              &:hover {
+                color: white;
+                background-color: $colorA;
+              }
+            }
+          }
         }
       }
     }
