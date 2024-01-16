@@ -1,0 +1,54 @@
+@import "variables.scss";
+
+.modal_wholePage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: colorBlack(40);
+  backdrop-filter: blur(3px);
+}
+.modal_container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  @include responsiveSize(1000, 600);
+  display: flex;
+  flex-direction: column;
+  > .modal_container_topBox {
+    background: colorWhite(100);
+    width: 100%;
+    height: 8%;
+  }
+  > .modal_container_bottomBox {
+    background: colorWhite(60);
+    width: 100%;
+    height: 92%;
+    display: flex;
+    flex-direction: row;
+    > .modal_conatiner_bottom_leftBox {
+      @include tempBorder(blue);
+      width: 60%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      > .modal_bottom_left_imgBox {
+        @include responsiveSize(600, 337.5);
+        @include tempBorder(green);
+      }
+      > .modal_bottom_left_summaryBox {
+        flex-grow: 1;
+        background-color: colorWhite(100);
+      }
+    }
+    > .modal_conatiner_bottom_rightBox {
+      background-color: colorWhite(100);
+      @include tempBorder(red);
+      width: 40%;
+      height: 100%;
+    }
+  }
+}

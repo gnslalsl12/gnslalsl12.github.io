@@ -29,7 +29,6 @@ function App() {
       } else if (isSticky && currentScrollPosition < viewportHeight) {
         setIsSticky(false);
       }
-      console.log(window.preventScrollUpdate);
       //Navbar Text 효과 설정 useEffect
       if (!window.preventScrollUpdate) {
         for (const section of sectionArray) {

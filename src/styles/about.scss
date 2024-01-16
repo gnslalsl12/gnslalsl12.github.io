@@ -124,7 +124,7 @@
           flex-direction: row;
           > .about_info_rightBox_about_name {
             // @include tempBorder(black);
-            background-color: colorBlack(70);
+            background-color: colorBlack(75);
             color: $colorWhite;
             width: 20%;
             height: 100%;
@@ -133,7 +133,7 @@
             @include center;
           }
           > .about_info_rightBox_about_percent {
-            background-color: colorA(80);
+            background-color: colorA(90);
             height: 100%;
           }
           > .percent_90 {

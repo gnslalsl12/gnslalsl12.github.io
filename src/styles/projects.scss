@@ -1,66 +1,68 @@
 @import "variables.scss";
+@import "projectModal.scss";
 
 .page_projects {
   background-color: colorWhite(100);
+  position: relative;
 }
 
 .projects_container {
   //   @include responsiveSize(1100, 500);
-  @include responsiveSize(1200, 300);
+  @include responsiveSize(1200, 400);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  //   > .projects_container_topBox {
-  //     height: 10%;
-  //     width: 100%;
-  //     display: flex;
-  //     flex-direction: row;
-  //     align-items: center;
-  //     justify-content: center;
-  //     position: relative;
+  /*     > .projects_container_topBox {
+      height: 10%;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      position: relative;
 
-  //     > .projects_filter_floating {
-  //       z-index: 0;
-  //       position: absolute;
-  //       width: 80%;
-  //       height: 80%;
-  //       > .floating_bar {
-  //         position: absolute;
-  //         width: 15%;
-  //         height: 100%;
-  //         background-color: colorA(70);
-  //       }
-  //       > .moveTo_0 {
-  //         left: 0;
-  //       }
-  //       > .moveTo_1 {
-  //         left: 30%;
-  //       }
-  //       > .moveTo_2 {
-  //       }
-  //       > .moveTo_3 {
-  //       }
-  //     }
+      > .projects_filter_floating {
+        z-index: 0;
+        position: absolute;
+        width: 80%;
+        height: 80%;
+        > .floating_bar {
+          position: absolute;
+          width: 15%;
+          height: 100%;
+          background-color: colorA(70);
+        }
+        > .moveTo_0 {
+          left: 0;
+        }
+        > .moveTo_1 {
+          left: 30%;
+        }
+        > .moveTo_2 {
+        }
+        > .moveTo_3 {
+        }
+      }
 
-  //     > .projects_filter_array {
-  //       z-index: 1;
-  //       width: 80%;
-  //       height: 80%;
-  //       display: flex;
-  //       flex-direction: row;
-  //       justify-content: space-between;
-  //       align-items: center;
-  //       > button {
-  //         font-family: "Montserrat-Medium";
-  //         @include responsiveFontSize(15);
-  //         display: grid;
-  //         place-content: center;
-  //         width: 15%;
-  //         height: 100%;
-  //       }
-  //     }
-  //   }
+      > .projects_filter_array {
+        z-index: 1;
+        width: 80%;
+        height: 80%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        > button {
+          font-family: "Montserrat-Medium";
+          @include responsiveFontSize(15);
+          display: grid;
+          place-content: center;
+          width: 15%;
+          height: 100%;
+        }
+      }
+    } */
   > .projects_container_bottomBox {
     height: fit-content;
     width: 100%;
