@@ -5,9 +5,11 @@ import Rendez_Overview from "../assets/images/projects/Rendez_Overview.png";
 import ProjectModal from "./ProjectModal";
 
 const Projects = () => {
+  const projectCount = 3; //프로젝트 수
   const [filtered, setFiltered] = useState(0);
-  const [openProject, setOpenProject] = useState(null);
-
+  const [openProject, setOpenProject] = useState(0);
+  const [imageList, setImageList] = useState(Array.from(Array(projectCount), () => []));
+  const [isImagesLoaded, setIsImagesLoaded] = useState(false);
   const filterButtons = () => {
     const filters = ["ALL", "REACT", "JAVASCRIPT"];
 
@@ -20,32 +22,32 @@ const Projects = () => {
     });
   };
 
-  const projectList = [
-    {
-      title: "WORLDY",
-      period: "23-04-10 ~ 23-05-26",
-      imgSrc: Worldy_Overview,
-      skills: "React & Three.js",
-    },
-    {
-      title: "이음",
-      period: "23-02-20 ~ 23-04-07",
-      imgSrc: Eeum_Overview,
-      skills: "ReactNative",
-    },
-    {
-      title: "Rendez-Boo",
-      period: "23-01-03 ~ 23-02-17",
-      imgSrc: Rendez_Overview,
-      skills: "React & WebRTC",
-    },
-  ];
   const projectsCardList = () => {
+    const projectList = [
+      {
+        title: "WORLDY",
+        period: "23-04-10 ~ 23-05-26",
+        imgSrc: Worldy_Overview,
+        skills: "React & Three.js",
+      },
+      {
+        title: "이음",
+        period: "23-02-20 ~ 23-04-07",
+        imgSrc: Eeum_Overview,
+        skills: "ReactNative",
+      },
+      {
+        title: "Rendez-Boo",
+        period: "23-01-03 ~ 23-02-17",
+        imgSrc: Rendez_Overview,
+        skills: "React & WebRTC",
+      },
+    ];
     return projectList.map((value, index) => {
       return (
         <li key={index}>
           <div className="projects_imgBox">
-            <img src={value.imgSrc}></img>
+            <img src={value.imgSrc} alt={`${value.title} 프로젝트 오버뷰`}></img>
           </div>
           <div className="projects_summary">
             <div className="projects_summary_topBox">
@@ -55,7 +57,9 @@ const Projects = () => {
               </span>
             </div>
             <div className="projects_summary_bottomBox">
-              <button className="projects_summary_button">Details</button>
+              <button className="projects_summary_button" onClick={() => setOpenProject(index)}>
+                Details
+              </button>
             </div>
           </div>
         </li>
@@ -64,8 +68,29 @@ const Projects = () => {
   };
 
   useEffect(() => {
-    console.log(filtered);
-  }, [filtered]);
+    if (imageList && imageList.length === projectCount && !isImagesLoaded) {
+      const worldyContext = require.context(
+        "../assets/images/projects/projectWorldy",
+        false,
+        /\.(png)$/
+      );
+      const worldyImageList = worldyContext.keys().map((path) => worldyContext(path));
+      const eeumContext = require.context(
+        "../assets/images/projects/projectEeum",
+        false,
+        /\.(png)$/
+      );
+      const eeumImageList = eeumContext.keys().map((path) => eeumContext(path));
+      const rendezContext = require.context(
+        "../assets/images/projects/projectRendez",
+        false,
+        /\.(png)$/
+      );
+      const rendezImageList = rendezContext.keys().map((path) => rendezContext(path));
+      setImageList([worldyImageList, eeumImageList, rendezImageList]);
+      setIsImagesLoaded(true);
+    }
+  }, []);
 
   return (
     <div className="page_global_background page_projects">
@@ -85,7 +110,7 @@ const Projects = () => {
           <ul>{projectsCardList()}</ul>
         </div>
       </div>
-      <ProjectModal project={projectList[openProject]} />
+      <ProjectModal project={openProject} imageList={imageList[openProject]} />
     </div>
   );
 };
