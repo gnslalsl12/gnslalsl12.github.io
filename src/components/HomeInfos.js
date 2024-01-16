@@ -17,7 +17,7 @@ const HomeInfos = () => {
       <h1>
         Hi, I'm <strong>Jeong Hoon</strong>
         .<br />
-        I'm a Front-end Developer.
+        I'm a Front-End Developer.
       </h1>
       <button onClick={moveTo}>More</button>
     </div>

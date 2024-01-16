@@ -1,203 +1,145 @@
-@import "variables.scss";
+// @import "variables.scss";
 
-.page_skills {
-  background-color: colorWhite(100);
-}
+// .page_skills {
+//   background-color: colorWhite(100);
+// }
 
-.skills_summary {
-  @include responsiveSize(1200, 250);
-  > ul {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    > .skills_summary_item {
-      height: 100%;
-      width: 23%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-      > .skills_summary_item_icon {
-        height: 40%;
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: start;
-        > .skills_summary_item_icon_value {
-          display: grid;
-          place-content: center;
-          @include responsiveSize(100, 100);
-          background: colorB(70);
-          border-radius: 15%;
-          > * {
-            @include responsiveFontSize(70);
-          }
-        }
-      }
-      > .skills_summary_item_title {
-        width: 70%;
-        height: 17%;
-        display: grid;
-        place-content: center;
-        font-family: "Montserrat-Bold";
-        border-left: 2px solid colorBlack(50);
-        border-right: 2px solid colorBlack(50);
-        @include responsiveFontSize(22);
-        color: colorBlack(80);
-      }
-      > .skills_summary_item_summary {
-        color: colorBlack(70);
-        @include responsiveFontSize(16);
-        font-family: "Pretendard-Regular";
-        text-align: center;
-        width: 100%;
-        height: 30%;
-        white-space: pre-line;
-      }
-    }
-  }
-}
+// .skills_bottomBox {
+//   @include tempBorder(black);
+//   @include responsiveSize(1200, 430);
+//   margin-top: 3%;
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: space-between;
+//   align-items: center;
 
-.skills_bottomBox {
-  @include tempBorder(black);
-  @include responsiveSize(1200, 430);
-  margin-top: 3%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+//   > .skills_type {
+//     width: 40%;
+//     height: 100%;
+//     @include tempBorder(red);
 
-  > .skills_type {
-    width: 40%;
-    height: 100%;
-    @include tempBorder(red);
+//     > .skills_type_title {
+//       height: 12%;
+//       width: 100%;
+//       @include tempBorder(blue);
+//       font-family: "Montserrat-Medium";
+//       @include responsiveFontSize(20);
+//       display: grid;
+//       place-content: center;
+//     }
+//     > .skills_type_table {
+//       height: 8%;
+//       width: 100%;
+//       display: flex;
+//       flex-direction: row;
+//       justify-content: space-between;
+//       align-items: center;
+//       > button {
+//         flex: 1;
+//         height: 100%;
+//         @include tempBorder(blue);
+//       }
+//     }
+//     > .skills_type_contentBox {
+//       height: 80%;
+//       width: 100%;
+//       background: colorA(10);
+//     }
+//   }
 
-    > .skills_type_title {
-      height: 12%;
-      width: 100%;
-      @include tempBorder(blue);
-      font-family: "Montserrat-Medium";
-      @include responsiveFontSize(20);
-      display: grid;
-      place-content: center;
-    }
-    > .skills_type_table {
-      height: 8%;
-      width: 100%;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      > button {
-        flex: 1;
-        height: 100%;
-        @include tempBorder(blue);
-      }
-    }
-    > .skills_type_contentBox {
-      height: 80%;
-      width: 100%;
-      background: colorA(10);
-    }
-  }
+//   > .skills_percent {
+//     // @include tempBorder(blue);
+//     width: 55%;
+//     height: 100%;
+//     > ul {
+//       height: 100%;
+//       display: flex;
+//       flex-direction: column;
+//       justify-content: space-between;
+//       > li {
+//         // @include tempBorder(green);
+//         background-color: colorC(23);
+//         display: flex;
+//         width: 100%;
+//         height: 7%;
+//         flex-direction: row;
+//         > .about_info_rightBox_skills_name {
+//           // @include tempBorder(black);
+//           background-color: colorBlack(70);
+//           color: $colorWhite;
+//           width: 20%;
+//           height: 100%;
+//           font-family: "Montserrat-Medium";
+//           @include responsiveFontSize(14);
+//           @include center;
+//         }
+//         > .about_info_rightBox_skills_percent {
+//           background-color: colorA(80);
+//           height: 100%;
+//         }
+//         > .percent_90 {
+//           width: 72%;
+//         }
+//         > .percent_70 {
+//           width: 56%;
+//         }
+//         > .percent_50 {
+//           width: 40%;
+//         }
+//       }
+//     }
+//   }
+// }
 
-  > .skills_percent {
-    // @include tempBorder(blue);
-    width: 55%;
-    height: 100%;
-    > ul {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      > li {
-        // @include tempBorder(green);
-        background-color: colorC(23);
-        display: flex;
-        width: 100%;
-        height: 7%;
-        flex-direction: row;
-        > .about_info_rightBox_skills_name {
-          // @include tempBorder(black);
-          background-color: colorBlack(70);
-          color: $colorWhite;
-          width: 20%;
-          height: 100%;
-          font-family: "Montserrat-Medium";
-          @include responsiveFontSize(14);
-          @include center;
-        }
-        > .about_info_rightBox_skills_percent {
-          background-color: colorA(80);
-          height: 100%;
-        }
-        > .percent_90 {
-          width: 72%;
-        }
-        > .percent_70 {
-          width: 56%;
-        }
-        > .percent_50 {
-          width: 40%;
-        }
-      }
-    }
-  }
-}
-
-.skill {
-  position: relative;
-  @include responsiveSize(80, 80);
-  background: colorWhite(80);
-  border-radius: 50%;
-  overflow: hidden;
-  cursor: pointer;
-  > .skill-image {
-    width: 80%;
-    height: 80%;
-    background-size: cover;
-    background-position: center;
-    transition: filter 0.3s ease;
-  }
-  > .skill-name {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-size: 1.2em;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-  &:hover > .skill-image {
-    filter: blur(4px);
-  }
-  &:hover > .skill-name {
-    opacity: 1;
-  }
-  > .skill-ring {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    transform: rotate(-90deg);
-    > .ring-background {
-      stroke: #ddd;
-    }
-    > .ring-progress {
-      stroke: colorA(70);
-      stroke-dasharray: 0, 282.74; /* 282.74 is the circumference of the circle (2 * π * 45) */
-      transition: stroke-dasharray 0.3s ease;
-    }
-    > .ring-background,
-    > .ring-progress {
-      fill: none;
-      stroke-width: 10;
-    }
-  }
-}
+// .skill {
+//   position: relative;
+//   @include responsiveSize(80, 80);
+//   background: colorWhite(80);
+//   border-radius: 50%;
+//   overflow: hidden;
+//   cursor: pointer;
+//   > .skill-image {
+//     width: 80%;
+//     height: 80%;
+//     background-size: cover;
+//     background-position: center;
+//     transition: filter 0.3s ease;
+//   }
+//   > .skill-name {
+//     position: absolute;
+//     top: 50%;
+//     left: 50%;
+//     transform: translate(-50%, -50%);
+//     color: white;
+//     font-size: 1.2em;
+//     opacity: 0;
+//     transition: opacity 0.3s ease;
+//   }
+//   &:hover > .skill-image {
+//     filter: blur(4px);
+//   }
+//   &:hover > .skill-name {
+//     opacity: 1;
+//   }
+//   > .skill-ring {
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     width: 100%;
+//     height: 100%;
+//     transform: rotate(-90deg);
+//     > .ring-background {
+//       stroke: #ddd;
+//     }
+//     > .ring-progress {
+//       stroke: colorA(70);
+//       stroke-dasharray: 0, 282.74; /* 282.74 is the circumference of the circle (2 * π * 45) */
+//       transition: stroke-dasharray 0.3s ease;
+//     }
+//     > .ring-background,
+//     > .ring-progress {
+//       fill: none;
+//       stroke-width: 10;
+//     }
+//   }
+// }

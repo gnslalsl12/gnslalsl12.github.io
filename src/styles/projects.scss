@@ -1,0 +1,99 @@
+@import "variables.scss";
+
+.page_projects {
+  background-color: colorWhite(80);
+}
+
+.projects_container {
+  //   @include responsiveSize(1100, 500);
+  @include responsiveSize(1100, 450);
+  @include tempBorder(black);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  > .projects_container_topBox {
+    @include tempBorder(red);
+    height: 10%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    > .projects_filter_floating {
+      @include tempBorder(blue);
+      z-index: 0;
+      position: absolute;
+      width: 80%;
+      height: 80%;
+      > .floating_bar {
+        position: absolute;
+        width: 15%;
+        height: 100%;
+        background-color: colorA(70);
+      }
+      > .moveTo_0 {
+        left: 0;
+      }
+      > .moveTo_1 {
+        left: 30%;
+      }
+      > .moveTo_2 {
+      }
+      > .moveTo_3 {
+      }
+    }
+
+    > .projects_filter_array {
+      z-index: 1;
+      @include tempBorder(green);
+      width: 80%;
+      height: 80%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      > button {
+        font-family: "Montserrat-Medium";
+        @include responsiveFontSize(15);
+        display: grid;
+        place-content: center;
+        @include tempBorder(red);
+        width: 15%;
+        height: 100%;
+      }
+    }
+  }
+  > .projects_container_bottomBox {
+    @include tempBorder(blue);
+    height: fit-content;
+    width: 100%;
+
+    > ul {
+      @include tempBorder(green);
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: start;
+      > li {
+        @include tempBorder(blue);
+        @include responsiveSize(340, 420);
+        $heightRatio: 17/21;
+        > img {
+          @include tempBorder(green);
+          width: 100%;
+          height: $heightRatio * 100%;
+        }
+
+        > .projects_summary {
+          width: 100%;
+          height: (1-$heightRatio) * 100%;
+        }
+      }
+    }
+  }
+}

@@ -4,10 +4,75 @@
   background-color: colorWhite(30);
 }
 
+.about_summary {
+  @include responsiveSize(1200, 250);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  > ul {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    > .about_summary_item {
+      height: 100%;
+      width: 23%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      > .about_summary_item_icon {
+        height: 40%;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: start;
+        > .about_summary_item_icon_value {
+          display: grid;
+          place-content: center;
+          @include responsiveSize(100, 100);
+          background: colorB(70);
+          border-radius: 15%;
+          > * {
+            @include responsiveFontSize(70);
+          }
+        }
+      }
+      > .about_summary_item_title {
+        width: 70%;
+        height: 17%;
+        display: grid;
+        place-content: center;
+        font-family: "Montserrat-Bold";
+        border-left: 2px solid colorBlack(50);
+        border-right: 2px solid colorBlack(50);
+        @include responsiveFontSize(22);
+        color: colorBlack(80);
+      }
+      > .about_summary_item_summary {
+        color: colorBlack(70);
+        @include responsiveFontSize(16);
+        font-family: "Pretendard-Regular";
+        text-align: center;
+        width: 100%;
+        height: 30%;
+        white-space: pre-line;
+      }
+    }
+  }
+}
+
 .about_info {
   // @include tempBorder(black);
-  @include responsiveSize(1000, 430);
-
+  @include responsiveSize(1100, 430);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   > .about_info_leftBox {
     // @include tempBorder(red);
     width: 33%;
@@ -23,7 +88,7 @@
     }
     > .about_info_leftBox_text {
       color: colorBlack();
-      border-top: 2px solid colorBlack(50);
+      // border-top: 2px solid colorBlack(50);
       height: 35%;
       font-family: "Pretendard-Regular";
       text-align: center;
@@ -34,6 +99,53 @@
         @include responsiveFontSize(20);
         font-family: "Pretendard-SemiBold";
         margin-bottom: 2%;
+      }
+    }
+  }
+
+  > .about_info_rightBox {
+    width: 60%;
+    height: 100%;
+    > .about_percent {
+      // @include tempBorder(blue);
+      width: 100%;
+      height: 100%;
+      > ul {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        > li {
+          // @include tempBorder(green);
+          background-color: colorC(23);
+          display: flex;
+          width: 100%;
+          height: 7%;
+          flex-direction: row;
+          > .about_info_rightBox_about_name {
+            // @include tempBorder(black);
+            background-color: colorBlack(70);
+            color: $colorWhite;
+            width: 20%;
+            height: 100%;
+            font-family: "Montserrat-Medium";
+            @include responsiveFontSize(14);
+            @include center;
+          }
+          > .about_info_rightBox_about_percent {
+            background-color: colorA(80);
+            height: 100%;
+          }
+          > .percent_90 {
+            width: 72%;
+          }
+          > .percent_70 {
+            width: 56%;
+          }
+          > .percent_50 {
+            width: 40%;
+          }
+        }
       }
     }
   }

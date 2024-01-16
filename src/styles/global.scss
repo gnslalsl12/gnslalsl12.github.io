@@ -2,7 +2,8 @@
 @use "noScroll.scss";
 @use "home.scss";
 @use "about.scss";
-@use "skills.scss";
+@use "projects.scss";
+// @use "skills.scss";
 @use "navBar.scss";
 
 @import "variables.scss";
@@ -34,10 +35,10 @@
   }
 }
 
-.page_global_topBox {
+.page_global_box {
   margin-top: 4%;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+  // flex-direction: row;
+  // justify-content: space-between;
+  // align-items: center;
 }
