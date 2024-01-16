@@ -5,114 +5,6 @@
 // import { IoRocketOutline } from "react-icons/io5";
 // import { TbBulb } from "react-icons/tb";
 // // import skillImages from "../assets/images/skills";
-
-<<<<<<< Updated upstream
-const Skills = () => {
-  const skillsArray = [
-    {
-      name: "JavaScript",
-      img: "",
-      exp: 90,
-      type: 0,
-      explain: "고급 클로저, 비동기 처리 및 ES6+ 기능 숙련도.",
-    },
-    { name: "HTML", img: "", exp: 90, type: 0, explain: "HTML5 및 웹 접근성에 대한 깊은 이해." },
-    {
-      name: "CSS",
-      img: "",
-      exp: 90,
-      type: 0,
-      explain: "다양한 에니메이션과 반응형 디자인 구현 능력.",
-    },
-    {
-      name: "React",
-      img: "",
-      exp: 90,
-      type: 0,
-      explain: "컴포넌트 생명주기, 상태 관리 및 Hooks 활용 능력.",
-    },
-    {
-      name: "ReactNative",
-      img: "",
-      exp: 70,
-      type: 0,
-      explain: "네이티브 모듈 통합 및 크로스 플랫폼 앱 개발 경험.",
-    },
-    {
-      name: "TypeScript",
-      img: "",
-      exp: 70,
-      type: 0,
-      explain: "정적 타입 지정 및 인터페이스 사용 능력.",
-    },
-    { name: "Java", img: "", exp: 70, type: 1, explain: "객체 지향 프로그래밍 및 JVM 이해도." },
-    { name: "Figma", img: "", exp: 70, type: 2, explain: "프로토타이핑 및 협업 디자인 경험." },
-    {
-      name: "MySQL",
-      img: "",
-      exp: 50,
-      type: 1,
-      explain: "데이터베이스 설계 및 SQL 쿼리 최적화 경험.",
-    },
-    { name: "Blender", img: "", exp: 50, type: 2, explain: "3D 모델링 및 애니메이션 기초 지식." },
-    { name: "Vue", img: "", exp: 50, type: 0, explain: "Vue 생태계 및 MVVM 패턴 이해." },
-    { name: "Redux", img: "", exp: 70, type: 0, explain: "상태 관리 패턴 및 미들웨어 통합 능력." },
-    {
-      name: "Recoil",
-      img: "",
-      exp: 50,
-      type: 0,
-      explain: "Recoil을 이용한 상태 관리 및 성능 최적화 경험.",
-    },
-    { name: "SASS", img: "", exp: 70, type: 0, explain: "SASS 및 SCSS를 활용한 스타일링 능력." },
-    {
-      name: "Tailwind",
-      img: "",
-      exp: 70,
-      type: 0,
-      explain: "유틸리티-퍼스트 CSS 프레임워크를 활용한 효율적인 디자인 구현.",
-    },
-    {
-      name: "Styled-Components",
-      img: "",
-      exp: 70,
-      type: 0,
-      explain: "CSS-in-JS 접근 방식을 통한 컴포넌트 스타일링.",
-    },
-    {
-      name: "Three.js",
-      img: "",
-      exp: 70,
-      type: 0,
-      explain: "웹 기반 3D 그래픽스 구현 및 애니메이션 경험.",
-    },
-    {
-      name: "SpringBoot",
-      img: "",
-      exp: 50,
-      type: 1,
-      explain: "RESTful API 개발 및 스프링 생태계 이해.",
-    },
-    { name: "Python", img: "", exp: 50, type: 1, explain: "스크립팅 및 데이터 처리 기본 지식." },
-    {
-      name: "GitLab",
-      img: "",
-      exp: 60,
-      type: 3,
-      explain: "버전 관리 및 CI/CD 파이프라인 구축 경험.",
-    },
-    { name: "JIRA", img: "", exp: 60, type: 3, explain: "프로젝트 관리 및 이슈 추적 능력." },
-    { name: "Photoshop", img: "", exp: 50, type: 2, explain: "기본 이미지 편집 및 디자인 스킬." },
-    {
-      name: "Node.js",
-      img: "",
-      exp: 60,
-      type: 1,
-      explain:
-        "Express.js를 이용한 기본적인 RESTful API 개발 및 서버 사이드 스크립팅 경험. 비동기 프로그래밍 및 기본적인 Node.js 라이브러리 활용 능력.",
-    },
-  ];
-=======
 // const Skills = () => {
 //   const knowledgeArray = [
 //     {
@@ -204,7 +96,6 @@ const Skills = () => {
 //     //     "Express.js를 이용한 기본적인 RESTful API 개발 및 서버 사이드 스크립팅 경험. 비동기 프로그래밍 및 기본적인 Node.js 라이브러리 활용 능력.",
 //     // },
 //   ];
->>>>>>> Stashed changes
 
 //   const skillsPercentContent = () => {
 //     // knowledgeArray.sort((x1, x2) => (x1.like === x2.like ? x2.exp - x1.exp : x2.like - x1.like));
