@@ -4,8 +4,6 @@ import { FaExternalLinkAlt } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 
 const ProjectModal = ({ openProject, imageList, setModalState, modalState }) => {
-  const [tempImages, setTempImages] = useState([]);
-
   const closeModal = () => {
     setModalState(false);
   };
@@ -215,18 +213,12 @@ const ProjectModal = ({ openProject, imageList, setModalState, modalState }) => 
     );
   };
 
-  useEffect(() => {
-    const worldyContext = require.context(
-      "../assets/images/projects/projectWorldy",
-      false,
-      /\.(png)$/
-    );
-    setTempImages(worldyContext.keys().map((path) => worldyContext(path)));
-  }, []);
-
   return (
-    <div className={`${modalState ? "popUp_wholePage" : "popDown_wholePage"} modal_wholePage`}>
-      <div className="modal_container">
+    <div
+      className={`${modalState ? "popUp_wholePage" : "popDown_wholePage"} modal_wholePage`}
+      onClick={() => closeModal()}
+    >
+      <div className="modal_container" onClick={(event) => event.stopPropagation()}>
         <div className="modal_container_topBox">
           <button className="modal_topBox_left">
             <span>Link to Github</span>

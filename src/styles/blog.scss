@@ -1,0 +1,80 @@
+@import "variables.scss";
+
+.page_blog {
+  position: relative;
+  background-color: colorWhite(30);
+}
+
+.blog_container {
+  display: grid;
+  width: 100%;
+  height: fit-content;
+  place-content: center;
+  > .blog_container_cardBox {
+    @include responsiveSize(1000, 400);
+    > ul {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: start;
+      height: 100%;
+      > .unhovered {
+        opacity: 0.3;
+      }
+      > li {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        width: 22%;
+        height: 100%;
+        transition: opacity 0.3s ease;
+        cursor: pointer;
+        &:hover > .blogCard_middleBox > h1 {
+          color: colorB(100);
+        }
+        > .blogCard_topBox {
+          width: 100%;
+          height: fit-content;
+          > img {
+            width: 100%;
+          }
+        }
+        > .blogCard_middleBox {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: end;
+          margin: 5% 0;
+          height: 20%;
+          > h1 {
+            //블로그 제목
+            @include responsiveFontSize(22);
+            color: colorBlack(60);
+            width: 100%;
+            transition: color 0.3s ease;
+            text-align: center;
+            font-family: "Pretendard-Bold";
+          }
+          > span {
+            //업데이트 날짜
+            @include responsiveFontSize(13);
+            font-family: "Pretendard-ExtraLight";
+          }
+        }
+        > .blogCard_line {
+          border: 2px solid colorB(80);
+          width: 20%;
+          margin-bottom: 5%;
+        }
+        > .blogCard_bottomBox {
+          height: 33.75%;
+          > p {
+            @include responsiveFontSize(14);
+            //설명
+            font-family: "Pretendard-Light";
+          }
+        }
+      }
+    }
+  }
+}
