@@ -26,9 +26,21 @@ const ProjectModal = ({ openProject, imageList }) => {
           "코드 검수 및 프론트엔드 코딩 스타일 획일화",
         ],
         gain: [
-          "복잡한 게임 알고리즘과 시간제한 기능, 랭킹 시스템 기능 등의 구현을 통해 코딩 구현 역량 강화",
-          "Redux와 Axios 기능을 커스텀하여 재사용성을 높이고, 코드 검수 및 코딩 스타일 획일화를 통해 가독성과 재사용성 높은 코딩 스타일 구축",
-          "사용 환경을 고려한 튜토리얼 기능, 퀴즈 스크랩기능 등을 구성한 사용자 최우선의 개발 경험",
+          {
+            big: "개발 서비스 구현 역량 강화",
+            small:
+              "복잡한 게임 알고리즘과 시간제한 기능, 랭킹 시스템 기능 등의 구현을 통해 코딩 구현 역량 강화",
+          },
+          {
+            big: "가독성 및 재사용성 높은 코딩 역량 강화",
+            small:
+              "Redux와 Axios 기능을 커스텀하여 재사용성을 높이고, 코드 검수 및 코딩 스타일 획일화를 통해 가독성과 재사용성 높은 코딩 스타일 구축",
+          },
+          {
+            big: "사용자 최우선의 개발 경험",
+            small:
+              "사용 환경을 고려한 튜토리얼 기능, 퀴즈 스크랩기능 등을 구성한 사용자 최우선의 개발 경험 획득",
+          },
         ],
         used_skills: [
           ["JavaScript", "HTML", "CSS", "React", "Redux", "TypeScript", "Three.js", "TailWind"],
@@ -55,9 +67,20 @@ const ProjectModal = ({ openProject, imageList }) => {
           "코드 검수 및 프론트엔드 코딩 스타일 획일화",
         ],
         gain: [
-          "모바일 서비스 프로젝트를 수행하며 여러 사용 환경에서의 개발 역량 강화",
-          "Recoil과 Axios 기능을 커스텀하여 재사용성을 높이고, 코드 검수 및 코딩 스타일 획일화를 통해 가독성과 재사용성 높은 코딩 스타일 구축",
-          "다양한 배경의 사용자들을 고려한 프로젝트 성격에 맞게 직관적인 UI/UX 및 페이지 디자인 구현",
+          {
+            big: "다양한 사용환경의 개발 역량 강화",
+            small: "모바일 서비스 프로젝트를 수행하며 여러 사용 환경에서의 개발 역량 강화",
+          },
+          {
+            big: "가독성 및 재사용성 높은 코딩 역량 강화",
+            small:
+              "Recoil과 Axios 기능을 커스텀하여 재사용성을 높이고, 코드 검수 및 코딩 스타일 획일화를 통해 가독성과 재사용성 높은 코딩 스타일 구축",
+          },
+          {
+            big: "다양한 배경의 사용자를 위한 개발 경험",
+            small:
+              "다양한 배경의 사용자들을 고려한 프로젝트 성격에 맞게 직관적인 UI/UX 및 페이지 디자인 구현",
+          },
         ],
         used_skills: [
           ["JavaScript", "HTML", "CSS", "ReactNative", "Recoil", "TypeScript", "Styled-Components"],
@@ -87,9 +110,21 @@ const ProjectModal = ({ openProject, imageList }) => {
           "코드 검수 및 프론트엔드 코딩 스타일 획일화",
         ],
         gain: [
-          "실시간 소통 기능에서 사용자 경험을 높이기 위해 LazyLoading을 적용하며 프로젝트 최적화 역량 강화",
-          "적절한 Library를 활용한 메인 및 서브 기능 구현과, 복잡한 달력 기능 구현을 통한 코딩 및 알고리즘 설계 역량 강화",
-          "프로젝트에 필수적인 회원 정보 시스템, 페이지 이동 알고리즘, UI/UX 구성 구현 등을 통해 기본적인 서비스 기능 구현 역량 강화",
+          {
+            big: "프로젝트 최적화 역량 강화",
+            small:
+              "실시간 소통 기능에서 사용자 경험을 높이기 위해 LazyLoading을 적용하며 프로젝트 최적화 역량 강화",
+          },
+          {
+            big: "코딩 및 알고리즘 설계 역량 강화",
+            small:
+              "적절한 Library를 활용한 메인 및 서브 기능 구현과, 복잡한 달력 기능 구현을 통한 코딩 및 알고리즘 설계 역량 강화",
+          },
+          {
+            big: "기본적인 서비스 기능 구현 역량 강화",
+            small:
+              "프로젝트에 필수적인 회원 정보 시스템, 페이지 이동 알고리즘, UI/UX 구성 구현 등을 통해 기본적인 서비스 기능 구현 역량 강화",
+          },
         ],
         used_skills: [
           [
@@ -126,7 +161,13 @@ const ProjectModal = ({ openProject, imageList }) => {
           <h1>강화 역량</h1>
           <ul>
             {projectList[openProject].rightBox.gain.map((value, index) => {
-              return <li key={index}>{value}</li>;
+              return (
+                <li key={index}>
+                  <span className="gain_big">{value.big}</span>
+                  <br />
+                  <span className="gain_small">{value.small}</span>
+                </li>
+              );
             })}
           </ul>
         </div>
