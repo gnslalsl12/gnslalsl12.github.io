@@ -66,19 +66,19 @@ $colorC: #a6a08d;
 
 @mixin center {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 @mixin right {
   display: flex;
-  align-items: center;
   justify-content: end;
+  align-items: center;
 }
 
 @mixin left {
   display: flex;
-  align-items: center;
   justify-content: start;
+  align-items: center;
 }
 
 @mixin tempBorder($color: white) {

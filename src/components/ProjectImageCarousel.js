@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 const ProjectImageCarousel = ({ images }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -17,9 +18,17 @@ const ProjectImageCarousel = ({ images }) => {
 
   return (
     <>
-      <button onClick={goToPrevious}>이전</button>
-      <img src={images[currentIndex]} alt="carousel" />
-      <button onClick={goToNext}>다음</button>
+      <img className="carousel_image" src={images[currentIndex]} alt="carousel" />
+      <div className="carousel_buttonContainer">
+        <button onClick={goToPrevious}>
+          <div className="carousel_button_previous" />
+          <IoIosArrowBack className="carousel_button_icon" />
+        </button>
+        <button onClick={goToNext}>
+          <div className="carousel_button_next" />
+          <IoIosArrowForward className="carousel_button_icon" />
+        </button>
+      </div>
     </>
   );
 };

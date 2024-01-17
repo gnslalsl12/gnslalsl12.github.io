@@ -3,8 +3,8 @@
 @use "home.scss";
 @use "about.scss";
 @use "projects.scss";
-// @use "skills.scss";
 @use "navBar.scss";
+@use "blog.scss";
 
 @import "variables.scss";
 
@@ -14,11 +14,11 @@
 }
 
 .page_global_background {
-  height: fit-content;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: fit-content;
   padding-top: 7%;
   padding-bottom: 7%;
 }
@@ -29,15 +29,15 @@
   place-content: center;
   border-bottom: 3px solid colorBlack(70);
   > span {
+    @include responsiveFontSize(30);
     color: colorBlack();
     font-family: "Montserrat-Bold";
-    @include responsiveFontSize(30);
   }
 }
 
 .page_global_box {
-  margin-top: 4%;
   display: flex;
+  margin-top: 4%;
   // flex-direction: row;
   // justify-content: space-between;
   // align-items: center;

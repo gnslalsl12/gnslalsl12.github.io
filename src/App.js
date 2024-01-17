@@ -4,7 +4,7 @@ import Home from "./components/Home";
 import NavBar from "./components/NavBar";
 import Skills from "./components/Skills";
 import Projects from "./components/Projects";
-import Extra from "./components/Extra";
+import Blog from "./components/Blog";
 import Contact from "./components/Contact";
 import throttle from "./utils/throttle";
 import ActiveSectionContext from "./contexts/ActiveSectionContext";
@@ -12,7 +12,7 @@ import ActiveSectionContext from "./contexts/ActiveSectionContext";
 function App() {
   const [isSticky, setIsSticky] = useState(false);
   const { activeSection, setActiveSection } = useContext(ActiveSectionContext);
-  const sectionArray = ["contact", "extra", "projects", "about", "home"];
+  const sectionArray = ["contact", "blog", "projects", "about", "home"];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -68,8 +68,8 @@ function App() {
       <div id="projects">
         <Projects />
       </div>
-      <div id="extra">
-        <Extra />
+      <div id="blog">
+        <Blog />
       </div>
       <div id="contact">
         <Contact />

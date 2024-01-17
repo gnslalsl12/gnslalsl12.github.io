@@ -11,55 +11,55 @@
   justify-content: space-between;
   align-items: center;
   > ul {
-    width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
+    height: 100%;
     > .about_summary_item {
-      height: 100%;
-      width: 23%;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
+      width: 23%;
+      height: 100%;
       > .about_summary_item_icon {
-        height: 40%;
-        width: 100%;
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: start;
+        width: 100%;
+        height: 40%;
         > .about_summary_item_icon_value {
-          display: grid;
-          place-content: center;
           @include responsiveSize(100, 100);
+          display: grid;
           background: colorB(70);
           border-radius: 15%;
+          place-content: center;
           > * {
             @include responsiveFontSize(70);
           }
         }
       }
       > .about_summary_item_title {
+        @include responsiveFontSize(22);
+        display: grid;
+        color: colorBlack(80);
         width: 70%;
         height: 17%;
-        display: grid;
         place-content: center;
         font-family: "Montserrat-Bold";
         border-left: 2px solid colorBlack(50);
         border-right: 2px solid colorBlack(50);
-        @include responsiveFontSize(22);
-        color: colorBlack(80);
       }
       > .about_summary_item_summary {
-        color: colorBlack(70);
         @include responsiveFontSize(16);
-        font-family: "Pretendard-Regular";
-        text-align: center;
+        color: colorBlack(70);
         width: 100%;
         height: 30%;
+        font-family: "Pretendard-Regular";
+        text-align: center;
         white-space: pre-line;
       }
     }
@@ -74,19 +74,20 @@
   justify-content: space-between;
   align-items: center;
   > .about_info_leftBox {
-    // @include tempBorder(red);
-    width: 33%;
-    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    // @include tempBorder(red);
+    width: 33%;
+    height: 100%;
     > .about_info_leftBox_img {
       border-radius: 15%;
       width: fit-content;
       height: 60%;
     }
     > .about_info_leftBox_text {
+      @include responsiveFontSize(17);
       color: colorBlack();
       // border-top: 2px solid colorBlack(50);
       height: 35%;
@@ -94,7 +95,6 @@
       text-align: center;
       padding-top: 3%;
       padding-bottom: 3%;
-      @include responsiveFontSize(17);
       > div {
         @include responsiveFontSize(20);
         font-family: "Pretendard-SemiBold";
@@ -111,26 +111,26 @@
       width: 100%;
       height: 100%;
       > ul {
-        height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        height: 100%;
         > li {
+          display: flex;
+          flex-direction: row;
           // @include tempBorder(green);
           background-color: colorC(23);
-          display: flex;
           width: 100%;
           height: 7%;
-          flex-direction: row;
           > .about_info_rightBox_about_name {
+            @include responsiveFontSize(14);
+            @include center;
+            color: $colorWhite;
             // @include tempBorder(black);
             background-color: colorBlack(75);
-            color: $colorWhite;
             width: 20%;
             height: 100%;
             font-family: "Montserrat-Medium";
-            @include responsiveFontSize(14);
-            @include center;
           }
           > .about_info_rightBox_about_percent {
             background-color: colorA(90);

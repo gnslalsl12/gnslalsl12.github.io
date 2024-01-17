@@ -1,0 +1,55 @@
+@import "variables.scss";
+
+.carousel_buttonContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: translate(0, -50%);
+  > button {
+    display: grid;
+    position: relative;
+    width: 9%;
+    height: 100%;
+    place-content: center;
+    > .carousel_button_icon {
+      @include responsiveFontSize(40);
+      z-index: 11;
+      color: colorWhite(50);
+      transition: color 0.3s ease-in-out;
+    }
+    > div {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    > .carousel_button_previous {
+      background-image: linear-gradient(to right, colorBlack(60), colorBlack(0));
+    }
+    > .carousel_button_next {
+      background-image: linear-gradient(to left, colorBlack(60), colorBlack(0));
+    }
+
+    &:hover {
+      > div {
+        opacity: 1;
+      }
+      > .carousel_button_icon {
+        color: colorWhite(100);
+      }
+    }
+  }
+}
+.carousel_image {
+  position: relative;
+  height: 100%;
+}

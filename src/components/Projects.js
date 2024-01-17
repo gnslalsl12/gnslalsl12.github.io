@@ -10,6 +10,8 @@ const Projects = () => {
   const [openProject, setOpenProject] = useState(0);
   const [imageList, setImageList] = useState(Array.from(Array(projectCount), () => []));
   const [isImagesLoaded, setIsImagesLoaded] = useState(false);
+  const [modalState, setModalState] = useState(false);
+
   const filterButtons = () => {
     const filters = ["ALL", "REACT", "JAVASCRIPT"];
 
@@ -20,6 +22,11 @@ const Projects = () => {
         </button>
       );
     });
+  };
+
+  const openProjectModal = (projectIndex) => {
+    setOpenProject(projectIndex);
+    setModalState(true);
   };
 
   const projectsCardList = () => {
@@ -57,7 +64,7 @@ const Projects = () => {
               </span>
             </div>
             <div className="projects_summary_bottomBox">
-              <button className="projects_summary_button" onClick={() => setOpenProject(index)}>
+              <button className="projects_summary_button" onClick={() => openProjectModal(index)}>
                 Details
               </button>
             </div>
@@ -110,7 +117,14 @@ const Projects = () => {
           <ul>{projectsCardList()}</ul>
         </div>
       </div>
-      <ProjectModal project={openProject} imageList={imageList[openProject]} />
+      <div id="modalState_pop">
+        <ProjectModal
+          openProject={openProject}
+          imageList={imageList[openProject]}
+          setModalState={setModalState}
+          modalState={modalState}
+        />
+      </div>
     </div>
   );
 };
