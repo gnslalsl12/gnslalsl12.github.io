@@ -32,7 +32,7 @@ function App() {
       //Navbar Text 효과 설정 useEffect
       if (!window.preventScrollUpdate) {
         for (const section of sectionArray) {
-          if (currentScrollPosition >= document.getElementById(section).offsetTop) {
+          if (currentScrollPosition >= document.getElementById(section).offsetTop - 49) {
             setActiveSection(section);
             break;
           }
