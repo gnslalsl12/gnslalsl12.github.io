@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import ProjectImageCarousel from "./ProjectImageCarousel";
 import { FaExternalLinkAlt } from "react-icons/fa";
-import { IoCloseOutline } from "react-icons/io5";
+import { IoClose } from "react-icons/io5";
 
-const ProjectModal = ({ openProject, imageList }) => {
+const ProjectModal = ({ openProject, imageList, setModalState, modalState }) => {
   const [tempImages, setTempImages] = useState([]);
+
+  const closeModal = () => {
+    setModalState(false);
+  };
 
   const projectList = [
     {
@@ -84,7 +88,7 @@ const ProjectModal = ({ openProject, imageList }) => {
         ],
         used_skills: [
           ["JavaScript", "HTML", "CSS", "ReactNative", "Recoil", "TypeScript", "Styled-Components"],
-          ["JAVA", "MySQL", "Python", "Flask", "Hadoop", "Spark", "..."],
+          ["JAVA", "MySQL", "Python", "Flask", "Hadoop", "Spark", "etc"],
           ["GitLab", "JIRA", "Blender", "MatterMost"],
         ],
         info: ["FE : 3 / BE : 3", "프론트엔드", "23-02-20 ~ 23-04-07"],
@@ -138,7 +142,7 @@ const ProjectModal = ({ openProject, imageList }) => {
             "face-api.js",
             "Tensorflow",
           ],
-          ["JAVA", "MySQL", "MongoDB", "Redis", "Zulu", "..."],
+          ["JAVA", "MySQL", "MongoDB", "Redis", "Zulu", "etc"],
           ["GitLab", "JIRA", "Blender", "MatterMost"],
         ],
         info: ["FE : 3 / BE : 3", "프론트엔드", "23-01-03 ~ 23-02-17"],
@@ -171,6 +175,23 @@ const ProjectModal = ({ openProject, imageList }) => {
             })}
           </ul>
         </div>
+        <div className="modal_rightBox_info">
+          <h1>수행 정보</h1>
+          <ul>
+            <li>
+              <div>팀 구성</div>
+              <div>{projectList[openProject].rightBox.info[0]}</div>
+            </li>
+            <li>
+              <div>역할</div>
+              <div>{projectList[openProject].rightBox.info[1]}</div>
+            </li>
+            <li>
+              <div>제작 기간</div>
+              <div>{projectList[openProject].rightBox.info[2]}</div>
+            </li>
+          </ul>
+        </div>
         <div className="modal_rightBox_used_skills">
           <h1>활용 기술</h1>
           <ul>
@@ -190,23 +211,6 @@ const ProjectModal = ({ openProject, imageList }) => {
             })}
           </ul>
         </div>
-        <div className="modal_rightBox_info">
-          <h1>수행 정보</h1>
-          <ul>
-            <li>
-              <span>팀 구성 : </span>
-              {projectList[openProject].rightBox.info[0]}
-            </li>
-            <li>
-              <span>역할 : </span>
-              {projectList[openProject].rightBox.info[1]}
-            </li>
-            <li>
-              <span>제작 기간</span>
-              {projectList[openProject].rightBox.info[2]}
-            </li>
-          </ul>
-        </div>
       </>
     );
   };
@@ -221,26 +225,26 @@ const ProjectModal = ({ openProject, imageList }) => {
   }, []);
 
   return (
-    <div className="modal_wholePage">
+    <div className={`${modalState ? "popUp_wholePage" : "popDown_wholePage"} modal_wholePage`}>
       <div className="modal_container">
         <div className="modal_container_topBox">
           <button className="modal_topBox_left">
-            <span>Github Link</span>
+            <span>Link to Github</span>
             <FaExternalLinkAlt className="modal_icon_link" />
           </button>
-          <button className="modal_topBox_right">
-            <IoCloseOutline />
+          <button className="modal_topBox_right" onClick={() => closeModal()}>
+            <IoClose />
           </button>
         </div>
         <div className="modal_container_bottomBox">
           <div className="modal_conatiner_bottom_leftBox">
             <div className="modal_bottom_left_imgBox">
-              <ProjectImageCarousel images={tempImages} />
+              <ProjectImageCarousel images={imageList} />
               {/* <img src={tempImages[0]} alt=";;" /> */}
             </div>
             <div className="modal_bottom_left_summaryBox">
               <div className="modal_summaryBox_topBox">
-                <span className="summaryBox_title">{projectList[openProject].title}</span>
+                <h1 className="summaryBox_title">{projectList[openProject].title}</h1>
                 <span className="summaryBox_explain_short">
                   {projectList[openProject].explain_short}
                 </span>

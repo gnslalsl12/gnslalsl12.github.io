@@ -2,37 +2,46 @@
 @import "projectImageCarousel.scss";
 
 .modal_wholePage {
+  display: grid;
   position: absolute;
   top: 0;
   left: 0;
-  background: colorBlack(40);
+  background-color: colorBlack(40);
   width: 100%;
   height: 100%;
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(3.5px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  place-content: center;
 }
 .modal_container {
   @include responsiveSize(1000, 600);
   display: flex;
   flex-direction: column;
-  position: absolute;
-  top: 50%;
-  left: 50%;
+  // position: absolute;
+  // top: 50%;
+  // left: 50%;
   z-index: 10;
-  transform: translate(-50%, -50%);
+  // transform: translate(-50%, -50%);
+  transform: scale(0.8);
+  transition: transform 0.3s ease;
   > .modal_container_topBox {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: colorWhite(100);
+    color: colorWhite(70);
+    background: colorBlack(40);
     padding: 0 1%;
     width: 100%;
     height: 8%;
+    border-bottom: 3px solid colorA(80);
     > .modal_topBox_left {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 0 1%;
-      width: 15%;
+      width: 18%;
       height: 60%;
       > span {
         @include responsiveFontSize(17);
@@ -51,76 +60,131 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background: colorWhite(60);
+    color: colorBlack(100);
+    background: colorWhite(70);
     width: 100%;
     height: 92%;
 
     > .modal_conatiner_bottom_leftBox {
-      @include tempBorder(blue);
       display: flex;
       flex-direction: column;
       width: 60%;
       height: 100%;
       > .modal_bottom_left_imgBox {
+        //왼쪽 위 이미지 캐러셀 박스
         @include responsiveSize(600, 337.5);
-        @include tempBorder(green);
+        display: flex;
+        justify-content: center;
         position: relative;
+        overflow: hidden;
       }
       > .modal_bottom_left_summaryBox {
-        flex-grow: 1;
-        background-color: colorWhite(100);
-        padding: 15px;
+        //왼쪽 아래 제목, 설명 박스
+        @include responsiveSize(600, 214.5);
+        display: flex;
+        flex-direction: column;
+        background-color: colorWhite(60);
+        padding: 18px;
         > .modal_summaryBox_topBox {
-          @include tempBorder(red);
+          //제목 박스
+          display: flex;
+          flex-direction: column;
+          justify-content: end;
+          align-items: start;
           width: 100%;
-          height: 40%;
-          border-bottom: 2px solid colorBlack(50);
+          height: 50%;
+          padding-bottom: 10px;
+          border-bottom: 3px solid colorBlack(10);
+          > h1 {
+            @include responsiveFontSize(30);
+            color: colorBlack(90);
+            //프로젝트 제목
+            font-family: "Pretendard-Black";
+          }
+          > span {
+            //프로젝트 간략 소개
+            @include responsiveFontSize(16);
+            color: colorBlack(33);
+            font-family: "Pretendard-ExtraBold";
+          }
         }
         > .modal_summaryBox_bottomBox {
-          @include tempBorder(green);
+          //설명 박스
+          display: flex;
+          flex-direction: column;
+          justify-content: start;
           width: 100%;
-          height: 60%;
+          height: 50%;
+          padding-right: 20px;
+          padding-top: 10px;
+          > span {
+            @include responsiveFontSize(16);
+            color: colorBlack(100);
+            font-family: "Pretendard-Light";
+          }
         }
       }
     }
     > .modal_conatiner_bottom_rightBox {
-      @include tempBorder(red);
-      background-color: colorWhite(100);
+      background-color: colorWhite(80);
       padding: 15px;
       width: 40%;
       height: 100%;
       overflow: hidden;
+      // ::-webkit-scrollbar {
+      //   display: none;
+      // }
       > .modal_rightBox_Info {
         width: 100%;
         height: 100%;
         overflow-y: scroll;
+        padding-right: 3%;
         > div {
+          //각 항목별 큰 박스
           width: 100%;
           height: fit-content;
-          border-bottom: 2px solid colorBlack(20);
+          border-bottom: 3px solid colorBlack(10);
           padding-top: 20px;
           padding-bottom: 20px;
         }
         > div:first-child {
+          //첫번째 박스
           padding-top: 0;
         }
         > div:last-child {
+          //마지막 박스
           border-bottom: none;
         }
+        > .modal_rightBox_info {
+          > ul > li {
+            div:first-child {
+              @include responsiveFontSize(18);
+              font-family: "Pretendard-Medium";
+            }
+            div:last-child {
+              @include responsiveFontSize(15);
+            }
+          }
+        }
         > div > h1 {
-          @include responsiveFontSize(20);
-          font-family: "Pretendard-Bold";
+          @include responsiveFontSize(22);
+          //담당 기능/강화역량/활용기술/수행정보
+          color: $colorA;
           margin: 8px 0px;
+          font-family: "Pretendard-Bold";
         }
         > div > ul > ul {
+          //활용기술 내부
           margin-left: 10px;
         }
         > div > ul > ul > h2 {
+          //Front-End, Back-End, Others
           @include responsiveFontSize(18);
           font-family: "Pretendard-SemiBold";
           margin-bottom: 5px;
         }
         > div li {
+          //li들
           @include responsiveFontSize(16);
           font-family: "Pretendard-Light";
           margin-left: 30px;
@@ -128,11 +192,22 @@
           list-style: disc;
         }
         .gain_big {
+          //강화 역량 타이틀
+          @include responsiveFontSize(18);
           font-family: "Pretendard-Medium";
         }
         .gain_small {
+          //강화 역량 내용
         }
       }
     }
+  }
+}
+
+.popUp_wholePage {
+  opacity: 1;
+  pointer-events: all;
+  > .modal_container {
+    transform: scale(1);
   }
 }
