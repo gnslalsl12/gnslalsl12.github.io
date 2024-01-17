@@ -110,7 +110,7 @@ const Projects = () => {
           <ul>{projectsCardList()}</ul>
         </div>
       </div>
-      <ProjectModal project={openProject} imageList={imageList[openProject]} />
+      <ProjectModal openProject={openProject} imageList={imageList[openProject]} />
     </div>
   );
 };

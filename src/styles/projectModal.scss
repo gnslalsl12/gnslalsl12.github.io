@@ -1,54 +1,133 @@
 @import "variables.scss";
+@import "projectImageCarousel.scss";
 
 .modal_wholePage {
   position: absolute;
   top: 0;
   left: 0;
+  background: colorBlack(40);
   width: 100%;
   height: 100%;
-  background: colorBlack(40);
   backdrop-filter: blur(3px);
 }
 .modal_container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 10;
   @include responsiveSize(1000, 600);
   display: flex;
   flex-direction: column;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 10;
+  transform: translate(-50%, -50%);
   > .modal_container_topBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background: colorWhite(100);
+    padding: 0 1%;
     width: 100%;
     height: 8%;
+    > .modal_topBox_left {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 1%;
+      width: 15%;
+      height: 60%;
+      > span {
+        @include responsiveFontSize(17);
+        font-family: "Montserrat-Medium";
+        cursor: pointer !important;
+      }
+      > .modal_icon_link {
+        @include responsiveFontSize(15);
+      }
+    }
+    > .modal_topBox_right {
+      @include responsiveFontSize(30);
+    }
   }
   > .modal_container_bottomBox {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     background: colorWhite(60);
     width: 100%;
     height: 92%;
-    display: flex;
-    flex-direction: row;
+
     > .modal_conatiner_bottom_leftBox {
       @include tempBorder(blue);
-      width: 60%;
-      height: 100%;
       display: flex;
       flex-direction: column;
+      width: 60%;
+      height: 100%;
       > .modal_bottom_left_imgBox {
         @include responsiveSize(600, 337.5);
         @include tempBorder(green);
+        position: relative;
       }
       > .modal_bottom_left_summaryBox {
         flex-grow: 1;
         background-color: colorWhite(100);
+        padding: 15px;
+        > .modal_summaryBox_topBox {
+          @include tempBorder(red);
+          width: 100%;
+          height: 40%;
+          border-bottom: 2px solid colorBlack(50);
+        }
+        > .modal_summaryBox_bottomBox {
+          @include tempBorder(green);
+          width: 100%;
+          height: 60%;
+        }
       }
     }
     > .modal_conatiner_bottom_rightBox {
-      background-color: colorWhite(100);
       @include tempBorder(red);
+      background-color: colorWhite(100);
+      padding: 15px;
       width: 40%;
       height: 100%;
+      overflow: hidden;
+      > .modal_rightBox_Info {
+        width: 100%;
+        height: 100%;
+        overflow-y: scroll;
+        > div {
+          width: 100%;
+          height: fit-content;
+          border-bottom: 2px solid colorBlack(20);
+          padding-top: 20px;
+          padding-bottom: 20px;
+        }
+        > div:first-child {
+          padding-top: 0;
+        }
+        > div:last-child {
+          border-bottom: none;
+        }
+        > div > h1 {
+          @include responsiveFontSize(20);
+          font-family: "Pretendard-Bold";
+          margin: 8px 0px;
+        }
+        > div > ul > ul {
+          margin-left: 10px;
+        }
+        > div > ul > ul > h2 {
+          @include responsiveFontSize(18);
+          font-family: "Pretendard-SemiBold";
+          margin-bottom: 5px;
+        }
+        > div li {
+          @include responsiveFontSize(16);
+          font-family: "Pretendard-Light";
+          margin-left: 30px;
+          margin-bottom: 8px;
+          list-style: disc;
+        }
+      }
     }
   }
 }

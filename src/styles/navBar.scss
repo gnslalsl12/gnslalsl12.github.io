@@ -1,15 +1,15 @@
 @import "variables.scss";
 
 .page_navbar {
-  height: max(7vh, 30px);
-  background-color: colorBlack(90);
-  width: 100%;
   @include left;
-  box-sizing: content-box;
-  border-top: 3px solid colorA(90);
-  z-index: 100;
   position: absolute;
   top: 100vh;
+  z-index: 100;
+  background-color: colorBlack(90);
+  box-sizing: content-box;
+  width: 100%;
+  height: max(7vh, 30px);
+  border-top: 3px solid colorA(90);
 }
 
 @keyframes navbarSlide {
@@ -32,17 +32,17 @@
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  height: 90%;
   width: 50%;
+  height: 90%;
   // @include tempBorder;
 
   > li {
+    display: grid;
+    color: colorWhite(70);
     // @include tempBorder(red);
     width: 10%;
     height: 70%;
-    display: grid;
     place-content: center;
-    color: colorWhite(70);
     font-family: "Montserrat-Medium";
     cursor: pointer;
 

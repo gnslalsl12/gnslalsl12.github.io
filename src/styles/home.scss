@@ -2,13 +2,13 @@
 
 .page_home {
   @include full-screen;
-  background: colorBlack();
-  position: relative;
   @include right;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  position: relative;
+  background: colorBlack();
 }
 
 .home_canvas {
@@ -24,25 +24,24 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 5%;
   position: relative;
   z-index: 2;
+  padding: 5%;
   // @include tempBorder(white);
 }
 
 .home_infos > h1 {
+  @include responsiveFontSize(50);
+  color: colorWhite();
   font-family: "Montserrat-Regular";
   text-align: end;
-  color: colorWhite();
-  @include responsiveFontSize(50);
+  margin-bottom: 5%;
   > strong {
     color: colorA();
   }
-  margin-bottom: 5%;
 }
 
 .home_infos > button {
-  font-family: "Montserrat-Light";
   @include responsiveSize(180, 50);
   @include responsiveFontSize(30);
   @include center;
@@ -50,10 +49,11 @@
   color: colorWhite(70);
   width: 120px;
   height: 50px;
+  font-family: "Montserrat-Light";
   transition: background-color 0.3s, border-color 0.3s, color 0.3s;
   &:hover {
+    color: colorWhite();
     background-color: colorB(50);
     border-color: colorB(50);
-    color: colorWhite();
   }
 }
