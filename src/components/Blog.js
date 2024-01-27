@@ -62,7 +62,7 @@ const Blog = () => {
               </div>
               <div className="blogCard_middleBox">
                 <h1>{value.title}</h1>
-                <span>{value.update}</span>
+                {/* <span>{value.update}</span> */}
               </div>
               <div className="blogCard_line" />
               <div className="blogCard_bottomBox">

@@ -1,28 +1,33 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Worldy_Overview from "../assets/images/projects/Worldy_Overview.png";
 import Eeum_Overview from "../assets/images/projects/Eeum_Overview.png";
 import Rendez_Overview from "../assets/images/projects/Rendez_Overview.png";
 import ProjectModal from "./ProjectModal";
+import ActiveSectionContext from "../contexts/ActiveSectionContext";
+import ScrollToSectionContext from "../contexts/ScrollToSectionContext";
 
 const Projects = () => {
   const projectCount = 3; //프로젝트 수
-  const [filtered, setFiltered] = useState(0);
+  // const [filtered, setFiltered] = useState(0);
   const [openProject, setOpenProject] = useState(0);
   const [imageList, setImageList] = useState(Array.from(Array(projectCount), () => []));
   const [isImagesLoaded, setIsImagesLoaded] = useState(false);
   const [modalState, setModalState] = useState(false);
+  const { activeSection, setActiveSection } = useContext(ActiveSectionContext);
 
-  const filterButtons = () => {
-    const filters = ["ALL", "REACT", "JAVASCRIPT"];
+  const { scrollToSection } = useContext(ScrollToSectionContext);
 
-    return filters.map((value, index) => {
-      return (
-        <button key={index} onClick={() => setFiltered(index)}>
-          {value}
-        </button>
-      );
-    });
-  };
+  // const filterButtons = () => {
+  //   const filters = ["ALL", "REACT", "JAVASCRIPT"];
+
+  //   return filters.map((value, index) => {
+  //     return (
+  //       <button key={index} onClick={() => setFiltered(index)}>
+  //         {value}
+  //       </button>
+  //     );
+  //   });
+  // };
 
   const openProjectModal = (projectIndex) => {
     setOpenProject(projectIndex);
@@ -64,7 +69,14 @@ const Projects = () => {
               </span>
             </div>
             <div className="projects_summary_bottomBox">
-              <button className="projects_summary_button" onClick={() => openProjectModal(index)}>
+              <button
+                className="projects_summary_button"
+                onClick={() => {
+                  openProjectModal(index);
+                  setActiveSection("projects");
+                  scrollToSection("projects");
+                }}
+              >
                 Details
               </button>
             </div>
