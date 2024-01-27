@@ -1,19 +1,23 @@
 @import "variables.scss";
 
 .page_bottom_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: end;
+  position: relative;
+  background-color: #1b242f;
   width: 100vw;
   height: 200px;
-  background-color: #1b242f;
-  position: relative;
-  > .page_bttom_topButton {
+  > .page_bottom_topButton {
+    @include responsiveSize(55, 55);
+    display: grid;
     position: absolute;
     top: 0;
     left: 50%;
-    transform: translate(-50%, -50%);
-    @include responsiveSize(55, 55);
-    display: grid;
-    place-content: center;
     background-color: colorA(100);
+    transform: translate(-50%, -50%);
+    place-content: center;
     opacity: 0.8;
     transition: opacity 0.3s ease;
     > * {
@@ -22,6 +26,51 @@
     }
     &:hover {
       opacity: 1;
+    }
+  }
+
+  > .page_bottom_contents {
+    @include responsiveSize(500, 150);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    > .bottom_contents_buttonList {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 50%;
+      > a {
+        @include responsiveSize(70, 70);
+        display: grid;
+        background-color: colorWhite(10);
+        margin: 0 5%;
+        place-content: center;
+        transition: background-color 0.3s ease;
+        border-radius: 10%;
+        > * {
+          @include responsiveSize(50, 50);
+          color: colorWhite(30);
+          transition: color 0.3s ease;
+        }
+        &:hover {
+          background-color: colorB(70);
+          > * {
+            color: colorWhite(70);
+          }
+        }
+      }
+    }
+    > .bottom_contents_rights {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: start;
+      color: $colorWhite;
+      width: 100%;
+      height: 30%;
     }
   }
 }

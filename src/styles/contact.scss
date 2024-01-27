@@ -49,11 +49,6 @@
     align-items: center;
     width: 100%;
     height: 30%;
-    a,
-    div,
-    span {
-      cursor: default;
-    }
     &:hover {
       :last-child {
         color: colorWhite(100);
@@ -61,12 +56,6 @@
       .contact_category {
         color: colorB(100);
       }
-    }
-    > a {
-      display: flex;
-      flex-direction: row;
-      justify-content: start;
-      align-items: center;
     }
     .contact_category {
       //   margin: 0 4%;
@@ -80,11 +69,15 @@
     }
     :last-child {
       @include responsiveFontSize(28);
+      display: flex;
+      flex-direction: row;
+      justify-content: start;
+      align-items: center;
+      color: colorWhite(70);
       width: 68%;
       transition: color 0.5s ease;
       font-family: "Montserrat-Light";
-      color: colorWhite(70);
-      > .contact_link_icon {
+      > .contact_icon {
         @include responsiveSize(28, 28);
         margin-left: 15px;
       }
