@@ -43,11 +43,11 @@ const Home = () => {
           this.opacity = 0.25;
           this.targetOpacity = 0.25;
           if (index < numberOfParticles / 2) {
-            this.rgb = "217, 169, 26";
+            this.rgb = "227, 27, 109";
             // } else if (index < (numberOfParticles * 2) / 3) {
             //   this.rgb = "28,54,89";
           } else {
-            this.rgb = "126, 173, 191";
+            this.rgb = "4, 194, 201";
           }
         }
 

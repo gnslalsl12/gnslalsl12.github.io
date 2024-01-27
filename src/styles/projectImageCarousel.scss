@@ -73,7 +73,7 @@
   }
   .lazyLoader {
     --height-of-loader: 4px;
-    --loader-color: #0071e2;
+    --loader-color: colorA(100);
     display: block;
     position: relative;
     background-color: rgba(0, 0, 0, 0.2);

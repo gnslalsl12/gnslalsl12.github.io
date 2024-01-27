@@ -43,6 +43,7 @@
       padding: 0 1%;
       width: 18%;
       height: 60%;
+      transition: color 0.2s ease;
       > span {
         @include responsiveFontSize(17);
         font-family: "Montserrat-Medium";
@@ -51,9 +52,16 @@
       > .modal_icon_link {
         @include responsiveFontSize(15);
       }
+      &:hover {
+        color: colorWhite(100);
+      }
     }
     > .modal_topBox_right {
       @include responsiveFontSize(30);
+      transition: color 0.2s ease;
+      &:hover {
+        color: colorWhite(100);
+      }
     }
   }
   > .modal_container_bottomBox {
@@ -96,7 +104,7 @@
           width: 100%;
           height: 50%;
           padding-bottom: 10px;
-          border-bottom: 3px solid colorBlack(10);
+          border-bottom: 2px solid colorBlack(15);
           > .summaryBox_title {
             @include responsiveFontSize(30);
             display: flex;
@@ -104,6 +112,7 @@
             color: colorBlack(90);
             width: 100%;
             //프로젝트 제목
+            cursor: default;
             font-family: "Pretendard-Black";
             > .modal_summaryBox_prize_container {
               display: flex;
@@ -114,9 +123,10 @@
               height: 100%;
               > .prize_text {
                 @include responsiveFontSize(17);
-                font-family: "Pretendard-Black";
+                font-family: "Pretendard-Regular";
                 visibility: hidden;
                 vertical-align: middle;
+                cursor: default;
               }
               &:hover {
                 > .prize_text {
@@ -128,8 +138,8 @@
                 }
               }
               > .prize_icon {
-                color: colorA(70);
                 @include responsiveSize(27, 27);
+                color: colorA(50);
                 margin: 0 3% 0 5%;
               }
             }
@@ -137,8 +147,8 @@
           > span {
             //프로젝트 간략 소개
             @include responsiveFontSize(16);
-            color: colorBlack(33);
-            font-family: "Pretendard-ExtraBold";
+            color: colorBlack(50);
+            font-family: "Pretendard-Bold";
           }
         }
         > .modal_summaryBox_bottomBox {
@@ -164,6 +174,7 @@
       width: 40%;
       height: 100%;
       overflow: hidden;
+      cursor: default;
       // ::-webkit-scrollbar {
       //   display: none;
       // }
@@ -171,12 +182,12 @@
         width: 100%;
         height: 100%;
         overflow-y: scroll;
-        padding-right: 3%;
+        padding-right: 7%;
         > div {
           //각 항목별 큰 박스
           width: 100%;
           height: fit-content;
-          border-bottom: 3px solid colorBlack(10);
+          border-bottom: 2px dashed colorBlack(15);
           padding-top: 20px;
           padding-bottom: 20px;
         }
