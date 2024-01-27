@@ -1,0 +1,154 @@
+@keyframes popFromBottom10 {
+  from {
+    transform: translateY(10%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes popFromBottom30 {
+  from {
+    transform: translateY(30%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes popFromBottom100 {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes popFromBottomSpan {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(-20%);
+    opacity: 1;
+  }
+  55% {
+    transform: translateY(-20%);
+  }
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+.titleAnimation {
+  animation: popFromBottom100 0.3s ease forwards;
+  > span {
+    animation: popFromBottomSpan 0.7s ease 0.2s forwards;
+  }
+}
+
+@keyframes slideRight10 {
+  from {
+    transform: translateX(-10%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+@keyframes slideRight100 {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+@keyframes slideRight30 {
+  from {
+    transform: translateX(-30%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+@keyframes slideLeft10 {
+  from {
+    transform: translateX(10%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+
+.slideRightCardsAnimation {
+  > .cardRef1 {
+    animation: slideRight30 0.3s ease forwards;
+  }
+  > .cardRef2 {
+    animation: slideRight30 0.3s ease 0.2s forwards;
+  }
+  > .cardRef3 {
+    animation: slideRight30 0.3s ease 0.4s forwards;
+  }
+  > .cardRef4 {
+    animation: slideRight30 0.3s ease 0.6s forwards;
+  }
+}
+
+.slideRightAnimation10 {
+  animation: slideRight10 0.3s ease forwards;
+}
+
+.aboutInfoPercentAnimation {
+  animation: slideLeft10 0.3s ease forwards;
+  > div > ul > li > :nth-child(2) {
+    animation: slideRight100 0.5s ease 0.4s forwards;
+  }
+}
+.projectsCardsPop {
+  > ul li {
+    @for $i from 1 through 10 {
+      &:nth-child(#{$i}) {
+        animation: popFromBottom30 0.5s ease ($i - 1) * 0.3s forwards;
+      }
+    }
+  }
+}
+
+.blogCardsPop {
+  > ul {
+    animation: popFromBottom10 0.5s ease forwards;
+  }
+}
+
+@keyframes popLight {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.contactListAnimation {
+  > div {
+    @for $i from 1 through 3 {
+      &:nth-child(#{$i}) {
+        animation: popLight 0.7s ease ($i - 1) * 0.3s forwards;
+      }
+    }
+  }
+}

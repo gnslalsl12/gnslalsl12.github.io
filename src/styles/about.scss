@@ -24,6 +24,7 @@
       align-items: center;
       width: 23%;
       height: 100%;
+      opacity: 0;
       > .about_summary_item_icon {
         display: flex;
         flex-direction: row;
@@ -81,6 +82,7 @@
     // @include tempBorder(red);
     width: 33%;
     height: 100%;
+    opacity: 0;
     > .about_info_leftBox_img {
       border-radius: 15%;
       width: fit-content;
@@ -106,6 +108,7 @@
   > .about_info_rightBox {
     width: 60%;
     height: 100%;
+    opacity: 0;
     > .about_percent {
       // @include tempBorder(blue);
       width: 100%;
@@ -122,6 +125,7 @@
           background-color: colorC(23);
           width: 100%;
           height: 7%;
+          overflow: hidden;
           > .about_info_rightBox_about_name {
             @include responsiveFontSize(16);
             @include center;
@@ -131,10 +135,13 @@
             width: 20%;
             height: 100%;
             font-family: "Montserrat-Bold";
+            z-index: 1;
           }
           > .about_info_rightBox_about_percent {
             background-color: #00a1a7;
             height: 100%;
+            opacity: 0;
+            z-index: 0;
           }
           > .percent_90 {
             width: 72%;

@@ -7,6 +7,7 @@
 @use "blog.scss";
 @use "contact.scss";
 @use "bottom.scss";
+@use "refAnimations.scss";
 
 @import "variables.scss";
 
@@ -29,8 +30,11 @@
   @include responsiveSize(160, 60);
   display: grid;
   place-content: center;
+  opacity: 0;
   border-bottom: 3px solid colorBlack(70);
+  overflow: hidden;
   > span {
+    opacity: 0;
     @include responsiveFontSize(30);
     color: colorBlack();
     font-family: "Montserrat-Bold";

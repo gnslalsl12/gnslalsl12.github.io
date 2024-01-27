@@ -18,6 +18,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    opacity: 0;
     margin-bottom: 2%;
     > a {
       @include responsiveFontSize(30);
@@ -25,10 +26,10 @@
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
+      color: colorBlack(100);
       padding: 0 5%;
       width: fit-content;
       height: 100%;
-      color: colorBlack(100);
       font-family: "Montserrat-Medium";
       > .blog_link_roll {
         @include responsiveSize(180, 80);
@@ -81,6 +82,7 @@
       justify-content: space-between;
       align-items: start;
       height: 100%;
+      opacity: 0;
       > .unhovered {
         opacity: 0.3;
       }
@@ -107,8 +109,8 @@
           flex-direction: column;
           justify-content: space-between;
           align-items: end;
-          margin-top: 5%;
           height: 15%;
+          margin-top: 5%;
           > h1 {
             //블로그 제목
             @include responsiveFontSize(22);

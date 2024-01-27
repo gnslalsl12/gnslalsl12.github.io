@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useRef } from "react";
 import { GoLinkExternal } from "react-icons/go";
 import { MdContentCopy } from "react-icons/md";
+import useAnimationOnScroll from "../utils/useAnimationOnScroll";
 const Contact = () => {
+  const conatctTitleRef = useRef();
+  const contactListRef = useRef();
+
+  useAnimationOnScroll(conatctTitleRef, "titleAnimation");
+  useAnimationOnScroll(contactListRef, "contactListAnimation");
+
   const copyText = async () => {
     try {
       //문자열을 클립보드에 복사
@@ -18,10 +25,10 @@ const Contact = () => {
         <div className="topTriangle-left" />
         <div className="topTriangle-right" />
       </div>
-      <div className="page_global_title page_contact_title">
+      <div className="page_global_title page_contact_title" ref={conatctTitleRef}>
         <span>CONTACT</span>
       </div>
-      <div className="page_global_box page_contact_container">
+      <div className="page_global_box page_contact_container" ref={contactListRef}>
         <div>
           <div className="contact_category">EMAIL</div>
           <button onClick={() => copyText()}>

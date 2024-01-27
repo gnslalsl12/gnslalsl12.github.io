@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import Worldy_Overview from "../assets/images/projects/Worldy_Overview.png";
 import Eeum_Overview from "../assets/images/projects/Eeum_Overview.png";
 import Rendez_Overview from "../assets/images/projects/Rendez_Overview.png";
 import ProjectModal from "./ProjectModal";
 import ActiveSectionContext from "../contexts/ActiveSectionContext";
 import ScrollToSectionContext from "../contexts/ScrollToSectionContext";
+import useAnimationOnScroll from "../utils/useAnimationOnScroll";
 
 const Projects = () => {
   const projectCount = 3; //프로젝트 수
@@ -17,17 +18,11 @@ const Projects = () => {
 
   const { scrollToSection } = useContext(ScrollToSectionContext);
 
-  // const filterButtons = () => {
-  //   const filters = ["ALL", "REACT", "JAVASCRIPT"];
+  const projectsTitleRef = useRef();
+  const projectsCardsRef = useRef();
 
-  //   return filters.map((value, index) => {
-  //     return (
-  //       <button key={index} onClick={() => setFiltered(index)}>
-  //         {value}
-  //       </button>
-  //     );
-  //   });
-  // };
+  useAnimationOnScroll(projectsTitleRef, "titleAnimation");
+  useAnimationOnScroll(projectsCardsRef, "projectsCardsPop");
 
   const openProjectModal = (projectIndex) => {
     setOpenProject(projectIndex);
@@ -113,19 +108,11 @@ const Projects = () => {
 
   return (
     <div className="page_global_background page_projects">
-      <div className="page_global_title">
+      <div className="page_global_title" ref={projectsTitleRef}>
         <span>PROJECTS</span>
       </div>
       <div className="page_global_box projects_container">
-        {/* <div className="projects_container_topBox">
-          <div className="projects_filter_floating">
-            <div className={`floating_bar moveTo_${filtered}`} />
-          </div>
-          <ul className="projects_filter_array">
-            {filterButtons()}
-          </ul>
-        </div> */}
-        <div className="projects_container_bottomBox">
+        <div className="projects_container_bottomBox" ref={projectsCardsRef}>
           <ul>{projectsCardList()}</ul>
         </div>
       </div>

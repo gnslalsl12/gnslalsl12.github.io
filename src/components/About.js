@@ -1,11 +1,22 @@
-import React from "react";
+import React, { useRef } from "react";
 import profileImage from "../assets/images/profileImage.jpg";
 import { MdDevices } from "react-icons/md";
 import { FiFeather } from "react-icons/fi";
 import { IoRocketOutline } from "react-icons/io5";
 import { TbBulb } from "react-icons/tb";
+import useAnimationOnScroll from "../utils/useAnimationOnScroll";
 
 const About = () => {
+  const aboutTitleRef = useRef();
+  const aboutSummaryCardRef = useRef();
+  const aboutInfoImgRef = useRef();
+  const aboutInfoPercentRef = useRef();
+
+  useAnimationOnScroll(aboutTitleRef, "titleAnimation");
+  useAnimationOnScroll(aboutSummaryCardRef, "slideRightCardsAnimation");
+  useAnimationOnScroll(aboutInfoImgRef, "slideRightAnimation10");
+  useAnimationOnScroll(aboutInfoPercentRef, "aboutInfoPercentAnimation");
+
   const aboutTopContent = () => {
     const aboutSummaryArray = [
       {
@@ -31,10 +42,10 @@ const About = () => {
     ];
 
     return (
-      <ul>
+      <ul ref={aboutSummaryCardRef}>
         {aboutSummaryArray.map((item, index) => {
           return (
-            <li key={index} className="about_summary_item">
+            <li key={index} className={`about_summary_item  cardRef${index + 1}`}>
               <div className="about_summary_item_icon">
                 <div className="about_summary_item_icon_value">{item.icon}</div>
               </div>
@@ -162,12 +173,12 @@ const About = () => {
 
   return (
     <div className="page_global_background page_about">
-      <div className="page_global_title">
+      <div className="page_global_title" ref={aboutTitleRef}>
         <span>ABOUT</span>
       </div>
       <div className="page_global_box about_summary">{aboutTopContent()}</div>
       <div className="page_global_box about_info">
-        <div className="about_info_leftBox">
+        <div className="about_info_leftBox" ref={aboutInfoImgRef}>
           <img src={profileImage} alt="프로필 이미지" className="about_info_leftBox_img" />
           <div className="about_info_leftBox_text">
             <div>Front-End 개발자 정훈입니다</div>
@@ -178,8 +189,7 @@ const About = () => {
             직관적인 사용 환경 구성에 깊은 열정이 있습니다.
           </div>
         </div>
-
-        <div className="about_info_rightBox">
+        <div className="about_info_rightBox" ref={aboutInfoPercentRef}>
           <div className="about_percent">{aboutPercentContent()}</div>
         </div>
       </div>

@@ -1,12 +1,21 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import blog_algorithm from "../assets/images/blog/blog_algorithm.jpg";
 import blog_solved from "../assets/images/blog/blog_solved.jpg";
 import blog_cs from "../assets/images/blog/blog_cs.jpg";
 import blog_languages from "../assets/images/blog/blog_languages.jpg";
 import blog_icon from "../assets/images/blog/notion_avatar_trans.png";
+import useAnimationOnScroll from "../utils/useAnimationOnScroll";
 
 const Blog = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
+
+  const blogTitleRef = useRef();
+  const blogMoveToRef = useRef();
+  const blogCardsRef = useRef();
+
+  useAnimationOnScroll(blogTitleRef, "titleAnimation");
+  useAnimationOnScroll(blogMoveToRef, "slideRightAnimation10");
+  useAnimationOnScroll(blogCardsRef, "blogCardsPop");
 
   const getCardList = () => {
     const blogContent = [
@@ -77,11 +86,11 @@ const Blog = () => {
 
   return (
     <div className="page_global_background page_blog">
-      <div className="page_global_title">
+      <div className="page_global_title" ref={blogTitleRef}>
         <span>BLOG</span>
       </div>
       <div className="page_global_box blog_container">
-        <div className="blog_container_mainBox">
+        <div className="blog_container_mainBox" ref={blogMoveToRef}>
           <a href="https://hoonyblog.vercel.app/" target="_blank" rel="noopener noreferrer">
             Move to
             <div className="blog_link_roll">
@@ -92,7 +101,9 @@ const Blog = () => {
             </div>
           </a>
         </div>
-        <div className="blog_container_cardBox">{getCardList()}</div>
+        <div className="blog_container_cardBox" ref={blogCardsRef}>
+          {getCardList()}
+        </div>
       </div>
     </div>
   );
