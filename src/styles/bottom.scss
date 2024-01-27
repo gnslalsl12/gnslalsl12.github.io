@@ -1,0 +1,27 @@
+@import "variables.scss";
+
+.page_bottom_container {
+  width: 100vw;
+  height: 200px;
+  background-color: #1b242f;
+  position: relative;
+  > .page_bttom_topButton {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    @include responsiveSize(55, 55);
+    display: grid;
+    place-content: center;
+    background-color: colorA(100);
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+    > * {
+      @include responsiveFontSize(48);
+      color: colorWhite(100);
+    }
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
