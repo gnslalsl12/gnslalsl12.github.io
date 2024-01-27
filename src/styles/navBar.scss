@@ -10,7 +10,7 @@
   box-sizing: content-box;
   width: 100%;
   height: max(7vh, 30px);
-  border-top: 3px solid colorA(90);
+  border-bottom: 4px solid colorB(100);
 }
 
 @keyframes navbarSlide {
@@ -46,7 +46,7 @@
     place-content: center;
     font-family: "Montserrat-Medium";
     cursor: pointer;
-
+    @include responsiveFontSize(20);
     transition: color 0.3s;
 
     &:hover {

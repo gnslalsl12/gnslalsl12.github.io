@@ -54,7 +54,7 @@
         border-right: 2px solid colorBlack(50);
       }
       > .about_summary_item_summary {
-        @include responsiveFontSize(16);
+        @include responsiveFontSize(18);
         color: colorBlack(70);
         width: 100%;
         height: 30%;
@@ -123,17 +123,17 @@
           width: 100%;
           height: 7%;
           > .about_info_rightBox_about_name {
-            @include responsiveFontSize(14);
+            @include responsiveFontSize(16);
             @include center;
             color: $colorWhite;
             // @include tempBorder(black);
-            background-color: colorBlack(75);
+            background-color: colorB(100);
             width: 20%;
             height: 100%;
             font-family: "Montserrat-Medium";
           }
           > .about_info_rightBox_about_percent {
-            background-color: colorA(90);
+            background-color: #00a1a7;
             height: 100%;
           }
           > .percent_90 {

@@ -5,6 +5,7 @@ import NavBar from "./components/NavBar";
 import Projects from "./components/Projects";
 import Blog from "./components/Blog";
 import Contact from "./components/Contact";
+import Bottom from "./components/Bottom";
 import throttle from "./utils/throttle";
 import ActiveSectionContext from "./contexts/ActiveSectionContext";
 
@@ -69,6 +70,9 @@ function App() {
       </div>
       <div id="contact">
         <Contact />
+      </div>
+      <div id="bottom">
+        <Bottom />
       </div>
     </div>
   );
