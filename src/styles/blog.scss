@@ -6,10 +6,72 @@
 }
 
 .blog_container {
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
   width: 100%;
   height: fit-content;
-  place-content: center;
+  > .blog_container_mainBox {
+    @include responsiveSize(500, 80);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2%;
+    > a {
+      @include responsiveFontSize(30);
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 5%;
+      width: fit-content;
+      height: 100%;
+      font-family: "Montserrat-Black";
+      > .blog_link_roll {
+        @include responsiveSize(180, 80);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+        > .blog_link_roll_text {
+          position: absolute;
+          right: 0;
+          bottom: 50%;
+          transform: translate(0, 50%);
+          opacity: 1;
+          transition: bottom 0.3s ease, opacity 0.3s ease;
+          cursor: pointer;
+        }
+        > .blog_link_roll_icon {
+          > img {
+            @include responsiveSize(50, 50);
+            position: absolute;
+            top: -10%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: top 0.3s ease, opacity 0.3s ease;
+          }
+        }
+      }
+      &:hover {
+        > .blog_link_roll {
+          > .blog_link_roll_text {
+            bottom: -10%;
+            opacity: 0;
+          }
+          > .blog_link_roll_icon > img {
+            top: 50%;
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
   > .blog_container_cardBox {
     @include responsiveSize(1000, 400);
     > ul {
@@ -21,7 +83,7 @@
       > .unhovered {
         opacity: 0.3;
       }
-      > li {
+      > a {
         display: flex;
         flex-direction: column;
         justify-content: start;

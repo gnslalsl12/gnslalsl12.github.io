@@ -2,17 +2,25 @@ import React, { useEffect, useState } from "react";
 import ProjectImageCarousel from "./ProjectImageCarousel";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
+import { FaStar } from "react-icons/fa";
 
 const ProjectModal = ({ openProject, imageList, setModalState, modalState }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
   const closeModal = () => {
     setModalState(false);
+    setTimeout(() => {
+      //모달 꺼진 후 이미지 인덱스 0으로 초기화 (에니메이션 방지)
+      setCurrentIndex(0);
+    }, 350);
   };
 
   const projectList = [
     {
       title: "WORLDY",
+      link: "https://github.com/SSAFY507/Worldy",
       explain_short: "AI 기술을 활용한 3D 메타버스 세계 지식 학습 게임",
-      prize: true,
+      prize: "SSAFY 자율 프로젝트 우수상",
       explain_long:
         "AI기반의 세계 상식 퀴즈 게임과 3D 메타버스로 구현된 세계 탐험 및 블루마블 게임을 통해 남녀노소 누구나 재미있게 세계를 배우는 게임, Worldy입니다.",
       rightBox: {
@@ -54,8 +62,9 @@ const ProjectModal = ({ openProject, imageList, setModalState, modalState }) => 
     },
     {
       title: "이음",
+      link: "https://github.com/IEUM-Team/IEUM",
       explain_short: "빅데이터 분산 기술을 활용한 '자립 준비 청년'들의 사회적 지원 서비스",
-      prize: false,
+      prize: "",
       explain_long:
         "보육원 보호가 종료된 자립 준비 청년들의 정서적 & 경제적 자립을 지원함으로써 그들이 사회로 이어지는 데에 더욱 튼튼한 연결 고리가 되어주는 서비스, 이음입니다.",
       rightBox: {
@@ -94,8 +103,9 @@ const ProjectModal = ({ openProject, imageList, setModalState, modalState }) => 
     },
     {
       title: "Rendez-Boo",
+      link: "https://github.com/gnslalsl12/Rendez-Boo",
       explain_short: "WebRTC 기술을 활용한 블라인드 미팅 플랫폼",
-      prize: false,
+      prize: "",
       explain_long:
         "처음 만나는 사람들의 내면을 들여다봄으로써 속 깊은 커뮤니케이션을 구축하고 진정성 있는 관계를 만들어주는 1:1, 3:3 미팅 플랫폼, Rendez-BOO(랑데부) 입니다",
       rightBox: {
@@ -220,10 +230,15 @@ const ProjectModal = ({ openProject, imageList, setModalState, modalState }) => 
     >
       <div className="modal_container" onClick={(event) => event.stopPropagation()}>
         <div className="modal_container_topBox">
-          <button className="modal_topBox_left">
+          <a
+            href={projectList[openProject].link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="modal_topBox_left"
+          >
             <span>Link to Github</span>
             <FaExternalLinkAlt className="modal_icon_link" />
-          </button>
+          </a>
           <button className="modal_topBox_right" onClick={() => closeModal()}>
             <IoClose />
           </button>
@@ -231,12 +246,24 @@ const ProjectModal = ({ openProject, imageList, setModalState, modalState }) => 
         <div className="modal_container_bottomBox">
           <div className="modal_conatiner_bottom_leftBox">
             <div className="modal_bottom_left_imgBox">
-              <ProjectImageCarousel images={imageList} />
+              <ProjectImageCarousel
+                images={imageList}
+                currentIndex={currentIndex}
+                setCurrentIndex={setCurrentIndex}
+              />
               {/* <img src={tempImages[0]} alt=";;" /> */}
             </div>
             <div className="modal_bottom_left_summaryBox">
               <div className="modal_summaryBox_topBox">
-                <h1 className="summaryBox_title">{projectList[openProject].title}</h1>
+                <div className="summaryBox_title">
+                  {projectList[openProject].title}
+                  {projectList[openProject].prize.length > 0 && (
+                    <div className="modal_summaryBox_prize_container">
+                      <FaStar className="prize_icon" />
+                      <p className="prize_text">{projectList[openProject].prize}</p>
+                    </div>
+                  )}
+                </div>
                 <span className="summaryBox_explain_short">
                   {projectList[openProject].explain_short}
                 </span>
