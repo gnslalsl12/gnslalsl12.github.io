@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.b2221557.css",
-    "main.js": "/static/js/main.24f84644.js",
+    "main.css": "/static/css/main.2479055c.css",
+    "main.js": "/static/js/main.a092bc0b.js",
     "static/js/787.2dcca737.chunk.js": "/static/js/787.2dcca737.chunk.js",
     "static/media/Pretendard-Thin.ttf": "/static/media/Pretendard-Thin.7aca4915b135693704c6.ttf",
     "static/media/Pretendard-ExtraLight.ttf": "/static/media/Pretendard-ExtraLight.50a2b2a1b0307c05712d.ttf",
@@ -57,12 +57,12 @@
     "static/media/notion_avatar_trans.png": "/static/media/notion_avatar_trans.d075632b88b5900eee86.png",
     "static/media/blog_solved.jpg": "/static/media/blog_solved.38ed146aec9f7436f268.jpg",
     "index.html": "/index.html",
-    "main.b2221557.css.map": "/static/css/main.b2221557.css.map",
-    "main.24f84644.js.map": "/static/js/main.24f84644.js.map",
+    "main.2479055c.css.map": "/static/css/main.2479055c.css.map",
+    "main.a092bc0b.js.map": "/static/js/main.a092bc0b.js.map",
     "787.2dcca737.chunk.js.map": "/static/js/787.2dcca737.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b2221557.css",
-    "static/js/main.24f84644.js"
+    "static/css/main.2479055c.css",
+    "static/js/main.a092bc0b.js"
   ]
 }
