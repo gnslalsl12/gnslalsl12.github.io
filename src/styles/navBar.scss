@@ -6,6 +6,7 @@
   top: 100vh;
   z-index: 100;
   background-color: colorBlack(90);
+  backdrop-filter: blur(5px);
   box-sizing: content-box;
   width: 100%;
   height: max(7vh, 30px);

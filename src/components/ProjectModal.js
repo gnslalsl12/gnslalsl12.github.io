@@ -251,7 +251,6 @@ const ProjectModal = ({ openProject, imageList, setModalState, modalState }) => 
                 currentIndex={currentIndex}
                 setCurrentIndex={setCurrentIndex}
               />
-              {/* <img src={tempImages[0]} alt=";;" /> */}
             </div>
             <div className="modal_bottom_left_summaryBox">
               <div className="modal_summaryBox_topBox">
