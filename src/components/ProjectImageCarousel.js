@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import LazyImg from "./LazyImg";
 
-const ProjectImageCarousel = ({ images }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
+const ProjectImageCarousel = ({ images, currentIndex, setCurrentIndex }) => {
   const goToPrevious = () => {
     const isFirstImage = currentIndex === 0;
     const newIndex = isFirstImage ? images.length - 1 : currentIndex - 1;
@@ -18,7 +17,7 @@ const ProjectImageCarousel = ({ images }) => {
 
   return (
     <>
-      <img className="carousel_image" src={images[currentIndex]} alt="carousel" />
+      <LazyImg src={images[currentIndex]} alt="carouselImg" />
       <div className="carousel_buttonContainer">
         <button onClick={goToPrevious}>
           <div className="carousel_button_previous" />

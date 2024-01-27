@@ -83,8 +83,10 @@
         @include responsiveSize(600, 214.5);
         display: flex;
         flex-direction: column;
+        position: relative;
         background-color: colorWhite(60);
         padding: 18px;
+
         > .modal_summaryBox_topBox {
           //제목 박스
           display: flex;
@@ -95,11 +97,42 @@
           height: 50%;
           padding-bottom: 10px;
           border-bottom: 3px solid colorBlack(10);
-          > h1 {
+          > .summaryBox_title {
             @include responsiveFontSize(30);
+            display: flex;
+            flex-direction: row;
             color: colorBlack(90);
+            width: 100%;
             //프로젝트 제목
             font-family: "Pretendard-Black";
+            > .modal_summaryBox_prize_container {
+              display: flex;
+              flex-direction: row;
+              justify-content: start;
+              align-items: center;
+              width: 50%;
+              height: 100%;
+              > .prize_text {
+                @include responsiveFontSize(17);
+                font-family: "Pretendard-Black";
+                visibility: hidden;
+                vertical-align: middle;
+              }
+              &:hover {
+                > .prize_text {
+                  color: colorA(100);
+                  visibility: visible;
+                }
+                > .prize_icon {
+                  color: colorA(100);
+                }
+              }
+              > .prize_icon {
+                color: colorA(70);
+                @include responsiveSize(27, 27);
+                margin: 0 3% 0 5%;
+              }
+            }
           }
           > span {
             //프로젝트 간략 소개
