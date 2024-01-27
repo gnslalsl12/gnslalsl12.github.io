@@ -36,7 +36,6 @@ const ProjectModal = ({ openProject, imageList, setModalState, modalState }) => 
   };
 
   useEffect(() => {
-    console.log(myProjectLists);
     setOpenedProject(myProjectLists[openProject]);
   }, [openProject]);
 
