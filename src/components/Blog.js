@@ -4,7 +4,6 @@ import blog_solved from "../assets/images/blog/blog_solved.jpg";
 import blog_cs from "../assets/images/blog/blog_cs.jpg";
 import blog_languages from "../assets/images/blog/blog_languages.jpg";
 import blog_icon from "../assets/images/blog/notion_avatar_trans.png";
-import { GoLinkExternal } from "react-icons/go";
 
 const Blog = () => {
   const [hoveredCard, setHoveredCard] = useState(null);

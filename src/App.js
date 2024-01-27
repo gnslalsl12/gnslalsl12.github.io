@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import About from "./components/About";
 import Home from "./components/Home";
 import NavBar from "./components/NavBar";
-import Skills from "./components/Skills";
 import Projects from "./components/Projects";
 import Blog from "./components/Blog";
 import Contact from "./components/Contact";
@@ -62,9 +61,6 @@ function App() {
       <div id="about">
         <About />
       </div>
-      {/* <div id="skills">
-        <Skills />
-      </div> */}
       <div id="projects">
         <Projects />
       </div>

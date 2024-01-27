@@ -162,7 +162,7 @@ const Home = () => {
   return (
     <div className="page_home">
       <canvas id="canvas" ref={canvasRef} className="home_canvas" />
-      <HomeInfos />;
+      <HomeInfos />
     </div>
   );
 };
