@@ -15,7 +15,7 @@ const ContextProvider = ({ children }) => {
     return <context.Provider value={value}>{acc}</context.Provider>;
   }, children);
 
-  return <>{combinedProviders};</>;
+  return <>{combinedProviders}</>;
 };
 
 export default ContextProvider;
