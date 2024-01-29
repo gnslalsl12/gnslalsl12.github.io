@@ -32,7 +32,10 @@ const Bottom = () => {
             <FaInstagram />
           </a>
         </div>
-        <div className="bottom_contents_rights">© 2024 JeongHoon, All rights reserved.</div>
+        <div className="bottom_contents_rights">
+          (반응형 개발 중)
+          <br />© 2024 JeongHoon, All rights reserved.
+        </div>
       </div>
     </div>
   );
