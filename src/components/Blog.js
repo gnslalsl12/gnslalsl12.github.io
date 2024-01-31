@@ -41,7 +41,7 @@ const Blog = () => {
         category: "🤖ComputerScience",
         update: "24-01-17",
         explain:
-          "네트워크, Front-End, React 등 다양한 CS에 대한 지식과 새로 알게된 정보들을 정리해 모아놓은 항목",
+          "SW 분야의 CS, Front-End, React 등 다양한 CS에 대한 지식과 새로 알게된 정보들을 정리해 모아놓은 항목",
       },
       {
         title: "Languages",
