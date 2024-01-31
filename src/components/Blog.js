@@ -30,7 +30,7 @@ const Blog = () => {
       {
         title: "Solved Algorithms",
         imgSrc: blog_solved,
-        category: "💡SolvedAlgos",
+        category: "📈SolvedAlgos",
         update: "24-01-17",
         explain:
           "Java, JavaScript, MySQL 언어를 기반으로 백준 골드, 플레티넘, 다이아 난이도와 그에 준하는 타 사이트 알고리즘 문제 풀이를 기록한 항목",
@@ -38,7 +38,7 @@ const Blog = () => {
       {
         title: "CS",
         imgSrc: blog_cs,
-        category: "🗄️ComputerScience",
+        category: "🤖ComputerScience",
         update: "24-01-17",
         explain:
           "네트워크, Front-End, React 등 다양한 CS에 대한 지식과 새로 알게된 정보들을 정리해 모아놓은 항목",
