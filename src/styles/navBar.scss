@@ -10,7 +10,7 @@
   width: 100%;
   height: max(7vh, 30px);
   @include respond {
-    height: 5.5vh;
+    height: 7vw;
   }
   backdrop-filter: blur(5px);
   border-bottom: 4px solid colorB(100);
