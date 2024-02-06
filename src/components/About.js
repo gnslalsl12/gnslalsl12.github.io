@@ -46,10 +46,12 @@ const About = () => {
         {aboutSummaryArray.map((item, index) => {
           return (
             <li key={index} className={`about_summary_item  cardRef${index + 1}`}>
-              <div className="about_summary_item_icon">
-                <div className="about_summary_item_icon_value">{item.icon}</div>
+              <div className="about_summary_left">
+                <div className="about_summary_item_icon">
+                  <div className="about_summary_item_icon_value">{item.icon}</div>
+                </div>
+                <div className="about_summary_item_title">{item.title}</div>
               </div>
-              <div className="about_summary_item_title">{item.title}</div>
               <div className="about_summary_item_summary">{item.summary}</div>
             </li>
           );
@@ -112,45 +114,9 @@ const About = () => {
       like: 1,
       explain: "웹 기반 3D 그래픽스 구현 및 애니메이션 경험.",
     },
-    // { name: "Figma", exp: 70, like: 0, explain: "프로토타이핑 및 협업 디자인 경험." },
-    // { name: "Blender", exp: 50, like: 0, explain: "3D 모델링 및 애니메이션 기초 지식." },
-    // {
-    //   name: "Recoil",
-    //   exp: 50,
-    //   like: 1,
-    //   explain: "Recoil을 이용한 상태 관리 및 성능 최적화 경험.",
-    // },
-    // {
-    //   name: "Styled-Components",
-    //   exp: 70,
-    //   like: 0,
-    //   explain: "CSS-in-JS 접근 방식을 통한 컴포넌트 스타일링.",
-    // },
-    // {
-    //   name: "SpringBoot",
-    //   exp: 50,
-    //   like: 0,
-    //   explain: "RESTful API 개발 및 스프링 생태계 이해.",
-    // },
-    // { name: "Python", exp: 50, like: 0, explain: "스크립팅 및 데이터 처리 기본 지식." },
-    // {
-    //   name: "GitLab",
-    //   exp: 60,
-    //   like: 0,
-    //   explain: "버전 관리 및 CI/CD 파이프라인 구축 경험.",
-    // },
-    // { name: "JIRA", exp: 60, like: 0, explain: "프로젝트 관리 및 이슈 추적 능력." },
-    // {
-    //   name: "Node.js",
-    //   exp: 60,
-    //   like: 1,
-    //   explain:
-    //     "Express.js를 이용한 기본적인 RESTful API 개발 및 서버 사이드 스크립팅 경험. 비동기 프로그래밍 및 기본적인 Node.js 라이브러리 활용 능력.",
-    // },
   ];
 
   const aboutPercentContent = () => {
-    // knowledgeArray.sort((x1, x2) => (x1.like === x2.like ? x2.exp - x1.exp : x2.like - x1.like));
     return (
       <ul>
         {(() => {
@@ -181,12 +147,16 @@ const About = () => {
         <div className="about_info_leftBox" ref={aboutInfoImgRef}>
           <img src={profileImage} alt="프로필 이미지" className="about_info_leftBox_img" />
           <div className="about_info_leftBox_text">
-            <div>Front-End 개발자 정훈입니다</div>
-            사용자 중심의 개발 방향성을 강화한 역량으로
-            <br />
-            다양한 UI/UX 설계, 다이나믹 에니메이션 구현,
-            <br />
-            직관적인 사용 환경 구성에 깊은 열정이 있습니다.
+            <div className="about_info_leftBox_text_title">
+              Front-End 개발자 <br /> 정훈입니다
+            </div>
+            <p className="about_info_leftBox_text_value">
+              사용자 중심의 개발 방향성을 강화한 역량으로
+              <br />
+              다양한 UI/UX 설계, 다이나믹 에니메이션 구현,
+              <br />
+              직관적인 사용 환경 구성에 깊은 열정이 있습니다.
+            </p>
           </div>
         </div>
         <div className="about_info_rightBox" ref={aboutInfoPercentRef}>

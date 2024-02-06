@@ -6,11 +6,23 @@
 
 .about_summary {
   @include responsiveSize(1200, 250);
+  @include respond {
+    width: 80vw;
+    height: 60vh;
+  }
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   > ul {
+    @include respond {
+      // @include tempBorder(blue);
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+    }
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -18,6 +30,10 @@
     width: 100%;
     height: 100%;
     > .about_summary_item {
+      @include respond {
+        flex-direction: row;
+        width: 100%;
+      }
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -25,36 +41,68 @@
       width: 23%;
       height: 100%;
       opacity: 0;
-      > .about_summary_item_icon {
+      > .about_summary_left {
+        @include respond {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          align-items: center;
+          width: 50%;
+          height: 100%;
+        }
         display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: start;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
         width: 100%;
-        height: 40%;
-        > .about_summary_item_icon_value {
-          @include responsiveSize(100, 100);
-          display: grid;
-          background: colorB(70);
-          border-radius: 15%;
-          place-content: center;
-          > * {
-            @include responsiveFontSize(70);
+        height: 60%;
+        > .about_summary_item_icon {
+          @include respond {
+            align-items: center;
+            // @include tempBorder(black);
+            width: 70px;
+            height: 70px;
+          }
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: start;
+          width: 100%;
+          height: 100%;
+          > .about_summary_item_icon_value {
+            @include responsiveSize(100, 100);
+            display: grid;
+            background: colorB(70);
+            border-radius: 15%;
+            place-content: center;
+            > * {
+              @include responsiveFontSize(70);
+            }
           }
         }
-      }
-      > .about_summary_item_title {
-        @include responsiveFontSize(22);
-        display: grid;
-        color: colorBlack(80);
-        width: 70%;
-        height: 17%;
-        place-content: center;
-        font-family: "Montserrat-Bold";
-        border-left: 2px solid colorBlack(50);
-        border-right: 2px solid colorBlack(50);
+        > .about_summary_item_title {
+          @include respond {
+            width: 90%;
+            height: 20%;
+          }
+          @include responsiveFontSize(22);
+          display: grid;
+          color: colorBlack(80);
+          width: 70%;
+          height: 17%;
+          place-content: center;
+          font-family: "Montserrat-Bold";
+          border-left: 2px solid colorBlack(50);
+          border-right: 2px solid colorBlack(50);
+        }
       }
       > .about_summary_item_summary {
+        @include respond {
+          display: grid;
+          height: 100%;
+          place-content: center;
+          font-size: 0.89rem !important;
+        }
         @include responsiveFontSize(18);
         color: colorBlack(70);
         width: 100%;
@@ -70,11 +118,22 @@
 .about_info {
   // @include tempBorder(black);
   @include responsiveSize(1100, 430);
+  @include respond {
+    flex-direction: column;
+    width: 80vw;
+    height: 120vw;
+  }
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   > .about_info_leftBox {
+    @include respond {
+      flex-direction: row;
+      align-items: center;
+      width: 100%;
+      height: 45%;
+    }
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -84,12 +143,24 @@
     height: 100%;
     opacity: 0;
     > .about_info_leftBox_img {
+      @include respond {
+        width: 40%;
+        height: auto;
+      }
       border-radius: 15%;
-      width: fit-content;
+      width: auto;
       height: 60%;
     }
     > .about_info_leftBox_text {
       @include responsiveFontSize(17);
+      @include respond {
+        @include responsiveFontSize(25);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 50%;
+        height: 100%;
+      }
       color: colorBlack();
       // border-top: 2px solid colorBlack(50);
       height: 35%;
@@ -97,15 +168,32 @@
       text-align: center;
       padding-top: 3%;
       padding-bottom: 3%;
-      > div {
+      > .about_info_leftBox_text_title {
         @include responsiveFontSize(20);
+        @include respond {
+          font-size: 1.2rem;
+          margin-bottom: 10%;
+        }
         font-family: "Pretendard-SemiBold";
         margin-bottom: 2%;
+      }
+      > .about_info_leftBox_text_value {
+        @include respond {
+          font-size: 0.9rem;
+          > br {
+            display: none;
+          }
+          // text-align: start;
+        }
       }
     }
   }
 
   > .about_info_rightBox {
+    @include respond {
+      width: 100%;
+      height: 50%;
+    }
     width: 60%;
     height: 100%;
     opacity: 0;
@@ -129,19 +217,19 @@
           > .about_info_rightBox_about_name {
             @include responsiveFontSize(16);
             @include center;
+            z-index: 1;
             color: $colorWhite;
             // @include tempBorder(black);
             background-color: colorB(100);
             width: 20%;
             height: 100%;
             font-family: "Montserrat-Bold";
-            z-index: 1;
           }
           > .about_info_rightBox_about_percent {
+            z-index: 0;
             background-color: #00a1a7;
             height: 100%;
             opacity: 0;
-            z-index: 0;
           }
           > .percent_90 {
             width: 72%;

@@ -46,19 +46,18 @@ $colorC: #a6a08d;
 
 @mixin responsiveSize($fullWidth, $fullHeight) {
   // 600px 이하일 때
-  @media (max-width: 899px) {
+  @media (max-width: 900px) {
     width: #{$fullWidth/2}px;
     height: #{$fullHeight/2}px;
   }
 
   // 1300px 이상일 때
-  @media (min-width: 1300px) {
+  @media (min-width: 1301px) {
     width: #{$fullWidth}px;
     height: #{$fullHeight}px;
   }
 
-  // 600px과 1300px 사이일 때
-  @media (min-width: 900px) and (max-width: 1299px) {
+  @media (min-width: 901px) and (max-width: 1300px) {
     width: calc(#{$fullWidth/2}px + #{$fullWidth/2}* ((100vw - 900px) / 399));
     height: calc(#{$fullHeight/2}px + #{$fullHeight/2}* ((100vw - 900px) / 399));
   }
@@ -86,15 +85,21 @@ $colorC: #a6a08d;
 }
 
 @mixin responsiveFontSize($fullFontSize) {
-  @media (max-width: 899px) {
-    font-size: #{$fullFontSize / 2}px;
+  @media (max-width: 900px) {
+    font-size: #{($fullFontSize) * 3 / 5}px;
   }
 
-  @media (min-width: 1300px) {
+  @media (min-width: 1301px) {
     font-size: #{$fullFontSize}px;
   }
 
-  @media (min-width: 900px) and (max-width: 1299px) {
+  @media (min-width: 901px) and (max-width: 1300px) {
     font-size: calc(#{$fullFontSize/2}px + #{$fullFontSize/2} * ((100vw - 900px) / 399));
+  }
+}
+
+@mixin respond {
+  @media screen and (max-width: 900px) {
+    @content;
   }
 }

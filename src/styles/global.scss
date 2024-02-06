@@ -17,6 +17,10 @@
 }
 
 .page_global_background {
+  @include respond {
+    padding-top: 15%;
+    padding-bottom: 15vw;
+  }
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -28,15 +32,21 @@
 
 .page_global_title {
   @include responsiveSize(160, 60);
+  @include respond {
+    // @include tempBorder(red);
+    @include responsiveSize(220, 70);
+    place-content: start center;
+    border-bottom: 2px solid colorBlack(70);
+  }
   display: grid;
   place-content: center;
   opacity: 0;
   border-bottom: 3px solid colorBlack(70);
   overflow: hidden;
   > span {
-    opacity: 0;
     @include responsiveFontSize(30);
     color: colorBlack();
+    opacity: 0;
     font-family: "Montserrat-Bold";
   }
 }
@@ -44,9 +54,6 @@
 .page_global_box {
   display: flex;
   margin-top: 4%;
-  // flex-direction: row;
-  // justify-content: space-between;
-  // align-items: center;
 }
 
 span {

@@ -14,3 +14,6 @@
 // app.listen(port, () => {
 //   console.log(`Server running on http://localhost:${port}`);
 // });
+// app.listen(3000, "0.0.0.0", function () {
+//   console.log("Server is running on port 3000");
+// });

@@ -6,10 +6,13 @@
   top: 100vh;
   z-index: 100;
   background-color: colorBlack(90);
-  backdrop-filter: blur(5px);
   box-sizing: content-box;
   width: 100%;
   height: max(7vh, 30px);
+  @include respond {
+    height: 5.5vh;
+  }
+  backdrop-filter: blur(5px);
   border-bottom: 4px solid colorB(100);
 }
 
@@ -29,6 +32,10 @@
 }
 
 .navbar_ul {
+  @include respond {
+    width: 100%;
+    justify-content: space-between;
+  }
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -38,6 +45,11 @@
   // @include tempBorder;
 
   > li {
+    @include responsiveFontSize(20);
+    @include respond {
+      width: 17%;
+      // transition: width 0.3s ease;
+    }
     display: grid;
     color: colorWhite(70);
     // @include tempBorder(red);
@@ -46,14 +58,25 @@
     place-content: center;
     font-family: "Montserrat-Medium";
     cursor: pointer;
-    @include responsiveFontSize(20);
     transition: color 0.3s;
-
     &:hover {
       color: colorWhite();
     }
   }
   > .navbar_li_active {
+    @include respond {
+      // width: 25%;
+      animation: mobileNavbarAnimation 0.3s 0.2s 1 forwards;
+    }
     color: colorA();
+  }
+}
+
+@keyframes mobileNavbarAnimation {
+  from {
+    width: 17%;
+  }
+  to {
+    width: 25%;
   }
 }
