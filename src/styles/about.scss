@@ -97,13 +97,13 @@
         }
       }
       > .about_summary_item_summary {
+        @include responsiveFontSize(18);
         @include respond {
           display: grid;
           height: 100%;
           place-content: center;
-          font-size: 0.89rem !important;
+          font-size: 0.89rem;
         }
-        @include responsiveFontSize(18);
         color: colorBlack(70);
         width: 100%;
         height: 30%;

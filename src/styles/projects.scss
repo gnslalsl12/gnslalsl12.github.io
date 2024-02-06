@@ -37,13 +37,13 @@
       width: 100%;
       height: fit-content;
       > li {
+        @include responsiveSize(400, 300);
         @include respond {
-          width: 60vw !important;
-          height: 45vw !important;
+          width: 60vw;
+          height: 45vw;
           margin-bottom: 3%;
           border-radius: 8%;
         }
-        @include responsiveSize(400, 300);
         position: relative;
         background-color: white;
         overflow: hidden;
