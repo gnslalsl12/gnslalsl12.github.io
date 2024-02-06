@@ -7,7 +7,6 @@
 
 .blog_container {
   @include respond {
-    @include tempBorder(blue);
   }
   display: flex;
   flex-direction: column;
@@ -83,7 +82,6 @@
   > .blog_container_cardBox {
     @include responsiveSize(1000, 420);
     @include respond {
-      @include tempBorder(black);
       width: 90%;
       height: fit-content;
       display: flex;
@@ -92,7 +90,6 @@
     }
     > ul {
       @include respond {
-        @include tempBorder(red);
         flex-direction: row;
         height: fit-content;
         justify-content: space-around;
