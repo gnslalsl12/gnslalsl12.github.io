@@ -21,11 +21,11 @@ const ProjectImageCarousel = ({ images, currentIndex, setCurrentIndex }) => {
       <div className="carousel_buttonContainer">
         <button onClick={goToPrevious}>
           <div className="carousel_button_previous" />
-          <IoIosArrowBack className="carousel_button_icon" />
+          <IoIosArrowBack className="carousel_button_icon button_icon_left" />
         </button>
         <button onClick={goToNext}>
           <div className="carousel_button_next" />
-          <IoIosArrowForward className="carousel_button_icon" />
+          <IoIosArrowForward className="carousel_button_icon button_icon_right" />
         </button>
       </div>
     </>

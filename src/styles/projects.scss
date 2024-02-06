@@ -3,21 +3,32 @@
 
 .page_projects {
   position: relative;
-  background-color: colorWhite(30);
+  background-color: colorC(25);
 }
 
 .projects_container {
   //   @include responsiveSize(1100, 500);
   @include responsiveSize(1200, 400);
+  @include respond {
+    width: 80vw;
+    height: fit-content;
+  }
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   > .projects_container_bottomBox {
+    @include respond {
+      height: fit-content;
+    }
     width: 100%;
     height: fit-content;
-
     > ul {
+      @include respond {
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+      }
       display: flex;
       flex-direction: row;
       justify-content: space-between;
@@ -26,6 +37,12 @@
       width: 100%;
       height: fit-content;
       > li {
+        @include respond {
+          width: 60vw !important;
+          height: 45vw !important;
+          margin-bottom: 3%;
+          border-radius: 8%;
+        }
         @include responsiveSize(400, 300);
         position: relative;
         background-color: white;
@@ -107,6 +124,9 @@
             transition: bottom 0.3s ease-in-out, opacity 0.3s ease-in-out;
             > .projects_summary_button {
               @include responsiveFontSize(20);
+              @include respond {
+                border: 1px solid $colorA;
+              }
               display: grid;
               border: 2px solid $colorA;
               width: 33%;

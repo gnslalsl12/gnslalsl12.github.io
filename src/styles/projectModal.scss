@@ -2,6 +2,9 @@
 @import "projectImageCarousel.scss";
 
 .modal_wholePage {
+  @include respond {
+    height: 100vh;
+  }
   display: grid;
   position: absolute;
   top: 0;
@@ -17,6 +20,10 @@
 }
 .modal_container {
   @include responsiveSize(1000, 600);
+  @include respond {
+    width: 95vw;
+    height: 60vh;
+  }
   display: flex;
   flex-direction: column;
   // position: absolute;
@@ -27,6 +34,12 @@
   transform: scale(0.8);
   transition: transform 0.3s ease;
   > .modal_container_topBox {
+    @include respond {
+      width: 100%;
+      height: 6%;
+      padding-right: 2%;
+      padding-left: 2%;
+    }
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -37,6 +50,10 @@
     height: 8%;
     border-bottom: 3px solid colorA(80);
     > .modal_topBox_left {
+      @include respond {
+        justify-content: start;
+        width: 28%;
+      }
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -46,11 +63,16 @@
       transition: color 0.2s ease;
       > span {
         @include responsiveFontSize(17);
+        @include respond {
+          margin-right: 5%;
+        }
         font-family: "Montserrat-Medium";
         cursor: pointer !important;
       }
       > .modal_icon_link {
         @include responsiveFontSize(15);
+        @include respond {
+        }
       }
       &:hover {
         color: colorWhite(100);
@@ -58,6 +80,12 @@
     }
     > .modal_topBox_right {
       @include responsiveFontSize(30);
+      @include respond {
+        @include responsiveFontSize(25);
+        @include responsiveSize(45, 45);
+        display: grid;
+        place-content: center;
+      }
       transition: color 0.2s ease;
       &:hover {
         color: colorWhite(100);
@@ -65,6 +93,10 @@
     }
   }
   > .modal_container_bottomBox {
+    @include respond {
+      flex-direction: column;
+      justify-content: start;
+    }
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -74,6 +106,13 @@
     height: 92%;
 
     > .modal_conatiner_bottom_leftBox {
+      @include respond {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 50%;
+      }
       display: flex;
       flex-direction: column;
       width: 60%;
@@ -81,6 +120,10 @@
       > .modal_bottom_left_imgBox {
         //왼쪽 위 이미지 캐러셀 박스
         @include responsiveSize(600, 337.5);
+        @include respond {
+          width: 55%;
+          height: 100%;
+        }
         display: flex;
         justify-content: center;
         position: relative;
@@ -88,6 +131,13 @@
       }
       > .modal_bottom_left_summaryBox {
         //왼쪽 아래 제목, 설명 박스
+        @include respond {
+          justify-content: start;
+          align-items: center;
+          padding: 0;
+          width: 45% !important;
+          height: 100% !important;
+        }
         @include responsiveSize(600, 214.5);
         display: flex;
         flex-direction: column;
@@ -97,6 +147,12 @@
 
         > .modal_summaryBox_topBox {
           //제목 박스
+          @include respond {
+            justify-content: space-around;
+            width: 90%;
+            height: 45%;
+            padding-top: 5%;
+          }
           display: flex;
           flex-direction: column;
           justify-content: end;
@@ -106,6 +162,9 @@
           padding-bottom: 10px;
           border-bottom: 2px solid colorBlack(15);
           > .summaryBox_title {
+            @include respond {
+              flex-direction: column;
+            }
             @include responsiveFontSize(30);
             display: flex;
             flex-direction: row;
@@ -115,6 +174,9 @@
             cursor: default;
             font-family: "Pretendard-Black";
             > .modal_summaryBox_prize_container {
+              @include respond {
+                width: 100%;
+              }
               display: flex;
               flex-direction: row;
               justify-content: start;
@@ -122,6 +184,11 @@
               width: 50%;
               height: 100%;
               > .prize_text {
+                @include respond {
+                  @include responsiveFontSize(19);
+                  color: colorA(100);
+                  visibility: visible;
+                }
                 @include responsiveFontSize(17);
                 font-family: "Pretendard-Regular";
                 visibility: hidden;
@@ -138,6 +205,9 @@
                 }
               }
               > .prize_icon {
+                @include respond {
+                  display: none;
+                }
                 @include responsiveSize(27, 27);
                 color: colorA(50);
                 margin: 0 3% 0 5%;
@@ -147,12 +217,20 @@
           > span {
             //프로젝트 간략 소개
             @include responsiveFontSize(16);
+            @include respond {
+              @include responsiveFontSize(18);
+            }
             color: colorBlack(50);
             font-family: "Pretendard-Bold";
           }
         }
         > .modal_summaryBox_bottomBox {
           //설명 박스
+          @include respond {
+            height: 50%;
+            padding-left: 5%;
+            padding-right: 5%;
+          }
           display: flex;
           flex-direction: column;
           justify-content: start;
@@ -162,6 +240,9 @@
           padding-top: 10px;
           > span {
             @include responsiveFontSize(16);
+            @include respond {
+              @include responsiveFontSize(18);
+            }
             color: colorBlack(100);
             font-family: "Pretendard-Light";
           }
@@ -169,6 +250,10 @@
       }
     }
     > .modal_conatiner_bottom_rightBox {
+      @include respond {
+        width: 100%;
+        height: 55%;
+      }
       background-color: colorWhite(80);
       padding: 15px;
       width: 40%;
@@ -203,17 +288,24 @@
           > ul > li {
             div:first-child {
               @include responsiveFontSize(18);
+              @include responsiveFontSize(21);
               font-family: "Pretendard-Medium";
             }
             div:last-child {
               @include responsiveFontSize(15);
+              @include respond {
+                @include responsiveFontSize(18);
+              }
             }
           }
         }
         > div > h1 {
           @include responsiveFontSize(22);
+          @include respond {
+            @include responsiveFontSize(25);
+          }
           //담당 기능/강화역량/활용기술/수행정보
-          color: $colorA;
+          // color: $colorA;
           margin: 8px 0px;
           font-family: "Pretendard-Bold";
         }
@@ -224,12 +316,18 @@
         > div > ul > ul > h2 {
           //Front-End, Back-End, Others
           @include responsiveFontSize(18);
+          @include respond {
+            @include responsiveFontSize(21);
+          }
           font-family: "Pretendard-SemiBold";
           margin-bottom: 5px;
         }
         > div li {
           //li들
           @include responsiveFontSize(16);
+          @include respond {
+            @include responsiveFontSize(19);
+          }
           font-family: "Pretendard-Light";
           margin-left: 30px;
           margin-bottom: 8px;
@@ -238,6 +336,9 @@
         .gain_big {
           //강화 역량 타이틀
           @include responsiveFontSize(18);
+          @include respond {
+            @include responsiveFontSize(21);
+          }
           font-family: "Pretendard-Medium";
         }
         .gain_small {

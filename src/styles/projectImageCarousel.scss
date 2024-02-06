@@ -11,6 +11,18 @@
   height: 100%;
   transform: translate(0, -50%);
   > button {
+    @include respond {
+      position: relative;
+      width: 20%;
+      > .button_icon_left {
+        bottom: 0;
+        left: 0;
+      }
+      > .button_icon_right {
+        bottom: 0;
+        right: 0;
+      }
+    }
     display: grid;
     position: relative;
     width: 9%;
@@ -18,6 +30,11 @@
     place-content: center;
     > .carousel_button_icon {
       @include responsiveFontSize(40);
+      @include respond {
+        position: absolute;
+        color: colorWhite(100);
+        background-color: colorBlack(30);
+      }
       z-index: 11;
       color: colorWhite(50);
       transition: color 0.3s ease-in-out;
@@ -33,9 +50,15 @@
     }
 
     > .carousel_button_previous {
+      @include respond {
+        background-image: linear-gradient(to right, colorBlack(40), colorBlack(0));
+      }
       background-image: linear-gradient(to right, colorBlack(60), colorBlack(0));
     }
     > .carousel_button_next {
+      @include respond {
+        background-image: linear-gradient(to left, colorBlack(40), colorBlack(0));
+      }
       background-image: linear-gradient(to left, colorBlack(60), colorBlack(0));
     }
 
@@ -61,14 +84,15 @@
       width: 0;
     }
   }
-  position: relative;
-  height: 100%;
-  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  width: 100%;
+  height: 100%;
 
   .carousel_image {
+    object-fit: contain;
     height: 100%;
   }
   .lazyLoader {

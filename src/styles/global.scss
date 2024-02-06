@@ -54,6 +54,9 @@
 .page_global_box {
   display: flex;
   margin-top: 4%;
+  @include respond {
+    margin-top: 7%;
+  }
 }
 
 span {
