@@ -1,6 +1,7 @@
 /* 모든 브라우저에서 세로 스크롤바 숨기기 */
 html,
-body {
+body,
+.skill_list_column_container {
   overflow-x: hidden;
   overflow-y: scroll;
 }
@@ -14,12 +15,14 @@ body::-webkit-scrollbar,
 
 /* 파이어폭스 */
 html,
+body,
 .skill_list_column_container {
   scrollbar-width: none;
 }
 
 /* IE 및 엣지 */
 html,
+body,
 .skill_list_column_container {
   -ms-overflow-style: none;
 }
