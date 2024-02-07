@@ -3,7 +3,7 @@ import ActiveSectionContext from "../contexts/ActiveSectionContext";
 import ScrollToSectionContext from "../contexts/ScrollToSectionContext";
 
 const NavBar = ({ isSticky }) => {
-  const sectionArray = ["home", "about", "projects", "blog", "contact"];
+  const sectionArray = ["home", "about", "projects", "blog", "others"];
   const { activeSection, setActiveSection } = useContext(ActiveSectionContext);
 
   const { scrollToSection } = useContext(ScrollToSectionContext);

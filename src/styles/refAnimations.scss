@@ -113,10 +113,18 @@
   animation: slideRight10 0.3s ease forwards;
 }
 
-.aboutInfoPercentAnimation {
+@keyframes slidePopDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+.aboutInfoSkillsAnimation {
   animation: slideLeft10 0.3s ease forwards;
-  > div > ul > li > :nth-child(2) {
-    animation: slideRight100 0.5s ease 0.4s forwards;
+  > li > .skill_list_column_container {
+    animation: slidePopDown 0.3s ease 0.35s forwards;
   }
 }
 .projectsCardsPop {
@@ -143,7 +151,7 @@
     opacity: 1;
   }
 }
-.contactListAnimation {
+.othersListAnimation {
   > div {
     @for $i from 1 through 3 {
       &:nth-child(#{$i}) {

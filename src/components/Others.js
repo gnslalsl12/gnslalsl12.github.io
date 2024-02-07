@@ -2,12 +2,12 @@ import React, { useRef } from "react";
 import { GoLinkExternal } from "react-icons/go";
 import { MdContentCopy } from "react-icons/md";
 import useAnimationOnScroll from "../utils/useAnimationOnScroll";
-const Contact = () => {
-  const conatctTitleRef = useRef();
-  const contactListRef = useRef();
+const Others = () => {
+  const othersTitleRef = useRef();
+  const othersListRef = useRef();
 
-  useAnimationOnScroll(conatctTitleRef, "titleAnimation");
-  useAnimationOnScroll(contactListRef, "contactListAnimation");
+  useAnimationOnScroll(othersTitleRef, "titleAnimation");
+  useAnimationOnScroll(othersListRef, "othersListAnimation");
 
   const copyText = async () => {
     try {
@@ -20,31 +20,31 @@ const Contact = () => {
   };
 
   return (
-    <div className="page_global_background page_contact">
-      <div className="page_contact_topTriangle">
+    <div className="page_global_background page_others">
+      <div className="page_others_topTriangle">
         <div className="topTriangle-left" />
         <div className="topTriangle-right" />
       </div>
-      <div className="page_global_title page_contact_title" ref={conatctTitleRef}>
-        <span>CONTACT</span>
+      <div className="page_global_title page_others_title" ref={othersTitleRef}>
+        <span>OTHERS</span>
       </div>
-      <div className="page_global_box page_contact_container" ref={contactListRef}>
+      <div className="page_global_box page_others_container" ref={othersListRef}>
         <div>
-          <div className="contact_category">EMAIL</div>
+          <div className="others_category">EMAIL</div>
           <button onClick={() => copyText()}>
-            wjdgnsxhsl@naver.com <MdContentCopy className="contact_icon" />
+            wjdgnsxhsl@naver.com <MdContentCopy className="others_icon" />
           </button>
         </div>
         <div>
-          <div className="contact_category">Github</div>
+          <div className="others_category">Github</div>
           <a href="https://github.com/gnslalsl12" target="_blank" rel="noopener noreferrer">
-            https://github.com/gnslalsl12 <GoLinkExternal className="contact_icon" />
+            https://github.com/gnslalsl12 <GoLinkExternal className="others_icon" />
           </a>
         </div>
         <div>
-          <div className="contact_category">BAEKJOON</div>
+          <div className="others_category">BAEKJOON</div>
           <a href="https://solved.ac/profile/wjdgnsxhsl" target="_blank" rel="noopener noreferrer">
-            https://solved.ac/profile/wjdgnsxhsl <GoLinkExternal className="contact_icon" />
+            https://solved.ac/profile/wjdgnsxhsl <GoLinkExternal className="others_icon" />
           </a>
         </div>
       </div>
@@ -52,4 +52,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default Others;

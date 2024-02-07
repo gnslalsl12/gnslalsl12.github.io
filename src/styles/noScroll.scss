@@ -7,16 +7,19 @@ body {
 
 /* 웹킷 기반 브라우저 (예: Safari, Chrome) */
 html::-webkit-scrollbar,
-body::-webkit-scrollbar {
+body::-webkit-scrollbar,
+.skill_list_column_container::webkit-scrollbar {
   display: none;
 }
 
 /* 파이어폭스 */
-html {
+html,
+.skill_list_column_container {
   scrollbar-width: none;
 }
 
 /* IE 및 엣지 */
-html {
+html,
+.skill_list_column_container {
   -ms-overflow-style: none;
 }

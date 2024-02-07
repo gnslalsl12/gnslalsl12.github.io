@@ -1,21 +1,24 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import profileImage from "../assets/images/profileImage.jpg";
 import { MdDevices } from "react-icons/md";
 import { FiFeather } from "react-icons/fi";
 import { IoRocketOutline } from "react-icons/io5";
 import { TbBulb } from "react-icons/tb";
 import useAnimationOnScroll from "../utils/useAnimationOnScroll";
+import recoilImg from "../assets/images/skills/recoil.png";
+import styledComponentsImg from "../assets/images/skills/styled-components.png";
+import { hover } from "@testing-library/user-event/dist/hover";
 
 const About = () => {
   const aboutTitleRef = useRef();
   const aboutSummaryCardRef = useRef();
   const aboutInfoImgRef = useRef();
-  const aboutInfoPercentRef = useRef();
+  const aboutInfoSkillstRef = useRef();
 
   useAnimationOnScroll(aboutTitleRef, "titleAnimation");
   useAnimationOnScroll(aboutSummaryCardRef, "slideRightCardsAnimation");
   useAnimationOnScroll(aboutInfoImgRef, "slideRightAnimation10");
-  useAnimationOnScroll(aboutInfoPercentRef, "aboutInfoPercentAnimation");
+  useAnimationOnScroll(aboutInfoSkillstRef, "aboutInfoSkillsAnimation");
 
   const aboutTopContent = () => {
     const aboutSummaryArray = [
@@ -116,26 +119,198 @@ const About = () => {
     },
   ];
 
-  const aboutPercentContent = () => {
-    return (
-      <ul>
-        {(() => {
-          const items = [];
-          for (let i = 0; i < 10 && i < knowledgeArray.length; i++) {
-            items.push(
-              <li key={i}>
-                <div className="about_info_rightBox_about_name">{knowledgeArray[i].name}</div>
-                <div
-                  className={`about_info_rightBox_about_percent percent_${knowledgeArray[i].exp}`}
-                />
-              </li>
-            );
-          }
-          return items;
-        })()}
-      </ul>
-    );
+  // const aboutPercentContent = () => {
+  //   return (
+  //     <ul>
+  //       {(() => {
+  //         const items = [];
+  //         for (let i = 0; i < 10 && i < knowledgeArray.length; i++) {
+  //           items.push(
+  //             <li key={i}>
+  //               <div className="about_info_rightBox_about_name">{knowledgeArray[i].name}</div>
+  //               <div
+  //                 className={`about_info_rightBox_about_percent percent_${knowledgeArray[i].exp}`}
+  //               />
+  //             </li>
+  //           );
+  //         }
+  //         return items;
+  //       })()}
+  //     </ul>
+  //   );
+  // };
+
+  const skillsList = {
+    "Front-End": [
+      {
+        name: "JavaScript",
+        icon: (
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" />
+        ),
+      },
+      {
+        name: "HTML",
+        icon: (
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" />
+        ),
+      },
+      {
+        name: "CSS",
+        icon: (
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" />
+        ),
+      },
+      {
+        name: "React",
+        icon: (
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original-wordmark.svg" />
+        ),
+      },
+      {
+        name: "ReactNative",
+        icon: (
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" />
+        ),
+      },
+      {
+        name: "Vue",
+        icon: (
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vuejs/vuejs-original.svg" />
+        ),
+      },
+      {
+        name: "TypeScript",
+        icon: (
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" />
+        ),
+      },
+      {
+        name: "Redux",
+        icon: (
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redux/redux-original.svg" />
+        ),
+      },
+      { name: "Recoil", icon: <img src={recoilImg} /> },
+      {
+        name: "Sass",
+        icon: (
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sass/sass-original.svg" />
+        ),
+      },
+      {
+        name: "Tailwind",
+        icon: (
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" />
+        ),
+      },
+      { name: "Styled Components", icon: <img src={styledComponentsImg} /> },
+      {
+        name: "Three.js",
+        icon: (
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/threejs/threejs-original.svg" />
+        ),
+      },
+    ],
+    "Back-End": [
+      {
+        name: "JAVA",
+        icon: (
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" />
+        ),
+      },
+      {
+        name: "Spring",
+        icon: (
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg" />
+        ),
+      },
+      {
+        name: "MySQL",
+        icon: (
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original-wordmark.svg" />
+        ),
+      },
+      {
+        name: "Python",
+        icon: (
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original-wordmark.svg" />
+        ),
+      },
+    ],
+    Etc: [
+      {
+        name: "GitLab",
+        icon: (
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/gitlab/gitlab-original.svg" />
+        ),
+      },
+      {
+        name: "JIRA",
+        icon: (
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jira/jira-original-wordmark.svg" />
+        ),
+      },
+      {
+        name: "Blender",
+        icon: (
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/blender/blender-original.svg" />
+        ),
+      },
+    ],
   };
+
+  const [hoveredSkill, setHoveredSkill] = useState({ skillType: "", name: null });
+
+  useEffect(() => {
+    console.log(hoveredSkill);
+  }, [hoveredSkill]);
+
+  function skillsContent(skillType) {
+    return (
+      <li className={`skills_` + { skillType }}>
+        <div className="skill_types_title_container">
+          <span
+            className={
+              `skills_types_title ` +
+              (hoveredSkill.skillType === skillType ? "skill_type_hidden" : "")
+            }
+          >
+            {skillType}
+          </span>
+          <span
+            className={
+              `hovered_skill_name ` +
+              (hoveredSkill.skillType === skillType ? "skill_name_popup" : "")
+            }
+          >
+            {hoveredSkill.name}
+          </span>
+        </div>
+        <div className="skill_list_column_container">
+          <ul className="skills_list_column">
+            {skillsList[skillType].map((value, index) => {
+              return (
+                <li
+                  key={index}
+                  onMouseEnter={() => setHoveredSkill({ skillType: skillType, name: value.name })}
+                  onMouseLeave={() => setHoveredSkill({ skillType: "", name: value.name })}
+                  className={
+                    hoveredSkill.skillType !== skillType
+                      ? ""
+                      : hoveredSkill.name === value.name
+                      ? "hovered_skill"
+                      : "unhovered_skill"
+                  }
+                >
+                  {value.icon}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </li>
+    );
+  }
 
   return (
     <div className="page_global_background page_about">
@@ -159,9 +334,15 @@ const About = () => {
             </p>
           </div>
         </div>
-        <div className="about_info_rightBox" ref={aboutInfoPercentRef}>
+        {/* <div className="about_info_rightBox" ref={aboutInfoSkillstRef}>
+          <div className="about_percent_title">10 Skills Love to</div>
           <div className="about_percent">{aboutPercentContent()}</div>
-        </div>
+        </div> */}
+        <ul className="about_skills_container" ref={aboutInfoSkillstRef}>
+          {skillsContent("Front-End")}
+          {skillsContent("Back-End")}
+          {skillsContent("Etc")}
+        </ul>
       </div>
     </div>
   );

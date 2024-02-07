@@ -33,6 +33,7 @@
     > .about_summary_item {
       @include respond {
         flex-direction: row;
+        justify-content: space-evenly;
         width: 100%;
       }
       display: flex;
@@ -48,7 +49,7 @@
           flex-direction: column;
           justify-content: space-around;
           align-items: center;
-          width: 50%;
+          width: 40%;
           height: 100%;
         }
         display: flex;
@@ -117,10 +118,10 @@
 }
 
 .about_info {
-  // @include tempBorder(black);
   @include responsiveSize(1100, 430);
   @include respond {
     flex-direction: column;
+    justify-content: start;
     width: 80vw;
     height: 120vw;
   }
@@ -134,6 +135,7 @@
       align-items: center;
       width: 100%;
       height: 45%;
+      margin-bottom: 5%;
     }
     display: flex;
     flex-direction: column;
@@ -172,7 +174,7 @@
       > .about_info_leftBox_text_title {
         @include responsiveFontSize(20);
         @include respond {
-          font-size: 1.2rem;
+          font-size: 3.2vw;
           margin-bottom: 10%;
         }
         font-family: "Pretendard-SemiBold";
@@ -180,7 +182,7 @@
       }
       > .about_info_leftBox_text_value {
         @include respond {
-          font-size: 0.9rem;
+          font-size: 2.5vw;
           > br {
             display: none;
           }
@@ -189,60 +191,195 @@
       }
     }
   }
-
-  > .about_info_rightBox {
+  > .about_skills_container {
     @include respond {
       width: 100%;
       height: 50%;
     }
+    opacity: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     width: 60%;
     height: 100%;
-    opacity: 0;
-    > .about_percent {
-      // @include tempBorder(blue);
-      width: 100%;
+    overflow: hidden;
+    > li {
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      position: relative;
+      width: 32%;
       height: 100%;
-      > ul {
+      overflow: hidden;
+      border-radius: 1rem;
+      z-index: 1;
+      > .skill_types_title_container {
+        z-index: 2;
+        position: relative;
+        color: colorWhite(100);
+        background-color: rgb(58, 58, 58);
+        width: 100%;
+        height: 15%;
+        border-bottom: 0.2rem solid colorB(100);
+        > .skills_types_title {
+          @include responsiveFontSize(22);
+          @include respond {
+            font-size: 3vw;
+          }
+
+          display: grid;
+          position: relative;
+          width: 100%;
+          height: 100%;
+          place-content: center;
+          font-family: "Montserrat-Bold";
+          transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+        }
+        > .skill_type_hidden {
+          opacity: 0;
+          transform: translateY(-50%);
+        }
+        > .hovered_skill_name {
+          @include responsiveFontSize(18);
+          @include respond {
+            font-size: 2.8vw;
+          }
+          display: flex;
+          position: absolute;
+          bottom: 0%;
+          left: 50%;
+          width: 100%;
+          height: 100%;
+          font-family: "Montserrat-Medium";
+          justify-content: center;
+          text-align: center;
+          align-items: center;
+          transform: translate(-50%, 50%);
+          opacity: 0;
+          transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+        }
+        > .skill_name_popup {
+          opacity: 1;
+          transform: translate(-50%, 0);
+        }
+      }
+      > .skill_list_column_container {
+        z-index: 1;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
-        height: 100%;
-        > li {
+        justify-content: start;
+        background-color: colorBlack(35);
+        width: 100%;
+        height: 85%;
+        transform: translateY(-100%);
+        padding: 4% 5%;
+        overflow-y: scroll;
+        > .skills_list_column {
           display: flex;
           flex-direction: row;
-          // @include tempBorder(green);
-          background-color: colorC(23);
+          justify-content: space-around;
+          align-items: start;
+          flex-wrap: wrap;
           width: 100%;
-          height: 7%;
-          overflow: hidden;
-          > .about_info_rightBox_about_name {
-            @include responsiveFontSize(16);
-            @include center;
-            z-index: 1;
-            color: $colorWhite;
-            // @include tempBorder(black);
-            background-color: colorB(100);
-            width: 20%;
-            height: 100%;
-            font-family: "Montserrat-Bold";
+          gap: 3%;
+          padding-top: 3%;
+          > li {
+            @include responsiveSize(52, 52);
+            @include respond {
+              width: 7vw;
+              height: 7vw;
+            }
+            // width: 3rem;
+            // height: 3rem;
+            flex-shrink: 0;
+            background-color: colorWhite(100);
+            border-radius: 5px;
+            margin-bottom: 10%;
+            opacity: 0.85;
+            transition: opacity 0.3s ease;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            > img {
+              object-fit: contain;
+              width: 70%;
+            }
           }
-          > .about_info_rightBox_about_percent {
-            z-index: 0;
-            background-color: #00a1a7;
-            height: 100%;
-            opacity: 0;
+
+          > .unhovered_skill {
+            opacity: 0.4;
           }
-          > .percent_90 {
-            width: 72%;
-          }
-          > .percent_70 {
-            width: 56%;
-          }
-          > .percent_50 {
-            width: 40%;
+          > .hovered_skill {
+            opacity: 1;
           }
         }
       }
     }
   }
+  // > .about_info_rightBox {
+  //   @include respond {
+  //     width: 100%;
+  //     height: 50%;
+  //   }
+  //   display: flex;
+  //   flex-direction: column;
+  //   justify-content: space-between;
+  //   width: 60%;
+  //   height: 100%;
+  //   opacity: 0;
+  //   > .about_percent_title {
+  //     @include responsiveFontSize(30);
+  //     display: grid;
+  //     width: 100%;
+  //     height: 12%;
+  //     font-family: "Pretendard-Bold";
+  //     place-content: start center;
+  //   }
+  //   > .about_percent {
+  //     // @include tempBorder(blue);
+  //     width: 100%;
+  //     height: 85%;
+  //     > ul {
+  //       display: flex;
+  //       flex-direction: column;
+  //       justify-content: space-between;
+  //       height: 100%;
+  //       > li {
+  //         display: flex;
+  //         flex-direction: row;
+  //         // @include tempBorder(green);
+  //         background-color: colorC(23);
+  //         width: 100%;
+  //         height: 7%;
+  //         overflow: hidden;
+  //         > .about_info_rightBox_about_name {
+  //           @include responsiveFontSize(16);
+  //           @include center;
+  //           z-index: 1;
+  //           color: $colorWhite;
+  //           // @include tempBorder(black);
+  //           background-color: colorB(100);
+  //           width: 20%;
+  //           height: 100%;
+  //           font-family: "Montserrat-Bold";
+  //         }
+  //         > .about_info_rightBox_about_percent {
+  //           z-index: 0;
+  //           background-color: #00a1a7;
+  //           height: 100%;
+  //           opacity: 0;
+  //         }
+  //         > .percent_90 {
+  //           width: 72%;
+  //         }
+  //         > .percent_70 {
+  //           width: 56%;
+  //         }
+  //         > .percent_50 {
+  //           width: 40%;
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
 }

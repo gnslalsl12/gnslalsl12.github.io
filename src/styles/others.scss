@@ -1,9 +1,9 @@
 @import "variables.scss";
 
-.page_contact {
+.page_others {
   position: relative;
   background: colorBlack(100);
-  > .page_contact_topTriangle {
+  > .page_others_topTriangle {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -30,7 +30,7 @@
       border-right: 25vw solid transparent;
     }
   }
-  .page_contact_title {
+  .page_others_title {
     border-color: colorWhite(100);
     margin-top: 5vw;
     > span {
@@ -39,7 +39,7 @@
   }
 }
 
-.page_contact_container {
+.page_others_container {
   @include responsiveSize(800, 250);
   @include respond {
     height: 35vw;
@@ -65,11 +65,11 @@
       :last-child {
         color: colorWhite(100);
       }
-      .contact_category {
+      .others_category {
         color: colorB(100);
       }
     }
-    .contact_category {
+    .others_category {
       //   margin: 0 4%;
       color: colorB(50);
       width: 28%;
@@ -93,7 +93,7 @@
       width: 68%;
       transition: color 0.5s ease;
       font-family: "Montserrat-Light";
-      > .contact_icon {
+      > .others_icon {
         @include responsiveSize(28, 28);
         @include respond {
           margin-left: 2vw;
