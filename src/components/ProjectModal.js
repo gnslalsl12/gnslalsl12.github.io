@@ -6,7 +6,10 @@ import { FaStar } from "react-icons/fa";
 import ModalRightBoxInfos from "./ModalRightBoxInfos";
 import { IoLogoGithub } from "react-icons/io";
 import myProjectLists from "../utils/myProjectLists";
-import { useFetcher } from "react-router-dom";
+import { IoConstruct } from "react-icons/io5";
+import { TbBulbFilled } from "react-icons/tb";
+import { AiFillInfoCircle } from "react-icons/ai";
+import { FaCode } from "react-icons/fa6";
 
 const ProjectModal = ({ openProject, imageList, setModalState, modalState }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -57,27 +60,36 @@ const ProjectModal = ({ openProject, imageList, setModalState, modalState }) => 
     ]);
   }, [openedProject]);
 
-  useEffect(() => {
-    console.log(modalContents);
-  }, [modalContents]);
   const modalContentsShow = () => {
     return (
       <>
-        <div className="modal_contents_bigTitle">{modalContents[sidebarIndex].bigTitle}</div>
+        <div className="modal_contents_bigTitle">
+          <div className={`${hideContents ? "hideContents_poped" : ""}`}>
+            {modalContents[sidebarIndex].bigTitle}
+          </div>
+        </div>
         {modalContents[sidebarIndex].midTitle === undefined
           ? modalContents[sidebarIndex].value.map((item, index) => {
               return (
-                <li className="modal_contents_value" key={index}>
+                <li
+                  className={`modal_contents_value ${hideContents ? "hideContents_poped" : ""}`}
+                  key={index}
+                >
                   {item}
                 </li>
               );
             })
           : modalContents[sidebarIndex].midTitle.map((item, index) => {
               return (
-                <li className="modal_contents_midTitle" key={index}>
+                <li
+                  className={`modal_contents_midTitle ${hideContents ? "hideContents_poped" : ""}`}
+                  key={index}
+                >
                   {item}
                   <li className="modal_contents_value">
-                    {modalContents[sidebarIndex].value[index]}
+                    {sidebarIndex === 3
+                      ? modalContents[sidebarIndex].value[index].join(", ")
+                      : modalContents[sidebarIndex].value[index]}
                   </li>
                 </li>
               );
@@ -87,11 +99,21 @@ const ProjectModal = ({ openProject, imageList, setModalState, modalState }) => 
   };
 
   const modalSidebarContents = [
-    <IoLogoGithub />,
-    <IoLogoGithub />,
-    <IoLogoGithub />,
-    <IoLogoGithub />,
+    <IoConstruct />,
+    <TbBulbFilled />,
+    <AiFillInfoCircle />,
+    <FaCode />,
   ];
+
+  const [hideContents, setHideContents] = useState(false);
+
+  const chagneSidbarIndex = (index) => {
+    setHideContents(true);
+    setTimeout(() => {
+      setSidebarIndex(index);
+      setHideContents(false);
+    }, 300);
+  };
 
   return (
     <div
@@ -113,7 +135,7 @@ const ProjectModal = ({ openProject, imageList, setModalState, modalState }) => 
           <div className="modal_wallPop_sideBar" onClick={(event) => event.stopPropagation()}>
             {modalSidebarContents.map((value, index) => {
               return (
-                <button key={index} onClick={() => setSidebarIndex(index)}>
+                <button key={index} onClick={() => chagneSidbarIndex(index)}>
                   <div className="sidebar_button_icon">{value}</div>
                 </button>
               );

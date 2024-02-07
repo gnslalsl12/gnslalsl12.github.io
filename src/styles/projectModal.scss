@@ -27,8 +27,8 @@
     top: 50%;
     right: 0;
     z-index: 3;
-    width: 40vw;
-    height: 80vh;
+    width: 40%;
+    height: 80%;
     transform: translateY(-50%);
     > .modal_wallPop_topBox {
       display: flex;
@@ -54,12 +54,12 @@
         margin-left: 5%;
         > .openedProject_title {
           @include responsiveFontSize(40);
-          color: colorWhite(90);
+          color: colorWhite(100);
           font-family: "Pretendard-Bold";
         }
         > .openedProject_explain_short {
           @include responsiveFontSize(15);
-          color: colorWhite(60);
+          color: colorWhite(70);
           font-family: "Pretendard-Medium";
         }
       }
@@ -92,27 +92,41 @@
       border-bottom-left-radius: 30px;
       border-right: none;
       > .modal_wallPop_bottomBox_textBox {
+        .hideContents_poped {
+          opacity: 0;
+        }
+        > div > div,
+        > li,
+        > li > li {
+          transition: opacity 0.2s ease-in-out;
+        }
         width: 85%;
         height: 90%;
         margin-left: 5%;
+        color: colorBlack(100);
         .modal_contents_bigTitle {
           @include responsiveFontSize(26);
           font-family: "Pretendard-Bold";
-          margin-bottom: 2.5%;
+          padding-bottom: 2%;
+          margin-bottom: 2%;
+          border-bottom: 2px dashed colorC(100);
         }
         .modal_contents_midTitle {
           @include responsiveFontSize(22);
           font-family: "Pretendard-SemiBold";
-          margin-bottom: 2%;
-          margin-left: 2%;
+          margin-bottom: 2.5%;
           list-style: decimal;
+          > .modal_contents_value {
+            margin-top: 0.5%;
+            margin-left: 5%;
+            list-style: none;
+          }
         }
         .modal_contents_value {
           @include responsiveFontSize(18);
           margin-bottom: 2%;
-          margin-left: 2%;
+          list-style: decimal;
           font-family: "Pretendard-Regular";
-          list-style: disc;
         }
       }
       > .modal_wallPop_sideBar {
@@ -124,30 +138,34 @@
         top: 50%;
         left: 0;
         z-index: 5;
-        background-color: colorBlack(100);
-        border: 2.5px solid colorWhite(100);
+        background-color: colorWhite(100);
+        border: 2.5px solid colorBlack(100);
         border-radius: 300px;
         padding: 3% 0;
         width: 10%;
         height: 80%;
         transform: translate(-50%, -50%);
-        box-shadow: colorBlack(30) 5px 5px 5px;
-        transition: box-shadow 0.2s ease;
+        box-shadow: 0px 0px 5px 0px colorBlack(50);
+        scale: 0.99;
+        transition: box-shadow 0.2s ease, scale 0.2s ease;
         &:hover {
-          box-shadow: colorBlack(50) 7px 5px 7px;
+          scale: 1;
+          box-shadow: 2px 2px 5px 2px colorBlack(50);
         }
         > button {
           @include responsiveSize(40, 40);
           display: grid;
-          color: colorA(50);
           border-radius: 500px;
           place-content: center;
-          transition: color 0.3s ease;
+          color: colorBlack(70);
+          scale: 0.8;
+          transition: color 0.3s ease, scale 0.3s ease;
           > .sidebar_button_icon {
             @include responsiveFontSize(40);
           }
           &:hover {
-            color: colorA(100);
+            scale: 1;
+            color: colorA(70);
           }
         }
       }
