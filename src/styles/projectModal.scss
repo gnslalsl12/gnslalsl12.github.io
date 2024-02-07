@@ -9,6 +9,7 @@
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 0;
   background-color: colorBlack(40);
   width: 100%;
   height: 100%;
@@ -18,71 +19,156 @@
   transition: opacity 0.3s ease;
   place-content: center;
   > .modal_wallPop_container {
-    position: absolute;
-    width: 40vw;
-    height: 80vh;
-    @include tempBorder(black);
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    z-index: 3;
+    width: 40vw;
+    height: 80vh;
+    transform: translateY(-50%);
     > .modal_wallPop_topBox {
-      width: 100%;
-      height: 20%;
-      @include tempBorder();
       display: flex;
       flex-direction: row;
       justify-content: center;
       align-items: center;
+      position: relative;
+      background-color: colorBlack(90);
+      border: 2.5px solid colorWhite(100);
+      width: 100%;
+      height: 20%;
+      border-top-left-radius: 30px;
+      border-bottom: 3px solid colorA(100);
+      border-right: none;
       > .modal_wallPop_topBox_textBox {
-        width: 80%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: start;
+        position: relative;
+        width: 85%;
         height: 80%;
-        @include tempBorder();
+        margin-left: 5%;
+        > .openedProject_title {
+          @include responsiveFontSize(40);
+          color: colorWhite(90);
+          font-family: "Pretendard-Bold";
+        }
+        > .openedProject_explain_short {
+          @include responsiveFontSize(15);
+          color: colorWhite(60);
+          font-family: "Pretendard-Medium";
+        }
+      }
+      > a {
+        @include responsiveFontSize(50);
+        position: absolute;
+        z-index: 5;
+        color: white;
+        top: 50%;
+        right: 0;
+        opacity: 0.6;
+        transform: translate(-50%, -50%);
+        transition: opacity 0.3s ease;
+        &:hover {
+          opacity: 1;
+        }
       }
     }
     > .modal_wallPop_bottomBox {
-      width: 100%;
-      height: 80%;
-      @include tempBorder();
-      position: relative;
       display: flex;
       flex-direction: row;
       justify-content: center;
       align-items: center;
+      position: relative;
+      background-color: rgb(233, 233, 233);
+      border: 2.5px solid colorWhite(100);
+      width: 100%;
+      height: 80%;
+      border-top: none;
+      border-bottom-left-radius: 30px;
+      border-right: none;
+      > .modal_wallPop_bottomBox_textBox {
+        width: 85%;
+        height: 90%;
+        margin-left: 5%;
+        .modal_contents_bigTitle {
+          @include responsiveFontSize(26);
+          font-family: "Pretendard-Bold";
+          margin-bottom: 2.5%;
+        }
+        .modal_contents_midTitle {
+          @include responsiveFontSize(22);
+          font-family: "Pretendard-SemiBold";
+          margin-bottom: 2%;
+          margin-left: 2%;
+          list-style: decimal;
+        }
+        .modal_contents_value {
+          @include responsiveFontSize(18);
+          margin-bottom: 2%;
+          margin-left: 2%;
+          font-family: "Pretendard-Regular";
+          list-style: disc;
+        }
+      }
       > .modal_wallPop_sideBar {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
         position: absolute;
         top: 50%;
         left: 0;
-        transform: translate(-50%, -50%);
+        z-index: 5;
+        background-color: colorBlack(100);
+        border: 2.5px solid colorWhite(100);
+        border-radius: 300px;
+        padding: 3% 0;
         width: 10%;
-        height: 90%;
-        @include tempBorder(black);
-      }
-      > .modal_wallPop_bottomBox_textBox {
-        width: 80%;
-        height: 90%;
-        @include tempBorder;
+        height: 80%;
+        transform: translate(-50%, -50%);
+        box-shadow: colorBlack(30) 5px 5px 5px;
+        transition: box-shadow 0.2s ease;
+        &:hover {
+          box-shadow: colorBlack(50) 7px 5px 7px;
+        }
+        > button {
+          @include responsiveSize(40, 40);
+          display: grid;
+          color: colorA(50);
+          border-radius: 500px;
+          place-content: center;
+          transition: color 0.3s ease;
+          > .sidebar_button_icon {
+            @include responsiveFontSize(40);
+          }
+          &:hover {
+            color: colorA(100);
+          }
+        }
       }
     }
   }
 
   > .modal_imageCarousel_container {
+    @include tempBorder(black);
+    display: grid;
     position: absolute;
     top: 50%;
     left: 0%;
-    @include tempBorder(black);
+    z-index: 0;
     width: 60vw;
     height: 80vh;
     transform: translateY(-50%);
-    display: grid;
     place-content: center;
     > .modal_imageCarousel {
+      @include tempBorder(black);
       width: 40vw;
       height: 80vh;
-      @include tempBorder(black);
     }
   }
 }
