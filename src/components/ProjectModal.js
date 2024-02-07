@@ -27,6 +27,13 @@ const ProjectModal = ({ openProject, imageList, setModalState, modalState }) => 
     },
   });
 
+  useEffect(() => {
+    const modalScrollY = document.getElementById("modalInnerScroll");
+    if (modalScrollY) {
+      modalScrollY.scrollTop = 0;
+    }
+  }, [modalState]);
+
   const closeModal = () => {
     setModalState(false);
     setTimeout(() => {
@@ -87,7 +94,7 @@ const ProjectModal = ({ openProject, imageList, setModalState, modalState }) => 
             </div>
           </div>
           <div className="modal_conatiner_bottom_rightBox">
-            <div className="modal_rightBox_Info">
+            <div id="modalInnerScroll" className="modal_rightBox_Info">
               <ModalRightBoxInfos projectArray={openedProject} />
             </div>
           </div>
