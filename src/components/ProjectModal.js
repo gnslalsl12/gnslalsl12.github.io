@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
 import ProjectImageCarousel from "./ProjectImageCarousel";
-import { FaExternalLinkAlt } from "react-icons/fa";
-import { IoClose } from "react-icons/io5";
-import { FaStar } from "react-icons/fa";
-import ModalRightBoxInfos from "./ModalRightBoxInfos";
 import { IoLogoGithub } from "react-icons/io";
 import myProjectLists from "../utils/myProjectLists";
 import { IoConstruct } from "react-icons/io5";
 import { TbBulbFilled } from "react-icons/tb";
 import { AiFillInfoCircle } from "react-icons/ai";
 import { FaCode } from "react-icons/fa6";
+import { FiLogOut } from "react-icons/fi";
 
 const ProjectModal = ({ openProject, imageList, setModalState, modalState }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -103,11 +100,12 @@ const ProjectModal = ({ openProject, imageList, setModalState, modalState }) => 
     <TbBulbFilled />,
     <AiFillInfoCircle />,
     <FaCode />,
+    <FiLogOut />,
   ];
 
   const [hideContents, setHideContents] = useState(false);
 
-  const chagneSidbarIndex = (index) => {
+  const changeSidbarIndex = (index) => {
     setHideContents(true);
     setTimeout(() => {
       setSidebarIndex(index);
@@ -135,7 +133,12 @@ const ProjectModal = ({ openProject, imageList, setModalState, modalState }) => 
           <div className="modal_wallPop_sideBar" onClick={(event) => event.stopPropagation()}>
             {modalSidebarContents.map((value, index) => {
               return (
-                <button key={index} onClick={() => chagneSidbarIndex(index)}>
+                <button
+                  key={index}
+                  onClick={() => {
+                    index < 4 ? changeSidbarIndex(index) : closeModal();
+                  }}
+                >
                   <div className="sidebar_button_icon">{value}</div>
                 </button>
               );
@@ -144,7 +147,13 @@ const ProjectModal = ({ openProject, imageList, setModalState, modalState }) => 
         </div>
       </div>
       <div className="modal_imageCarousel_container" onClick={() => closeModal()}>
-        <div className="modal_imageCarousel" onClick={(event) => event.stopPropagation()}></div>
+        <div className="modal_imageCarousel" onClick={(event) => event.stopPropagation()}>
+          <ProjectImageCarousel
+            images={imageList}
+            currentIndex={currentIndex}
+            setCurrentIndex={setCurrentIndex}
+          />
+        </div>
       </div>
     </div>
   );

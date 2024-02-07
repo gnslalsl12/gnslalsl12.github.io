@@ -1,89 +1,49 @@
 @import "variables.scss";
 
-.carousel_buttonContainer {
+.carousel_button_container {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-evenly;
+  align-items: center;
   position: absolute;
-  top: 50%;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  transform: translate(0, -50%);
-  > button {
-    @include respond {
-      position: relative;
-      width: 20%;
-      > .button_icon_left {
-        bottom: 0;
-        left: 0;
-      }
-      > .button_icon_right {
-        bottom: 0;
-        right: 0;
-      }
-    }
+  bottom: 0;
+  left: 50%;
+  z-index: 3;
+  background-color: colorWhite(100);
+  border: 2.5px solid colorBlack(80);
+  border-radius: 300px;
+  width: 40%;
+  height: 10%;
+  transform: translate(-50%, 50%);
+  transition: box-shadow 0.2s ease, scale 0.2s ease;
+  .carousel_button {
+    @include responsiveSize(60, 30);
     display: grid;
-    position: relative;
-    width: 9%;
-    height: 100%;
+    color: colorWhite(80);
+    background-color: colorBlack(70);
+    border: 2.5px solid colroBlack(100);
+    border-radius: 300px;
     place-content: center;
+    scale: 0.9;
+    transition: background-color 0.3s ease, scale 0.3s ease;
     > .carousel_button_icon {
-      @include responsiveFontSize(40);
-      @include respond {
-        position: absolute;
-        color: colorWhite(100);
-        background-color: colorBlack(30);
-      }
-      z-index: 11;
-      color: colorWhite(50);
-      transition: color 0.3s ease-in-out;
+      @include responsiveFontSize(20);
     }
-    > div {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      transition: opacity 0.3s ease-in-out;
-    }
-
-    > .carousel_button_previous {
-      @include respond {
-        background-image: linear-gradient(to right, colorBlack(40), colorBlack(0));
-      }
-      background-image: linear-gradient(to right, colorBlack(60), colorBlack(0));
-    }
-    > .carousel_button_next {
-      @include respond {
-        background-image: linear-gradient(to left, colorBlack(40), colorBlack(0));
-      }
-      background-image: linear-gradient(to left, colorBlack(60), colorBlack(0));
-    }
-
     &:hover {
-      > div {
-        opacity: 1;
-      }
-      > .carousel_button_icon {
-        color: colorWhite(100);
-      }
+      background-color: colorA(70);
+      scale: 1;
     }
+  }
+
+  .carousel_button_previous {
+    left: 0;
+  }
+  .carousel_button_next {
+    right: 0;
   }
 }
-.carousel_container {
-  @keyframes lazyMoving {
-    50% {
-      width: 100%;
-    }
 
-    100% {
-      right: 0;
-      left: unset;
-      width: 0;
-    }
-  }
+.carousel_container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -92,29 +52,47 @@
   height: 100%;
 
   .carousel_image {
-    object-fit: contain;
     height: 100%;
+    object-fit: contain;
   }
-  .lazyLoader {
-    --height-of-loader: 4px;
-    --loader-color: colorA(100);
-    display: block;
+  /*  */
+  .ping {
+    --uib-size: 50px;
+    --uib-speed: 1s;
+    --uib-color: #ffffff;
     position: relative;
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 30px;
-    width: 130px;
-    height: var(--height-of-loader);
+    height: var(--uib-size);
+    width: var(--uib-size);
   }
 
-  .lazyLoader::before {
+  .ping::before,
+  .ping::after {
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
-    background: var(--loader-color);
-    border-radius: 30px;
-    width: 0%;
     height: 100%;
-    content: "";
-    animation: lazyMoving 1s ease-in-out infinite;
+    width: 100%;
+    border-radius: 50%;
+    background-color: var(--uib-color);
+    animation: pulse7132 var(--uib-speed) linear infinite;
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  .ping::after {
+    animation-delay: calc(var(--uib-speed) / -2);
+  }
+
+  @keyframes pulse7132 {
+    0% {
+      transform: scale(0);
+      opacity: 1;
+    }
+
+    100% {
+      transform: scale(1);
+      opacity: 0;
+    }
   }
 }

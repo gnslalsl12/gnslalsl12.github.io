@@ -40,7 +40,7 @@ const LazyImg = ({ src, alt, ...props }) => {
       {isVisible ? (
         <img ref={imgRef} src={src} alt={alt} {...props} className="carousel_image" />
       ) : (
-        <div ref={imgRef} className="lazyLoader" />
+        <div ref={imgRef} className="ping" />
       )}
     </div>
   );

@@ -18,14 +18,15 @@ const ProjectImageCarousel = ({ images, currentIndex, setCurrentIndex }) => {
   return (
     <>
       <LazyImg src={images[currentIndex]} alt="carouselImg" />
-      <div className="carousel_buttonContainer">
-        <button onClick={goToPrevious}>
-          <div className="carousel_button_previous" />
-          <IoIosArrowBack className="carousel_button_icon button_icon_left" />
+      <div className="carousel_button_container">
+        <button className="carousel_button carousel_button_previous" onClick={goToPrevious}>
+          <IoIosArrowBack className="carousel_button_icon" />
         </button>
-        <button onClick={goToNext}>
-          <div className="carousel_button_next" />
-          <IoIosArrowForward className="carousel_button_icon button_icon_right" />
+        <div className="carousel_button_imageIndex">
+          {currentIndex + 1}/{images.length}
+        </div>
+        <button className="carousel_button carousel_button_next" onClick={goToNext}>
+          <IoIosArrowForward className="carousel_button_icon" />
         </button>
       </div>
     </>
