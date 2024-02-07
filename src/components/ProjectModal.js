@@ -27,13 +27,6 @@ const ProjectModal = ({ openProject, imageList, setModalState, modalState }) => 
     },
   });
 
-  useEffect(() => {
-    const modalScrollY = document.getElementById("modalInnerScroll");
-    if (modalScrollY) {
-      modalScrollY.scrollTop = 0;
-    }
-  }, [modalState]);
-
   const closeModal = () => {
     setModalState(false);
     setTimeout(() => {
@@ -48,57 +41,22 @@ const ProjectModal = ({ openProject, imageList, setModalState, modalState }) => 
 
   return (
     <div
-      className={`${modalState ? "popUp_wholePage" : "popDown_wholePage"} modal_wholePage`}
+      className={`${modalState ? "popUp_wholePage" : ""} modal_wholePage`}
       onClick={() => closeModal()}
     >
-      <div className="modal_container" onClick={(event) => event.stopPropagation()}>
-        <div className="modal_container_topBox">
-          <a
-            href={openedProject.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="modal_topBox_left"
-          >
-            <span>Link to Github</span>
-            <FaExternalLinkAlt className="modal_icon_link" />
-          </a>
-          <button className="modal_topBox_right" onClick={() => closeModal()}>
-            <IoClose />
-          </button>
-        </div>
-        <div className="modal_container_bottomBox">
-          <div className="modal_conatiner_bottom_leftBox">
-            <div className="modal_bottom_left_imgBox">
-              <ProjectImageCarousel
-                images={imageList}
-                currentIndex={currentIndex}
-                setCurrentIndex={setCurrentIndex}
-              />
-            </div>
-            <div className="modal_bottom_left_summaryBox">
-              <div className="modal_summaryBox_topBox">
-                <div className="summaryBox_title">
-                  {openedProject.title}
-                  {openedProject.prize.length > 0 && (
-                    <div className="modal_summaryBox_prize_container">
-                      <FaStar className="prize_icon" />
-                      <p className="prize_text">{openedProject.prize}</p>
-                    </div>
-                  )}
-                </div>
-                <span className="summaryBox_explain_short">{openedProject.explain_short}</span>
-              </div>
-              <div className="modal_summaryBox_bottomBox">
-                <span>{openedProject.explain_long}</span>
-              </div>
-            </div>
-          </div>
-          <div className="modal_conatiner_bottom_rightBox">
-            <div id="modalInnerScroll" className="modal_rightBox_Info">
-              <ModalRightBoxInfos projectArray={openedProject} />
-            </div>
+      <div className="modal_wallPop_container" onClick={(event) => event.stopPropagation()}>
+        <div className="modal_wallPop_topBox">
+          <div className="modal_wallPop_topBox_textBox">
+            <span>{openProject.title}</span>
           </div>
         </div>
+        <div className="modal_wallPop_bottomBox">
+          <div className="modal_wallPop_sideBar"></div>
+          <div className="modal_wallPop_bottomBox_textBox"></div>
+        </div>
+      </div>
+      <div className="modal_imageCarousel_container" onClick={() => closeModal()}>
+        <div className="modal_imageCarousel" onClick={(event) => event.stopPropagation()}></div>
       </div>
     </div>
   );

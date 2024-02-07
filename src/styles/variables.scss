@@ -80,7 +80,7 @@ $colorC: #a6a08d;
   align-items: center;
 }
 
-@mixin tempBorder($color: white) {
+@mixin tempBorder($color: black) {
   border: 1px solid $color;
 }
 
