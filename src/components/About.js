@@ -326,10 +326,8 @@ const About = () => {
               Front-End 개발자 <br /> 정훈입니다
             </div>
             <p className="about_info_leftBox_text_value">
-              사용자 중심의 개발 방향성을 강화한 역량으로
-              <br />
-              다양한 UI/UX 설계, 다이나믹 에니메이션 구현,
-              <br />
+              사용자 중심의 개발 방향성을 강화한 역량으로 <br />
+              다양한 UI/UX 설계, 다이나믹 에니메이션 구현, <br />
               직관적인 사용 환경 구성에 깊은 열정이 있습니다.
             </p>
           </div>
