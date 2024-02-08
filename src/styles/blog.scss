@@ -16,6 +16,7 @@
     @include respond {
       width: max(45vw, 30vh);
       margin-left: 2%;
+      margin-bottom: 5%;
     }
     display: flex;
     flex-direction: row;
@@ -28,7 +29,7 @@
     > a {
       @include responsiveFontSize(30);
       @include respond {
-        justify-content: center;
+        justify-content: space-evenly;
         width: 100%;
         font-size: max(3.2vw, 2.3vh);
       }
@@ -42,7 +43,9 @@
       height: 100%;
       font-family: "Montserrat-Medium";
       > .blog_link_roll {
+        @include responsiveSize(180, 50);
         @include respond {
+          width: max-content;
           width: 60%;
         }
         display: flex;
@@ -50,7 +53,6 @@
         justify-content: center;
         align-items: center;
         position: relative;
-        @include responsiveSize(180, 50);
         // width: 70%;
         // height: fit-content;
         overflow: hidden;
@@ -59,9 +61,9 @@
             width: max-content;
           }
           position: absolute;
-          width: max-content;
           right: 50%;
           bottom: 50%;
+          width: max-content;
           transform: translate(50%, 50%);
           opacity: 1;
           transition: bottom 0.3s ease, opacity 0.3s ease;
