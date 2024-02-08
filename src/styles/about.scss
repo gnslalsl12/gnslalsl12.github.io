@@ -10,6 +10,7 @@
   @include respond {
     width: 80vw;
     height: fit-content;
+    // height: max(100vw, 70vh);
   }
   display: flex;
   flex-direction: row;
@@ -49,9 +50,9 @@
           flex-direction: column;
           justify-content: space-around;
           align-items: center;
+          margin: max(2vw, 2vh) 0;
           width: fit-content;
           height: 100%;
-          margin: max(2vw, 2vh) 0;
         }
         display: flex;
         flex-direction: column;
@@ -101,11 +102,12 @@
             border-left: max(0.3vw, 0.3vh) solid colorBlack(50);
             border-right: max(0.3vw, 0.3vh) solid colorBlack(50);
           }
-          display: grid;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
           color: colorBlack(80);
           width: 70%;
           height: 17%;
-          place-content: center;
           font-family: "Montserrat-Bold";
           border-left: 2px solid colorBlack(50);
           border-right: 2px solid colorBlack(50);
