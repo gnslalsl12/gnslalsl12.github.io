@@ -2,6 +2,11 @@
 
 .page_navbar {
   @include left;
+  @include respond {
+    height: max(5vw, 5vh);
+    // height: 7vw;
+    // height: 5vh;
+  }
   position: absolute;
   top: 100vh;
   z-index: 100;
@@ -9,9 +14,6 @@
   box-sizing: content-box;
   width: 100%;
   height: max(7vh, 30px);
-  @include respond {
-    height: 7vw;
-  }
   backdrop-filter: blur(5px);
   border-bottom: 4px solid colorB(100);
 }
@@ -33,8 +35,8 @@
 
 .navbar_ul {
   @include respond {
-    width: 100%;
     justify-content: space-between;
+    width: 100%;
   }
   display: flex;
   flex-direction: row;
@@ -48,6 +50,9 @@
     @include responsiveFontSize(20);
     @include respond {
       width: 17%;
+      font-size: max(2vw, 1.8vh);
+      // font-size: 2vw;
+      // font-size: 1.8vh;
       // transition: width 0.3s ease;
     }
     display: grid;
