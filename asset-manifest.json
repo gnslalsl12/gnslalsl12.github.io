@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.30663f3d.css",
-    "main.js": "/static/js/main.44e4b0b0.js",
+    "main.css": "/static/css/main.a9774a0d.css",
+    "main.js": "/static/js/main.7a9895f5.js",
     "static/js/787.2dcca737.chunk.js": "/static/js/787.2dcca737.chunk.js",
     "static/media/Pretendard-Thin.ttf": "/static/media/Pretendard-Thin.7aca4915b135693704c6.ttf",
     "static/media/Pretendard-ExtraLight.ttf": "/static/media/Pretendard-ExtraLight.50a2b2a1b0307c05712d.ttf",
@@ -59,12 +59,12 @@
     "static/media/notion_avatar_trans.png": "/static/media/notion_avatar_trans.d075632b88b5900eee86.png",
     "static/media/blog_solved.jpg": "/static/media/blog_solved.38ed146aec9f7436f268.jpg",
     "index.html": "/index.html",
-    "main.30663f3d.css.map": "/static/css/main.30663f3d.css.map",
-    "main.44e4b0b0.js.map": "/static/js/main.44e4b0b0.js.map",
+    "main.a9774a0d.css.map": "/static/css/main.a9774a0d.css.map",
+    "main.7a9895f5.js.map": "/static/js/main.7a9895f5.js.map",
     "787.2dcca737.chunk.js.map": "/static/js/787.2dcca737.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.30663f3d.css",
-    "static/js/main.44e4b0b0.js"
+    "static/css/main.a9774a0d.css",
+    "static/js/main.7a9895f5.js"
   ]
 }
