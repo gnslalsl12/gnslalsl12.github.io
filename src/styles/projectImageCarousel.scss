@@ -63,12 +63,12 @@
     @include respond {
       visibility: hidden;
     }
-    font-family: "Montserrat-Light";
+    font-family: "Pretendard-Light";
     width: 20%;
     height: 100%;
     display: grid;
     place-content: center;
-    font-size: max(2vw, 1.3vh);
+    font-size: 1.2vw;
   }
 }
 
