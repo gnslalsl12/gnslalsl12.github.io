@@ -40,8 +40,8 @@
     // @include tempBorder(red);
     // @include responsiveSize(220, 70);
     place-content: start center;
-    padding-bottom: max(5vw, 4vh);
-    border-bottom: max(0.35vw, 0.2vh) solid colorBlack(70);
+    // padding-bottom: max(5vw, 4vh);
+    border-bottom: max(0.35vw, 0.25vh) solid colorBlack(70);
   }
   display: grid;
   place-content: center;
