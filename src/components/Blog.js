@@ -94,7 +94,7 @@ const Blog = () => {
           <a href="https://hoonyblog.vercel.app/" target="_blank" rel="noopener noreferrer">
             Move to
             <div className="blog_link_roll">
-              <span className="blog_link_roll_text">Blog Page</span>
+              <span className="blog_link_roll_text">[Blog Page]</span>
               <div className="blog_link_roll_icon">
                 <img src={blog_icon} alt="blog_icon" />
               </div>

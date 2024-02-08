@@ -33,13 +33,13 @@
 .page_global_title {
   @include responsiveSize(160, 60);
   @include respond {
+    padding: 0 max(2vw, 2vh);
     width: fit-content;
     // @include tempBorder(red);
     // @include responsiveSize(220, 70);
     place-content: start center;
-    padding: 0 max(2vw, 2vh);
-    padding-bottom: max(4vw, 4vh);
-    border-bottom: min(0.5vw, 0.3vh) solid colorBlack(70);
+    padding-bottom: max(5vw, 4vh);
+    border-bottom: max(0.35vw, 0.2vh) solid colorBlack(70);
   }
   display: grid;
   place-content: center;
@@ -49,7 +49,7 @@
   > span {
     @include responsiveFontSize(30);
     @include respond {
-      font-size: max(2.5vw, 2.5vh);
+      font-size: max(3.5vw, 2.5vh);
     }
     color: colorBlack();
     opacity: 0;

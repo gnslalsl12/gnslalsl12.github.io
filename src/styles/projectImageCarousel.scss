@@ -53,13 +53,9 @@
   }
 
   .carousel_button_previous {
-    @include respond {
-    }
     left: 0;
   }
   .carousel_button_next {
-    @include respond {
-    }
     right: 0;
   }
 

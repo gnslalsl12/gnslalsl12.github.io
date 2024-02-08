@@ -52,7 +52,7 @@
   > div {
     @include responsiveFontSize(30);
     @include respond {
-      @include responsiveFontSize(25);
+      font-size: max(3.5vw, 1.8vh);
     }
     display: flex;
     flex-direction: row;
@@ -83,7 +83,7 @@
     :last-child {
       @include responsiveFontSize(28);
       @include respond {
-        @include responsiveFontSize(24);
+        font-size: max(3vw, 1.5vh);
       }
       display: flex;
       flex-direction: row;
@@ -96,6 +96,8 @@
       > .others_icon {
         @include responsiveSize(28, 28);
         @include respond {
+          width: max(3vw, 1.5vh);
+          height: max(3vw, 1.5vh);
           margin-left: 2vw;
         }
         flex-shrink: 0;

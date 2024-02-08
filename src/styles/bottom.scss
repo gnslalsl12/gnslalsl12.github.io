@@ -17,6 +17,10 @@
   padding-bottom: 2vw;
   > .page_bottom_topButton {
     @include responsiveSize(55, 55);
+    @include respond {
+      width: max(6vw, 5vh);
+      height: max(6vw, 5vh);
+    }
     display: grid;
     position: absolute;
     top: 0;
@@ -29,7 +33,7 @@
     > * {
       @include responsiveFontSize(48);
       @include respond {
-        @include responsiveFontSize(40);
+        font-size: max(5vw, 4vh);
       }
       color: colorWhite(100);
     }
@@ -40,6 +44,10 @@
 
   > .page_bottom_contents {
     @include responsiveSize(500, 150);
+    @include respond {
+      height: fit-content;
+      width: fit-content;
+    }
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -53,6 +61,10 @@
       height: 50%;
       > a {
         @include responsiveSize(70, 70);
+        @include respond {
+          width: max(6vw, 5vh);
+          height: max(6vw, 5vh);
+        }
         display: grid;
         background-color: colorWhite(10);
         margin: 0 5%;
@@ -61,6 +73,10 @@
         border-radius: 10%;
         > * {
           @include responsiveSize(50, 50);
+          @include respond {
+            width: max(4vw, 3vh);
+            height: max(4vw, 3vh);
+          }
           color: colorWhite(30);
           transition: color 0.3s ease;
         }
@@ -74,6 +90,10 @@
     }
     > .bottom_contents_rights {
       @include responsiveFontSize(17);
+      @include respond {
+        font-size: max(1.5vw, 1.5vh);
+        align-items: center;
+      }
       display: flex;
       flex-direction: row;
       justify-content: center;

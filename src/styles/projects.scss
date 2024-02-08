@@ -96,6 +96,9 @@
             transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out;
             > .projects_summary_title {
               @include responsiveFontSize(30);
+              @include respond {
+                font-size: max(4.5vw, 2.7vh);
+              }
               display: flex;
               flex-direction: column;
               justify-content: center;
@@ -106,6 +109,9 @@
               font-family: "Pretendard-Bold";
               > span {
                 @include responsiveFontSize(18);
+                @include respond {
+                  font-size: max(2.7vw, 1.7vh);
+                }
                 color: $colorA;
                 font-family: "Pretendard-Regular";
               }
@@ -126,7 +132,8 @@
             > .projects_summary_button {
               @include responsiveFontSize(20);
               @include respond {
-                border: 1px solid $colorA;
+                font-size: max(2.5vw, 1.5vh);
+                border: max(0.28vw, 0.2vh) solid $colorA;
               }
               display: grid;
               border: 2px solid $colorA;

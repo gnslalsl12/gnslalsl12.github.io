@@ -6,8 +6,6 @@
 }
 
 .blog_container {
-  @include respond {
-  }
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -16,6 +14,10 @@
   height: fit-content;
   > .blog_container_mainBox {
     @include responsiveSize(500, 80);
+    @include respond {
+      width: max(45vw, 30vh);
+      margin-left: 2%;
+    }
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -25,7 +27,9 @@
     > a {
       @include responsiveFontSize(30);
       @include respond {
-        @include responsiveFontSize(25);
+        width: 100%;
+        font-size: max(3.2vw, 2.3vh);
+        justify-content: center;
       }
       display: flex;
       flex-direction: row;
@@ -38,6 +42,9 @@
       font-family: "Montserrat-Medium";
       > .blog_link_roll {
         @include responsiveSize(180, 80);
+        @include respond {
+          width: 60%;
+        }
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -45,10 +52,13 @@
         position: relative;
         overflow: hidden;
         > .blog_link_roll_text {
+          @include respond {
+            width: max-content;
+          }
           position: absolute;
-          right: 0;
+          right: 50%;
           bottom: 50%;
-          transform: translate(0, 50%);
+          transform: translate(50%, 50%);
           opacity: 1;
           transition: bottom 0.3s ease, opacity 0.3s ease;
           cursor: pointer;
@@ -82,19 +92,19 @@
   > .blog_container_cardBox {
     @include responsiveSize(1000, 420);
     @include respond {
-      width: 90%;
-      height: fit-content;
       display: flex;
       flex-direction: row;
       justify-content: center;
+      width: 90%;
+      height: fit-content;
     }
     > ul {
       @include respond {
         flex-direction: row;
-        height: fit-content;
         justify-content: space-around;
         align-items: normal;
         flex-wrap: wrap;
+        height: fit-content;
       }
       display: flex;
       flex-direction: row;
@@ -138,7 +148,7 @@
             //블로그 제목
             @include responsiveFontSize(22);
             @include respond {
-              @include responsiveFontSize(24);
+              font-size: max(3.3vw, 1.8vh);
               margin-bottom: 2%;
             }
             color: colorBlack(60);
@@ -147,15 +157,10 @@
             text-align: center;
             font-family: "Pretendard-Bold";
           }
-          // > span {
-          //   //업데이트 날짜
-          //   @include responsiveFontSize(13);
-          //   font-family: "Pretendard-ExtraLight";
-          // }
         }
         > .blogCard_line {
           @include respond {
-            border: 1.4px solid colorB(80);
+            border: max(0.3vw, 0.15vh) solid colorB(80);
           }
           border: 2px solid colorB(80);
           width: 20%;
@@ -166,7 +171,7 @@
           > p {
             @include responsiveFontSize(16);
             @include respond {
-              @include responsiveFontSize(18);
+              font-size: max(2.2vw, 1.4vh);
             }
             //설명
             font-family: "Pretendard-Light";
