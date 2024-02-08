@@ -31,7 +31,9 @@
 }
 
 .page_global_title {
-  @include responsiveSize(160, 60);
+  // @include responsiveSize(160, 60);
+  width: fit-content;
+  padding: 0 2%;
   @include respond {
     padding: 0 max(2vw, 2vh);
     width: fit-content;
