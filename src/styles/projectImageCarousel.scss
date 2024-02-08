@@ -68,7 +68,6 @@
     height: 100%;
     display: grid;
     place-content: center;
-    @include tempBorder;
     font-size: max(2vw, 1.3vh);
   }
 }
