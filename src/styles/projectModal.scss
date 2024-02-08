@@ -3,7 +3,7 @@
 
 .modal_wholePage {
   @include respond {
-    height: 100vh;
+    height: 100%;
   }
   display: grid;
   position: absolute;
