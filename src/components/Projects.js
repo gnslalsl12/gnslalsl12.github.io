@@ -69,7 +69,7 @@ const Projects = () => {
                 onClick={() => {
                   openProjectModal(index);
                   setActiveSection("projects");
-                  scrollToSection("projects");
+                  // scrollToSection("projects");
                 }}
               >
                 Details
