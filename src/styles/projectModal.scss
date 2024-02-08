@@ -245,19 +245,19 @@
 
   > .modal_imageCarousel_container {
     @include respond {
-      top: 6vh;
+      bottom: 59vh;
       width: 100vw;
       height: 32vh;
       transform: translateY(0);
     }
     display: grid;
     position: absolute;
-    top: 50%;
+    bottom: 50%;
     left: 0%;
     z-index: 0;
     width: 60%;
     height: 80%;
-    transform: translate(0%, -50%);
+    transform: translate(0%, 50%);
     scale: 0.5;
     transition: scale 0.3s ease;
     place-content: center;
