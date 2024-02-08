@@ -33,10 +33,13 @@
 .page_global_title {
   @include responsiveSize(160, 60);
   @include respond {
+    width: fit-content;
     // @include tempBorder(red);
-    @include responsiveSize(220, 70);
+    // @include responsiveSize(220, 70);
     place-content: start center;
-    border-bottom: 2px solid colorBlack(70);
+    padding: 0 max(2vw, 2vh);
+    padding-bottom: max(4vw, 4vh);
+    border-bottom: min(0.5vw, 0.3vh) solid colorBlack(70);
   }
   display: grid;
   place-content: center;
@@ -45,6 +48,9 @@
   overflow: hidden;
   > span {
     @include responsiveFontSize(30);
+    @include respond {
+      font-size: max(2.5vw, 2.5vh);
+    }
     color: colorBlack();
     opacity: 0;
     font-family: "Montserrat-Bold";
@@ -52,11 +58,11 @@
 }
 
 .page_global_box {
-  display: flex;
-  margin-top: 4%;
   @include respond {
     margin-top: 7%;
   }
+  display: flex;
+  margin-top: 4%;
 }
 
 span {

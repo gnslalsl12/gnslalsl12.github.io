@@ -6,6 +6,7 @@
     height: max(5vw, 5vh);
     // height: 7vw;
     // height: 5vh;
+    border-bottom: min(1vw, 0.6vh) solid colorB(100);
   }
   position: absolute;
   top: 100vh;

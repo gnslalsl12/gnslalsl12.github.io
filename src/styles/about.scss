@@ -9,7 +9,7 @@
   @include responsiveSize(1200, 250);
   @include respond {
     width: 80vw;
-    height: 60vh;
+    height: fit-content;
   }
   display: flex;
   flex-direction: row;
@@ -49,8 +49,9 @@
           flex-direction: column;
           justify-content: space-around;
           align-items: center;
-          width: 40%;
+          width: fit-content;
           height: 100%;
+          margin: max(2vw, 2vh) 0;
         }
         display: flex;
         flex-direction: column;
@@ -62,8 +63,8 @@
           @include respond {
             align-items: center;
             // @include tempBorder(black);
-            width: 70px;
-            height: 70px;
+            // margin-bottom: maxx(1);
+            margin-bottom: max(1vw, 1vh);
           }
           display: flex;
           flex-direction: row;
@@ -73,22 +74,33 @@
           height: 100%;
           > .about_summary_item_icon_value {
             @include responsiveSize(100, 100);
+            @include respond {
+              width: max(8vw, 8vh);
+              height: max(8vw, 8vh);
+            }
             display: grid;
             background: colorB(70);
             border-radius: 15%;
             place-content: center;
             > * {
               @include responsiveFontSize(70);
+              @include respond {
+                font-size: max(6vw, 6vh);
+              }
             }
           }
         }
         > .about_summary_item_title {
-          @include respond {
-            width: 90%;
-            height: 20%;
-            @include responsiveFontSize(18);
-          }
           @include responsiveFontSize(22);
+          @include respond {
+            margin: 5% 0;
+            // padding: 0 10%;
+            width: min(30vw, 20vh);
+            height: 20%;
+            font-size: max(2.3vw, 1.8vh);
+            border-left: max(0.3vw, 0.3vh) solid colorBlack(50);
+            border-right: max(0.3vw, 0.3vh) solid colorBlack(50);
+          }
           display: grid;
           color: colorBlack(80);
           width: 70%;
@@ -103,9 +115,10 @@
         @include responsiveFontSize(18);
         @include respond {
           display: grid;
+          width: max(40vw, 25vh);
           height: 100%;
+          font-size: max(2.3vw, 1.6vh);
           place-content: center;
-          font-size: 0.89rem;
         }
         color: colorBlack(70);
         width: 100%;
@@ -158,7 +171,6 @@
     > .about_info_leftBox_text {
       @include responsiveFontSize(17);
       @include respond {
-        @include responsiveFontSize(25);
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -175,7 +187,7 @@
       > .about_info_leftBox_text_title {
         @include responsiveFontSize(20);
         @include respond {
-          font-size: 3.2vw;
+          font-size: max(3.2vw, 2.3vh);
           margin-bottom: 10%;
         }
         font-family: "Pretendard-SemiBold";
@@ -184,6 +196,7 @@
       > .about_info_leftBox_text_value {
         @include respond {
           font-size: 2.5vw;
+          font-size: max(2.5vw, 1.6vh);
           > br {
             display: none;
           }
@@ -197,26 +210,26 @@
       width: 100%;
       height: 50%;
     }
-    opacity: 0;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     width: 60%;
     height: 100%;
+    opacity: 0;
     overflow: hidden;
     > li {
       display: flex;
       flex-direction: column;
       justify-content: start;
       position: relative;
+      z-index: 1;
+      border-radius: 1rem;
       width: 32%;
       height: 100%;
       overflow: hidden;
-      border-radius: 1rem;
-      z-index: 1;
       > .skill_types_title_container {
-        z-index: 2;
         position: relative;
+        z-index: 2;
         color: colorWhite(100);
         background-color: rgb(102, 105, 105);
         width: 100%;
@@ -246,15 +259,15 @@
             font-size: 2.8vw;
           }
           display: flex;
+          justify-content: center;
+          align-items: center;
           position: absolute;
           bottom: 0%;
           left: 50%;
           width: 100%;
           height: 100%;
           font-family: "Montserrat-Medium";
-          justify-content: center;
           text-align: center;
-          align-items: center;
           transform: translate(-50%, 50%);
           opacity: 0;
           transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
@@ -265,15 +278,15 @@
         }
       }
       > .skill_list_column_container {
-        z-index: 1;
         display: flex;
         flex-direction: column;
         justify-content: start;
+        z-index: 1;
         background-color: colorBlack(20);
+        padding: 4% 5%;
         width: 100%;
         height: 85%;
         transform: translateY(-100%);
-        padding: 4% 5%;
         overflow-y: scroll;
         > .skills_list_column {
           display: flex;
@@ -290,6 +303,9 @@
               width: 7vw;
               height: 7vw;
             }
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
             // width: 3rem;
             // height: 3rem;
             flex-shrink: 0;
@@ -298,12 +314,9 @@
             margin-bottom: 10%;
             opacity: 0.85;
             transition: opacity 0.3s ease;
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
             > img {
-              object-fit: contain;
               width: 70%;
+              object-fit: contain;
             }
           }
 

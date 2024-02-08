@@ -261,11 +261,7 @@ const About = () => {
 
   const [hoveredSkill, setHoveredSkill] = useState({ skillType: "", name: null });
 
-  useEffect(() => {
-    console.log(hoveredSkill);
-  }, [hoveredSkill]);
-
-  function skillsContent(skillType) {
+  const skillsContent = (skillType) => {
     return (
       <li className={`skills_` + { skillType }}>
         <div className="skill_types_title_container">
@@ -310,7 +306,7 @@ const About = () => {
         </div>
       </li>
     );
-  }
+  };
 
   return (
     <div className="page_global_background page_about">
