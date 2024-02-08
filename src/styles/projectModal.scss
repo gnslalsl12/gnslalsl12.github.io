@@ -10,28 +10,42 @@
   top: 0;
   left: 0;
   z-index: 0;
+  opacity: 0;
   background-color: colorBlack(40);
   width: 100%;
   height: 100%;
   backdrop-filter: blur(4px);
-  opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
   place-content: center;
   > .modal_wallPop_container {
+    @include respond {
+      right: 50%;
+      bottom: 0;
+      width: 90vw;
+      height: 60vh;
+    }
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     position: absolute;
-    top: 50%;
     right: 0;
+    bottom: 50%;
     z-index: 3;
     width: 40%;
     height: 80%;
-    transform: translate(50%, -50%);
+    transform: translate(50%, 50%);
     transition: transform 0.3s ease;
     > .modal_wallPop_topBox {
+      @include respond {
+        // height: max(12vw, 10vh);
+        padding: max(1vh, 1vw) 0;
+        height: fit-content;
+        border-top-right-radius: 30px;
+        border-right: 2.5px solid colorWhite(100);
+        border-bottom: max(0.35vw, 0.35vh) solid colorA(100);
+      }
       display: flex;
       flex-direction: row;
       justify-content: center;
@@ -45,6 +59,10 @@
       border-bottom: 3px solid colorA(100);
       border-right: none;
       > .modal_wallPop_topBox_textBox {
+        @include respond {
+          margin-left: 0;
+          padding-right: 15%;
+        }
         display: flex;
         flex-direction: column;
         justify-content: space-around;
@@ -55,17 +73,26 @@
         margin-left: 5%;
         > .openedProject_title {
           @include responsiveFontSize(40);
+          @include respond {
+            font-size: max(4vw, 3vh);
+          }
           color: colorWhite(100);
           font-family: "Pretendard-Bold";
         }
         > .openedProject_explain_short {
           @include responsiveFontSize(15);
+          @include respond {
+            font-size: max(2vw, 1.6vh);
+          }
           color: colorWhite(70);
           font-family: "Pretendard-Medium";
         }
       }
       > a {
         @include responsiveFontSize(50);
+        @include respond {
+          font-size: max(6vw, 4.5vh);
+        }
         position: absolute;
         top: 50%;
         right: 0;
@@ -80,6 +107,13 @@
       }
     }
     > .modal_wallPop_bottomBox {
+      @include respond {
+        align-items: start;
+        flex-grow: 1;
+        border-right: 2.5px solid colorWhite(100);
+        border-bottom-left-radius: 0;
+        padding-top: 3%;
+      }
       display: flex;
       flex-direction: row;
       justify-content: center;
@@ -93,6 +127,13 @@
       border-bottom-left-radius: 30px;
       border-right: none;
       > .modal_wallPop_bottomBox_textBox {
+        @include respond {
+          width: 85%;
+          height: 80%;
+          overflow-y: scroll;
+          margin-left: 0;
+          padding-bottom: 3%;
+        }
         color: colorBlack(100);
         width: 85%;
         height: 90%;
@@ -107,6 +148,9 @@
         }
         .modal_contents_bigTitle {
           @include responsiveFontSize(26);
+          @include respond {
+            font-size: max(3.5vw, 2.3vh);
+          }
           font-family: "Pretendard-Bold";
           padding-bottom: 2%;
           margin-bottom: 2%;
@@ -114,6 +158,10 @@
         }
         .modal_contents_midTitle {
           @include responsiveFontSize(22);
+          @include respond {
+            font-size: max(3.2vw, 2vh);
+            margin-bottom: 1vh;
+          }
           font-family: "Pretendard-SemiBold";
           margin-bottom: 2.5%;
           list-style: decimal;
@@ -125,18 +173,34 @@
         }
         .modal_contents_value {
           @include responsiveFontSize(18);
+          @include respond {
+            font-size: max(2.7vw, 1.5vh);
+          }
           margin-bottom: 2%;
           list-style: decimal;
           font-family: "Pretendard-Regular";
         }
       }
       > .modal_wallPop_sideBar {
+        @include respond {
+          flex-direction: row;
+          bottom: 5%;
+          left: 50%;
+          border: min(0.4vw, 0.3vh) solid colorBlack(100);
+          width: max(60vw, 40vh);
+          height: min(12vw, 5vh);
+          transform: translate(-50%, 0);
+          &:hover {
+            scale: 1;
+            box-shadow: 2px 0px 5px 2px colorBlack(50);
+          }
+        }
         display: flex;
         flex-direction: column;
         justify-content: space-around;
         align-items: center;
         position: absolute;
-        top: 50%;
+        bottom: 50%;
         left: 0;
         z-index: 5;
         background-color: colorWhite(100);
@@ -145,7 +209,7 @@
         padding: 3% 0;
         width: 10%;
         height: 80%;
-        transform: translate(-50%, -50%);
+        transform: translate(-50%, 50%);
         box-shadow: 0px 0px 5px 0px colorBlack(50);
         scale: 0.99;
         transition: box-shadow 0.2s ease, scale 0.2s ease;
@@ -163,6 +227,12 @@
           transition: color 0.3s ease, scale 0.3s ease;
           > .sidebar_button_icon {
             @include responsiveFontSize(40);
+            @include respond {
+              font-size: max(4.2vw, 3.5vh);
+            }
+          }
+          &:nth-last-child(1):hover {
+            color: colorBlack(40);
           }
           &:hover {
             color: colorA(70);
@@ -174,6 +244,12 @@
   }
 
   > .modal_imageCarousel_container {
+    @include respond {
+      top: 6vh;
+      width: 100vw;
+      height: 32vh;
+      transform: translateY(0);
+    }
     display: grid;
     position: absolute;
     top: 50%;
@@ -186,8 +262,13 @@
     transition: scale 0.3s ease;
     place-content: center;
     > .modal_imageCarousel {
-      position: relative;
       @include responsiveSize(720, 480);
+      @include respond {
+        border: max(0.4vw, 0.4vh) solid colorBlack(30);
+        width: 80vw;
+        height: 32vh;
+      }
+      position: relative;
       background-color: colorBlack(40);
       border: 3px solid colorBlack(30);
       border-radius: 15px;
@@ -199,7 +280,10 @@
   opacity: 1;
   pointer-events: all;
   > .modal_wallPop_container {
-    transform: translate(0, -50%);
+    @include respond {
+      transform: translate(50%, 0);
+    }
+    transform: translate(0, 50%);
   }
   > .modal_imageCarousel_container {
     scale: 1;

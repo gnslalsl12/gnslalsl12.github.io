@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ProjectImageCarousel from "./ProjectImageCarousel";
 import { IoLogoGithub } from "react-icons/io";
 import myProjectLists from "../utils/myProjectLists";
-import { IoConstruct } from "react-icons/io5";
+import { IoColorFill, IoConstruct } from "react-icons/io5";
 import { TbBulbFilled } from "react-icons/tb";
 import { AiFillInfoCircle } from "react-icons/ai";
 import { FaCode } from "react-icons/fa6";
@@ -137,6 +137,9 @@ const ProjectModal = ({ openProject, imageList, setModalState, modalState }) => 
                   key={index}
                   onClick={() => {
                     index < 4 ? changeSidbarIndex(index) : closeModal();
+                  }}
+                  style={{
+                    color: index === sidebarIndex ? "#e31b6d" : "",
                   }}
                 >
                   <div className="sidebar_button_icon">{value}</div>

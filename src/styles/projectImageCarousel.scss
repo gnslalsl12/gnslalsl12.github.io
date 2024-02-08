@@ -1,6 +1,15 @@
 @import "variables.scss";
 
 .carousel_button_container {
+  @include respond {
+    width: 95vw;
+    height: 0;
+    bottom: 50%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    border: none;
+    z-index: 10;
+  }
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -18,6 +27,11 @@
   transition: box-shadow 0.2s ease, scale 0.2s ease;
   .carousel_button {
     @include responsiveSize(60, 30);
+    @include respond {
+      width: max(4vw, 3vh);
+      height: max(14vw, 10vh);
+      position: absolute;
+    }
     display: grid;
     color: colorWhite(80);
     background-color: colorBlack(70);
@@ -28,18 +42,38 @@
     transition: background-color 0.3s ease, scale 0.3s ease;
     > .carousel_button_icon {
       @include responsiveFontSize(20);
+      @include respond {
+        font-size: max(3.3vw, 2.5vh);
+      }
     }
     &:hover {
-      background-color: colorA(70);
+      background-color: colorA(50);
       scale: 1;
     }
   }
 
   .carousel_button_previous {
+    @include respond {
+    }
     left: 0;
   }
   .carousel_button_next {
+    @include respond {
+    }
     right: 0;
+  }
+
+  .carousel_button_imageIndex {
+    @include respond {
+      visibility: hidden;
+    }
+    font-family: "Montserrat-Light";
+    width: 20%;
+    height: 100%;
+    display: grid;
+    place-content: center;
+    @include tempBorder;
+    font-size: max(2vw, 1.3vh);
   }
 }
 
