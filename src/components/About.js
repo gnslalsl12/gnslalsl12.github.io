@@ -319,11 +319,11 @@ const About = () => {
           <img src={profileImage} alt="프로필 이미지" className="about_info_leftBox_img" />
           <div className="about_info_leftBox_text">
             <div className="about_info_leftBox_text_title">
-              Front-End 개발자 <br /> 정훈입니다
+              SW 개발자 <br /> 정훈입니다
             </div>
             <p className="about_info_leftBox_text_value">
               사용자 중심의 개발 방향성을 강화한 역량으로 <br />
-              다양한 UI/UX 설계, 다이나믹 에니메이션 구현, <br />
+              다양한 컴퍼넌트 구현, 효율적인 데이터 가공 및 처리, <br />
               직관적인 사용 환경 구성에 깊은 열정이 있습니다.
             </p>
           </div>

@@ -33,7 +33,7 @@ const Blog = () => {
         category: "📈SolvedAlgos",
         update: "24-01-17",
         explain:
-          "Java, JavaScript, MySQL 언어를 기반으로 백준 골드, 플레티넘, 다이아 난이도와 그에 준하는 타 사이트 알고리즘 문제 풀이를 기록한 항목",
+          "Java, JavaScript 언어를 기반으로 백준 골드, 플레티넘, 다이아 난이도와 그에 준하는 타 사이트 알고리즘 문제 풀이를 기록한 항목",
       },
       {
         title: "CS",
