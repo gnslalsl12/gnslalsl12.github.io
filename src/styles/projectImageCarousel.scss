@@ -63,12 +63,14 @@
     @include respond {
       visibility: hidden;
     }
-    font-family: "Pretendard-Light";
+    font-family: "Pretendard-SemiBold";
     width: 20%;
-    height: 100%;
+    height: fit-content;
     display: grid;
     place-content: center;
     font-size: 1.2vw;
+    border-radius: 0.5vw;
+    background-color: colorBlack(13);
   }
 }
 
