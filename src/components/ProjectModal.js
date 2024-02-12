@@ -7,6 +7,7 @@ import { TbBulbFilled } from "react-icons/tb";
 import { AiFillInfoCircle } from "react-icons/ai";
 import { FaCode } from "react-icons/fa6";
 import { FiLogOut } from "react-icons/fi";
+import { GiGraduateCap } from "react-icons/gi";
 
 const ProjectModal = ({ openProject, imageList, setModalState, modalState }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -121,7 +122,15 @@ const ProjectModal = ({ openProject, imageList, setModalState, modalState }) => 
       <div className="modal_wallPop_container" onClick={(event) => event.stopPropagation()}>
         <div className="modal_wallPop_topBox">
           <div className="modal_wallPop_topBox_textBox">
-            <span className="openedProject_title">{openedProject.title}</span>
+            <div className="openedProject_title_box">
+              <span>{openedProject.title}</span>
+              {openedProject.prize !== "" && (
+                <div>
+                  <GiGraduateCap className="prize_icon" />
+                  <span>{openedProject.prize}</span>
+                </div>
+              )}
+            </div>
             <span className="openedProject_explain_short">{openedProject.explain_short}</span>
           </div>
           <a href={openedProject.link} target="_blank" rel="noopener noreferrer">

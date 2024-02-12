@@ -3,7 +3,7 @@ const myProjectLists = [
     title: "WORLDY",
     link: "https://github.com/SSAFY507/Worldy",
     explain_short: "AI 기술을 활용한 3D 메타버스 세계 지식 학습 게임",
-    prize: "SSAFY 자율 프로젝트 우수상",
+    prize: "SSAFY 8기 우수상",
     explain_long:
       "AI기반의 세계 상식 퀴즈 게임과 3D 메타버스로 구현된 세계 탐험 및 블루마블 게임을 통해 남녀노소 누구나 재미있게 세계를 배우는 게임, Worldy입니다.",
     my_works: [
