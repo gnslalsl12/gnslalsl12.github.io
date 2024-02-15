@@ -3,8 +3,6 @@ import Worldy_Overview from "../assets/images/projects/Worldy_Overview.png";
 import Eeum_Overview from "../assets/images/projects/Eeum_Overview.png";
 import Rendez_Overview from "../assets/images/projects/Rendez_Overview.png";
 import ProjectModal from "./ProjectModal";
-import ActiveSectionContext from "../contexts/ActiveSectionContext";
-import ScrollToSectionContext from "../contexts/ScrollToSectionContext";
 import useAnimationOnScroll from "../utils/useAnimationOnScroll";
 
 const Projects = () => {
@@ -14,9 +12,6 @@ const Projects = () => {
   const [imageList, setImageList] = useState(Array.from(Array(projectCount), () => []));
   const [isImagesLoaded, setIsImagesLoaded] = useState(false);
   const [modalState, setModalState] = useState(false);
-  // const { activeSection, setActiveSection } = useContext(ActiveSectionContext);
-
-  // const { scrollToSection } = useContext(ScrollToSectionContext);
 
   const projectsTitleRef = useRef();
   const projectsCardsRef = useRef();
@@ -27,6 +22,10 @@ const Projects = () => {
   const openProjectModal = (projectIndex) => {
     setOpenProject(projectIndex);
     setModalState(true);
+  };
+
+  const openThisProject = (index) => {
+    openProjectModal(index);
   };
 
   const projectsCardList = () => {
@@ -67,9 +66,7 @@ const Projects = () => {
               <button
                 className="projects_summary_button"
                 onClick={() => {
-                  openProjectModal(index);
-                  // setActiveSection("projects");
-                  // scrollToSection("projects");
+                  openThisProject(index);
                 }}
               >
                 Details
