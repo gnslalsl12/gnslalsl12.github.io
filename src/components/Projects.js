@@ -14,9 +14,9 @@ const Projects = () => {
   const [imageList, setImageList] = useState(Array.from(Array(projectCount), () => []));
   const [isImagesLoaded, setIsImagesLoaded] = useState(false);
   const [modalState, setModalState] = useState(false);
-  const { activeSection, setActiveSection } = useContext(ActiveSectionContext);
+  // const { activeSection, setActiveSection } = useContext(ActiveSectionContext);
 
-  const { scrollToSection } = useContext(ScrollToSectionContext);
+  // const { scrollToSection } = useContext(ScrollToSectionContext);
 
   const projectsTitleRef = useRef();
   const projectsCardsRef = useRef();
@@ -68,8 +68,8 @@ const Projects = () => {
                 className="projects_summary_button"
                 onClick={() => {
                   openProjectModal(index);
-                  setActiveSection("projects");
-                  scrollToSection("projects");
+                  // setActiveSection("projects");
+                  // scrollToSection("projects");
                 }}
               >
                 Details
