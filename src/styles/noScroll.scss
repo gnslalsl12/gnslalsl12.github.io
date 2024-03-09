@@ -1,7 +1,8 @@
 /* 모든 브라우저에서 세로 스크롤바 숨기기 */
 html,
 body,
-.skill_list_column_container {
+.skill_list_column_container,
+.modal_wallPop_bottomBox_textBox {
   overflow-x: hidden;
   overflow-y: scroll;
 }
@@ -9,20 +10,23 @@ body,
 /* 웹킷 기반 브라우저 (예: Safari, Chrome) */
 html::-webkit-scrollbar,
 body::-webkit-scrollbar,
-.skill_list_column_container::webkit-scrollbar {
+.skill_list_column_container::-webkit-scrollbar,
+.modal_wallPop_bottomBox_textBox::-webkit-scrollbar {
   display: none;
 }
 
 /* 파이어폭스 */
 html,
 body,
-.skill_list_column_container {
+.skill_list_column_container,
+.modal_wallPop_bottomBox_textBox {
   scrollbar-width: none;
 }
 
 /* IE 및 엣지 */
 html,
 body,
-.skill_list_column_container {
+.skill_list_column_container,
+.modal_wallPop_bottomBox_textBox {
   -ms-overflow-style: none;
 }

@@ -14,7 +14,7 @@
   width: 100%;
   height: 100%;
   opacity: 0;
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(8px);
   pointer-events: none;
   transition: opacity 0.3s ease;
   place-content: center;
@@ -22,7 +22,7 @@
     @include respond {
       right: 50%;
       bottom: 0;
-      width: 90vw;
+      width: 100vw;
       height: 58vh;
     }
     display: flex;
@@ -34,7 +34,7 @@
     bottom: 50%;
     z-index: 3;
     width: 40%;
-    height: 80%;
+    height: 100%;
     transform: translate(50%, 50%);
     transition: transform 0.3s ease;
     > .modal_wallPop_topBox {
@@ -42,9 +42,9 @@
         // height: max(12vw, 10vh);
         padding: max(1vh, 1vw) 0;
         height: fit-content;
-        border-top-right-radius: 30px;
-        border-right: 2.5px solid colorWhite(100);
-        border-bottom: max(0.35vw, 0.35vh) solid colorA(100);
+        // border-top-right-radius: 30px;
+        // border-right: 2.5px solid colorWhite(100);
+        // border-bottom: max(0.35vw, 0.35vh) solid colorA(100);
       }
       display: flex;
       flex-direction: row;
@@ -52,12 +52,12 @@
       align-items: center;
       position: relative;
       background-color: colorBlack(90);
-      border: 2.5px solid colorWhite(100);
+      // border: 2.5px solid colorWhite(100);
       width: 100%;
       height: 20%;
-      border-top-left-radius: 30px;
-      border-bottom: 3px solid colorA(100);
-      border-right: none;
+      // border-top-left-radius: 30px;
+      // border-bottom: 3px solid colorA(100);
+      // border-right: none;
       > .modal_wallPop_topBox_textBox {
         @include respond {
           margin-left: 0;
@@ -172,8 +172,8 @@
       @include respond {
         align-items: start;
         flex-grow: 1;
-        border-right: 2.5px solid colorWhite(100);
-        border-bottom-left-radius: 0;
+        // border-right: 2.5px solid colorWhite(100);
+        // border-bottom-left-radius: 0;
         padding-top: 3%;
       }
       display: flex;
@@ -181,13 +181,14 @@
       justify-content: center;
       align-items: center;
       position: relative;
-      background-color: rgb(233, 233, 233);
-      border: 2.5px solid colorWhite(100);
+      // background-color: rgb(233, 233, 233);
+      background-color: colorBlack(80);
+      // border: 2.5px solid colorWhite(100);
       width: 100%;
       height: 80%;
-      border-top: none;
-      border-bottom-left-radius: 30px;
-      border-right: none;
+      // border-top: none;
+      // border-bottom-left-radius: 30px;
+      // border-right: none;
       > .modal_wallPop_bottomBox_textBox {
         @include respond {
           width: 85%;
@@ -196,7 +197,8 @@
           margin-left: 0;
           padding-bottom: 3%;
         }
-        color: colorBlack(100);
+        // color: colorBlack(100);
+        color: colorWhite(80);
         width: 85%;
         height: 90%;
         margin-left: 5%;
@@ -248,14 +250,14 @@
           flex-direction: row;
           bottom: 5%;
           left: 50%;
-          border: min(0.4vw, 0.3vh) solid colorBlack(100);
+          // border: min(0.4vw, 0.3vh) solid colorBlack(100);
           width: max(60vw, 40vh);
           height: min(12vw, 5vh);
           transform: translate(-50%, 0);
-          &:hover {
-            scale: 1;
-            box-shadow: 2px 0px 5px 2px colorBlack(50);
-          }
+          // &:hover {
+          //   scale: 1;
+          //   box-shadow: 2px 0px 5px 2px colorBlack(50);
+          // }
         }
         display: flex;
         flex-direction: column;
@@ -265,20 +267,21 @@
         bottom: 50%;
         left: 0;
         z-index: 5;
-        background-color: colorWhite(100);
-        border: 2.5px solid colorBlack(100);
+        backdrop-filter: blur(8px);
+        background-color: colorWhite(80);
+        border: 2.5px solid colorWhite(100);
         border-radius: 300px;
         padding: 3% 0;
         width: 10%;
         height: 80%;
         transform: translate(-50%, 50%);
         box-shadow: 0px 0px 5px 0px colorBlack(50);
-        scale: 0.99;
+        // scale: 0.99;
         transition: box-shadow 0.2s ease, scale 0.2s ease;
-        &:hover {
-          scale: 1;
-          box-shadow: 2px 2px 5px 2px colorBlack(50);
-        }
+        // &:hover {
+        //   scale: 1;
+        //   box-shadow: 2px 2px 5px 2px colorBlack(50);
+        // }
         > button {
           @include responsiveSize(40, 40);
           display: grid;
@@ -326,13 +329,13 @@
     > .modal_imageCarousel {
       @include responsiveSize(720, 480);
       @include respond {
-        border: max(0.4vw, 0.4vh) solid colorBlack(30);
+        // border: max(0.4vw, 0.4vh) solid colorBlack(30);
         width: 80vw;
         height: 32vh;
       }
       position: relative;
-      background-color: colorBlack(40);
-      border: 3px solid colorBlack(30);
+      background-color: colorWhite(20);
+      // border: 3px solid colorBlack(30);
       border-radius: 15px;
     }
   }

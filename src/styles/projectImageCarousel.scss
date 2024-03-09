@@ -18,8 +18,9 @@
   bottom: 0;
   left: 50%;
   z-index: 3;
-  background-color: colorWhite(100);
-  border: 2.5px solid colorBlack(80);
+  backdrop-filter: blur(8px);
+  background-color: colorWhite(80);
+  border: 2.5px solid colorWhite(100);
   border-radius: 300px;
   width: 40%;
   height: 10%;
@@ -33,9 +34,9 @@
       position: absolute;
     }
     display: grid;
-    color: colorWhite(80);
-    background-color: colorBlack(70);
-    border: 2.5px solid colroBlack(100);
+    color: colorWhite(100);
+    background-color: colorBlack(50);
+    // border: 2.5px solid colroBlack(100);
     border-radius: 300px;
     place-content: center;
     scale: 0.9;
@@ -63,7 +64,7 @@
     @include respond {
       visibility: hidden;
     }
-    font-family: "Pretendard-Medium";
+    font-family: "Pretendard-Regular";
     width: 20%;
     height: fit-content;
     display: grid;
