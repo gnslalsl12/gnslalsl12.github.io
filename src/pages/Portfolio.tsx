@@ -4,7 +4,6 @@ import Hero from "../sections/Hero";
 import About from "../sections/About";
 import Skills from "../sections/Skills";
 import Projects from "../sections/Projects";
-import Blog from "../sections/Blog";
 import Contact from "../sections/Contact";
 
 type ScrollState = { scrollTo?: string };
@@ -28,7 +27,6 @@ export default function Portfolio() {
       <div id="about"><About /></div>
       <div id="skills"><Skills /></div>
       <div id="projects"><Projects /></div>
-      <div id="blog"><Blog /></div>
       <div id="contact"><Contact /></div>
     </>
   );

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ChevronLeft, ChevronRight, Github, Trophy, Users, CalendarDays, UserCircle2 } from "lucide-react";
+import { ChevronLeft, ChevronRight, Github, Globe, Trophy, Users, CalendarDays, UserCircle2 } from "lucide-react";
 import Modal from "../components/Modal";
 import type { Project } from "../data/projects";
 
@@ -79,15 +79,28 @@ export default function ProjectModal({ project, onClose }: Props) {
                 <h3 className="text-3xl font-bold">{project.title}</h3>
                 <p className="mt-2 text-muted">{project.subtitle}</p>
               </div>
-              <a
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-ghost"
-              >
-                <Github size={16} />
-                GitHub
-              </a>
+              <div className="flex flex-wrap items-center gap-2">
+                {project.live && (
+                  <a
+                    href={project.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-primary"
+                  >
+                    <Globe size={16} />
+                    사이트 방문
+                  </a>
+                )}
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-ghost"
+                >
+                  <Github size={16} />
+                  GitHub
+                </a>
+              </div>
             </div>
 
             {/* Meta */}

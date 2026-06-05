@@ -1,6 +1,7 @@
 import worldyOverview from "../assets/images/projects/Worldy_Overview.png";
 import eeumOverview from "../assets/images/projects/Eeum_Overview.png";
 import rendezOverview from "../assets/images/projects/Rendez_Overview.png";
+import famringOverview from "../assets/images/projects/Famring_Overview.png";
 
 export type ProjectGain = { title: string; detail: string };
 export type ProjectSkillGroup = { group: string; items: string[] };
@@ -15,6 +16,7 @@ export type Project = {
   team: string;
   prize?: string;
   link: string;
+  live?: string;
   overview: string;
   gallery: string[];
   highlight: string;
@@ -49,8 +51,66 @@ const rendezGallery = gallery(
     import: "default",
   }) as Record<string, string>
 );
+const famringGallery = gallery(
+  import.meta.glob("../assets/images/projects/projectFamring/*.png", {
+    eager: true,
+    import: "default",
+  }) as Record<string, string>
+);
 
 export const projects: Project[] = [
+  {
+    id: "famring",
+    title: "Famring",
+    subtitle: "가족 단위로 계정·일정·정보를 안전하게 공유하는 모바일 PWA 서비스",
+    description:
+      "가족이 함께 쓰는 공유 계정, 구매 요청, 일정, 정보를 한 곳에서 비공개로 주고받는 모바일 PWA, Famring입니다. 부모님 세대도 편하게 쓸 수 있도록 큰 글자와 한국어 안내, 단순한 5탭 구조로 설계했으며 famring.co.kr 도메인으로 실제 운영 중입니다.",
+    period: "개인 프로젝트 · 운영 중",
+    role: "기획 · 디자인 · 풀스택 개발",
+    team: "1인 개발",
+    link: "https://github.com/gnslalsl12/famring",
+    live: "https://famring.co.kr",
+    overview: famringOverview,
+    gallery: famringGallery,
+    highlight: "Next.js · PWA · Supabase",
+    featured: true,
+    works: [
+      "서비스 기획부터 UI/UX 디자인, 프론트·백엔드 개발, 운영까지 1인 풀스택 수행",
+      "AES-256-GCM 기반 공유 계정 볼트 — 평문은 reveal API에서만 열람, 5초 자동 마스킹",
+      "OG 메타 자동 파싱 + Web Share Target을 활용한 구매 요청 보드 구현",
+      "가족 캘린더, 마크다운 정보 게시판, 4개 도메인 통합 검색 구현",
+      "초대 코드 기반 그룹 격리 + 관리자 승인 흐름, groupId 강제 필터로 데이터 누출 방지",
+      "PWA 셸·Service Worker 구성 및 Vercel 배포, famring.co.kr 운영",
+    ],
+    gains: [
+      {
+        title: "1인 풀스택 서비스 운영 경험",
+        detail:
+          "기획·디자인·개발·배포·운영 전 과정을 직접 수행하며 실제 사용자를 대상으로 한 라이브 서비스 운영 역량 확보",
+      },
+      {
+        title: "보안 중심 설계 역량",
+        detail:
+          "AES-256-GCM 암호화, server-only 마스터 키, groupId 강제 필터, 보안 헤더·AuditLog 등 보안을 최우선으로 한 아키텍처 설계 경험",
+      },
+      {
+        title: "사용자 접근성 우선 개발",
+        detail:
+          "부모님 세대까지 고려한 큰 글자·한국어 안내·단순한 5탭 구조로 접근성과 사용성을 동시에 만족하는 개발 경험",
+      },
+    ],
+    skills: [
+      {
+        group: "Front-End",
+        items: ["Next.js 16", "TypeScript", "Tailwind CSS", "shadcn/ui", "PWA", "React"],
+      },
+      {
+        group: "Back-End",
+        items: ["Prisma", "Supabase", "PostgreSQL", "Auth.js", "AES-256-GCM"],
+      },
+      { group: "Etc", items: ["Vercel", "Vitest", "Google·Kakao OAuth"] },
+    ],
+  },
   {
     id: "worldy",
     title: "WORLDY",

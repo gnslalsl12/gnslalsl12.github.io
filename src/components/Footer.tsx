@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Github, Mail, BookOpen } from "lucide-react";
+import { Github, Mail } from "lucide-react";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -18,15 +18,6 @@ export default function Footer() {
             aria-label="GitHub"
           >
             <Github size={18} />
-          </a>
-          <a
-            href="https://hoonyblog.vercel.app/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="transition-colors hover:text-text"
-            aria-label="Blog"
-          >
-            <BookOpen size={18} />
           </a>
           <a
             href="mailto:wjdgnsxhsl@naver.com"

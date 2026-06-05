@@ -33,7 +33,7 @@ export default function CoinFlip() {
           <div className="coin-face bg-gradient-to-br from-amber-300 to-amber-500 text-3xl font-bold text-amber-900 shadow-lg">
             앞
           </div>
-          <div className="coin-back bg-gradient-to-br from-slate-300 to-slate-500 text-3xl font-bold text-slate-900 shadow-lg">
+          <div className="coin-face coin-back bg-gradient-to-br from-slate-300 to-slate-500 text-3xl font-bold text-slate-900 shadow-lg">
             뒤
           </div>
         </div>

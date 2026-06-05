@@ -30,6 +30,15 @@ function ProjectCard({ project, onOpen }: { project: Project; onOpen: () => void
             {project.prize}
           </span>
         )}
+        {project.live && (
+          <span className="chip absolute left-4 top-4 text-emerald-300">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+            </span>
+            Live · 운영 중
+          </span>
+        )}
       </div>
 
       <div className={cn("flex flex-col p-6", featured && "justify-center md:p-8")}>
@@ -67,7 +76,7 @@ export default function Projects() {
               직접 만든 <span className="text-gradient">프로젝트</span>
             </>
           }
-          description="SSAFY에서 진행한 팀 프로젝트들입니다. 각 카드를 눌러 상세 내용을 확인해 보세요."
+          description="직접 운영 중인 라이브 서비스부터 SSAFY 팀 프로젝트까지, 각 카드를 눌러 상세 내용을 확인해 보세요."
         />
 
         <div className="mt-10 grid gap-4 md:grid-cols-2">

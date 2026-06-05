@@ -1,4 +1,4 @@
-import { Lightbulb, Feather, Rocket, MonitorSmartphone } from "lucide-react";
+import { Lightbulb, Feather, Rocket, MonitorSmartphone, Briefcase } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import profileImage from "../assets/images/profileImage.jpg";
 import SectionHeader from "../components/SectionHeader";
@@ -49,6 +49,18 @@ export default function About() {
                   팀과 함께 완성도 높은 결과물을 만드는 것을 즐깁니다.
                 </p>
               </div>
+
+              {/* Current role */}
+              <div className="mt-5 flex items-center gap-3 rounded-2xl bg-gradient-to-br from-brand/15 to-brand-2/10 p-4 ring-1 ring-white/10">
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white/5 ring-1 ring-white/10">
+                  <Briefcase size={18} className="text-brand" />
+                </span>
+                <div className="min-w-0">
+                  <p className="truncate text-sm font-semibold">하나금융티아이 · AI솔루션셀</p>
+                  <p className="text-xs text-muted">2024.05 ~ 현재 · 재직 중</p>
+                </div>
+              </div>
+
               <div className="mt-auto flex flex-wrap gap-2 pt-5">
                 <span className="chip">SSAFY 8기</span>
                 <span className="chip">Frontend</span>
