@@ -1,70 +1,70 @@
-# Getting Started with Create React App
+# gnslalsl12.github.io
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+정훈(Jeong Hoon)의 개인 포트폴리오 & 도구함. **Bento / Glassmorphism** 다크 테마로 디자인했습니다.
 
-## Available Scripts
+🔗 **Live:** https://gnslalsl12.github.io
 
-In the project directory, you can run:
+## ✨ 구성
 
-### `npm start`
+- **`/` 포트폴리오** — Hero · About · Skills · Projects(상세 모달) · Blog · Contact
+- **`/tools` 도구함** — 보드게임·타이머·유틸리티 도구 모음 (전부 브라우저 로컬 저장, 설치 불필요)
+  - 🎲 보드게임: 보드게임 타이머, 점수 카운터, 주사위 & 랜덤, 사다리타기, 룰렛, 동전 던지기
+  - ⏱️ 타이머: 뽀모도로, 멀티 타이머, 스톱워치, D-day
+  - 🛠️ 유틸리티: QR 코드 생성, 빠른 메모, 컬러 팔레트, 단위 변환기
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🧰 기술 스택
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+| 영역 | 사용 |
+| --- | --- |
+| 빌드 | Vite 6 |
+| 언어 | TypeScript |
+| UI | React 18 · React Router |
+| 스타일 | Tailwind CSS v4 + CSS 디자인 토큰 |
+| 애니메이션 | Framer Motion |
+| 아이콘 | lucide-react |
+| 기타 | qrcode.react |
 
-### `npm test`
+## 🚀 개발
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+npm install      # 의존성 설치
+npm run dev      # 개발 서버 (http://localhost:5173)
+npm run build    # 프로덕션 빌드 → dist/
+npm run preview  # 빌드 결과 미리보기
+npm run typecheck# 타입 검사
+```
 
-### `npm run build`
+## 📦 배포 (GitHub Pages)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+npm run deploy   # dist 를 gh-pages 브랜치로 배포
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+`gnslalsl12.github.io` 는 사용자 페이지(루트 도메인)라 Vite `base` 는 `/` 입니다.
+새로고침 시에도 `/tools` 등 클라이언트 라우트가 동작하도록 `public/404.html`
+SPA 리다이렉트 기법을 적용했습니다.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🎨 테마 색상
 
-### `npm run eject`
+메인 컬러는 CSS 토큰(`src/index.css` 의 `@theme`)으로 관리합니다.
+`--color-brand` 값만 바꾸면 사이트 전체 포인트 컬러가 교체됩니다.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```
+--color-brand:   #8b5cf6   /* violet */
+--color-brand-2: #6366f1   /* indigo */
+--color-brand-3: #3b82f6   /* blue   */
+--color-accent:  #d946ef   /* fuchsia */
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 📁 구조
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+src/
+  components/   공통 컴포넌트 (Navbar, Footer, Modal, Reveal …)
+  sections/     포트폴리오 섹션 (Hero, About, Skills, Projects …)
+  pages/        Portfolio, Tools 라우트
+  tools/        도구 14종 + registry
+  data/         projects, skills 데이터
+  lib/          유틸 (cn, localStorage, sound, scroll)
+  assets/       이미지
+```
