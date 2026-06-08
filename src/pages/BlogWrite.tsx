@@ -1,9 +1,34 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { AlertCircle, ArrowLeft, ExternalLink, Eye, EyeOff, KeyRound, Loader2, Send } from "lucide-react";
-import { createPost, getToken, setToken, REPO_OWNER, REPO_NAME } from "../lib/blog";
+import {
+  AlertCircle,
+  ArrowLeft,
+  CheckCircle2,
+  ExternalLink,
+  Eye,
+  EyeOff,
+  KeyRound,
+  Loader2,
+  Send,
+  ShieldAlert,
+} from "lucide-react";
+import {
+  createPost,
+  getToken,
+  setToken,
+  verifyToken,
+  isAllowedAuthor,
+  REPO_OWNER,
+  REPO_NAME,
+} from "../lib/blog";
+
+// Result of checking which GitHub account the saved token belongs to.
+type Account =
+  | { state: "idle" }
+  | { state: "checking" }
+  | { state: "done"; login: string | null; allowed: boolean };
 
 const TOKEN_URL =
   "https://github.com/settings/tokens/new?scopes=public_repo&description=blog-" + REPO_NAME;
@@ -13,6 +38,7 @@ export default function BlogWrite() {
 
   const [token, setTokenState] = useState(getToken());
   const [showToken, setShowToken] = useState(false);
+  const [account, setAccount] = useState<Account>({ state: "idle" });
 
   const [title, setTitle] = useState("");
   const [tags, setTags] = useState("");
@@ -20,6 +46,24 @@ export default function BlogWrite() {
 
   const [publishing, setPublishing] = useState(false);
   const [error, setError] = useState("");
+
+  // Verify which account the token belongs to (debounced) so only the site
+  // owner can publish.
+  useEffect(() => {
+    const t = token.trim();
+    if (!t) {
+      setAccount({ state: "idle" });
+      return;
+    }
+    setAccount({ state: "checking" });
+    const handle = setTimeout(async () => {
+      const login = await verifyToken(t);
+      setAccount({ state: "done", login, allowed: !!login && isAllowedAuthor(login) });
+    }, 600);
+    return () => clearTimeout(handle);
+  }, [token]);
+
+  const isOwner = account.state === "done" && account.allowed;
 
   const tagList = useMemo(
     () =>
@@ -30,7 +74,7 @@ export default function BlogWrite() {
     [tags]
   );
 
-  const canPublish = token.trim() && title.trim() && body.trim() && !publishing;
+  const canPublish = isOwner && title.trim() && body.trim() && !publishing;
 
   const saveToken = (value: string) => {
     setTokenState(value);
@@ -39,7 +83,7 @@ export default function BlogWrite() {
 
   const publish = async () => {
     setError("");
-    if (!token.trim()) return setError("GitHub 토큰을 입력해 주세요.");
+    if (!isOwner) return setError("사이트 소유자만 게시할 수 있습니다.");
     if (!title.trim()) return setError("제목을 입력해 주세요.");
     if (!body.trim()) return setError("본문을 입력해 주세요.");
 
@@ -115,8 +159,28 @@ export default function BlogWrite() {
             </button>
           </div>
           <p className="text-xs text-muted">
-            게시 대상: <code>{REPO_OWNER}/{REPO_NAME}</code>
+            게시 대상: <code>{REPO_OWNER}/{REPO_NAME}</code> · 소유자(<code>@{REPO_OWNER}</code>)만 게시 가능
           </p>
+
+          {account.state === "checking" && (
+            <p className="flex items-center gap-1.5 text-xs text-muted">
+              <Loader2 size={13} className="animate-spin" />
+              토큰 확인 중…
+            </p>
+          )}
+          {account.state === "done" && account.allowed && (
+            <p className="flex items-center gap-1.5 text-xs text-emerald-400">
+              <CheckCircle2 size={13} />@{account.login} 으로 인증됨 · 게시 가능
+            </p>
+          )}
+          {account.state === "done" && !account.allowed && (
+            <p className="flex items-center gap-1.5 text-xs text-amber-400">
+              <ShieldAlert size={13} />
+              {account.login
+                ? `@${account.login} 계정은 게시 권한이 없습니다 (소유자 전용).`
+                : "토큰이 유효하지 않습니다."}
+            </p>
+          )}
         </div>
       </details>
 

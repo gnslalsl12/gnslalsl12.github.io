@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { AlertCircle, CalendarDays, Loader2, PenLine, Tag } from "lucide-react";
-import { fetchPosts, type BlogPost } from "../lib/blog";
+import { fetchPosts, getToken, isAllowedAuthor, verifyToken, type BlogPost } from "../lib/blog";
 
 function formatDate(iso: string) {
   if (!iso) return "";
@@ -16,6 +16,19 @@ export default function Blog() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
   const [error, setError] = useState("");
+  const [canWrite, setCanWrite] = useState(false);
+
+  // The write entry only appears for the verified site owner.
+  useEffect(() => {
+    let alive = true;
+    if (!getToken()) return;
+    verifyToken().then((login) => {
+      if (alive) setCanWrite(!!login && isAllowedAuthor(login));
+    });
+    return () => {
+      alive = false;
+    };
+  }, []);
 
   useEffect(() => {
     let alive = true;
@@ -49,10 +62,12 @@ export default function Blog() {
             개발하며 배운 것, 프로젝트 회고, 자잘한 트러블슈팅을 남깁니다.
           </p>
         </div>
-        <Link to="/blog/write" className="btn btn-primary">
-          <PenLine size={16} />
-          글 작성
-        </Link>
+        {canWrite && (
+          <Link to="/blog/write" className="btn btn-primary">
+            <PenLine size={16} />
+            글 작성
+          </Link>
+        )}
       </header>
 
       {/* states */}
@@ -73,9 +88,11 @@ export default function Blog() {
       {status === "ready" && posts.length === 0 && (
         <div className="mt-16 flex flex-col items-center gap-4 text-center">
           <p className="text-muted">아직 작성된 글이 없습니다.</p>
-          <Link to="/blog/write" className="btn btn-ghost">
-            <PenLine size={16} />첫 글 작성하기
-          </Link>
+          {canWrite && (
+            <Link to="/blog/write" className="btn btn-ghost">
+              <PenLine size={16} />첫 글 작성하기
+            </Link>
+          )}
         </div>
       )}
 

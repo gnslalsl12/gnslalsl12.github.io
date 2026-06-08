@@ -10,8 +10,17 @@ export const REPO_OWNER = "gnslalsl12";
 export const REPO_NAME = "gnslalsl12.github.io";
 export const BLOG_LABEL = "blog";
 
+// Only posts authored by these GitHub accounts are ever rendered. This is a
+// defense-in-depth guard on top of GitHub's own rule that only users with push
+// access can apply the `blog` label to an issue.
+export const ALLOWED_AUTHORS = [REPO_OWNER.toLowerCase()];
+
 const API = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}`;
 const TOKEN_KEY = "blog:gh-token";
+
+export function isAllowedAuthor(login: string): boolean {
+  return ALLOWED_AUTHORS.includes((login || "").toLowerCase());
+}
 
 export type BlogPost = {
   number: number; // issue number, used as the /blog/:number slug
@@ -131,7 +140,10 @@ export async function fetchPosts(force = false): Promise<BlogPost[]> {
   );
   if (!res.ok) throw new Error(await errorMessage(res, "글 목록을 불러오지 못했습니다"));
   const data = (await res.json()) as RawIssue[];
-  const posts = data.filter((i) => !i.pull_request).map(toPost);
+  const posts = data
+    .filter((i) => !i.pull_request)
+    .map(toPost)
+    .filter((p) => isAllowedAuthor(p.author));
   listCache = { at: Date.now(), posts };
   return posts;
 }
@@ -142,7 +154,26 @@ export async function fetchPost(number: number): Promise<BlogPost> {
   if (!res.ok) throw new Error(await errorMessage(res, "글을 불러오지 못했습니다"));
   const issue = (await res.json()) as RawIssue;
   if (issue.pull_request) throw new Error("글을 찾을 수 없습니다.");
-  return toPost(issue);
+  const post = toPost(issue);
+  if (!isAllowedAuthor(post.author)) throw new Error("글을 찾을 수 없습니다.");
+  return post;
+}
+
+/**
+ * Resolve the GitHub account a token belongs to. Used to gate the write UI so
+ * only the site owner can publish. Returns the login, or null if the token is
+ * missing/invalid. Authenticated, so it doesn't consume the anon rate limit.
+ */
+export async function verifyToken(token = getToken()): Promise<string | null> {
+  if (!token) return null;
+  try {
+    const res = await fetch("https://api.github.com/user", { headers: headers(token) });
+    if (!res.ok) return null;
+    const data = (await res.json()) as { login?: string };
+    return data.login ?? null;
+  } catch {
+    return null;
+  }
 }
 
 export async function createPost(input: {
