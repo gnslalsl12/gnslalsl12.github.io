@@ -1,17 +1,41 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { CalendarDays, PenLine, Tag } from "lucide-react";
-import { posts } from "../lib/blog";
+import { AlertCircle, CalendarDays, Loader2, PenLine, Tag } from "lucide-react";
+import { fetchPosts, type BlogPost } from "../lib/blog";
 
-function formatDate(date: string) {
-  if (!date) return "";
-  const d = new Date(date);
+function formatDate(iso: string) {
+  if (!iso) return "";
+  const d = new Date(iso);
   return Number.isNaN(d.getTime())
-    ? date
+    ? iso
     : d.toLocaleDateString("ko-KR", { year: "numeric", month: "long", day: "numeric" });
 }
 
 export default function Blog() {
+  const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    let alive = true;
+    setStatus("loading");
+    fetchPosts()
+      .then((p) => {
+        if (!alive) return;
+        setPosts(p);
+        setStatus("ready");
+      })
+      .catch((e: unknown) => {
+        if (!alive) return;
+        setError(e instanceof Error ? e.message : String(e));
+        setStatus("error");
+      });
+    return () => {
+      alive = false;
+    };
+  }, []);
+
   return (
     <div className="container-x pb-20 pt-28">
       {/* header */}
@@ -25,29 +49,47 @@ export default function Blog() {
             개발하며 배운 것, 프로젝트 회고, 자잘한 트러블슈팅을 남깁니다.
           </p>
         </div>
-        <Link to="/blog/write" className="btn btn-ghost">
+        <Link to="/blog/write" className="btn btn-primary">
           <PenLine size={16} />
           글 작성
         </Link>
       </header>
 
-      {/* list */}
-      {posts.length === 0 ? (
-        <p className="mt-16 text-center text-muted">아직 작성된 글이 없습니다.</p>
-      ) : (
+      {/* states */}
+      {status === "loading" && (
+        <div className="mt-20 flex items-center justify-center gap-2 text-muted">
+          <Loader2 size={18} className="animate-spin" />
+          글을 불러오는 중…
+        </div>
+      )}
+
+      {status === "error" && (
+        <div className="mt-16 flex flex-col items-center gap-3 text-center">
+          <AlertCircle size={28} className="text-red-400" />
+          <p className="text-muted">{error}</p>
+        </div>
+      )}
+
+      {status === "ready" && posts.length === 0 && (
+        <div className="mt-16 flex flex-col items-center gap-4 text-center">
+          <p className="text-muted">아직 작성된 글이 없습니다.</p>
+          <Link to="/blog/write" className="btn btn-ghost">
+            <PenLine size={16} />첫 글 작성하기
+          </Link>
+        </div>
+      )}
+
+      {status === "ready" && posts.length > 0 && (
         <div className="mt-12 grid gap-4 sm:grid-cols-2">
           {posts.map((post, i) => (
             <motion.div
-              key={post.slug}
+              key={post.number}
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.4, delay: 0.04 * i }}
             >
-              <Link
-                to={`/blog/${post.slug}`}
-                className="bento group flex h-full flex-col p-6"
-              >
+              <Link to={`/blog/${post.number}`} className="bento group flex h-full flex-col p-6">
                 <div className="flex items-center gap-2 text-xs text-muted">
                   <CalendarDays size={14} />
                   {formatDate(post.date)}
@@ -55,9 +97,11 @@ export default function Blog() {
                 <h2 className="mt-3 text-xl font-bold transition-colors group-hover:text-brand">
                   {post.title}
                 </h2>
-                <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-muted">
-                  {post.excerpt}
-                </p>
+                {post.excerpt && (
+                  <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-muted">
+                    {post.excerpt}
+                  </p>
+                )}
                 {post.tags.length > 0 && (
                   <div className="mt-4 flex flex-wrap gap-2">
                     {post.tags.map((t) => (

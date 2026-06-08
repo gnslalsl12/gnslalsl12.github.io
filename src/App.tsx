@@ -27,7 +27,7 @@ export default function App() {
           <Route path="/tools" element={<Tools />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/write" element={<BlogWrite />} />
-          <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="/blog/:number" element={<BlogPost />} />
           <Route path="*" element={<Portfolio />} />
         </Routes>
       </main>

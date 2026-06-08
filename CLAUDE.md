@@ -10,7 +10,7 @@
 - **라우트**
   - `/` — 포트폴리오 (Hero · About · Skills · Projects · Contact)
   - `/tools` — 도구함 14종 (전부 브라우저 로컬 저장, 설치 불필요)
-  - `/blog` · `/blog/:slug` · `/blog/write` — 블로그 (목록 / 상세 / 작성 도우미)
+  - `/blog` · `/blog/:number` · `/blog/write` — 블로그 (목록 / 상세 / 작성·게시, GitHub Issues 기반)
 
 ## 기술 스택
 
@@ -46,7 +46,6 @@ src/
   sections/     포트폴리오 섹션 (Hero, About, Skills, Projects, ProjectModal, Contact)
   pages/        라우트 단위 페이지 (Portfolio, Tools, Blog …)
   tools/        도구 14종 + registry
-  content/blog/ 블로그 글 (.md, frontmatter 포함)
   data/         projects, skills 등 정적 데이터
   lib/          유틸 (cn, useLocalStorage, sound, scroll)
   assets/       이미지
@@ -63,21 +62,18 @@ src/
   `prefers-reduced-motion`을 존중할 것.
 - **언어**: UI 카피는 한국어가 기본. 코드 주석/식별자는 영어.
 
-## 블로그 (Markdown 방식)
+## 블로그 (GitHub Issues 방식)
 
-- 글은 `src/content/blog/*.md`. 상단에 frontmatter:
-  ```md
-  ---
-  title: 제목
-  date: 2026-06-08
-  tags: [react, vite]
-  excerpt: 한 줄 요약
-  ---
-  본문(마크다운)…
-  ```
-- `import.meta.glob(..., { query: '?raw', eager: true })`로 빌드 시 로드.
-- `/blog/write`는 정적 사이트 특성상 **작성 도우미**: 입력 → 미리보기 →
-  완성된 `.md` 내용/파일명 생성 → 사용자가 `src/content/blog/`에 커밋하여 게시.
+- 백엔드가 없으므로 글은 이 저장소의 **GitHub 이슈**(`blog` 라벨)로 저장됨.
+- 사이트는 **런타임에 GitHub REST API로 이슈를 읽어** 렌더링 → 재빌드 없이 즉시 반영.
+  공개 저장소 읽기는 인증 불필요(비로그인 60req/시간/IP, 60초 메모리 캐시 적용).
+- 메타데이터: 제목=이슈 title, 날짜=created_at, 태그=본문 맨 위
+  `<!-- tags: a, b -->` 주석(렌더 시 제거), 발췌=본문 앞부분 자동 생성, slug=이슈 번호.
+- 라우트: `/blog`(목록) · `/blog/:number`(상세) · `/blog/write`(작성·게시).
+- `/blog/write`는 **실제 게시**: 사용자 GitHub 토큰(localStorage에만 저장, `public_repo`
+  권한)으로 GitHub Issues API에 이슈를 생성 → 즉시 게시.
+- 핵심 로직은 `src/lib/blog.ts` (`fetchPosts`/`fetchPost`/`createPost`, 토큰 저장).
+- 본문 렌더는 `react-markdown` + `remark-gfm`, 스타일은 `index.css`의 `.markdown`.
 
 ## 배포 주의
 
