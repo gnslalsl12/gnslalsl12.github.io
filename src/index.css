@@ -341,9 +341,10 @@
   display: flex;
   width: max-content;
   white-space: nowrap;
+  /* Per-item right padding (instead of flex gap) keeps the duplicated track
+     perfectly seamless, so the -50% loop has no jump. */
+  animation: marquee 28s linear infinite;
 }
-/* Per-item right padding (instead of flex gap) keeps the duplicated track
-   perfectly seamless, so the -50% loop has no jump. */
 
 /* Fade the marquee edges so the scrolling text doesn't look abruptly cut. */
 .marquee-mask {
@@ -391,15 +392,18 @@
   stroke-dashoffset: 100;
   animation: ladder-draw 0.9s ease forwards;
 }
-@media (prefers-reduced-motion: no-preference) {
-  .marquee-track { animation: marquee 28s linear infinite; }
-}
-
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
+  }
+  /* The skill marquee is an intentional, continuous decorative scroll the site
+     owner wants visible at all times, so it opts out of the reduced-motion
+     reset above. (Framer Motion entrance animations still respect the setting
+     via MotionConfig in main.tsx.) */
+  .marquee-track {
+    animation: marquee 28s linear infinite !important;
   }
 }
