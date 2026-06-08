@@ -141,13 +141,15 @@ export default function ProjectModal({ project, onClose }: Props) {
             {/* Skills */}
             <div className="mt-8">
               <h4 className="eyebrow">사용 기술</h4>
-              <div className="mt-3 space-y-3">
+              <div className="mt-3 space-y-4">
                 {project.skills.map((s) => (
-                  <div key={s.group} className="flex flex-wrap items-center gap-2">
-                    <span className="w-20 shrink-0 text-xs font-semibold text-muted">{s.group}</span>
-                    {s.items.map((item) => (
-                      <span key={item} className="chip">{item}</span>
-                    ))}
+                  <div key={s.group}>
+                    <p className="text-xs font-semibold text-muted">{s.group}</p>
+                    <div className="mt-2 flex flex-wrap gap-2">
+                      {s.items.map((item) => (
+                        <span key={item} className="chip">{item}</span>
+                      ))}
+                    </div>
                   </div>
                 ))}
               </div>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { LayoutGrid, Menu, X } from "lucide-react";
+import { BookOpen, Menu, X } from "lucide-react";
 import { cn } from "../lib/cn";
 
 const SECTIONS = [
@@ -62,14 +62,14 @@ export default function Navbar() {
             </button>
           ))}
           <Link
-            to="/tools"
+            to="/blog"
             className={cn(
               "btn ml-2 px-3.5 py-2 text-sm",
-              location.pathname === "/tools" ? "btn-primary" : "btn-ghost"
+              location.pathname.startsWith("/blog") ? "btn-primary" : "btn-ghost"
             )}
           >
-            <LayoutGrid size={16} />
-            Toolbox
+            <BookOpen size={16} />
+            Blog
           </Link>
         </div>
 
@@ -95,12 +95,12 @@ export default function Navbar() {
             </button>
           ))}
           <Link
-            to="/tools"
+            to="/blog"
             onClick={() => setOpen(false)}
             className="btn btn-primary mt-1 w-full"
           >
-            <LayoutGrid size={16} />
-            Toolbox
+            <BookOpen size={16} />
+            Blog
           </Link>
         </div>
       )}
