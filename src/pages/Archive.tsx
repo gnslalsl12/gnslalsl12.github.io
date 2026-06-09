@@ -1,6 +1,6 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
   AlertCircle,
   ArrowUpRight,
@@ -26,6 +26,12 @@ const CATEGORY_ICON: Record<string, typeof FileText> = {
   travel: Plane,
 };
 
+// Tapping the page title this many times in quick succession reveals the
+// upload entry (kept hidden from the main UI). Publishing still requires the
+// owner's GitHub token.
+const SECRET_TAPS = 5;
+const TAP_RESET_MS = 1200;
+
 function formatDate(iso: string) {
   if (!iso) return "";
   const d = new Date(iso);
@@ -39,6 +45,24 @@ export default function Archive() {
   const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
   const [error, setError] = useState("");
   const [canUpload, setCanUpload] = useState(false);
+  const [secretOpen, setSecretOpen] = useState(false);
+  const reduceMotion = useReducedMotion();
+  const tapsRef = useRef(0);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+
+  const handleTitleTap = () => {
+    if (secretOpen) return;
+    tapsRef.current += 1;
+    if (timerRef.current) clearTimeout(timerRef.current);
+    if (tapsRef.current >= SECRET_TAPS) {
+      tapsRef.current = 0;
+      setSecretOpen(true);
+      return;
+    }
+    timerRef.current = setTimeout(() => {
+      tapsRef.current = 0;
+    }, TAP_RESET_MS);
+  };
 
   useEffect(() => {
     let alive = true;
@@ -79,22 +103,37 @@ export default function Archive() {
 
   return (
     <div className="container-x pb-20 pt-28">
-      <header className="flex flex-wrap items-end justify-between gap-6">
-        <div className="max-w-2xl">
-          <span className="eyebrow">Archive</span>
-          <h1 className="mt-3 text-4xl font-bold sm:text-5xl">
-            문서 <span className="text-gradient">아카이브</span>
-          </h1>
-          <p className="mt-4 text-pretty text-muted">
-            개발 지식부터 여행 정보까지, 정리해 둔 문서들을 종류별로 모아두는 공간입니다.
-          </p>
-        </div>
-        {canUpload && (
-          <Link to="/archive/upload" className="btn btn-primary">
-            <Upload size={16} />
-            문서 올리기
-          </Link>
-        )}
+      <header className="max-w-2xl">
+        <span className="eyebrow">Archive</span>
+        <h1
+          onClick={handleTitleTap}
+          className="mt-3 cursor-pointer select-none text-4xl font-bold sm:text-5xl"
+        >
+          문서 <span className="text-gradient">아카이브</span>
+        </h1>
+        <p className="mt-4 text-pretty text-muted">
+          개발 지식부터 여행 정보까지, 정리해 둔 문서들을 종류별로 모아두는 공간입니다.
+        </p>
+
+        {/* Upload entry — visible to the verified owner, or revealed by tapping
+            the title 5 times. Publishing itself still requires the owner token. */}
+        <AnimatePresence initial={false}>
+          {(canUpload || secretOpen) && (
+            <motion.div
+              key="upload-entry"
+              initial={reduceMotion ? false : { opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={reduceMotion ? undefined : { opacity: 0, height: 0 }}
+              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              className="overflow-hidden"
+            >
+              <Link to="/archive/upload" className="btn btn-primary mt-5">
+                <Upload size={16} />
+                문서 올리기
+              </Link>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
 
       {status === "loading" && (
