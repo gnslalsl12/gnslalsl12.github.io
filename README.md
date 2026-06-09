@@ -14,6 +14,9 @@
 - **`/blog` 블로그** — 글 목록(`/blog`)·상세(`/blog/:number`)·작성/게시(`/blog/write`)
   - 백엔드가 없어 글은 **GitHub 이슈**(`blog` 라벨)로 저장되고, 런타임에 GitHub API로
     읽어 렌더링합니다. `/blog/write` 에서 본인 토큰으로 게시하면 **즉시** 반영됩니다.
+- **`/archive` 문서 아카이브** — Claude로 만든 완성형 HTML 문서를 종류별로 모아두는 허브
+  - 문서는 `public/archive/<category>/<slug>.html` 정적 파일로 서빙되고, `/archive/upload`
+    에서 본인 토큰으로 업로드하면 `main`에 커밋 → GitHub Actions 자동 배포로 반영됩니다.
 
 ## 🧰 기술 스택
 

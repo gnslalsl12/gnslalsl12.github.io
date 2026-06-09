@@ -8,6 +8,8 @@ import Tools from "./pages/Tools";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import BlogWrite from "./pages/BlogWrite";
+import Archive from "./pages/Archive";
+import ArchiveUpload from "./pages/ArchiveUpload";
 
 export default function App() {
   const location = useLocation();
@@ -28,6 +30,8 @@ export default function App() {
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/write" element={<BlogWrite />} />
           <Route path="/blog/:number" element={<BlogPost />} />
+          <Route path="/archive" element={<Archive />} />
+          <Route path="/archive/upload" element={<ArchiveUpload />} />
           <Route path="*" element={<Portfolio />} />
         </Routes>
       </main>

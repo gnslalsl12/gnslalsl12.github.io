@@ -11,6 +11,7 @@
   - `/` — 포트폴리오 (Hero · About · Skills · Projects · Contact)
   - `/tools` — 도구함 14종 (전부 브라우저 로컬 저장, 설치 불필요)
   - `/blog` · `/blog/:number` · `/blog/write` — 블로그 (목록 / 상세 / 작성·게시, GitHub Issues 기반)
+  - `/archive` · `/archive/upload` — 문서 아카이브 (standalone HTML 문서 허브 / 업로드)
 
 ## 기술 스택
 
@@ -75,10 +76,27 @@ src/
 - 핵심 로직은 `src/lib/blog.ts` (`fetchPosts`/`fetchPost`/`createPost`, 토큰 저장).
 - 본문 렌더는 `react-markdown` + `remark-gfm`, 스타일은 `index.css`의 `.markdown`.
 
+## 문서 아카이브 (Archive)
+
+- Claude로 만든 **완성된 HTML 문서**를 그대로 한 페이지로 보여주는 허브.
+- 문서는 **실제 정적 파일** `public/archive/<category>/<slug>.html` 로 저장되어
+  `/archive/<category>/<slug>.html` 로 직접 서빙됨(원본 스타일·스크립트 그대로).
+- 목록은 매니페스트 `public/archive/index.json`(`docs[]`: slug·title·category·
+  description·path·date)로 관리. 허브(`/archive`)가 런타임에 읽어 카테고리별로 묶어 표시.
+- 카테고리 정의는 `src/lib/archive.ts`의 `CATEGORIES`(id↔라벨).
+- `/archive/upload`는 **소유자 전용 자가 업로드**: HTML 파일 선택 → 토큰으로
+  `main`에 HTML + 매니페스트를 **한 커밋**(Git Data API)으로 푸시 → GitHub Actions가
+  자동 빌드·배포(`.github/workflows/deploy.yml`) → 1~2분 뒤 반영.
+- 핵심 로직 `src/lib/archive.ts` (`fetchDocs`/`publishDoc`/`commitFiles`).
+  토큰·소유자 검증은 블로그와 동일(`blog.ts`의 `getToken`/`verifyToken`/`isAllowedAuthor` 재사용).
+
 ## 배포 주의
 
 - 사용자 페이지라 `base: "/"`. 새로고침 시 클라이언트 라우트가 동작하도록
   `public/404.html` SPA 리다이렉트 기법이 적용되어 있음 — 라우트 추가 시 영향 없음.
+- **자동 배포**: `main`에 푸시되면 `.github/workflows/deploy.yml`이 빌드 후 `gh-pages`로
+  배포함. 따라서 평소엔 수동 `npm run deploy` 불필요(둘 다 gh-pages 브랜치를 서빙).
+  로컬에서 즉시 배포하고 싶을 때만 `npm run deploy` 사용.
 
 ## SessionStart 훅
 
