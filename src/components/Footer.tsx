@@ -1,5 +1,4 @@
-import { Link } from "react-router-dom";
-import { Github, Mail, LayoutGrid } from "lucide-react";
+import { Github, Mail } from "lucide-react";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -26,14 +25,6 @@ export default function Footer() {
           >
             <Mail size={18} />
           </a>
-          <Link
-            to="/tools"
-            className="btn btn-ghost gap-1.5 px-3 py-1.5 text-xs"
-            aria-label="Toolbox 열기"
-          >
-            <LayoutGrid size={14} />
-            Toolbox
-          </Link>
         </div>
       </div>
     </footer>

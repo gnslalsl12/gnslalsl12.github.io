@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Check, Copy, Github, Mail, Code2, ArrowUpRight, LayoutGrid } from "lucide-react";
+import { Check, Copy, Github, Mail, Code2, ArrowUpRight } from "lucide-react";
 import SectionHeader from "../components/SectionHeader";
 import Reveal from "../components/Reveal";
 
@@ -89,24 +88,6 @@ export default function Contact() {
               </div>
               <ArrowUpRight size={18} className="text-muted transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
-          </Reveal>
-
-          <Reveal delay={0.15} className="sm:col-span-2">
-            <Link
-              to="/tools"
-              className="bento group flex items-center justify-between p-6"
-            >
-              <div className="flex items-center gap-4">
-                <span className="grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br from-accent/30 to-brand/20 ring-1 ring-white/10">
-                  <LayoutGrid size={22} className="text-accent" />
-                </span>
-                <div>
-                  <p className="text-xs text-muted">개인 도구함</p>
-                  <p className="font-semibold">보드게임 타이머 · 카운터 · 유틸리티 모음</p>
-                </div>
-              </div>
-              <ArrowUpRight size={18} className="text-muted transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </Link>
           </Reveal>
         </div>
       </div>

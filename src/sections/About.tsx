@@ -1,8 +1,24 @@
-import { Lightbulb, Feather, Rocket, MonitorSmartphone, Briefcase } from "lucide-react";
+import { useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import {
+  Lightbulb,
+  Feather,
+  Rocket,
+  MonitorSmartphone,
+  Briefcase,
+  LayoutGrid,
+  Library,
+} from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import profileImage from "../assets/images/profileImage.jpg";
 import SectionHeader from "../components/SectionHeader";
 import Reveal from "../components/Reveal";
+
+// Tapping the profile photo this many times in quick succession reveals the
+// hidden navigation to the Toolbox & Archive pages (kept off the main UI).
+const SECRET_TAPS = 5;
+const TAP_RESET_MS = 1200;
 
 type Value = { title: string; icon: LucideIcon; desc: string };
 
@@ -14,6 +30,25 @@ const VALUES: Value[] = [
 ];
 
 export default function About() {
+  const reduceMotion = useReducedMotion();
+  const [secretOpen, setSecretOpen] = useState(false);
+  const tapsRef = useRef(0);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+
+  const handleProfileTap = () => {
+    if (secretOpen) return;
+    tapsRef.current += 1;
+    if (timerRef.current) clearTimeout(timerRef.current);
+    if (tapsRef.current >= SECRET_TAPS) {
+      tapsRef.current = 0;
+      setSecretOpen(true);
+      return;
+    }
+    timerRef.current = setTimeout(() => {
+      tapsRef.current = 0;
+    }, TAP_RESET_MS);
+  };
+
   return (
     <section className="section">
       <div className="container-x">
@@ -31,15 +66,46 @@ export default function About() {
           {/* Profile card */}
           <Reveal className="md:col-span-1 md:row-span-2">
             <article className="bento flex h-full flex-col p-6">
-              <div className="relative mx-auto aspect-square w-40 overflow-hidden rounded-2xl ring-1 ring-white/10 md:w-full">
+              <button
+                type="button"
+                onClick={handleProfileTap}
+                aria-label="정훈 프로필"
+                className="group relative mx-auto block aspect-square w-40 cursor-pointer select-none overflow-hidden rounded-2xl ring-1 ring-white/10 md:w-full"
+              >
                 <img
                   src={profileImage}
                   alt="정훈 프로필"
                   className="h-full w-full object-cover"
                   loading="lazy"
+                  draggable={false}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-bg/70 to-transparent" />
-              </div>
+              </button>
+
+              {/* Hidden navigation — revealed by tapping the photo 5 times */}
+              <AnimatePresence initial={false}>
+                {secretOpen && (
+                  <motion.div
+                    key="secret-nav"
+                    initial={reduceMotion ? false : { opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={reduceMotion ? undefined : { opacity: 0, height: 0 }}
+                    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                    className="overflow-hidden"
+                  >
+                    <div className="mt-4 flex flex-col gap-2">
+                      <Link to="/tools" className="btn btn-ghost w-full justify-start">
+                        <LayoutGrid size={16} className="text-accent" />
+                        Toolbox
+                      </Link>
+                      <Link to="/archive" className="btn btn-ghost w-full justify-start">
+                        <Library size={16} className="text-brand" />
+                        Archive
+                      </Link>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
               <div className="mt-5">
                 <h3 className="text-2xl font-bold">
                   SW 개발자 <span className="text-gradient">정훈</span>
