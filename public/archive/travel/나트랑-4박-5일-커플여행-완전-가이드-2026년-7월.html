@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>나트랑 4박 5일 커플여행 완전 가이드 (2026년 7월)</title>
+<!--
+========================================================================
+문서 정보
+========================================================================
+최초 생성일시 : 2026-06-09 (KST)
+최종 수정일시 : 2026-06-09 (KST)
+수정 이력 :
+  - 2026-06-09 : 최초 작성 (심층 리서치 기반 종합 가이드 — 날씨·항공·숙박·맛집·
+                 액티비티·볼거리·쇼핑·실용정보·커플추천·일정·예산·체크리스트)
+작성 관점   : 2026년 7월 11~15일 출발, 인천/김포 출발, 휴양·먹거리·관광 테마의
+              커플(2인) 여행자 기준. 해변 럭셔리 리조트 선호, 호핑·스노클링 +
+              맛집 탐방 중점. 예산 3단계(가성비/중간/럭셔리) 제시.
+========================================================================
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  :root{
+    --sea:#00897B;          /* 바다 청록 (primary) */
+    --deep:#004D40;         /* 심해 그린 */
+    --sunset:#FF7043;       /* 일몰 주황 (accent) */
+    --gold:#F9A825;         /* 하이라이트 골드 */
+    --coral:#EF5777;        /* 커플 코랄 */
+    --success:#2E8B57;
+    --warn:#C0392B;
+    --info:#2980B9;
+    --ink:#1F2D2B;          /* 본문 텍스트 */
+    --muted:#5C6B68;
+    --line:#E4E0D6;
+    --sand:#FBF7EF;         /* 배경 모래색 */
+    --card:#FFFFFF;
+    --shadow:0 6px 22px rgba(0,77,64,.08);
+    --shadow-lg:0 14px 40px rgba(0,77,64,.14);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:"Pretendard","IBM Plex Sans KR",-apple-system,system-ui,sans-serif;
+    color:var(--ink);
+    background:var(--sand);
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{font-family:"Gowun Batang",serif;line-height:1.3;letter-spacing:-.01em}
+  a{color:var(--sea);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;
+    background:
+      radial-gradient(1200px 400px at 85% -10%, rgba(249,168,37,.45), transparent 60%),
+      linear-gradient(135deg, var(--deep) 0%, var(--sea) 42%, #2BB7A3 65%, var(--sunset) 115%);
+    color:#fff;
+    padding:74px 0 64px;
+    overflow:hidden;
+  }
+  .hero::after{
+    content:"";position:absolute;left:0;right:0;bottom:-1px;height:90px;
+    background:radial-gradient(80px 90px at 50% 0,transparent 70%, var(--sand) 71%);
+    background-size:160px 90px;
+    opacity:.0;
+  }
+  .hero .eyebrow{
+    display:inline-block;font-size:.82rem;letter-spacing:.32em;text-transform:uppercase;
+    opacity:.92;font-weight:700;margin-bottom:14px;
+    border:1px solid rgba(255,255,255,.45);padding:5px 14px;border-radius:999px;
+  }
+  .hero h1{font-size:clamp(2.1rem,5.4vw,3.5rem);margin:0 0 12px;font-weight:700;color:#fff;text-shadow:0 2px 18px rgba(0,40,34,.3)}
+  .hero .sub{font-size:clamp(1.02rem,2.2vw,1.28rem);opacity:.96;max-width:760px;margin:0 0 26px;font-weight:300}
+  .hero-badges{display:flex;flex-wrap:wrap;gap:10px}
+  .hero-badges .hb{
+    background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.34);
+    backdrop-filter:blur(4px);padding:9px 16px;border-radius:12px;font-size:.92rem;font-weight:500;
+  }
+  .hero-badges .hb b{font-weight:700}
+
+  /* ===== META BOX ===== */
+  .meta{
+    margin:-34px auto 0;position:relative;z-index:3;
+    background:var(--card);border-radius:16px;box-shadow:var(--shadow-lg);
+    border:1px solid var(--line);padding:20px 26px;
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px 28px;
+  }
+  .meta .m-item{font-size:.9rem}
+  .meta .m-item .lbl{display:block;font-size:.72rem;letter-spacing:.06em;color:var(--sea);font-weight:700;text-transform:uppercase;margin-bottom:3px}
+  .meta .m-item .val{color:var(--muted)}
+
+  /* ===== SECTION SHELL ===== */
+  section{padding:46px 0 8px}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:8px}
+  .sec-head .num{
+    font-family:"Gowun Batang",serif;font-size:1.05rem;color:#fff;
+    background:var(--sea);min-width:38px;height:38px;border-radius:11px;
+    display:inline-flex;align-items:center;justify-content:center;flex:none;box-shadow:var(--shadow)
+  }
+  h2.sec-title{font-size:1.62rem;margin:0;color:var(--deep)}
+  .sec-desc{color:var(--muted);margin:4px 0 22px;font-size:.98rem}
+
+  /* ===== TOC ===== */
+  .toc{
+    background:linear-gradient(180deg,#fff, #FCFAF4);
+    border:1px solid var(--line);border-radius:16px;padding:24px 26px;box-shadow:var(--shadow);
+  }
+  .toc h2{font-size:1.18rem;margin:0 0 14px;color:var(--deep)}
+  .toc ol{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px 22px;counter-reset:t}
+  .toc ol li{counter-increment:t;font-size:.96rem}
+  .toc ol li a{display:flex;gap:10px;align-items:center;padding:7px 9px;border-radius:9px;color:var(--ink)}
+  .toc ol li a:hover{background:#EAF5F2;text-decoration:none}
+  .toc ol li a::before{content:counter(t,decimal-leading-zero);font-family:"Gowun Batang",serif;color:var(--sunset);font-weight:700;font-size:.84rem}
+
+  /* ===== TLDR ===== */
+  .tldr{background:linear-gradient(135deg,#E8F6F3, #FDF1E7);border-radius:18px;padding:26px 28px;border:1px solid #D6EBE6}
+  .tldr h2{margin:0 0 14px;color:var(--deep);font-size:1.3rem}
+  .tldr ul{margin:0;padding:0;list-style:none;display:grid;gap:12px}
+  .tldr li{position:relative;padding-left:32px;font-size:1rem}
+  .tldr li::before{content:"✦";position:absolute;left:4px;top:1px;color:var(--gold);font-size:1.05rem}
+  .tldr b{color:var(--deep)}
+
+  /* ===== QUICK FACTS ===== */
+  .qf{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:16px}
+  .qf .qf-card{
+    background:var(--card);border-radius:14px;padding:20px 18px;text-align:center;
+    border:1px solid var(--line);border-top:4px solid var(--sea);box-shadow:var(--shadow)
+  }
+  .qf .qf-card:nth-child(2){border-top-color:var(--sunset)}
+  .qf .qf-card:nth-child(3){border-top-color:var(--gold)}
+  .qf .qf-card:nth-child(4){border-top-color:var(--info)}
+  .qf .ic{font-size:1.7rem;margin-bottom:6px}
+  .qf .big{font-family:"Gowun Batang",serif;font-size:1.5rem;font-weight:700;color:var(--deep);line-height:1.2}
+  .qf .cap{font-size:.82rem;color:var(--muted);margin-top:4px}
+
+  /* ===== CARDS / GRID ===== */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:var(--shadow)}
+  .card.t-sea{border-top:4px solid var(--sea)}
+  .card.t-sun{border-top:4px solid var(--sunset)}
+  .card.t-gold{border-top:4px solid var(--gold)}
+  .card.t-coral{border-top:4px solid var(--coral)}
+  .card h3{margin:0 0 8px;font-size:1.12rem;color:var(--deep)}
+  .card p{margin:6px 0;font-size:.95rem}
+  .card ul{margin:8px 0 0;padding-left:18px}
+  .card ul li{margin:5px 0;font-size:.94rem}
+
+  /* ===== BADGES ===== */
+  .badge{display:inline-block;font-size:.72rem;font-weight:700;padding:2px 9px;border-radius:999px;vertical-align:middle;letter-spacing:.01em;line-height:1.5}
+  .badge.hot{background:#FDEAE4;color:#D84315}
+  .badge.must{background:#FFF4D6;color:#B8860B}
+  .badge.couple{background:#FCE4EC;color:#C2185B}
+  .badge.sea{background:#E0F2F1;color:#00695C}
+  .badge.cash{background:#EDE7F6;color:#5E35B1}
+  .badge.korean{background:#E8F5E9;color:#2E7D32}
+
+  /* ===== CALLOUT ===== */
+  .callout{border-radius:12px;padding:15px 18px 15px 46px;position:relative;margin:16px 0;font-size:.94rem;border:1px solid}
+  .callout::before{position:absolute;left:15px;top:14px;font-size:1.15rem}
+  .callout.ok{background:#EAF7EF;border-color:#BfE5CC;color:#1E5E3A}
+  .callout.ok::before{content:"✅"}
+  .callout.warn{background:#FCEDEC;border-color:#F2C6C2;color:#922}
+  .callout.warn::before{content:"⚠️"}
+  .callout.info{background:#EAF3FB;border-color:#C5DEF2;color:#1B4F72}
+  .callout.info::before{content:"ℹ️"}
+  .callout b{color:inherit}
+
+  /* ===== TABLE ===== */
+  .tbl-wrap{overflow-x:auto;border-radius:14px;box-shadow:var(--shadow);border:1px solid var(--line);margin:14px 0}
+  table{border-collapse:collapse;width:100%;background:var(--card);font-size:.92rem;min-width:560px}
+  thead th{background:var(--deep);color:#fff;font-family:"Pretendard",sans-serif;font-weight:600;padding:12px 14px;text-align:left;font-size:.88rem}
+  tbody td{padding:11px 14px;border-top:1px solid var(--line);vertical-align:top}
+  tbody tr:nth-child(even){background:#FBFAF6}
+  tbody tr:hover{background:#EFF8F6}
+  td .sub{display:block;color:var(--muted);font-size:.82rem;margin-top:3px}
+  tr.sum td{background:#FFF8E1;font-weight:700;color:var(--deep);border-top:2px solid var(--gold)}
+  .stars{color:var(--gold);letter-spacing:1px}
+
+  /* ===== TIMELINE / DAY ===== */
+  .day{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 24px;margin:16px 0;box-shadow:var(--shadow)}
+  .day h3{display:flex;align-items:center;gap:12px;margin:0 0 14px;font-size:1.18rem;color:var(--deep)}
+  .day-tag{background:linear-gradient(135deg,var(--sea),var(--sunset));color:#fff;font-family:"Pretendard";font-size:.78rem;font-weight:700;padding:5px 12px;border-radius:999px;letter-spacing:.05em;flex:none}
+  ul.timeline{list-style:none;margin:0;padding:0;position:relative}
+  ul.timeline::before{content:"";position:absolute;left:62px;top:6px;bottom:6px;width:2px;background:linear-gradient(var(--sea),var(--sunset));opacity:.35}
+  ul.timeline li{position:relative;padding:9px 0 9px 86px;font-size:.95rem;min-height:22px}
+  ul.timeline li .time{position:absolute;left:0;top:8px;width:54px;text-align:right;font-weight:700;color:var(--sea);font-size:.85rem;font-variant-numeric:tabular-nums}
+  ul.timeline li::before{content:"";position:absolute;left:57px;top:13px;width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid var(--sunset)}
+  .planb{margin-top:12px;background:#F4FBFA;border:1px dashed #B6DED7;border-radius:10px;padding:10px 14px;font-size:.9rem;color:var(--muted)}
+  .planb b{color:var(--info)}
+
+  /* ===== BUDGET CARDS ===== */
+  .budget3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:8px 0 18px}
+  .b-card{border-radius:16px;padding:22px 20px;color:#fff;box-shadow:var(--shadow-lg);position:relative;overflow:hidden}
+  .b-card.eco{background:linear-gradient(150deg,#26A69A,#00897B)}
+  .b-card.mid{background:linear-gradient(150deg,#FFB74D,#FB8C00)}
+  .b-card.lux{background:linear-gradient(150deg,#7E57C2,#5E35B1)}
+  .b-card .tier{font-size:.82rem;letter-spacing:.18em;text-transform:uppercase;opacity:.9;font-weight:700}
+  .b-card .amt{font-family:"Gowun Batang",serif;font-size:2rem;font-weight:700;margin:6px 0 2px}
+  .b-card .amt small{font-size:.95rem;font-weight:400;opacity:.9}
+  .b-card .note{font-size:.86rem;opacity:.92}
+
+  /* ===== CHECKLIST ===== */
+  .checklist{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+  .checklist li{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 14px 10px 40px;position:relative;font-size:.94rem}
+  .checklist li::before{content:"";position:absolute;left:14px;top:14px;width:14px;height:14px;border:2px solid var(--sea);border-radius:4px}
+  .timeline-pills{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+  .pill-card{border:1px solid var(--line);border-radius:14px;padding:16px 18px;background:#fff;box-shadow:var(--shadow);border-left:5px solid var(--sea)}
+  .pill-card:nth-child(2){border-left-color:var(--gold)}
+  .pill-card:nth-child(3){border-left-color:var(--sunset)}
+  .pill-card:nth-child(4){border-left-color:var(--coral)}
+  .pill-card h4{margin:0 0 8px;font-size:1rem;color:var(--deep)}
+  .pill-card ul{margin:0;padding-left:16px;font-size:.9rem}
+  .pill-card ul li{margin:4px 0}
+
+  /* ===== SOURCES / FOOTER ===== */
+  .sources{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 24px;box-shadow:var(--shadow);font-size:.9rem}
+  .sources ul{margin:6px 0 0;padding-left:18px;columns:2;column-gap:34px}
+  .sources li{margin:5px 0;break-inside:avoid}
+  footer{margin-top:48px;background:linear-gradient(135deg,var(--deep),var(--sea));color:#fff;padding:40px 0 34px;text-align:center}
+  footer .fmsg{font-family:"Gowun Batang",serif;font-size:1.3rem;margin:0 0 10px}
+  footer .fsub{opacity:.9;font-size:.95rem;margin:0 0 18px}
+  footer .fmeta{font-size:.8rem;opacity:.75;border-top:1px solid rgba(255,255,255,.2);padding-top:16px;margin-top:6px}
+
+  .note-inline{font-size:.86rem;color:var(--muted)}
+  .anchor{scroll-margin-top:20px}
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width:760px){
+    .grid2,.grid3,.budget3{grid-template-columns:1fr}
+    .hero{padding:56px 0 50px}
+    .meta{grid-template-columns:1fr 1fr}
+    .sources ul{columns:1}
+    ul.timeline::before{left:54px}
+    ul.timeline li{padding-left:78px}
+    ul.timeline li::before{left:49px}
+  }
+  @media (max-width:480px){
+    .meta{grid-template-columns:1fr}
+    .qf{grid-template-columns:1fr 1fr}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== HERO ===================== -->
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Nha Trang · Vietnam</span>
+    <h1>나트랑 4박 5일 커플여행 완전 가이드</h1>
+    <p class="sub">바다 위 호핑과 일몰 디너, 해산물 맛집까지. 2026년 7월, 청록빛 나트랑에서의 4박 5일을 이 문서 하나로 준비하실 수 있도록 정리해 드렸습니다.</p>
+    <div class="hero-badges">
+      <span class="hb">🗓️ <b>2026.7.11~15</b> · 4박 5일</span>
+      <span class="hb">💑 <b>커플 2인</b></span>
+      <span class="hb">🏖️ <b>휴양·먹거리·관광</b></span>
+      <span class="hb">🏝️ 호핑·스노클링 + 맛집 중점</span>
+      <span class="hb">💰 1인 <b>78만 / 125만 / 220만+</b></span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- ===== META BOX ===== -->
+  <div class="meta">
+    <div class="m-item"><span class="lbl">최초 생성</span><span class="val">2026-06-09 (KST)</span></div>
+    <div class="m-item"><span class="lbl">최종 수정</span><span class="val">2026-06-09 (KST)</span></div>
+    <div class="m-item"><span class="lbl">수정 이력</span><span class="val">2026-06-09 최초 작성 (종합 가이드)</span></div>
+    <div class="m-item"><span class="lbl">작성 관점</span><span class="val">7월 출발 · 인천/김포 · 휴양형 커플 2인</span></div>
+  </div>
+
+  <!-- ===== TOC ===== -->
+  <section class="anchor" id="toc">
+    <div class="toc">
+      <h2>📑 목차</h2>
+      <ol>
+        <li><a href="#tldr">핵심 요약 (TL;DR)</a></li>
+        <li><a href="#quickfacts">Quick Facts</a></li>
+        <li><a href="#weather">7월 날씨와 시기 특성</a></li>
+        <li><a href="#flight">항공·환율·기본 비용</a></li>
+        <li><a href="#stay">숙박 (3단계)</a></li>
+        <li><a href="#food">맛집·먹거리</a></li>
+        <li><a href="#activity">액티비티 (호핑·스노클링)</a></li>
+        <li><a href="#sights">볼거리·관광지</a></li>
+        <li><a href="#shopping">쇼핑·기념품</a></li>
+        <li><a href="#info">실용 정보</a></li>
+        <li><a href="#couple">커플 맞춤 추천</a></li>
+        <li><a href="#itinerary">일자별 추천 일정</a></li>
+        <li><a href="#budget">예산표 (3단계)</a></li>
+        <li><a href="#checklist">체크리스트</a></li>
+        <li><a href="#caveats">주의사항</a></li>
+        <li><a href="#sources">참고 출처</a></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===== TL;DR ===== -->
+  <section class="anchor" id="tldr">
+    <div class="tldr">
+      <h2>✨ 핵심 요약 (TL;DR)</h2>
+      <ul>
+        <li><b>7월 나트랑은 호핑·스노클링 최적기입니다.</b> 낮 최고 30.6~32℃, 바닷물 28℃로 따뜻하고 파도가 잔잔합니다. 다만 <b>오후 스콜(소나기)</b>과 <b>극단적 자외선(UV 지수 최대 14, "Extreme")</b>에는 반드시 대비하셔야 합니다.</li>
+        <li><b>가성비가 매우 뛰어난 여행지입니다.</b> 한국인 <b>45일 무비자(2028.3.14까지)</b>, 인천 직항 약 5시간, 환율 1만 동 ≈ 약 571원입니다.</li>
+        <li><b>해변 럭셔리 리조트 + 호핑투어 + 해산물 디너</b>를 축으로 일정을 짜시면 휴양·먹거리·관광 테마를 모두 충족하실 수 있습니다.</li>
+        <li><b>예산은 1인 기준(항공·숙박 2인 분할 반영) 가성비 약 78만 원 / 중간 약 125만 원 / 럭셔리 약 220만 원 이상</b>으로 구성됩니다.</li>
+        <li><b>항공권과 럭셔리 리조트는 지금(출발 3~4개월 전) 먼저 확정</b>하시는 것이 좋습니다. 7월은 성수기라 가격 상승·매진이 빠릅니다.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== QUICK FACTS ===== -->
+  <section class="anchor" id="quickfacts">
+    <div class="sec-head"><span class="num">QF</span><h2 class="sec-title">Quick Facts</h2></div>
+    <p class="sec-desc">여행 준비 전 한눈에 확인하실 핵심 지표 4가지입니다.</p>
+    <div class="qf">
+      <div class="qf-card"><div class="ic">✈️</div><div class="big">약 5시간</div><div class="cap">인천 → 깜라인(CXR) 직항</div></div>
+      <div class="qf-card"><div class="ic">🛂</div><div class="big">45일 무비자</div><div class="cap">한국인, 2028.3.14까지</div></div>
+      <div class="qf-card"><div class="ic">🌡️</div><div class="big">30.6~32℃</div><div class="cap">7월 낮 최고 · 바닷물 28℃</div></div>
+      <div class="qf-card"><div class="ic">💱</div><div class="big">1만 동 ≈ 571원</div><div class="cap">2026.5 기준 (변동)</div></div>
+    </div>
+  </section>
+
+  <!-- ===== WEATHER ===== -->
+  <section class="anchor" id="weather">
+    <div class="sec-head"><span class="num">01</span><h2 class="sec-title">7월 날씨와 시기 특성</h2></div>
+    <p class="sec-desc">7월 중순 나트랑은 "호핑 최적기"이지만, 스콜과 자외선 대비가 여행 만족도를 좌우합니다.</p>
+
+    <div class="grid2">
+      <div class="card t-sea">
+        <h3>🌤️ 기온·바다</h3>
+        <ul>
+          <li>평균 최고 <b>30.6~32℃</b>, 최저 25~27℃ — 8월과 함께 연중 가장 더운 달입니다.</li>
+          <li>바닷물 온도 <b>약 28℃</b>, 파도 잔잔 → 수영·스노클링·호핑투어 최적입니다.</li>
+          <li>습도 약 77~84%로 높아 한낮 체감이 매우 덥습니다.</li>
+        </ul>
+      </div>
+      <div class="card t-sun">
+        <h3>🌧️ 강수·태풍 <span class="badge hot">주의</span></h3>
+        <ul>
+          <li>본격 우기·태풍은 9~12월(특히 10~11월)이라 <b>7월은 태풍 위험이 낮은 편</b>입니다.</li>
+          <li>다만 <b>오후 스콜성 소나기가 잦습니다.</b> 짧게 지나가는 형태라 일정에 치명적이진 않습니다.</li>
+          <li>대기질(AQI 약 50)은 좋은 편으로 미세먼지 우려는 낮습니다.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <b>강수량은 출처 간 편차가 큽니다.</b> 한국 여행 블로그는 "건기, 47~60mm"로 낙관적이지만, 국제 기상 통계는 7월 강수량 79~119mm·강수일 18~20일로 훨씬 높게 봅니다. 보수적으로 <b>"비교적 건조하나 오후 소나기가 잦은 시기"</b>로 보시고 우산·방수팩을 준비하시는 것이 안전합니다.
+    </div>
+    <div class="callout info">
+      <b>자외선이 극단적입니다 (UV 지수 최대 14, "Extreme").</b> SPF50+ 선크림, 모자, 선글라스, 래시가드는 선택이 아니라 필수입니다. 호핑·해변에서는 산호 친화(reef-safe) 선크림을 권해 드립니다.
+    </div>
+    <div class="callout warn">
+      <b>여름철 해파리 주의.</b> 4~7월 불해파리(fire jellyfish)가 간헐적으로 출현할 수 있습니다. 화려한 색 해파리에는 접근하지 마시고, 쏘이면 <b>바닷물 또는 식초로 15~30분 세척(민물 금지 — 독소 추가 방출)</b>하세요. 호흡곤란 시 즉시 115(구급)로 연락하셔야 합니다.
+    </div>
+  </section>
+
+  <!-- ===== FLIGHT / COST ===== -->
+  <section class="anchor" id="flight">
+    <div class="sec-head"><span class="num">02</span><h2 class="sec-title">항공·환율·기본 비용</h2></div>
+    <p class="sec-desc">인천 직항 기준 항공·환율·교통 등 기본 비용을 정리했습니다. (가격은 7월 성수기·환율 변동 반영 필요)</p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>항목</th><th>내용</th><th>비고</th></tr></thead>
+        <tbody>
+          <tr><td><b>직항 노선</b></td><td>인천(ICN) → 깜라인(CXR), <b>약 5시간</b></td><td>지방공항(대구·청주 등) 옵션 있으나 편수 적음</td></tr>
+          <tr><td><b>항공사</b></td><td>비엣젯·에어부산·진에어·티웨이·제주항공·베트남항공 등</td><td>비엣젯은 최저가이나 기내 서비스 최소·지연 후기 있음</td></tr>
+          <tr><td><b>왕복 항공권</b></td><td>7월 성수기 <b>약 35만~55만 원</b> (편도 최저 14만~16만 원대)</td><td>출발 3~4개월 전 확보 권장</td></tr>
+          <tr><td><b>공항 → 시내</b></td><td>택시 35만~50만 동(약 2만~2.8만 원), 그랩 정찰제 권장</td><td>공항버스 18번 6.5만 동(약 3,700원)</td></tr>
+          <tr><td><b>환율</b></td><td><b>1만 동 ≈ 약 571원</b> / 10만 동 ≈ 약 5,700원</td><td>2026.5 기준 · 최근 1년 동화 약 9% 절상</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note-inline">※ 환율은 작성 시점(2026년 5월) 기준이며, 최근 1년간 베트남 동이 원화 대비 약 9% 절상되어 환전 시 다소 불리해졌습니다. 실제 여행 시점 환율을 다시 확인해 주세요.</p>
+  </section>
+
+  <!-- ===== STAY ===== -->
+  <section class="anchor" id="stay">
+    <div class="sec-head"><span class="num">03</span><h2 class="sec-title">숙박 (3단계)</h2></div>
+    <p class="sec-desc">선호하신 "해변 럭셔리 리조트"를 중심으로, 3단계 가격대를 모두 제시합니다. (1박, 2인실 기준)</p>
+
+    <div class="grid3">
+      <div class="card t-sea">
+        <h3>💸 가성비 <span class="badge sea">3~4성 시내</span></h3>
+        <p><b>약 4만~9만 원/박</b></p>
+        <ul>
+          <li>시내 중심 3~4성 호텔. 쩐푸 해변·야시장 접근성 좋음</li>
+          <li>맛집 탐방·시내 관광 위주 일정에 적합</li>
+        </ul>
+      </div>
+      <div class="card t-sun">
+        <h3>🏨 중급 <span class="badge must">4~5성</span></h3>
+        <p><b>약 9만~18만 원/박</b></p>
+        <ul>
+          <li>해변·시내 4~5성. 셰라톤·노보텔 등</li>
+          <li>오션뷰 + 합리적 가격의 균형점</li>
+        </ul>
+      </div>
+      <div class="card t-coral">
+        <h3>🌴 럭셔리 <span class="badge couple">해변 리조트</span></h3>
+        <p><b>약 20만~50만 원+/박</b></p>
+        <ul>
+          <li>인터컨티넨탈(최저 약 26만 원), 아미아나(프라이빗 비치·수영장 3개), 빈펄 리조트&스파 나트랑 베이 등</li>
+          <li>커플 호캉스·데이패스·인피니티풀에 최적</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout ok">
+      아미아나 등 일부 럭셔리 리조트는 <b>체크인 33~63일 전 얼리버드 10~15% 할인</b>이 있습니다. 7월 성수기는 매진이 빠르니 리조트를 먼저 확정하시길 권합니다.
+    </div>
+  </section>
+
+  <!-- ===== FOOD ===== -->
+  <section class="anchor" id="food">
+    <div class="sec-head"><span class="num">04</span><h2 class="sec-title">맛집·먹거리</h2></div>
+    <p class="sec-desc">중점 테마인 "맛집 탐방"에 맞춰, 검증된 한국인 인기 식당을 구체적으로 정리했습니다. 가격·주소·영업시간 포함입니다.</p>
+
+    <h3 style="color:var(--deep);margin:6px 0 4px">🍜 나트랑 대표 음식</h3>
+    <p class="sec-desc">넴느엉(돼지고기 숯불꼬치 라이스페이퍼 쌈, 닌호아 명물) · 분짜까(생선어묵 쌀국수) · 반쎄오(나트랑은 오징어 반쎄오가 유명) · 분짜 · 퍼(쌀국수) · 반깐 · 해산물(랍스터·머드크랩 등).</p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>식당</th><th>시그니처 / 가격</th><th>주소 · 영업 · 팁</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><b>넴느엉 닌호아 당반꾸엔</b><br><span class="badge must">나트랑 대표</span></td>
+            <td>넴느엉(숯불 돼지꼬치 쌈)</td>
+            <td>16A Lãn Ông, Xương Huân · <a href="https://www.google.com/maps/search/Nem+N%C6%B0%E1%BB%9Bng+Ninh+H%C3%B2a+%C4%90%E1%BA%B7ng+V%C4%83n+Quy%C3%AAn+Nha+Trang" target="_blank">지도</a></td>
+          </tr>
+          <tr>
+            <td><b>분짜까 바히엔</b></td>
+            <td>분짜까 1그릇 35,000~45,000동<span class="sub">약 1,800~2,300원</span></td>
+            <td>담시장 인근 · 아침 일찍부터 현지인으로 붐빔 · <a href="https://www.google.com/maps/search/B%C3%BAn+Ch%E1%BA%A3+C%C3%A1+B%C3%A0+Hi%E1%BB%83n+Nha+Trang" target="_blank">지도</a></td>
+          </tr>
+          <tr>
+            <td><b>코스타 씨푸드</b><br><span class="badge hot">고급</span></td>
+            <td>칠리 머드크랩·갈릭버터 랍스터 1kg 약 150만~350만 동</td>
+            <td>인터컨티넨탈 1층, 쩐푸 해변 · 청결·에어컨 · <a href="https://www.google.com/maps/search/Costa+Seafood+Nha+Trang" target="_blank">지도</a></td>
+          </tr>
+          <tr>
+            <td><b>응옥짜이</b><br><span class="badge sea">정찰제</span></td>
+            <td>치즈 랍스터 100g당 약 15,000원, 맛조개·모닝글로리 볶음 6,000원대</td>
+            <td>흥정 부담 없는 정찰제 · <a href="https://www.google.com/maps/search/Ngoc+Trai+Seafood+Nha+Trang" target="_blank">지도</a></td>
+          </tr>
+          <tr>
+            <td><b>하이산 탄스엉</b></td>
+            <td>대형 해산물(1층 선택 → 2층 조리)</td>
+            <td>9A Trần Phú · <a href="https://www.google.com/maps/search/H%E1%BA%A3i+s%E1%BA%A3n+Thanh+S%C6%B0%C6%A1ng+Nha+Trang" target="_blank">지도</a></td>
+          </tr>
+          <tr>
+            <td><b>꽌20 (Quán 20)</b><br><span class="badge sea">가성비</span></td>
+            <td>로컬 해산물, 메뉴별 100,000~500,000동<span class="sub">약 5,000~25,000원</span></td>
+            <td>시내 · <a href="https://www.google.com/maps/search/Qu%C3%A1n+20+Nha+Trang+seafood" target="_blank">지도</a></td>
+          </tr>
+          <tr>
+            <td><b>반쎄오 짜우</b></td>
+            <td>오징어 반쎄오(베트남식 부침개)</td>
+            <td>85 Tô Hiến Thành · <a href="https://www.google.com/maps/search/B%C3%A1nh+X%C3%A8o+Ch%E1%BA%A3o+85+T%C3%B4+Hi%E1%BA%BFn+Th%C3%A0nh+Nha+Trang" target="_blank">지도</a></td>
+          </tr>
+          <tr>
+            <td><b>한식당</b><br><span class="badge korean">한식</span></td>
+            <td>서울불고기 · 바다포차 · 제주가</td>
+            <td>서울불고기(32 Tran Quang Khai) · 바다포차(67 Van Don, 자정까지) · 제주가(171 Nguyen Thi Minh Khai)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid2">
+      <div class="card t-gold">
+        <h3>🦞 해산물 시장에서 사서 요리</h3>
+        <p>담(쩌담) 시장·쩐푸 해변 인근 식당에서 수조 해산물을 무게로 구매 후 대리 조리해 줍니다. <b>랍스터 1kg ≈ 2인 적당</b>, "반은 갈릭버터·반은 칠리소스" 요청을 추천합니다. 정찰제 대형 식당이 흥정 부담이 없습니다.</p>
+      </div>
+      <div class="card t-sea">
+        <h3>🍽️ 식당 이용 팁</h3>
+        <ul>
+          <li>로컬 식당은 대부분 <b>현금(동)</b>만, 대형·프랜차이즈는 카드 가능 <span class="badge cash">현금</span></li>
+          <li>물티슈는 유료(2~3천 동), 고수 빼려면 "Không cho rau thơm"</li>
+          <li>얼음물보다 생수 별도 구매 권장, 팁은 강하지 않음(잔돈 정도)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout info">
+      <b>미슐랭/빕구르망은 나트랑에 없습니다.</b> 2025년 6월 발표된 미슐랭 가이드 베트남은 하노이·호치민·다낭 3개 도시만 포함합니다. 나트랑 맛집은 한국인 검증 후기·구글맵 평점 기준으로 선별했습니다.
+    </div>
+  </section>
+
+  <!-- ===== ACTIVITY ===== -->
+  <section class="anchor" id="activity">
+    <div class="sec-head"><span class="num">05</span><h2 class="sec-title">액티비티 (호핑·스노클링 중점)</h2></div>
+    <p class="sec-desc">중점 테마인 바다 액티비티입니다. 한국 OTA·한국인 가이드 기준 가격으로 비교했습니다.</p>
+
+    <h3 style="color:var(--deep);margin:6px 0 4px">🏝️ 호핑투어 가격 비교 <span class="badge couple">커플 추천</span></h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>예약처</th><th>상품 / 코스</th><th>가격(1인)</th><th>특징</th></tr></thead>
+        <tbody>
+          <tr><td><b>마이리얼트립</b></td><td>어메이징 3섬 호핑(혼문·혼땀), 오션월드 럭셔리, YOLO 파티호핑, 미니비치 등</td><td>약 3만~10만 원</td><td>스타인월드·니모트립·베나자 등 한국인 전용 업체 다수</td></tr>
+          <tr><td><b>KKday</b></td><td>혼문섬+피싱빌리지+트란비치(영어가이드)</td><td>대인 약 3만 원·소인 약 1.5만 원</td><td>YOLO 플로팅바 파티 약 3.5만 원(6시간 30분, 픽업·점심 포함)</td></tr>
+          <tr><td><b>클룩(Klook)</b></td><td>혼문섬 보트투어 등</td><td>약 3만~6만 원</td><td>현지 영어가이드 위주</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout ok">
+      <b>주요 섬:</b> 혼문(Hon Mun) — 산호초 자연보호구역으로 스노클링 최적, 대부분 첫 코스 / 혼땀 / 혼미우 미니비치. <b>한국인 가이드 투어가 다수</b>라 영어가 부담스러우셔도 괜찮습니다.
+    </div>
+    <div class="callout warn">
+      <b>호핑 예약 시 꼭 확인하세요.</b> 승선서류용 <b>여권정보를 출발 전날(한국시간 14시까지) 사전 제출</b>해야 합니다. 최소 모객 인원·뗏(설) 추가요금 확인, 여행자보험 가입 권장. 비가 와도 스콜 수준이면 정상 진행되나, 파도가 높으면 환불·일정 변경됩니다.
+    </div>
+
+    <div class="grid2">
+      <div class="card t-gold">
+        <h3>♨️ 머드온천</h3>
+        <ul>
+          <li><b>아이리조트(I-Resort)</b>: 입장 약 5,700원 / 워터파크 성인 170,000동(약 9,700원)·어린이 80,000동, 08:00~17:30(머드 20분 제한)</li>
+          <li><b>탑바(Thap Ba)</b>: 입장권 약 2,800원</li>
+          <li><b>갈리나(Galina)</b>: 약 6,500원</li>
+        </ul>
+      </div>
+      <div class="card t-sun">
+        <h3>🎢 빈원더스(VinWonders) <span class="badge hot">확인 필수</span></h3>
+        <p>표준 입장권 <b>공식 1,050,000동</b>(왕복 케이블카 포함), 일부 OTA는 성인 950,000동(약 54,000원)·16시 이후 660,000동부터 표기. 한국 OTA 약 3.5만~5.5만 원대. 빈펄 계열 리조트 투숙 시 10% 할인.</p>
+        <p class="note-inline">⚠️ 아쿠아리움·인어쇼·일부 놀이기구가 2025년 보수로 임시 중단 중일 수 있어, 방문 전 공식 홈페이지 확인이 필요합니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SIGHTS ===== -->
+  <section class="anchor" id="sights">
+    <div class="sec-head"><span class="num">06</span><h2 class="sec-title">볼거리·관광지</h2></div>
+    <p class="sec-desc">입장료·운영시간을 함께 정리했습니다. (여행사·블로그 기반으로 현장 변동 가능)</p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>명소</th><th>입장료</th><th>운영시간 · 팁</th></tr></thead>
+        <tbody>
+          <tr><td><b>포나가르 탑</b><br><span class="badge must">필수</span></td><td>25,000~30,000동<span class="sub">약 1,400~1,700원</span></td><td>08:00~18:00 · 어깨·무릎 가리는 복장(무료 가운) · <a href="https://www.google.com/maps/search/Po+Nagar+Cham+Towers+Nha+Trang" target="_blank">지도</a></td></tr>
+          <tr><td><b>롱선사</b></td><td>무료</td><td>07:00~17:00 · 좌불상까지 152계단(오토바이 왕복 5만 동) · <a href="https://www.google.com/maps/search/Long+Son+Pagoda+Nha+Trang" target="_blank">지도</a></td></tr>
+          <tr><td><b>나트랑 대성당</b></td><td>무료</td><td>평일 05:30~17:00 · <b>정문 가짜 티켓(최대 5만 동) 사기 주의</b> · 단정한 복장 · <a href="https://www.google.com/maps/search/Nha+Trang+Cathedral" target="_blank">지도</a></td></tr>
+          <tr><td><b>혼쫑곶</b></td><td>22,000~30,000동<span class="sub">약 1,250~1,700원</span></td><td>대체로 07:00~18:00 · 시내 북동 3~4km · <a href="https://www.google.com/maps/search/Hon+Chong+Promontory+Nha+Trang" target="_blank">지도</a></td></tr>
+          <tr><td><b>쩐푸 해변</b><br><span class="badge couple">일몰</span></td><td>무료</td><td>메인 비치 · 산책·일몰·야경 · <a href="https://www.google.com/maps/search/Tran+Phu+Beach+Nha+Trang" target="_blank">지도</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout info">
+      <b>인스타·일몰·야경 스폿:</b> 쩐푸 해변 · 빈원더스 스카이휠(120m 대관람차, 세계 10대 관람차) · 포나가르 탑 · 나트랑 대성당 · 해변 루프톱 바.
+    </div>
+  </section>
+
+  <!-- ===== SHOPPING ===== -->
+  <section class="anchor" id="shopping">
+    <div class="sec-head"><span class="num">07</span><h2 class="sec-title">쇼핑·기념품</h2></div>
+    <p class="sec-desc">야시장·재래시장·마트별 특징과, 가성비 좋은 기념품 BEST를 정리했습니다.</p>
+
+    <div class="grid2">
+      <div class="card t-sea">
+        <h3>🛍️ 어디서 살까</h3>
+        <ul>
+          <li><b>나트랑 야시장</b>: 비치웨어·진주 액세서리(5천~8천 원)·슈슈 땅콩 100g 35,000동(약 1,800원, 정찰제). 쇼핑 위주(먹거리 적음)</li>
+          <li><b>담(쩌담) 시장</b>: 최대 재래시장, 건망고·견과류·라탄·말린과일 — 흥정 필수, 견과류는 마트보다 저렴</li>
+          <li><b>롯데마트(냐짱점·골드코스트점)</b>: 카드 결제·쾌적, 공산품 가성비 우수</li>
+          <li><b>빅C마트</b>: 과자·라면·커피 저렴</li>
+        </ul>
+      </div>
+      <div class="card t-gold">
+        <h3>🎁 기념품 BEST (가격·구입처)</h3>
+        <ul>
+          <li><b>G7 커피</b>(쭝웬 생산): 믹스 21입 55,000동(약 2,750원)·원두 15입 24,500동(약 1,225원)</li>
+          <li><b>콩카페 코코넛커피 파우더</b>(매장 한정)</li>
+          <li><b>칼치즈</b> 17입 26,500동(약 1,450원)</li>
+          <li><b>베트남 연유</b>(Ong Tho·Southern Star) 21,000~25,000동</li>
+          <li><b>비폰(Vifon) 소고기 쌀국수 라면</b> 봉지 약 430원·컵 약 1,400원, 하오하오 라면, 콘삭(다람쥐) 커피</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== INFO ===== -->
+  <section class="anchor" id="info">
+    <div class="sec-head"><span class="num">08</span><h2 class="sec-title">실용 정보</h2></div>
+    <p class="sec-desc">비자·교통·결제·치안·긴급 연락처 등 현지에서 바로 쓰실 정보입니다.</p>
+
+    <div class="grid2">
+      <div class="card t-sea">
+        <h3>🛂 비자·입국</h3>
+        <p>한국인 <b>45일 무비자</b>(결의안 44/2025/NQ-CP, <b>2025.3.15~2028.3.14</b> 적용). 여권 유효 6개월+, 왕복 항공권 소지 필요. 4박 5일이라 e비자 불필요하며, 무비자는 현지 연장이 불가합니다.</p>
+      </div>
+      <div class="card t-sun">
+        <h3>🚕 교통</h3>
+        <p><b>그랩(Grab)·비(Be)</b> 앱 필수(한국서 미리 설치, 트래블카드 등록). 공식 택시는 비나선(흰색)·마이린(초록). 공항 그랩은 프리미엄 요금·대기 가능성이 있어 픽업 예약도 고려하세요.</p>
+      </div>
+      <div class="card t-gold">
+        <h3>📱 인터넷·결제·환전</h3>
+        <ul>
+          <li>유심: 깜라인 공항 도착층 통신사 부스(로밍보다 저렴), 이심도 가능</li>
+          <li>결제: 로컬은 현금 위주, 대형 매장 카드 <span class="badge cash">현금 비중↑</span></li>
+          <li>환전: <b>USD 100달러권</b>이 환율 우대 — 한국서 USD 환전 후 현지 금은방·환전소에서 동 환전이 가장 유리</li>
+        </ul>
+      </div>
+      <div class="card t-coral">
+        <h3>🚨 치안·긴급 연락처</h3>
+        <ul>
+          <li>치안은 동남아 대비 양호. 택시 바가지·잔돈 사기 주의</li>
+          <li>경찰 <b>113</b> · 소방 <b>114</b> · 구급 <b>115</b></li>
+          <li>나트랑은 <b>주호치민 총영사관 관할</b> — 대표 +84-28-3822-5757, 24시간 긴급 <b>+84-93-850-0238</b></li>
+          <li>외교부 영사콜센터(서울 24시간) <b>+82-2-3210-0404</b></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== COUPLE ===== -->
+  <section class="anchor" id="couple">
+    <div class="sec-head"><span class="num">09</span><h2 class="sec-title">커플 맞춤 추천</h2></div>
+    <p class="sec-desc">두 분의 여행을 더 특별하게 만들어 줄 로맨틱 옵션입니다.</p>
+
+    <div class="grid2">
+      <div class="card t-coral">
+        <h3>🛥️ 로맨틱 디너 크루즈 <span class="badge couple">강력 추천</span></h3>
+        <p><b>엠퍼러 크루즈(Emperor Cruise) 선셋 디너</b> — 클룩 약 US$59.25(약 78,000원), 마이리얼트립 약 89,750~102,400원(랍스터/스테이크 메인 택1). 5코스 시푸드·무제한 음료·라이브 음악·호텔 픽업 포함입니다. 더 저렴한 요트형 BBQ 선셋투어는 4만~6만 원대입니다.</p>
+      </div>
+      <div class="card t-sea">
+        <h3>💆 커플 스파·마사지</h3>
+        <ul>
+          <li><b>셰라톤 나트랑 스파</b>(오션뷰 룸·투숙 안 해도 이용 가능)</li>
+          <li><b>센스파(Sen Spa)</b>(리버사이드·구글 4.9·무료 셔틀)</li>
+          <li><b>갈리나(Galina) 머드스파</b> — 한국 대비 약 70% 저렴</li>
+        </ul>
+      </div>
+      <div class="card t-gold">
+        <h3>🏖️ 럭셔리 리조트 데이패스</h3>
+        <p>투숙하지 않아도 즐길 수 있습니다. <b>아미아나</b>(프라이빗 비치·수영장 3개·스노클링 가능)·<b>빈펄</b> 등의 데이패스로 휴양 하루를 채우실 수 있습니다.</p>
+      </div>
+      <div class="card t-sun">
+        <h3>📸 사진 잘 나오는 명소</h3>
+        <p>쩐푸 해변 · 스카이휠 야경 · 포나가르 탑 · 나트랑 대성당 · 리조트 인피니티풀. 일몰 30분 전(골든아워)에 해변으로 나가시면 가장 예쁜 사진을 남기실 수 있습니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ITINERARY ===== -->
+  <section class="anchor" id="itinerary">
+    <div class="sec-head"><span class="num">10</span><h2 class="sec-title">일자별 추천 일정</h2></div>
+    <p class="sec-desc">"오전 야외 → 오후 실내/스파"로 배치해 오후 스콜 리스크를 줄였습니다. 우천 시 플랜 B를 함께 적었습니다.</p>
+
+    <div class="day">
+      <h3><span class="day-tag">DAY 1</span> 도착·해변 적응 (7/11 금)</h3>
+      <ul class="timeline">
+        <li><span class="time">오전</span>인천/김포 출발 → 깜라인(CXR) 도착 (직항 약 5시간)</li>
+        <li><span class="time">15:00</span>그랩/픽업으로 리조트 체크인, 짐 정리·휴식</li>
+        <li><span class="time">17:30</span>쩐푸 해변 산책 + 일몰 감상</li>
+        <li><span class="time">19:00</span>저녁: 넴느엉 닌호아 당반꾸엔</li>
+        <li><span class="time">20:30</span>나트랑 야시장 구경</li>
+      </ul>
+      <div class="planb"><b>우천 플랜 B</b> · 리조트 스파·실내 휴식, 호텔 레스토랑 디너로 대체</div>
+    </div>
+
+    <div class="day">
+      <h3><span class="day-tag">DAY 2</span> 호핑·스노클링 + 해산물 (7/12 토)</h3>
+      <ul class="timeline">
+        <li><span class="time">08:00</span>호핑투어 출발 (혼문 스노클링, 한국인 가이드, 점심 포함)</li>
+        <li><span class="time">15:00</span>투어 종료·리조트 복귀, 휴식</li>
+        <li><span class="time">18:00</span>해산물 디너: 코스타 씨푸드 또는 응옥짜이</li>
+        <li><span class="time">20:00</span>커플 마사지 (센스파 등)</li>
+      </ul>
+      <div class="planb"><b>우천 플랜 B</b> · 파도 높으면 호핑 취소·빈원더스 종일권으로 대체 (위약·환불 규정 사전 확인)</div>
+    </div>
+
+    <div class="day">
+      <h3><span class="day-tag">DAY 3</span> 시내 관광 + 선셋 크루즈 (7/13 일)</h3>
+      <ul class="timeline">
+        <li><span class="time">09:00</span>머드온천 (아이리조트, ~12:00)</li>
+        <li><span class="time">13:00</span>점심 후 시내 관광: 포나가르 탑 → 롱선사 → 대성당 (그랩 이동)</li>
+        <li><span class="time">17:00</span>엠퍼러 선셋 디너 크루즈 (호텔 픽업)</li>
+        <li><span class="time">21:00</span>리조트 복귀</li>
+      </ul>
+      <div class="planb"><b>우천 플랜 B</b> · 크루즈 취소 시 고급 해산물 레스토랑 + 시내 카페 투어로 대체</div>
+    </div>
+
+    <div class="day">
+      <h3><span class="day-tag">DAY 4</span> 빈원더스 or 호캉스 + 쇼핑 (7/14 월)</h3>
+      <ul class="timeline">
+        <li><span class="time">오전</span>(택1) 빈원더스 종일(케이블카·테마파크·스카이휠) / 리조트 호캉스+데이패스</li>
+        <li><span class="time">17:00</span>저녁: 야시장 + 담시장 기념품 쇼핑</li>
+        <li><span class="time">20:00</span>해변 루프톱 바에서 마무리 한 잔</li>
+      </ul>
+      <div class="planb"><b>우천 플랜 B</b> · 빈원더스 실내존·아쿠아리움(운영 시), 롯데마트 쇼핑·마사지로 대체</div>
+    </div>
+
+    <div class="day">
+      <h3><span class="day-tag">DAY 5</span> 출국 (7/15 화)</h3>
+      <ul class="timeline">
+        <li><span class="time">오전</span>여유로운 조식·수영, 짐 정리</li>
+        <li><span class="time">12:00</span>체크아웃 → 롯데마트에서 마지막 기념품</li>
+        <li><span class="time">오후</span>공항 이동 → 인천/김포 도착(저녁/심야편)</li>
+      </ul>
+      <div class="planb"><b>팁</b> · 출국 항공편 시간대에 따라 레이트 체크아웃(유료)·짐 보관 서비스를 활용하시면 마지막 날을 알차게 보내실 수 있습니다.</div>
+    </div>
+  </section>
+
+  <!-- ===== BUDGET ===== -->
+  <section class="anchor" id="budget">
+    <div class="sec-head"><span class="num">11</span><h2 class="sec-title">예산표 (3단계)</h2></div>
+    <p class="sec-desc">1인 기준(4박 5일), 항공·숙박은 2인 분할을 반영했습니다.</p>
+
+    <div class="budget3">
+      <div class="b-card eco">
+        <div class="tier">가성비</div>
+        <div class="amt">약 78만 원<small> /1인</small></div>
+        <div class="note">4성 시내 호텔 + 로컬 맛집 + 가성비 호핑 중심</div>
+      </div>
+      <div class="b-card mid">
+        <div class="tier">중간</div>
+        <div class="amt">약 125만 원<small> /1인</small></div>
+        <div class="note">5성 해변 호텔 + 해산물 디너 + 머드온천·스파</div>
+      </div>
+      <div class="b-card lux">
+        <div class="tier">럭셔리</div>
+        <div class="amt">약 220만 원+<small> /1인</small></div>
+        <div class="note">럭셔리 리조트 + 선셋 크루즈 + 프리미엄 스파</div>
+      </div>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>항목</th><th>가성비</th><th>중간</th><th>럭셔리</th></tr></thead>
+        <tbody>
+          <tr><td>항공(왕복)</td><td>35만</td><td>45만</td><td>50만+</td></tr>
+          <tr><td>숙박(4박/2인 분할)</td><td>약 18만<span class="sub">4성 시내</span></td><td>약 35만<span class="sub">5성 해변</span></td><td>약 90만<span class="sub">럭셔리 리조트</span></td></tr>
+          <tr><td>식사·투어·교통·스파</td><td>약 25만</td><td>약 45만</td><td>약 80만<span class="sub">크루즈·프리미엄 스파 포함</span></td></tr>
+          <tr class="sum"><td>합계 (1인)</td><td>약 78만 원</td><td>약 125만 원</td><td>약 220만 원+</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note-inline">※ 환율 1만 동 ≈ 571원(2026.5 기준) 적용. 항공·숙박은 7월 성수기·환율 변동에 따라 상승 가능합니다.</p>
+  </section>
+
+  <!-- ===== CHECKLIST ===== -->
+  <section class="anchor" id="checklist">
+    <div class="sec-head"><span class="num">12</span><h2 class="sec-title">체크리스트</h2></div>
+    <p class="sec-desc">예약 타임라인, 짐 체크리스트, 현지 도착 후 할 일을 정리했습니다.</p>
+
+    <h3 style="color:var(--deep);margin:6px 0 10px">📆 예약 타임라인</h3>
+    <div class="timeline-pills">
+      <div class="pill-card">
+        <h4>출발 3~4개월 전</h4>
+        <ul>
+          <li>항공권 확정 (55만 원 초과 시 지방공항·날짜 조정 검토)</li>
+          <li>럭셔리 리조트 예약 (얼리버드 할인 확인)</li>
+        </ul>
+      </div>
+      <div class="pill-card">
+        <h4>출발 1개월 전</h4>
+        <ul>
+          <li>호핑투어·빈원더스·디너 크루즈 OTA 예약</li>
+          <li>호핑 1인 8만 원 초과 시 가성비 상품 비교</li>
+        </ul>
+      </div>
+      <div class="pill-card">
+        <h4>출발 전 (2주~전날)</h4>
+        <ul>
+          <li>그랩 앱 설치·트래블카드 등록</li>
+          <li>여행자보험 가입, USD 환전</li>
+          <li>호핑 여권정보 사전 제출(전날 14시까지)</li>
+          <li>빈원더스 휴장 여부 공식 홈피 재확인</li>
+        </ul>
+      </div>
+      <div class="pill-card">
+        <h4>현지 도착 후</h4>
+        <ul>
+          <li>유심/이심 개통, 그랩 작동 확인</li>
+          <li>현지 동 환전(금은방·환전소)</li>
+          <li>리조트 와이파이·세이프티박스 확인</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="color:var(--deep);margin:22px 0 10px">🧳 짐 체크리스트</h3>
+    <div class="grid2">
+      <ul class="checklist">
+        <li>여권(유효 6개월+), 사본·여권사진 (호핑 제출용)</li>
+        <li>SPF50+ 선크림(reef-safe), 모자·선글라스</li>
+        <li>래시가드·수영복·아쿠아슈즈</li>
+        <li>방수팩·우산(스콜 대비)</li>
+      </ul>
+      <ul class="checklist">
+        <li>상비약(지사제·멀미약·모기기피제)</li>
+        <li>USD 현금(100달러권) + 트래블카드</li>
+        <li>보조배터리·멀티어댑터(베트남 220V, A/C타입)</li>
+        <li>얇은 긴옷(사원 방문·냉방 대비)</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== CAVEATS ===== -->
+  <section class="anchor" id="caveats">
+    <div class="sec-head"><span class="num">13</span><h2 class="sec-title">주의사항 (Caveats)</h2></div>
+    <div class="callout warn"><b>날씨 수치는 출처 간 편차가 큽니다.</b> 한국 블로그(47~60mm) vs 국제 통계(79~119mm, 강수일 18~20일). 보수적으로 스콜·잦은 소나기에 대비해 주세요.</div>
+    <div class="callout warn"><b>항공·숙박 가격은 변동성이 큽니다.</b> 2026년 7월 성수기·환율(동화 절상 추세)에 따라 상승할 수 있습니다.</div>
+    <div class="callout warn"><b>빈원더스 입장료·운영</b>은 출처별로 1,050,000동(공식)·950,000동(일부 OTA 시작가)으로 엇갈리며, 일부 시설은 2025년 보수 중단 중 — 방문 전 공식 확인이 필요합니다.</div>
+    <div class="callout info"><b>관광지 입장료·운영시간</b>(포나가르 25,000 vs 30,000동, 혼쫑곶 22,000 vs 30,000동 등)은 여행사·블로그 기반이라 현장에서 다를 수 있습니다. 공식 1차 출처가 아닌 점을 감안해 주세요.</div>
+    <div class="callout info"><b>환율</b>은 본 문서 작성 시점(2026년 5월, 1만 동 ≈ 571원) 기준입니다. 실제 여행 시점 환율을 다시 확인해 주세요.</div>
+  </section>
+
+  <!-- ===== SOURCES ===== -->
+  <section class="anchor" id="sources">
+    <div class="sec-head"><span class="num">14</span><h2 class="sec-title">참고 출처</h2></div>
+    <div class="sources">
+      <p>아래 출처를 교차 검증해 정리했습니다. (가격·정책 등 변동 정보는 여행 시점 재확인 권장)</p>
+      <ul>
+        <li>KAYAK — 인천~베트남/나트랑 항공권 시세</li>
+        <li>KKday — 나트랑 자유여행·야시장·호핑 정보</li>
+        <li>Triple Guide — 깜라인 공항~시내 이동</li>
+        <li>Trip.com — 나트랑 로컬 맛집·공항 이동</li>
+        <li>Tripstore(트립스토어) — 코스타 씨푸드·해산물 맛집·호핑 코스/비용</li>
+        <li>Tgroup — 나트랑 필수 음식 TOP5</li>
+        <li>VinWonders / Vinpearl — 빈원더스 입장료·한식당</li>
+        <li>MyRealtrip(마이리얼트립) — 머드온천·호핑·디너 크루즈</li>
+        <li>Wellnessmommy — 롱선사 등 시내 볼거리 입장료·운영시간</li>
+        <li>Brunch(KKday) — 나트랑 롯데마트 쇼핑리스트</li>
+        <li>Onekoreatour360 / Vietnamguide — 베트남 45일 무비자·택시 정보</li>
+        <li>Blessstory1 — 나트랑 마사지·스파 가격</li>
+        <li>weather-and-climate.com / nomadseason.com / vietnamonline.com — 7월 기온·강수·UV·습도 통계</li>
+        <li>exchange-rates.org — VND/KRW 환율</li>
+        <li>MICHELIN Guide 공식 — 베트남 선정 도시(나트랑 미선정 확인)</li>
+      </ul>
+    </div>
+  </section>
+
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="wrap">
+    <p class="fmsg">청록빛 바다 위에서, 두 분만의 잊지 못할 4박 5일 되시길 바랍니다. 🌴</p>
+    <p class="fsub">호핑으로 맞는 아침 햇살과 일몰 크루즈의 노을, 그리고 갓 구운 해산물까지 — 이 문서 하나로 충분히 준비하실 수 있습니다.</p>
+    <p class="fmeta">나트랑 4박 5일 커플여행 완전 가이드 · 최초 생성 2026-06-09 (KST) · 최종 수정 2026-06-09 (KST)<br>본 가이드의 가격·운영시간·정책 정보는 변동될 수 있으니 여행 시점에 재확인해 주세요.</p>
+  </div>
+</footer>
+
+</body>
+</html>
