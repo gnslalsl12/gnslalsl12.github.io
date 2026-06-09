@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>삿포로 4박5일 커플 겨울여행 완전가이드 · 온천·먹거리·볼거리</title>
+<!--
+========================================================================
+문서 정보
+========================================================================
+최초 생성일시 : 2026-06-05 (KST)
+최종 수정일시 : 2026-06-09 (KST)
+수정 이력 :
+  - 2026-06-05 : 최초 작성 (심층 리서치 기반 HTML 완전가이드 생성)
+  - 2026-06-09 : 여행 연도 2025→2026 정정. 숙박세 2026.4.1 시행 반영(적용으로 변경),
+                 겨울 이벤트 일정을 2026-27시즌(46회) 예상으로 갱신(공식 미발표 안내)
+작성 관점   : 2026년 12월 초~중순 출발, 휴양형 커플(온천·먹거리·볼거리)
+              4박5일 / 조잔케이 온천 1박 포함 / 눈+합리적 비용 우선
+환율 기준   : 100엔 ≈ 940원 (2026년 6월 초 기준)
+========================================================================
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --primary:#163a5f;        /* 깊은 겨울 네이비 */
+    --primary-2:#2e6e93;      /* 아이스 블루 */
+    --primary-3:#5fa4c4;      /* 옅은 빙하색 */
+    --accent:#e07a3e;         /* 온천 앰버(따뜻함) */
+    --accent-soft:#f6c89a;
+    --gold:#c9a14a;
+    --success:#2e8b57;
+    --warn:#c0392b;
+    --info:#2f80b8;
+    --snow:#f4f8fb;
+    --snow-2:#eaf2f8;
+    --ink:#16202e;
+    --muted:#5c6b7a;
+    --line:#d9e3ec;
+    --card:#ffffff;
+    --shadow:0 10px 30px rgba(22,58,95,.10);
+    --shadow-sm:0 4px 14px rgba(22,58,95,.08);
+    --radius:16px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:"IBM Plex Sans KR",system-ui,sans-serif;
+    color:var(--ink);
+    background:var(--snow);
+    line-height:1.75;
+    font-weight:400;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{font-family:"Gowun Batang",serif;line-height:1.3;letter-spacing:-.01em;}
+  a{color:var(--primary-2);}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 22px;}
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;overflow:hidden;color:#fff;
+    background:
+      radial-gradient(900px 400px at 80% -10%, rgba(224,122,62,.35), transparent 60%),
+      radial-gradient(700px 500px at 10% 110%, rgba(95,164,196,.45), transparent 55%),
+      linear-gradient(160deg,#0f2c49 0%, #163a5f 45%, #2e6e93 100%);
+  }
+  .hero::after{
+    /* CSS-only 눈송이 */
+    content:"";position:absolute;inset:0;pointer-events:none;opacity:.55;
+    background-image:
+      radial-gradient(2px 2px at 20% 30%, #fff, transparent),
+      radial-gradient(2px 2px at 60% 70%, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 80% 20%, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 35% 80%, #fff, transparent),
+      radial-gradient(2px 2px at 90% 55%, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 50% 45%, #fff, transparent);
+    background-size:100% 100%;
+    animation:snow 9s linear infinite;
+  }
+  @keyframes snow{from{background-position:0 0,0 0,0 0,0 0,0 0,0 0;}to{background-position:0 600px,0 500px,0 700px,0 550px,0 650px,0 600px;}}
+  .hero-inner{position:relative;z-index:2;padding:78px 0 64px;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:13px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--accent-soft);font-weight:600;margin-bottom:18px;
+  }
+  .eyebrow::before{content:"❄";font-size:14px;}
+  .hero h1{font-size:clamp(34px,5.4vw,58px);margin:0 0 14px;font-weight:700;color:#fff;}
+  .hero .sub{font-size:clamp(16px,2.2vw,20px);color:#dfeaf3;max-width:680px;margin:0 0 28px;font-weight:300;}
+  .hero-badges{display:flex;flex-wrap:wrap;gap:10px;}
+  .hb{
+    background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);
+    backdrop-filter:blur(4px);color:#fff;border-radius:999px;
+    padding:9px 16px;font-size:14px;font-weight:500;display:flex;gap:8px;align-items:center;
+  }
+  .hb b{color:var(--accent-soft);font-weight:700;}
+
+  /* ===== 공통 섹션 ===== */
+  section{padding:54px 0;}
+  .section-tag{
+    display:inline-block;font-size:13px;font-weight:700;letter-spacing:.12em;
+    color:var(--accent);text-transform:uppercase;margin-bottom:8px;
+  }
+  h2.title{font-size:clamp(24px,3.4vw,34px);margin:0 0 8px;color:var(--primary);}
+  .lead{color:var(--muted);font-size:16px;margin:0 0 26px;max-width:760px;}
+  .divider{height:1px;background:var(--line);border:0;margin:0;}
+
+  /* ===== 메타 박스 ===== */
+  .meta-box{
+    background:linear-gradient(135deg,#fff, #f0f6fb);
+    border:1px solid var(--line);border-left:5px solid var(--primary-2);
+    border-radius:var(--radius);padding:20px 24px;box-shadow:var(--shadow-sm);
+    margin-top:-34px;position:relative;z-index:5;font-size:14px;color:var(--muted);
+  }
+  .meta-box .mt{font-weight:700;color:var(--primary);font-family:"Gowun Batang",serif;margin-bottom:6px;}
+  .meta-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px 28px;}
+  .meta-grid div b{color:var(--ink);font-weight:600;}
+
+  /* ===== TOC ===== */
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:24px 26px;box-shadow:var(--shadow-sm);}
+  .toc h3{margin:0 0 14px;font-size:18px;color:var(--primary);}
+  .toc ol{margin:0;padding:0;list-style:none;columns:2;column-gap:32px;}
+  .toc li{margin:0 0 9px;break-inside:avoid;}
+  .toc a{text-decoration:none;color:var(--ink);font-size:15px;display:flex;gap:10px;align-items:baseline;}
+  .toc a:hover{color:var(--accent);}
+  .toc .num{color:var(--primary-3);font-weight:700;font-size:13px;min-width:22px;}
+
+  /* ===== TL;DR ===== */
+  .tldr{background:linear-gradient(135deg,#163a5f,#22557d);color:#fff;border-radius:var(--radius);
+    padding:30px 32px;box-shadow:var(--shadow);}
+  .tldr h3{color:#fff;margin:0 0 16px;font-size:22px;display:flex;align-items:center;gap:10px;}
+  .tldr ul{margin:0;padding-left:0;list-style:none;}
+  .tldr li{position:relative;padding:10px 0 10px 34px;border-bottom:1px solid rgba(255,255,255,.12);font-size:15.5px;}
+  .tldr li:last-child{border-bottom:0;}
+  .tldr li::before{content:"✦";position:absolute;left:4px;top:10px;color:var(--accent-soft);}
+  .tldr li b{color:var(--accent-soft);}
+
+  /* ===== Quick Facts ===== */
+  .qf-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  .qf{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--primary-2);
+    border-radius:14px;padding:20px;box-shadow:var(--shadow-sm);text-align:center;}
+  .qf .ic{font-size:26px;}
+  .qf .k{font-size:13px;color:var(--muted);margin-top:6px;font-weight:600;}
+  .qf .v{font-size:18px;font-weight:700;color:var(--primary);margin-top:2px;font-family:"Gowun Batang",serif;}
+  .qf .s{font-size:12.5px;color:var(--muted);margin-top:3px;}
+
+  /* ===== 카드 ===== */
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:26px 28px;box-shadow:var(--shadow-sm);margin-bottom:18px;}
+  .card.top-accent{border-top:4px solid var(--accent);}
+  .card.top-primary{border-top:4px solid var(--primary-2);}
+  .card.top-gold{border-top:4px solid var(--gold);}
+  .card h3{margin:0 0 6px;font-size:21px;color:var(--primary);}
+  .card h4{margin:18px 0 8px;font-size:16px;color:var(--primary-2);}
+
+  /* ===== 표 ===== */
+  .tbl-wrap{overflow-x:auto;border-radius:14px;box-shadow:var(--shadow-sm);border:1px solid var(--line);margin:14px 0;}
+  table{width:100%;border-collapse:collapse;background:#fff;font-size:14.5px;min-width:560px;}
+  thead th{background:var(--primary);color:#fff;text-align:left;padding:13px 14px;font-weight:600;font-size:14px;}
+  tbody td{padding:12px 14px;border-top:1px solid var(--line);vertical-align:top;}
+  tbody tr:nth-child(even){background:#f7fafc;}
+  tbody tr:hover{background:#eef5fa;}
+  td .small{color:var(--muted);font-size:13px;display:block;margin-top:3px;}
+  .row-total td{background:#fff8e1 !important;font-weight:700;color:var(--primary);}
+  .star{color:var(--gold);letter-spacing:1px;}
+
+  /* ===== 배지 ===== */
+  .badge{display:inline-block;font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:999px;
+    margin-left:5px;vertical-align:middle;letter-spacing:.02em;}
+  .badge.hot{background:#fdecec;color:#c0392b;}
+  .badge.must{background:#fff3e0;color:#d9742f;}
+  .badge.couple{background:#fce8ef;color:#c2185b;}
+  .badge.michelin{background:#f3e8ff;color:#7b3fb0;}
+  .badge.cash{background:#e8f5e9;color:#2e7d32;}
+  .badge.kr{background:#e3f2fd;color:#1565c0;}
+
+  /* ===== 콜아웃 ===== */
+  .callout{border-radius:14px;padding:16px 20px;margin:16px 0;font-size:14.5px;border:1px solid;display:flex;gap:12px;}
+  .callout .ci{font-size:20px;flex-shrink:0;}
+  .callout.ok{background:#eaf7ef;border-color:#bfe6cd;color:#1e5b38;}
+  .callout.warn{background:#fdeeec;border-color:#f3c4bc;color:#8e2b1f;}
+  .callout.info{background:#eaf3fb;border-color:#bcd9f0;color:#1c4f78;}
+  .callout b{font-weight:700;}
+
+  /* ===== 타임라인(일정) ===== */
+  .day{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px 26px;margin-bottom:16px;box-shadow:var(--shadow-sm);}
+  .day h3{display:flex;align-items:center;gap:12px;margin:0 0 14px;font-size:19px;}
+  .day-tag{background:linear-gradient(135deg,var(--primary),var(--primary-2));color:#fff;
+    font-family:"IBM Plex Sans KR";font-size:13px;font-weight:700;padding:6px 13px;border-radius:8px;letter-spacing:.04em;}
+  .timeline{list-style:none;margin:0;padding:0;position:relative;}
+  .timeline::before{content:"";position:absolute;left:54px;top:6px;bottom:6px;width:2px;background:var(--line);}
+  .timeline li{position:relative;padding:8px 0 8px 78px;font-size:14.5px;}
+  .timeline li::before{content:"";position:absolute;left:50px;top:15px;width:10px;height:10px;border-radius:50%;
+    background:var(--accent);border:2px solid #fff;box-shadow:0 0 0 2px var(--accent-soft);}
+  .time{position:absolute;left:0;top:8px;width:46px;text-align:right;font-weight:700;color:var(--primary-2);font-size:13px;}
+  .timeline li b{color:var(--ink);}
+
+  /* ===== 예산 3단 카드 ===== */
+  .budget-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:8px;}
+  .budget{border-radius:var(--radius);padding:24px 22px;border:1px solid var(--line);box-shadow:var(--shadow-sm);background:#fff;}
+  .budget.value{border-top:5px solid var(--success);}
+  .budget.mid{border-top:5px solid var(--primary-2);}
+  .budget.lux{border-top:5px solid var(--gold);background:linear-gradient(160deg,#fffdf6,#fff);}
+  .budget .bt{font-size:14px;font-weight:700;letter-spacing:.04em;color:var(--muted);}
+  .budget .bp{font-size:26px;font-weight:700;color:var(--primary);font-family:"Gowun Batang",serif;margin:4px 0 2px;}
+  .budget .bn{font-size:13px;color:var(--muted);margin-bottom:14px;}
+  .budget ul{margin:0;padding-left:18px;font-size:13.5px;color:var(--ink);}
+  .budget li{margin:5px 0;}
+
+  /* ===== 체크리스트 ===== */
+  .check-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .check{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;box-shadow:var(--shadow-sm);}
+  .check h4{margin:0 0 12px;color:var(--primary);font-size:17px;}
+  .check ul{list-style:none;margin:0;padding:0;}
+  .check li{padding:7px 0 7px 30px;position:relative;font-size:14.5px;border-bottom:1px dashed var(--line);}
+  .check li:last-child{border-bottom:0;}
+  .check li::before{content:"☐";position:absolute;left:0;top:6px;color:var(--primary-2);font-size:16px;}
+  .timeline-book li::before{content:"⏱";}
+
+  /* ===== 출처 ===== */
+  .sources{font-size:13.5px;color:var(--muted);}
+  .sources li{margin:6px 0;}
+
+  /* ===== 푸터 ===== */
+  footer{background:var(--primary);color:#cfe0ee;padding:40px 0 30px;margin-top:30px;}
+  footer .fmsg{font-family:"Gowun Batang",serif;font-size:20px;color:#fff;margin-bottom:10px;}
+  footer .fsub{font-size:13.5px;color:#9fc0d8;}
+
+  /* ===== 반응형 ===== */
+  @media (max-width:760px){
+    .qf-grid{grid-template-columns:repeat(2,1fr);}
+    .budget-grid{grid-template-columns:1fr;}
+    .check-grid{grid-template-columns:1fr;}
+    .meta-grid{grid-template-columns:1fr;}
+    .toc ol{columns:1;}
+    .hero-inner{padding:60px 0 50px;}
+    section{padding:42px 0;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="wrap hero-inner">
+    <span class="eyebrow">Sapporo · Hokkaido · Winter Couple Trip</span>
+    <h1>삿포로 4박 5일<br>커플 겨울 온천 여행</h1>
+    <p class="sub">눈 내리는 삿포로에서 즐기는 휴식·먹거리·볼거리, 그리고 조잔케이 온천 1박. “눈은 오되 너무 비싸지 않은” 최적 시기와 연말 휴무 회피 전략까지 담았습니다.</p>
+    <div class="hero-badges">
+      <span class="hb">🗓 <b>4박 5일</b></span>
+      <span class="hb">💑 <b>커플</b> 휴양형</span>
+      <span class="hb">♨ <b>조잔케이</b> 온천 1박</span>
+      <span class="hb">❄ <b>12월 초~중순</b> 추천</span>
+      <span class="hb">💰 2인 <b>170만~700만원</b></span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <!-- ============ 메타 박스 ============ -->
+  <div class="meta-box">
+    <div class="mt">📄 문서 정보</div>
+    <div class="meta-grid">
+      <div><b>최초 생성</b> : 2026-06-05 (KST)</div>
+      <div><b>최종 수정</b> : 2026-06-09 (KST)</div>
+      <div><b>작성 관점</b> : 2026년 12월 초·중순 출발 / 휴양형 커플</div>
+      <div><b>환율 기준</b> : 100엔 ≈ 940원 (2026.6 초)</div>
+      <div style="grid-column:1/-1;"><b>수정 이력</b> : 2026-06-05 최초 작성 · 2026-06-09 여행 연도 2026 정정, 숙박세·이벤트 일정 갱신</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ TOC ============ -->
+<section style="padding-top:34px;">
+  <div class="wrap">
+    <div class="toc">
+      <h3>📑 목차</h3>
+      <ol>
+        <li><a href="#tldr"><span class="num">01</span>핵심 요약 (TL;DR)</a></li>
+        <li><a href="#facts"><span class="num">02</span>Quick Facts</a></li>
+        <li><a href="#timing"><span class="num">03</span>언제 가야 할까 — 최적 시기</a></li>
+        <li><a href="#newyear"><span class="num">04</span>연말연시 휴무 주의 ⚠</a></li>
+        <li><a href="#weather"><span class="num">05</span>날씨 · 복장</a></li>
+        <li><a href="#flight"><span class="num">06</span>항공권 · 환전</a></li>
+        <li><a href="#stay"><span class="num">07</span>숙박 (시내 + 료칸)</a></li>
+        <li><a href="#food"><span class="num">08</span>맛집 · 먹거리</a></li>
+        <li><a href="#see"><span class="num">09</span>볼거리 · 액티비티</a></li>
+        <li><a href="#event"><span class="num">10</span>겨울 이벤트 · 일루미네이션</a></li>
+        <li><a href="#couple"><span class="num">11</span>커플 맞춤 추천</a></li>
+        <li><a href="#tour"><span class="num">12</span>BA투어 · OTA 투어</a></li>
+        <li><a href="#itinerary"><span class="num">13</span>추천 일정 (4박 5일)</a></li>
+        <li><a href="#budget"><span class="num">14</span>예산표 (3단계)</a></li>
+        <li><a href="#practical"><span class="num">15</span>실용 정보</a></li>
+        <li><a href="#checklist"><span class="num">16</span>체크리스트</a></li>
+        <li><a href="#caveats"><span class="num">17</span>주의사항 (Caveats)</a></li>
+        <li><a href="#sources"><span class="num">18</span>참고 출처</a></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TL;DR ============ -->
+<section id="tldr" style="padding-top:10px;">
+  <div class="wrap">
+    <span class="section-tag">Summary</span>
+    <h2 class="title">한눈에 보는 결론</h2>
+    <p class="lead">바쁘시면 이 다섯 줄만 보셔도 됩니다.</p>
+    <div class="tldr">
+      <h3>✦ 핵심 요약</h3>
+      <ul>
+        <li><b>최적 시기는 12월 첫째~둘째 주(약 12/5~12/15)</b>입니다. 안정적인 눈 + 화이트 일루미네이션을 즐기면서, 연말 휴무와 항공권 폭등을 모두 피하는 “골든존”입니다.</li>
+        <li><b>연말연시(12/29~1/3)는 반드시 피하세요.</b> 개인 식당·시장·박물관이 닫고 항공·숙박이 연중 최고가입니다. 지난번 연말에 가게가 다 닫혔던 그 문제가 바로 이 구간입니다.</li>
+        <li>“첫눈”과 “쌓이는 눈”은 다릅니다. 삿포로 <b>첫눈은 평년 10/28</b>, <b>처음 쌓이는 날은 11/12</b>경이며, 시내가 제대로 눈에 덮이는 건 <b>12월부터</b>입니다.</li>
+        <li>숙박은 <b>시내 3박 + 조잔케이 온천 1박</b> 구성을 추천합니다. 정통 가이세키는 <b>후루카와</b>, 뷔페·리조트형은 <b>모리노우타</b>가 좋습니다.</li>
+        <li>2인 4박5일 총예산은 <b>가성비 170만~230만 / 중급 280만~380만 / 럭셔리 500만~700만 원</b> 수준입니다.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Quick Facts ============ -->
+<section id="facts">
+  <div class="wrap">
+    <span class="section-tag">Quick Facts</span>
+    <h2 class="title">핵심 지표 4가지</h2>
+    <div class="qf-grid">
+      <div class="qf">
+        <div class="ic">✈️</div>
+        <div class="k">비행시간 (인천 직항)</div>
+        <div class="v">약 2시간 45분</div>
+        <div class="s">신치토세공항(CTS)</div>
+      </div>
+      <div class="qf">
+        <div class="ic">🛂</div>
+        <div class="k">비자</div>
+        <div class="v">무비자 90일</div>
+        <div class="s">Visit Japan Web 권장</div>
+      </div>
+      <div class="qf">
+        <div class="ic">🌡</div>
+        <div class="k">12월 기온</div>
+        <div class="v">−1 ~ −5℃</div>
+        <div class="s">적설 본격화 시즌</div>
+      </div>
+      <div class="qf">
+        <div class="ic">💴</div>
+        <div class="k">환율</div>
+        <div class="v">100엔 ≈ 940원</div>
+        <div class="s">2026.6 초 기준</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ============ 03 시기 ============ -->
+<section id="timing">
+  <div class="wrap">
+    <span class="section-tag">Best Timing</span>
+    <h2 class="title">언제 가야 할까 — 눈 ＆ 가격의 균형</h2>
+    <p class="lead">두 분의 가장 중요한 질문이죠. 결론부터 말씀드리면, <b>눈 확률과 비용을 함께 따졌을 때 12월 첫째~둘째 주가 최적</b>입니다.</p>
+
+    <div class="callout info">
+      <span class="ci">❄</span>
+      <div><b>“첫눈” ≠ “쌓이는 눈”</b><br>
+      일본 기상청(JMA) 삿포로 평년값(1991~2020) 기준 <b>첫눈(初雪)은 10월 28일</b>이지만 즉시 녹습니다. 지면에 처음 쌓이는 <b>첫 적설(初積雪)은 11월 12일</b>경, 시내가 안정적으로 눈에 덮이는 건 <b>12월부터</b>입니다. 즉 “눈 내린 삿포로”를 원하시면 11월보다 12월이 확실합니다.</div>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>시기</th><th>적설 가능성</th><th>평균 기온(최고/최저)</th><th>항공·숙박 가격</th><th>혼잡도</th><th>추천도</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>11월 초</b></td>
+            <td>거의 없음 (맨땅)</td><td>9~10℃ / 3~4℃</td>
+            <td>연중 최저</td><td>낮음</td><td class="star">★★☆☆☆</td>
+          </tr>
+          <tr>
+            <td><b>11월 중순</b><span class="badge cash">가성비</span></td>
+            <td>첫 적설·진눈깨비</td><td>5~6℃ / 0~1℃</td>
+            <td>저렴</td><td>낮음</td><td class="star">★★★☆☆</td>
+          </tr>
+          <tr>
+            <td>11월 말</td>
+            <td>적설 시작(불안정)</td><td>3~5℃ / 0℃</td>
+            <td>상승 시작</td><td>보통</td><td class="star">★★★☆☆</td>
+          </tr>
+          <tr style="background:#fff8e1 !important;">
+            <td><b>12월 초~중순</b><span class="badge must">최적</span></td>
+            <td><b>적설 본격화 ✔</b></td><td>−1℃ / −5℃</td>
+            <td>중간(합리적)</td><td>보통</td><td class="star">★★★★★</td>
+          </tr>
+          <tr>
+            <td>12월 하순 (~12/28)</td>
+            <td>적설 안정</td><td>−2℃ / −6℃</td>
+            <td>높음(성수기 진입)</td><td>높음</td><td class="star">★★★☆☆</td>
+          </tr>
+          <tr>
+            <td><b>12/29 ~ 1/3</b><span class="badge hot">회피</span></td>
+            <td>적설 안정</td><td>−3℃ / −7℃</td>
+            <td><b>연중 최고가</b></td><td>매우 높음</td><td class="star">★☆☆☆☆</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout ok">
+      <span class="ci">✅</span>
+      <div><b>최종 추천</b> — <b>12월 8일~15일 출발</b>이 가장 균형 잡힌 선택입니다. 눈은 충분히 쌓여 있고, 화이트 일루미네이션·크리스마스 마켓(12/25 종료)도 즐길 수 있으며, 가격은 연말 대비 크게 낮습니다. <b>예산이 최우선이라면 11월 중순</b>(눈은 적지만 단풍 끝물 + 저렴)도 합리적인 대안입니다.</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ============ 04 연말 휴무 ============ -->
+<section id="newyear">
+  <div class="wrap">
+    <span class="section-tag">Important</span>
+    <h2 class="title">연말연시 휴무 — 지난번 “가게가 다 닫힌” 그 문제 ⚠</h2>
+    <p class="lead">일본의 연말연시(年末年始) 휴무는 한국보다 훨씬 광범위합니다. 다행히 <b>12월 중순까지 다녀오면 이 이슈를 완전히 피할 수 있습니다.</b></p>
+
+    <div class="callout warn">
+      <span class="ci">🚫</span>
+      <div><b>휴무 핵심 구간 : 12월 29일 ~ 1월 3일</b><br>특히 <b>1월 1일(간지쓰)</b>은 거의 모든 가게가 문을 닫습니다. 지난 연말 여행에서 겪으신 상황이 바로 이 기간입니다.</div>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>시설 종류</th><th>연말연시 영업 패턴</th><th>비고</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>개인 식당·소규모 가게</b></td><td>12/30~31부터 1/3(때로 1/5)까지 휴무</td><td>가장 광범위하게 닫힘</td></tr>
+          <tr><td>백화점·쇼핑몰</td><td>12/31까지 영업 → 1/1 휴무 → 1/2~3 ‘첫 판매’ 재개</td><td>복주머니(후쿠부쿠로) 행사</td></tr>
+          <tr><td>편의점</td><td><b>연중무휴 24시간</b></td><td>세븐·패미마·로손, 연말 생명줄 <span class="badge cash">현금/카드</span></td></tr>
+          <tr><td>박물관·미술관</td><td>12/29~1/3 다수 휴무</td><td>방문 전 공식 확인 필수</td></tr>
+          <tr><td>신사·사찰</td><td>휴무 없음 (오히려 붐빔)</td><td>하쓰모데(첫 참배) 인파</td></tr>
+          <tr><td>은행 창구</td><td>12/31~1/3 휴무</td><td>ATM·편의점 ATM은 대체로 가능(현금 소진 주의)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout ok">
+      <span class="ci">✅</span>
+      <div><b>해결책은 간단합니다.</b> 본 가이드가 추천하는 <b>12월 초~중순(8~15일)</b>에 다녀오시면 모든 식당·시장·관광시설이 정상 영업합니다. 연말 휴무 걱정은 전혀 하실 필요가 없습니다.</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ============ 05 날씨/복장 ============ -->
+<section id="weather">
+  <div class="wrap">
+    <span class="section-tag">Weather</span>
+    <h2 class="title">날씨 · 복장</h2>
+    <p class="lead">삿포로는 세계에서 손꼽히는 폭설 도시입니다. JMA 평년값(1991~2020) 기준 <b>연 누적 강설량 479cm</b>로, 12월부터 본격적인 설경이 시작됩니다.</p>
+
+    <div class="card top-primary">
+      <h4>📌 12월 기후 요약</h4>
+      <ul>
+        <li>평균 최고 약 −1℃, 최저 −5℃ 내외. 1~2월보다는 덜 춥지만 체감은 영하권입니다.</li>
+        <li>겨울 해가 짧아 <b>오후 4시 전후</b>면 어두워집니다 (일루미네이션 점등이 16:30인 이유).</li>
+        <li>도로·인도 결빙이 잦습니다. <b>미끄럼방지 신발 또는 탈착식 아이젠</b>(현지 약 1,000~2,000엔)을 권장합니다.</li>
+        <li>지하철(난보쿠·도자이·도호선)은 지하라 폭설과 무관해 겨울 이동에 가장 안정적입니다.</li>
+      </ul>
+      <h4>🧥 복장 가이드</h4>
+      <ul>
+        <li><b>3겹 레이어링</b> : 발열내의 + 플리스/니트 + 방풍·방수 아우터</li>
+        <li>방수 부츠, 모자·장갑·목도리, 핫팩 필수</li>
+        <li>실내 난방이 매우 강하므로 <b>탈착이 쉬운 옷</b>으로 준비하세요</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ============ 06 항공/환전 ============ -->
+<section id="flight">
+  <div class="wrap">
+    <span class="section-tag">Flight & Money</span>
+    <h2 class="title">항공권 · 환전</h2>
+    <p class="lead">인천–신치토세 직항이 가장 편리하며, 부산(김해)에서도 직항이 운항합니다.</p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>시기</th><th>인천 왕복 (2인 합산)</th><th>비고</th></tr></thead>
+        <tbody>
+          <tr><td>11월 초·중순</td><td>약 50만 ~ 70만 원</td><td>연중 가성비 골든타임</td></tr>
+          <tr style="background:#fff8e1 !important;"><td><b>12월 초·중순</b></td><td>약 80만 ~ 120만 원</td><td>합리적 (추천 시기)</td></tr>
+          <tr><td>12월 말 ~ 1월 초</td><td>약 120만 ~ 200만 원+</td><td>극성수기 <span class="badge hot">회피</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <ul>
+        <li><b>운항 항공사</b> : 제주항공·진에어·티웨이·이스타·피치(LCC), 대한항공·아시아나(FSC) 등 다수. 비행시간 약 2시간 45분~3시간.</li>
+        <li><b>부산(김해) 출발</b> : 대한항공·에어부산·제주항공·진에어 직항. 가격은 인천과 비슷하거나 약간 높은 편입니다.</li>
+        <li><b>예약 팁</b> : 12월 출발은 <b>8~9월에 예약</b>하는 것이 유리하고, 화·수·목 출발이 주말 대비 20% 이상 저렴한 경우가 많습니다.</li>
+        <li><b>환율</b> : 2026년 6월 초 기준 100엔 ≈ 940~960원. 개인 식당·시장은 현금 위주이니 <b>1인 약 100달러 상당</b>을 환전해 가시면 안정적입니다.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ============ 07 숙박 ============ -->
+<section id="stay">
+  <div class="wrap">
+    <span class="section-tag">Stay</span>
+    <h2 class="title">숙박 — 시내 3박 + 조잔케이 온천 1박</h2>
+    <p class="lead">두 분의 휴양 테마에 맞춰, 활동 거점인 <b>시내 호텔 3박</b>과 하이라이트인 <b>조잔케이 료칸 1박</b>으로 구성하는 것을 추천합니다.</p>
+
+    <div class="card top-primary">
+      <h3>🏙 삿포로 시내 (스스키노 / 삿포로역 주변)</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>등급</th><th>1박 2인</th><th>추천 호텔</th><th>특징</th></tr></thead>
+          <tbody>
+            <tr><td><b>가성비</b><span class="badge cash">가성비</span></td><td>약 7만~13만 원</td><td>슈퍼호텔 스스키노, 라이브맥스, 베셀인 나카지마파크</td><td>비즈니스호텔, 대욕장 보유 다수</td></tr>
+            <tr><td><b>중급</b></td><td>약 13만~22만 원</td><td>미쓰이가든, 베셀호텔, 카락사호텔</td><td>3~4성, 대욕장·조식 우수</td></tr>
+            <tr><td><b>럭셔리</b></td><td>약 22만~45만 원+</td><td>JR타워 호텔 닛코(삿포로역 직결), 삿포로 그랜드, ANA크라운플라자</td><td>전망·접근성 최고</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card top-accent">
+      <h3>♨ 조잔케이 온천 료칸 비교 <span class="badge couple">커플</span></h3>
+      <p style="color:var(--muted);font-size:14.5px;margin-top:0;">삿포로 도심에서 차로 약 50분. 접근성이 가장 좋아 4박5일 일정의 온천 1박으로 최적입니다. (가격은 1인 1박2식 기준)</p>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>료칸</th><th>스타일</th><th>가격대 (1인 1박2식)</th><th>특징 · 셔틀</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><b>누쿠모리노야도 후루카와</b><span class="badge must">가이세키</span></td>
+              <td>정통 가이세키 료칸</td>
+              <td>표준 약 ¥22,800 (약 21.4만원)<br><span class="small">객실 노천탕 특별층 ¥28,500~35,000</span></td>
+              <td>객실 노천탕 2실·대절탕 2실. 도심(오도리)에서 무료 셔틀 1일 1회(예약제, 약 60분)</td>
+            </tr>
+            <tr>
+              <td><b>츠루가 리조트 스파 모리노우타</b><span class="badge kr">한국인 인기</span></td>
+              <td>뷔페·샤브샤브 리조트<br><span class="small">※정통 가이세키 아님</span></td>
+              <td>트윈 약 ¥19,800 (약 18.6만원)<br><span class="small">개별 노천탕 코테지 ¥45,000+</span></td>
+              <td>대형 리조트, 가족탕 다양. 마코마나이역에서 무료 셔틀 약 30분(예약제)</td>
+            </tr>
+            <tr>
+              <td>다이이치 다키모토칸<br><span class="small">(노보리베츠 · 비교용)</span></td>
+              <td>1858년 창업 대형 온천</td>
+              <td>표준 약 ¥20,900 (약 19.6만원)<br><span class="small">서관 객실 노천탕 ¥47,520</span></td>
+              <td>5종 원천·약 35탕. 삿포로에서 버스 약 100분(예약제)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout info">
+        <span class="ci">💡</span>
+        <div><b>커플 추천</b> : 분위기 있는 정통 가이세키 + 객실 노천탕을 원하시면 <b>후루카와</b>, 뷔페·리조트형 편안함을 원하시면 <b>모리노우타</b>가 좋습니다. <b>객실 노천탕 객실은 조기 마감</b>되니 항공권과 동시에 예약하시길 권합니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ============ 08 맛집 ============ -->
+<section id="food">
+  <div class="wrap">
+    <span class="section-tag">Food</span>
+    <h2 class="title">맛집 · 먹거리</h2>
+    <p class="lead">삿포로는 미소라멘·수프카레·징기스칸의 본고장이자 게·성게·연어 등 해산물 천국입니다.</p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>분류</th><th>추천 / 메뉴</th><th>가격대 (대략)</th><th>팁</th></tr></thead>
+        <tbody>
+          <tr><td><b>미소라멘</b><span class="badge must">필수</span></td><td>스미레, 이치겐(새우미소), 라멘요코초 골목</td><td>1인 ¥900~1,200</td><td>스스키노 라멘 골목 밀집</td></tr>
+          <tr><td><b>수프카레</b><span class="badge must">필수</span></td><td>스아게+, 가라쿠, 소울스토어</td><td>1인 ¥1,300~1,800</td><td>스아게는 <span class="badge cash">현금만</span>, 가라쿠 대기 길어요</td></tr>
+          <tr><td><b>징기스칸(양고기)</b></td><td>다루마(1954 창업), 쿠이테이</td><td>2인 ¥4,000~6,000</td><td>다루마 예약불가·웨이팅, 쿠이테이 일요일 휴무</td></tr>
+          <tr><td><b>해산물·게</b><span class="badge hot">인기</span></td><td>니조시장·장외시장 카이센동, 게 코스 전문점</td><td>카이센동 ¥2,000~4,000<br>게코스 ¥8,590~</td><td>태블릿·한국어 지원 매장 다수</td></tr>
+          <tr><td><b>디저트·카페</b></td><td>르타오(치즈케이크), 키타카로, 롯카테이, 동구리 베이커리</td><td>¥300~1,500</td><td>동구리 치쿠와빵 가성비 굿</td></tr>
+          <tr><td><b>시메 파르페</b><span class="badge couple">커플</span></td><td>술 후 마무리 파르페 (스스키노 문화)</td><td>¥1,000~1,800</td><td>커플 야식 코스로 인기</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout warn">
+      <span class="ci">⚠</span>
+      <div>개인 식당은 <b>12/29~1/3 휴무 위험</b>이 큽니다. 12월 중순 방문 시에는 모두 정상 영업하니 안심하셔도 됩니다.</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ============ 09 볼거리 ============ -->
+<section id="see">
+  <div class="wrap">
+    <span class="section-tag">Sightseeing</span>
+    <h2 class="title">볼거리 · 액티비티</h2>
+    <p class="lead">시내 명소는 도보·지하철로 충분하고, 오타루는 당일치기로 다녀오기 좋습니다.</p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>장소</th><th>포인트</th><th>입장료</th><th>운영 / 이동</th></tr></thead>
+        <tbody>
+          <tr><td><b>오타루</b><span class="badge couple">커플</span></td><td>운하·오르골당·사카이마치·르타오 본점</td><td>대부분 무료</td><td>삿포로역→쾌속 약 32~40분(미나미오타루역 추천)</td></tr>
+          <tr><td><b>모이와산 야경</b><span class="badge must">필수</span></td><td>일본 신3대 야경, ‘행복의 종’</td><td>로프웨이+모리스카 왕복 ¥2,100</td><td>겨울 11:00~22:00, 상행 막차 21:30</td></tr>
+          <tr><td>오도리공원·TV타워</td><td>도심 중심, 일루미네이션 회장</td><td>공원 무료 / 타워 전망 별도</td><td>지하철 오도리역</td></tr>
+          <tr><td>홋카이도청 구청사</td><td>붉은벽돌, 인스타 명소</td><td>무료</td><td>삿포로역 도보권</td></tr>
+          <tr><td>시로이코이비토 파크</td><td>초콜릿 공장·체험</td><td>유료 구역 있음</td><td>도자이선 미야노사와역</td></tr>
+          <tr><td>삿포로 맥주박물관</td><td>맥주 시음·징기스칸</td><td>입장 무료(시음 별도)</td><td>도호선·셔틀</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ============ 10 겨울 이벤트 ============ -->
+<section id="event">
+  <div class="wrap">
+    <span class="section-tag">Winter Events</span>
+    <h2 class="title">겨울 이벤트 · 화이트 일루미네이션</h2>
+    <p class="lead">12월 초·중순 방문의 또 다른 매력입니다. <b>2026–27시즌(제46회) 공식 일정은 아직 미발표(보통 9월경 공개)</b>이므로, 아래는 직전 시즌(2025–26, 45회) 패턴에 기반한 <b>예상치</b>입니다. 예약 전 공식 사이트(sapporo.travel) 재확인을 권합니다.</p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>이벤트</th><th>장소</th><th>기간 (2026–27 예상)</th><th>점등 시간</th></tr></thead>
+        <tbody>
+          <tr style="background:#fff8e1 !important;"><td><b>화이트 일루미네이션 (오도리)</b><span class="badge must">하이라이트</span></td><td>오도리공원 회장</td><td>11월 하순 ~ 12/25 예상</td><td>16:30~22:00 (크리스마스 전후 24:00까지)</td></tr>
+          <tr><td>뮌헨 크리스마스 마켓</td><td>오도리 2초메</td><td>11월 하순 ~ 12/25 예상</td><td>글뤼바인·독일 먹거리</td></tr>
+          <tr><td>일루미네이션 (에키마에도리)</td><td>역앞 거리</td><td>11월 하순 ~ 2월 중순 예상</td><td>장기간 운영</td></tr>
+          <tr><td>일루미네이션 (미나미1조·아카플라 등)</td><td>도심 일대</td><td>11월 하순 ~ 3월 중순 예상</td><td>장기간 운영</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout ok">
+      <span class="ci">🎄</span>
+      <div><b>12월 중순 방문이 이상적</b>인 이유 : 직전 시즌 기준 오도리 회장과 크리스마스 마켓이 모두 <b>12/25에 종료</b>됐습니다. 2026–27시즌도 같은 패턴이면 12월 초·중순 방문 시 전부 즐길 수 있습니다. (1월에 가면 오도리 회장은 끝나 있을 가능성이 큽니다.)</div>
+    </div>
+    <div class="callout info">
+      <span class="ci">🔎</span>
+      <div><b>출발 2~3개월 전 재확인 필수</b> : 46회 일루미네이션·크리스마스 마켓의 정확한 개최일은 보통 9월경 발표됩니다. 출발 전 공식 일정으로 한 번 더 확인해 주세요.</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ============ 11 커플 추천 ============ -->
+<section id="couple">
+  <div class="wrap">
+    <span class="section-tag">For Couples</span>
+    <h2 class="title">커플 맞춤 추천</h2>
+    <div class="card top-accent">
+      <h4>💑 로맨틱 디너 · 야경</h4>
+      <ul>
+        <li>모이와산 정상 ‘The Jewels’ 레스토랑(예약제, 야경 디너)</li>
+        <li>스스키노 노르베사 옥상 관람차 ‘노리아’ — 눈 내리는 도심 야경</li>
+      </ul>
+      <h4>♨ 커플 온천 · 객실 노천탕</h4>
+      <ul>
+        <li>조잔케이 후루카와 객실 노천탕(특별층 月星)</li>
+        <li>모리노우타 코테지 개별 노천탕 / 가족탕(대절탕)</li>
+      </ul>
+      <h4>❄ 겨울 데이트 · 사진 명소</h4>
+      <ul>
+        <li>화이트 일루미네이션 오도리, 뮌헨 크리스마스 마켓(글뤼바인 한 잔)</li>
+        <li>오타루 운하 야경, 오르골당, 홋카이도청 붉은벽돌</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ============ 12 BA투어 ============ -->
+<section id="tour">
+  <div class="wrap">
+    <span class="section-tag">Guided Tours</span>
+    <h2 class="title">BA투어 · OTA 한국어 투어</h2>
+    <p class="lead">말씀하신 BA투어처럼, 마이리얼트립·클룩·KKday에 한국어 가이드 일일 투어가 다양하게 있습니다. 겨울 설경·온천 코스가 특히 인기입니다.</p>
+    <div class="card">
+      <ul>
+        <li><b>비에이·후라노 설경 투어</b> : 겨울 대표 코스. 청의 호수·설원 풍경. 한국어/한국인 가이드 상품 다수.</li>
+        <li><b>노보리베츠 + 도야호수 투어</b> : 지옥계곡 + 온천. 대중교통이 불편한 구간을 버스로 편하게 이동.</li>
+        <li><b>오타루·샤코탄 투어</b> : 오타루를 가이드와 함께 깊이 있게.</li>
+        <li><b>조잔케이 온천 당일 투어</b> : 셔틀 + 온천 패키지(클룩 등). 료칸 1박이 부담될 때 대안.</li>
+      </ul>
+      <div class="callout info">
+        <span class="ci">💡</span>
+        <div>두 분은 이미 <b>조잔케이 온천 1박</b>이 일정에 포함돼 있으니, 투어는 <b>비에이·후라노 설경</b> 또는 <b>노보리베츠</b> 중 하나만 추가하시면 휴양 페이스를 유지하면서 알차게 채울 수 있습니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ============ 13 일정 ============ -->
+<section id="itinerary">
+  <div class="wrap">
+    <span class="section-tag">Itinerary</span>
+    <h2 class="title">추천 일정 — 4박 5일 (12월 초·중순)</h2>
+    <p class="lead">휴양 페이스를 살려 ‘1일 1메인’ 위주로 여유 있게 구성했습니다. 시간은 상황에 맞게 조정하세요.</p>
+
+    <div class="day">
+      <h3><span class="day-tag">DAY 1</span> 도착 · 스스키노 입성</h3>
+      <ul class="timeline">
+        <li><span class="time">오전</span>인천 → 신치토세공항 (비행 약 2시간 45분)</li>
+        <li><span class="time">14:00</span>JR 쾌속에어포트로 삿포로역 이동(약 37분, ¥1,150) → 호텔 체크인</li>
+        <li><span class="time">18:00</span><b>스스키노</b> 라멘요코초 미소라멘 / 또는 징기스칸 ‘다루마’</li>
+        <li><span class="time">20:00</span><b>화이트 일루미네이션</b> 오도리공원 산책 (점등 ~22:00)</li>
+        <li><span class="time">21:30</span>시메 파르페로 마무리 🍨</li>
+      </ul>
+    </div>
+
+    <div class="day">
+      <h3><span class="day-tag">DAY 2</span> 오타루 당일치기</h3>
+      <ul class="timeline">
+        <li><span class="time">09:30</span>삿포로역 → 미나미오타루역(쾌속 약 35분)</li>
+        <li><span class="time">10:30</span>사카이마치 거리 · <b>오르골당</b> · <b>르타오 본점</b> 치즈케이크</li>
+        <li><span class="time">13:00</span>오타루 스시·해산물 점심</li>
+        <li><span class="time">16:00</span><b>오타루 운하</b> 일몰·야경 (커플 인생샷)</li>
+        <li><span class="time">19:00</span>삿포로 복귀 → <b>수프카레</b>(스아게+ / 가라쿠)</li>
+      </ul>
+    </div>
+
+    <div class="day">
+      <h3><span class="day-tag">DAY 3</span> 시내 명소 · 모이와산 야경</h3>
+      <ul class="timeline">
+        <li><span class="time">10:00</span>홋카이도청 구청사 · 시계탑 · 오도리공원</li>
+        <li><span class="time">12:30</span>니조시장 <b>카이센동</b> 점심</li>
+        <li><span class="time">14:00</span>시로이코이비토 파크 초콜릿 체험 / 또는 맥주박물관</li>
+        <li><span class="time">18:30</span><b>모이와산 로프웨이</b> 야경 (상행 막차 21:30 유의)</li>
+        <li><span class="time">20:30</span>스스키노 이자카야 · 게 요리</li>
+      </ul>
+    </div>
+
+    <div class="day">
+      <h3><span class="day-tag">DAY 4</span> 조잔케이 온천 호캉스 ♨</h3>
+      <ul class="timeline">
+        <li><span class="time">11:00</span>료칸 무료 셔틀 / 캇파라이너로 조잔케이 이동(약 60분)</li>
+        <li><span class="time">14:00</span>료칸 체크인 → <b>객실 노천탕 · 대욕장</b> 온천</li>
+        <li><span class="time">18:00</span>가이세키 코스 디너 (후루카와) / 뷔페 (모리노우타)</li>
+        <li><span class="time">21:00</span>눈 내리는 노천탕에서 휴식 — 여행의 하이라이트</li>
+      </ul>
+    </div>
+
+    <div class="day">
+      <h3><span class="day-tag">DAY 5</span> 조식 · 귀국</h3>
+      <ul class="timeline">
+        <li><span class="time">08:00</span>료칸 조식 · 모닝 온천</li>
+        <li><span class="time">11:00</span>셔틀로 삿포로 복귀 → 마지막 쇼핑(역 직결 상가)</li>
+        <li><span class="time">14:00</span>JR로 신치토세공항 이동 → 면세·기념품</li>
+        <li><span class="time">17:00</span>신치토세 → 인천 (귀국)</li>
+      </ul>
+    </div>
+
+    <div class="callout warn">
+      <span class="ci">🌨</span>
+      <div><b>우천·폭설 플랜 B</b> : Day 2 오타루가 폭설로 어려우면 시로이코이비토 파크·실내 온천·맥주박물관 등 실내 일정으로 교체하세요. 신치토세공항은 12~2월 결항·지연이 잦으니 <b>귀국 항공편은 가급적 오후</b>로 잡으시면 안전합니다.</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ============ 14 예산 ============ -->
+<section id="budget">
+  <div class="wrap">
+    <span class="section-tag">Budget</span>
+    <h2 class="title">예산표 — 2인 / 4박 5일</h2>
+    <p class="lead">항공 + 숙박 + 현지비 총합 기준이며, 환율 100엔=940원으로 환산했습니다. 시기·예약 시점에 따라 변동됩니다.</p>
+
+    <div class="budget-grid">
+      <div class="budget value">
+        <div class="bt">가성비</div>
+        <div class="bp">170만~230만원</div>
+        <div class="bn">LCC · 비즈니스호텔 · 표준 료칸</div>
+        <ul>
+          <li>항공(LCC) 60~80만</li>
+          <li>시내 3박 24~39만</li>
+          <li>료칸 1박(표준) 약 43만</li>
+          <li>식비·교통·입장 40~50만</li>
+        </ul>
+      </div>
+      <div class="budget mid">
+        <div class="bt">중급</div>
+        <div class="bp">280만~380만원</div>
+        <div class="bn">4성 호텔 · 객실 노천탕 료칸</div>
+        <ul>
+          <li>항공 80~120만</li>
+          <li>중급 3박 40~66만</li>
+          <li>료칸(노천탕급) 54~66만</li>
+          <li>식비·투어 60~80만</li>
+        </ul>
+      </div>
+      <div class="budget lux">
+        <div class="bt">럭셔리</div>
+        <div class="bp">500만~700만원</div>
+        <div class="bn">FSC · 5성 · 고급 료칸 · 파인다이닝</div>
+        <ul>
+          <li>항공(FSC) 120~180만</li>
+          <li>5성 3박 70~135만</li>
+          <li>고급 료칸 노천탕 90~120만</li>
+          <li>다이닝·프라이빗 투어 100만+</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>항목</th><th>가성비</th><th>중급</th><th>럭셔리</th></tr></thead>
+        <tbody>
+          <tr><td>항공권 (2인)</td><td>60~80만</td><td>80~120만</td><td>120~180만</td></tr>
+          <tr><td>시내 숙박 (3박)</td><td>24~39만</td><td>40~66만</td><td>70~135만</td></tr>
+          <tr><td>조잔케이 료칸 (1박2식)</td><td>약 43만</td><td>54~66만</td><td>90~120만</td></tr>
+          <tr><td>식사</td><td>25~30만</td><td>35~50만</td><td>60만+</td></tr>
+          <tr><td>액티비티·투어</td><td>10~15만</td><td>20~30만</td><td>40만+</td></tr>
+          <tr><td>교통(공항·시내)</td><td>5~8만</td><td>5~8만</td><td>10만(택시 포함)</td></tr>
+          <tr><td>유심·보험·잡비</td><td>8~12만</td><td>10~15만</td><td>15만+</td></tr>
+          <tr class="row-total"><td>합계 (2인)</td><td>약 170~230만</td><td>약 280~380만</td><td>약 500~700만</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ============ 15 실용 정보 ============ -->
+<section id="practical">
+  <div class="wrap">
+    <span class="section-tag">Practical Info</span>
+    <h2 class="title">실용 정보</h2>
+    <div class="card">
+      <h4>🛂 입국</h4>
+      <ul>
+        <li>한국인 관광 <b>90일 무비자</b>. <b>Visit Japan Web</b> 사전 등록(입국심사+세관 QR 통합) 권장.</li>
+      </ul>
+      <h4>🚆 공항 ↔ 시내</h4>
+      <ul>
+        <li>JR 쾌속에어포트 자유석 ¥1,150(약 37분, 15분 간격), 지정석 +¥840.</li>
+        <li>Suica·PASMO·ICOCA 등 IC카드 사용 가능. 시내는 지하철 3개 노선 + 시영전차(시덴).</li>
+      </ul>
+      <h4>♨ 조잔케이 가는 법</h4>
+      <ul>
+        <li>조테쓰버스 <b>캇파라이너</b>(급행·예약제) 편도 ¥1,400(인터넷 예약 시 ¥1,260, 약 60분).</li>
+        <li>가장 편한 방법은 <b>료칸 무료 셔틀</b>(완전예약제) — 숙박 예약과 함께 확보하세요.</li>
+      </ul>
+      <h4>🚗 렌터카 · 💳 결제 · 📶 통신</h4>
+      <ul>
+        <li>겨울 결빙·폭설로 렌터카는 비권장. 대중교통·투어로 충분합니다.</li>
+        <li>개인 식당·시장은 현금 위주(예: 스아게는 현금만). 편의점 ATM에서 국제카드 인출 가능.</li>
+        <li><b>이심(eSIM)</b>이 가성비·편의 모두 우수합니다(도시락eSIM·Holafly 등).</li>
+      </ul>
+      <h4>🆘 안전 · 응급</h4>
+      <ul>
+        <li>일본 치안은 양호. 긴급 <b>110</b>(경찰)·<b>119</b>(소방/구급).</li>
+        <li>외교부 <b>영사콜센터</b> +82-2-3210-0404 (24시간).</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ============ 16 체크리스트 ============ -->
+<section id="checklist">
+  <div class="wrap">
+    <span class="section-tag">Checklist</span>
+    <h2 class="title">체크리스트</h2>
+    <div class="check-grid">
+      <div class="check">
+        <h4>⏱ 예약 타임라인</h4>
+        <ul class="timeline-book">
+          <li><b>출발 2~3개월 전</b> : 항공권(8~9월 권장) · 료칸 객실 노천탕 예약</li>
+          <li><b>출발 1개월 전</b> : 시내 호텔 · 일일 투어 · 이심 구매</li>
+          <li><b>출발 2주 전</b> : 료칸 무료 셔틀 예약 · 환전(1인 ~100$)</li>
+          <li><b>출발 전날</b> : Visit Japan Web 등록 · 날씨/항공 결항 체크</li>
+          <li><b>도착 후 즉시</b> : 이심 활성화 · IC카드 충전 · 첫날 식당 위치 확인</li>
+        </ul>
+      </div>
+      <div class="check">
+        <h4>🧳 짐 체크리스트 (겨울)</h4>
+        <ul>
+          <li>발열내의 · 플리스 · 방풍방수 아우터(3겹)</li>
+          <li>방수 부츠 + 미끄럼방지(아이젠)</li>
+          <li>모자 · 장갑 · 목도리 · 핫팩</li>
+          <li>여권 · Visit Japan Web QR · 환전 현금</li>
+          <li>이심/유심 · 멀티어댑터(일본 A타입) · 보조배터리</li>
+          <li>상비약 · 립밤·핸드크림(건조 주의)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ============ 17 Caveats ============ -->
+<section id="caveats">
+  <div class="wrap">
+    <span class="section-tag">Caveats</span>
+    <h2 class="title">주의사항 · 면책</h2>
+    <div class="callout warn">
+      <span class="ci">⚠</span>
+      <div>
+        <b>가격·환율·운영시간은 시점에 따라 변동</b>되며, 본 가이드 수치는 보수적 범위입니다. <b>예약 전 공식 사이트 재확인</b>을 권합니다.
+      </div>
+    </div>
+    <div class="card">
+      <ul>
+        <li>첫눈·적설일은 JMA <b>평년값</b>으로 해마다 편차가 큽니다(온난화로 최근 적설 감소 경향, 2024년 겨울은 평년 대비 약 80%).</li>
+        <li><b>모리노우타는 정통 가이세키가 아닌 뷔페·샤브샤브형</b>입니다. 가이세키를 원하시면 후루카와를 선택하세요.</li>
+        <li>오도리 화이트 일루미네이션·크리스마스 마켓은 <b>12/25 종료</b>입니다(에키마에도리 등 일부는 2~3월까지 연장).</li>
+        <li>신치토세공항은 12~2월 폭설로 <b>결항·지연이 빈번</b>합니다. 일정 버퍼와 오후 귀국편을 권합니다.</li>
+        <li><b>홋카이도·삿포로 숙박세가 2026년 4월 1일 숙박분부터 시행</b>되었습니다. 두 분의 <b>2026년 11~12월 여행에는 적용</b>됩니다. 삿포로시(도세+시세 합산) 기준 <b>1인 1박당 숙박료 2만엔 미만 300円 · 2만~5만엔 미만 400円 · 5만엔 이상 1,000円</b>이며, 체크인/아웃 시 숙박료와 별도로 납부합니다(식사·소비세 제외 금액 기준). 조잔케이도 삿포로시에 속해 적용됩니다.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ============ 18 출처 ============ -->
+<section id="sources">
+  <div class="wrap">
+    <span class="section-tag">Sources</span>
+    <h2 class="title">참고 출처</h2>
+    <div class="card">
+      <ul class="sources">
+        <li>일본 기상청(JMA) 삿포로관구기상대 평년값(1991~2020) — 첫눈·첫 적설·강설량</li>
+        <li>삿포로시 관광 공식(sapporo.travel), HOKKAIDO LOVE!(visit-hokkaido.jp) — 일루미네이션·명소</li>
+        <li>모이와산 공식(mt-moiwa.jp) — 로프웨이 요금·운영시간</li>
+        <li>Jalan(자란넷)·Kakaku·GOOD LUCK TRIP — 료칸 요금(후루카와·모리노우타·다키모토칸)</li>
+        <li>Klook·KKday·마이리얼트립 — 료칸/투어 가격·셔틀</li>
+        <li>트립닷컴·트립스토어 — 항공권 시기별 가격·교통 정보</li>
+        <li>Japan Cultural Journal(journal.jpn.org) — 연말연시 휴무 관행</li>
+        <li>Magical Trip·MATCHA — 2025–26 겨울 이벤트 일정</li>
+      </ul>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:0;">※ 동일 출처 간 수치가 다를 경우 보수적인 값으로 표기하였으며, 시기·예약 시점에 따라 달라질 수 있습니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="fmsg">눈 내리는 노천탕에서, 두 분 모두 따뜻한 여행 되세요 ♨❄</div>
+    <div class="fsub">
+      삿포로 4박 5일 커플 겨울 온천 여행 완전가이드 · 2026년 12월 초~중순 출발 기준<br>
+      최초 생성 2026-06-05 · 최종 수정 2026-06-09 (KST) · 환율 100엔≈940원 기준<br>
+      본 문서는 여행 계획 참고용이며, 예약 전 공식 정보 확인을 권장합니다.
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
