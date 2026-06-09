@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import { ArrowDown, LayoutGrid, Sparkles } from "lucide-react";
+import { ArrowDown, Sparkles } from "lucide-react";
 import { scrollToId } from "../lib/scroll";
 
 const container = {
@@ -46,8 +45,7 @@ export default function Hero() {
           >
             Hi, I&apos;m <span className="text-gradient">Jeong Hoon</span>
             <br />
-            <span className="text-text/90">interactive web,</span>{" "}
-            <span className="text-muted">made human.</span>
+            <span className="text-text/90">SW Developer</span>
           </motion.h1>
 
           <motion.p
@@ -63,10 +61,6 @@ export default function Hero() {
               프로젝트 보기
               <ArrowDown size={16} />
             </button>
-            <Link to="/tools" className="btn btn-ghost">
-              <LayoutGrid size={16} />
-              Toolbox 열기
-            </Link>
           </motion.div>
 
           <motion.ul variants={item} className="mt-10 flex flex-wrap items-center justify-center gap-2">
@@ -79,11 +73,14 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* skill marquee */}
-      <div className="absolute inset-x-0 bottom-0 overflow-hidden border-t border-white/5 py-4">
-        <div className="marquee-track">
+      {/* skill marquee — seamless auto-scroll, edge-faded */}
+      <div className="marquee-mask absolute inset-x-0 bottom-0 overflow-hidden border-t border-white/5 py-4">
+        <div className="marquee-track" aria-hidden="true">
           {[...MARQUEE, ...MARQUEE].map((t, i) => (
-            <span key={i} className="text-sm font-medium uppercase tracking-widest text-muted/60">
+            <span
+              key={i}
+              className="pr-10 text-sm font-medium uppercase tracking-widest text-muted/60"
+            >
               {t}
             </span>
           ))}

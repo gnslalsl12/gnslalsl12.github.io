@@ -36,18 +36,20 @@ export default function Modal({ open, onClose, children, className }: Props) {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
         >
-          <div className="absolute inset-0 bg-black/75 backdrop-blur-sm" onClick={onClose} />
+          <div className="absolute inset-0 bg-black/80" onClick={onClose} />
           <motion.div
             role="dialog"
             aria-modal="true"
             className={cn(
-              "glass relative z-10 max-h-[88vh] w-full overflow-y-auto rounded-3xl",
+              // Solid surface (no backdrop-filter): animating a backdrop-blurred
+              // panel over a blurred overlay causes heavy repaint flicker.
+              "relative z-10 max-h-[88vh] w-full overflow-y-auto rounded-3xl border border-white/10 bg-surface shadow-2xl",
               className ?? "max-w-3xl"
             )}
-            initial={{ opacity: 0, y: 24, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 16, scale: 0.98 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 12 }}
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
           >
             <button
               onClick={onClose}

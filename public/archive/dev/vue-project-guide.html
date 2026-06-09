@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  파일명 : vue-project-guide.html
+  설명   : 중간 합류한 Vue 프로젝트 구조 입문 가이드 (인터랙티브 HTML)
+  최초 생성 일시 : 2026-06-09
+  최종 수정 일시 : 2026-06-09 (3차)
+  수정 내용 :
+    - 2026-06-09 : 최초 생성 (프로젝트 구조 / 라우팅 흐름 / 화면 수정 추적 /
+                   새 페이지 생성 / .vue 파일 구조 및 script 옵션 / 페이지 이동·모달 가이드)
+    - 2026-06-09 (2차) : ① 메뉴 출처를 adminMenu.json(미사용) → DB ocr_menu 테이블로 전면 수정
+                         (폴더 트리·역할 카드·화면 찾기 추적기·새 페이지 단계·체크리스트·모달)
+                       ② 노선도(linemap) 점 크기 확대·번호 표기, 연결선 정렬 보정, 클릭 영역 확대
+    - 2026-06-09 (3차) : ① 폴더 트리 div→pre 전환(줄바꿈이 한 줄로 합쳐지던 문제 해결, 가로 스크롤 추가)
+                       ② 트리에서 adminMenu.json 및 빈 menu 폴더 줄 완전 삭제(취소선 표기 제거)
+                       ③ 전체 정밀 검수(태그 균형·링크·코드복사·정렬문자 pre 포함 여부·인코딩 확인)
+  ============================================================
+-->
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vue 프로젝트 길잡이 — 메뉴에서 화면까지</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<style>
+  /* ============ 컬러 코딩 시스템 ============
+     라우팅의 각 단계마다 고유 색을 부여해, 문서 전체에서 같은 색이
+     같은 단계를 의미하도록 통일합니다. (노선도 컨셉) */
+  :root{
+    --bg:        #F4F5F8;
+    --surface:   #FFFFFF;
+    --surface-2: #FBFBFD;
+    --ink:       #161A26;
+    --ink-soft:  #5A6072;
+    --ink-faint: #8C92A4;
+    --line:      #E4E6EE;
+    --line-soft: #EEF0F5;
+
+    /* 단계별 노선 색 */
+    --c-menu:   #7C5CFC; /* 1. 메뉴 (DB ocr_menu 테이블) */
+    --c-url:    #2B7FD4; /* 2. URL */
+    --c-router: #2E9E6E; /* 3. router/index.js */
+    --c-index:  #0E9AA7; /* 4. Index.vue */
+    --c-view:   #E0791C; /* 5. router-view */
+    --c-screen: #D6457D; /* 6. 실제 화면.vue */
+
+    --code-bg:  #161B27;
+    --code-line:#232A3A;
+
+    --radius:   16px;
+    --radius-sm:10px;
+    --shadow:   0 1px 2px rgba(22,26,38,.04), 0 8px 28px rgba(22,26,38,.07);
+    --shadow-lg:0 12px 48px rgba(22,26,38,.18);
+
+    --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "D2Coding", monospace;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; scroll-padding-top:84px; }
+  body{
+    margin:0;
+    font-family:"Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+    letter-spacing:-0.01em;
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ animation:none !important; transition:none !important; }
+  }
+
+  /* ============ 상단 고정 네비 ============ */
+  header.topbar{
+    position:sticky; top:0; z-index:50;
+    background:rgba(244,245,248,.82);
+    backdrop-filter:saturate(160%) blur(12px);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar-inner{
+    max-width:1080px; margin:0 auto; padding:13px 24px;
+    display:flex; align-items:center; gap:18px;
+  }
+  .brand{ display:flex; align-items:center; gap:10px; font-weight:800; font-size:15px; white-space:nowrap; }
+  .brand .logo{
+    width:26px; height:26px; border-radius:8px; flex:none;
+    background:conic-gradient(from 210deg, var(--c-menu), var(--c-url), var(--c-router), var(--c-index), var(--c-view), var(--c-screen), var(--c-menu));
+  }
+  .navlinks{ display:flex; gap:4px; margin-left:auto; overflow-x:auto; }
+  .navlinks a{
+    color:var(--ink-soft); text-decoration:none; font-size:13.5px; font-weight:600;
+    padding:7px 12px; border-radius:9px; white-space:nowrap; transition:.18s;
+  }
+  .navlinks a:hover{ color:var(--ink); background:var(--line-soft); }
+  .navlinks a:focus-visible{ outline:2px solid var(--c-router); outline-offset:2px; }
+  @media (max-width:820px){ .navlinks{ display:none; } }
+
+  /* ============ 레이아웃 ============ */
+  main{ max-width:1080px; margin:0 auto; padding:0 24px 120px; }
+  section{ padding-top:78px; }
+  .eyebrow{
+    font-family:var(--mono); font-size:12px; font-weight:600; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--ink-faint); display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{ content:""; width:22px; height:2px; background:var(--ink-faint); display:inline-block; }
+  h2.sect-title{ font-size:30px; font-weight:800; margin:14px 0 10px; letter-spacing:-0.03em; line-height:1.25; }
+  .sect-lead{ font-size:16px; color:var(--ink-soft); margin:0 0 30px; max-width:62ch; }
+  h3{ font-size:19px; font-weight:700; margin:34px 0 12px; letter-spacing:-0.02em; }
+  p{ margin:0 0 14px; }
+  .muted{ color:var(--ink-soft); }
+  .card{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:26px; box-shadow:var(--shadow); }
+
+  /* ============ HERO ============ */
+  .hero{ padding:64px 0 18px; }
+  .hero h1{ font-size:clamp(34px,5.4vw,56px); font-weight:800; line-height:1.08; letter-spacing:-0.04em; margin:18px 0 18px; }
+  .hero h1 .grad{
+    background:linear-gradient(95deg,var(--c-menu),var(--c-router) 45%,var(--c-screen));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .hero p.sub{ font-size:18px; color:var(--ink-soft); max-width:60ch; margin:0 0 28px; }
+  .hero-note{
+    display:inline-flex; align-items:center; gap:9px; font-size:13.5px; font-weight:600;
+    color:var(--c-router); background:rgba(46,158,110,.1); border:1px solid rgba(46,158,110,.25);
+    padding:8px 14px; border-radius:999px;
+  }
+
+  /* ============ 시그니처: 라우팅 노선도 ============ */
+  .linemap{ margin:40px 0 6px; }
+  .linemap-track{
+    display:grid; grid-template-columns:repeat(6,1fr); column-gap:0; row-gap:20px;
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    padding:28px 26px 24px; box-shadow:var(--shadow); position:relative;
+  }
+  .station{
+    min-width:0; position:relative; cursor:pointer;
+    border:none; background:none; text-align:left; padding:0 0 4px 0; font-family:inherit;
+    border-radius:12px; transition:transform .18s;
+  }
+  .station:hover{ transform:translateY(-2px); }
+  .station:focus-visible{ outline:2px solid var(--st-c); outline-offset:4px; }
+  /* 점과 연결선이 함께 놓이는 고정 높이 줄 (정렬 기준) */
+  .station-top{ position:relative; height:32px; display:flex; align-items:center; margin-bottom:14px; }
+  .station-dot{
+    width:32px; height:32px; border-radius:50%; background:var(--st-c); flex:none;
+    position:relative; z-index:2; display:grid; place-items:center;
+    color:#fff; font-family:var(--mono); font-weight:700; font-size:14px;
+    box-shadow:0 0 0 5px color-mix(in srgb, var(--st-c) 15%, transparent);
+    transition:transform .18s, box-shadow .18s;
+  }
+  .station:hover .station-dot{ transform:scale(1.12); box-shadow:0 0 0 7px color-mix(in srgb, var(--st-c) 18%, transparent); }
+  /* 연결선: 점 세로 중심(16px)을 정확히 통과, 현재 점 중심에서 다음 점 중심까지 */
+  .station-rail{
+    position:absolute; top:16px; left:16px; right:-16px; height:3px; transform:translateY(-50%);
+    background:linear-gradient(90deg,var(--st-c),var(--st-c-next)); z-index:1; border-radius:3px;
+  }
+  .station:last-child .station-rail{ display:none; }
+  .station-name{ font-weight:700; font-size:15px; letter-spacing:-0.01em; padding-right:14px; }
+  .station-hint{ font-family:var(--mono); font-size:11.5px; color:var(--st-c); margin-top:5px; padding-right:14px; line-height:1.45; word-break:break-word; }
+  .linemap-tip{ font-size:13px; color:var(--ink-faint); margin-top:18px; text-align:center; }
+  @media (max-width:760px){
+    .linemap-track{ grid-template-columns:repeat(3,1fr); }
+    .station-rail{ display:none !important; }
+  }
+  @media (max-width:430px){
+    .linemap-track{ grid-template-columns:repeat(2,1fr); }
+  }
+
+  /* ============ 코드 블록 ============ */
+  .code{
+    position:relative; background:var(--code-bg); border-radius:var(--radius-sm);
+    margin:16px 0; overflow:hidden; border:1px solid #222838;
+  }
+  .code-head{
+    display:flex; align-items:center; gap:8px; padding:9px 14px;
+    border-bottom:1px solid var(--code-line); background:#11151F;
+  }
+  .code-dot{ width:10px; height:10px; border-radius:50%; }
+  .code-fname{ font-family:var(--mono); font-size:12px; color:#9CA6BC; margin-left:6px; }
+  .code-copy{
+    margin-left:auto; font-family:var(--mono); font-size:11.5px; color:#9CA6BC;
+    background:#1E2433; border:1px solid #2C3344; border-radius:7px; padding:4px 10px; cursor:pointer; transition:.15s;
+  }
+  .code-copy:hover{ color:#fff; background:#2A3142; }
+  .code pre{
+    margin:0; padding:16px 18px; overflow-x:auto;
+    font-family:var(--mono); font-size:13px; line-height:1.65; color:#D6DCEA;
+  }
+  .code pre::-webkit-scrollbar{ height:8px; }
+  .code pre::-webkit-scrollbar-thumb{ background:#2C3344; border-radius:8px; }
+  /* 토큰 색 */
+  .t-kw{ color:#C792EA; }   .t-str{ color:#9ECE6A; }   .t-com{ color:#5C6678; font-style:italic; }
+  .t-fn{ color:#82AAFF; }   .t-tag{ color:#F07178; }   .t-attr{ color:#FFCB6B; }
+  .t-prop{ color:#7FDBCA; } .t-path{ color:#FF9E64; }
+
+  /* ============ Next vs Vue 비교 ============ */
+  .vs{ display:grid; grid-template-columns:1fr auto 1fr; gap:0; align-items:stretch; margin:8px 0; }
+  .vs-col{ background:var(--surface); border:1px solid var(--line); padding:24px; }
+  .vs-col:first-child{ border-radius:var(--radius) 0 0 var(--radius); }
+  .vs-col:last-child{ border-radius:0 var(--radius) var(--radius) 0; }
+  .vs-mid{ display:flex; align-items:center; justify-content:center; background:var(--ink); color:#fff; font-weight:800; font-size:13px; padding:0 18px; }
+  .vs-tag{ font-family:var(--mono); font-size:12px; font-weight:700; padding:4px 10px; border-radius:7px; display:inline-block; margin-bottom:14px; }
+  .vs-tag.next{ background:rgba(22,26,38,.06); color:var(--ink); }
+  .vs-tag.vue{ background:rgba(46,158,110,.12); color:var(--c-router); }
+  .vs-col h4{ margin:0 0 4px; font-size:16px; }
+  .vs-col .small{ font-size:13.5px; color:var(--ink-soft); }
+  @media (max-width:720px){
+    .vs{ grid-template-columns:1fr; }
+    .vs-col:first-child{ border-radius:var(--radius) var(--radius) 0 0; }
+    .vs-col:last-child{ border-radius:0 0 var(--radius) var(--radius); }
+    .vs-mid{ padding:10px; border-radius:0; }
+  }
+
+  /* ============ 파일 트리 ============ */
+  .tree{ font-family:var(--mono); font-size:13px; line-height:1.95; margin:0; white-space:pre; overflow-x:auto; }
+  .tree .dir{ color:var(--c-index); font-weight:600; }
+  .tree .file{ color:var(--ink-soft); }
+  .tree .hi{ color:var(--c-screen); font-weight:700; }
+  .tree .cmt{ color:var(--ink-faint); }
+
+  /* ============ 역할 카드 그리드 ============ */
+  .role-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:16px; margin-top:8px; }
+  .role-card{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:22px; box-shadow:var(--shadow); }
+  .role-card .chip{ font-family:var(--mono); font-size:12px; font-weight:700; padding:4px 10px; border-radius:7px; display:inline-block; margin-bottom:12px; }
+  .role-card h4{ margin:0 0 8px; font-size:16.5px; }
+  .role-card p{ font-size:14px; color:var(--ink-soft); margin:0; }
+
+  /* ============ 화면 찾기 인터랙티브 추적 ============ */
+  .tracer{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:26px; box-shadow:var(--shadow); }
+  .tracer-progress{ display:flex; gap:6px; margin-bottom:22px; }
+  .tracer-progress span{ height:5px; flex:1; border-radius:3px; background:var(--line); transition:.3s; }
+  .tracer-progress span.on{ background:var(--c-router); }
+  .tracer-step{ display:none; }
+  .tracer-step.active{ display:block; animation:fade .35s ease; }
+  @keyframes fade{ from{ opacity:0; transform:translateY(6px);} to{ opacity:1; transform:none; } }
+  .tracer-badge{ font-family:var(--mono); font-size:12px; font-weight:700; color:#fff; padding:5px 11px; border-radius:8px; display:inline-block; margin-bottom:12px; }
+  .tracer-step h4{ font-size:18px; margin:0 0 8px; }
+  .tracer-step .why{ font-size:14px; color:var(--ink-soft); margin:0 0 14px; }
+  .tracer-controls{ display:flex; align-items:center; gap:12px; margin-top:20px; }
+  .btn{
+    font-family:inherit; font-weight:700; font-size:14px; border-radius:10px; cursor:pointer; border:1px solid transparent;
+    padding:10px 18px; transition:.16s;
+  }
+  .btn-primary{ background:var(--ink); color:#fff; }
+  .btn-primary:hover{ background:#000; }
+  .btn-ghost{ background:transparent; color:var(--ink-soft); border-color:var(--line); }
+  .btn-ghost:hover{ color:var(--ink); border-color:var(--ink-soft); }
+  .btn:disabled{ opacity:.4; cursor:not-allowed; }
+  .btn:focus-visible{ outline:2px solid var(--c-router); outline-offset:2px; }
+  .tracer-count{ margin-left:auto; font-family:var(--mono); font-size:12.5px; color:var(--ink-faint); }
+
+  /* ============ 새 페이지 만들기 스텝 ============ */
+  .steps{ display:flex; flex-direction:column; gap:0; counter-reset:step; }
+  .step{ position:relative; padding:0 0 28px 56px; }
+  .step:not(:last-child)::before{ content:""; position:absolute; left:17px; top:38px; bottom:0; width:2px; background:var(--line); }
+  .step-num{
+    counter-increment:step; position:absolute; left:0; top:0;
+    width:36px; height:36px; border-radius:50%; background:var(--c-router); color:#fff;
+    display:grid; place-items:center; font-weight:800; font-size:15px; z-index:1;
+  }
+  .step-num::before{ content:counter(step); }
+  .step h4{ margin:4px 0 6px; font-size:17px; }
+  .step .step-desc{ font-size:14px; color:var(--ink-soft); margin:0 0 10px; }
+  .step.optional .step-num{ background:var(--ink-faint); }
+
+  /* ============ .vue 구조 분해 ============ */
+  .sfc{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); }
+  .sfc-row{ display:grid; grid-template-columns:140px 1fr; border-bottom:1px solid var(--line-soft); }
+  .sfc-row:last-child{ border-bottom:none; }
+  .sfc-label{ padding:20px 22px; border-right:1px solid var(--line-soft); }
+  .sfc-label .tag{ font-family:var(--mono); font-weight:700; font-size:14px; }
+  .sfc-label .role{ font-size:12px; color:var(--ink-faint); margin-top:3px; }
+  .sfc-label.tmpl .tag{ color:var(--c-view); }
+  .sfc-label.scr  .tag{ color:var(--c-router); }
+  .sfc-label.sty  .tag{ color:var(--c-menu); }
+  .sfc-body{ padding:18px 22px; font-size:14px; color:var(--ink-soft); }
+  .sfc-body .code{ margin-top:6px; margin-bottom:2px; }
+  @media (max-width:600px){ .sfc-row{ grid-template-columns:1fr; } .sfc-label{ border-right:none; border-bottom:1px solid var(--line-soft); } }
+
+  /* ============ script 옵션 아코디언 ============ */
+  .opts{ display:flex; flex-direction:column; gap:10px; margin-top:8px; }
+  .opt{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-sm); overflow:hidden; }
+  .opt-head{
+    width:100%; text-align:left; font-family:inherit; cursor:pointer; background:none; border:none;
+    padding:16px 20px; display:flex; align-items:center; gap:14px;
+  }
+  .opt-head:hover{ background:var(--surface-2); }
+  .opt-head:focus-visible{ outline:2px solid var(--c-router); outline-offset:-2px; }
+  .opt-key{ font-family:var(--mono); font-weight:700; font-size:14.5px; color:var(--c-router); flex:none; min-width:108px; }
+  .opt-onel{ font-size:14px; color:var(--ink); font-weight:600; }
+  .opt-chev{ margin-left:auto; color:var(--ink-faint); transition:transform .25s; flex:none; }
+  .opt.open .opt-chev{ transform:rotate(180deg); }
+  .opt-body{ max-height:0; overflow:hidden; transition:max-height .3s ease; }
+  .opt.open .opt-body{ max-height:900px; }
+  .opt-inner{ padding:2px 20px 20px; font-size:14px; color:var(--ink-soft); }
+  .opt-inner b{ color:var(--ink); }
+
+  .req{ font-size:11px; font-family:var(--mono); padding:2px 7px; border-radius:6px; font-weight:700; flex:none; }
+  .req.must{ background:rgba(214,69,125,.12); color:var(--c-screen); }
+  .req.opt{ background:var(--line-soft); color:var(--ink-faint); }
+
+  /* ============ 모달 ============ */
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(22,26,38,.55); backdrop-filter:blur(3px);
+    display:none; align-items:center; justify-content:center; z-index:100; padding:24px;
+  }
+  .modal-overlay.show{ display:flex; animation:fade .2s; }
+  .modal{
+    background:var(--surface); border-radius:var(--radius); max-width:520px; width:100%;
+    box-shadow:var(--shadow-lg); overflow:hidden; max-height:86vh; display:flex; flex-direction:column;
+  }
+  .modal-top{ height:6px; background:var(--m-c,var(--c-router)); }
+  .modal-head{ display:flex; align-items:flex-start; gap:14px; padding:24px 26px 8px; }
+  .modal-icon{
+    width:42px; height:42px; border-radius:11px; flex:none; display:grid; place-items:center; font-family:var(--mono);
+    font-weight:800; font-size:15px; color:#fff; background:var(--m-c,var(--c-router));
+  }
+  .modal-head h3{ margin:0; font-size:19px; }
+  .modal-head .modal-sub{ font-size:12.5px; color:var(--ink-faint); font-family:var(--mono); margin-top:2px; }
+  .modal-close{ margin-left:auto; background:none; border:none; cursor:pointer; color:var(--ink-faint); font-size:22px; line-height:1; padding:2px 6px; border-radius:8px; }
+  .modal-close:hover{ background:var(--line-soft); color:var(--ink); }
+  .modal-body{ padding:6px 26px 26px; overflow-y:auto; font-size:14.5px; color:var(--ink-soft); }
+  .modal-body p{ margin:0 0 12px; }
+  .modal-body strong{ color:var(--ink); }
+
+  /* ============ 체크리스트 ============ */
+  .checklist{ counter-reset:ck; display:flex; flex-direction:column; gap:2px; }
+  .ck-item{ display:flex; align-items:center; gap:14px; padding:13px 16px; border-radius:11px; transition:.15s; cursor:default; }
+  .ck-item:hover{ background:var(--surface-2); }
+  .ck-box{
+    counter-increment:ck; width:26px; height:26px; flex:none; border-radius:8px;
+    background:var(--ck-c); color:#fff; display:grid; place-items:center; font-family:var(--mono); font-weight:700; font-size:12px;
+  }
+  .ck-box::before{ content:counter(ck); }
+  .ck-text{ font-size:14.5px; }
+  .ck-text code{ font-family:var(--mono); font-size:13px; background:var(--line-soft); padding:1px 6px; border-radius:5px; color:var(--ink); }
+
+  /* ============ 콜아웃 ============ */
+  .callout{
+    display:flex; gap:14px; padding:18px 20px; border-radius:var(--radius-sm); margin:18px 0;
+    background:rgba(46,158,110,.07); border:1px solid rgba(46,158,110,.2);
+  }
+  .callout.warn{ background:rgba(224,121,28,.07); border-color:rgba(224,121,28,.25); }
+  .callout .co-ico{ font-weight:800; flex:none; color:var(--c-router); }
+  .callout.warn .co-ico{ color:var(--c-view); }
+  .callout p{ margin:0; font-size:14px; color:var(--ink); }
+
+  footer{ text-align:center; padding:50px 24px 0; color:var(--ink-faint); font-size:13px; border-top:1px solid var(--line); margin-top:80px; }
+  footer .meta{ font-family:var(--mono); font-size:11.5px; margin-top:8px; }
+
+  ::selection{ background:rgba(46,158,110,.22); }
+  code{ font-family:var(--mono); }
+</style>
+</head>
+<body>
+
+<!-- ===================== 상단 네비 ===================== -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand"><span class="logo" aria-hidden="true"></span>Vue 프로젝트 길잡이</div>
+    <nav class="navlinks" aria-label="섹션 이동">
+      <a href="#flow">핵심 흐름</a>
+      <a href="#structure">폴더 구조</a>
+      <a href="#diff">Next vs Vue</a>
+      <a href="#roles">핵심 파일</a>
+      <a href="#find">화면 찾기</a>
+      <a href="#create">새 페이지</a>
+      <a href="#sfc">.vue 구조</a>
+      <a href="#nav">이동·파라미터</a>
+      <a href="#checklist">체크리스트</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero" id="top" style="padding-top:40px;">
+    <div class="eyebrow">중간 합류자를 위한 입문 가이드 · Vue 2 (Options API)</div>
+    <h1>메뉴 한 번 누르면<br><span class="grad">화면이 뜨기까지</span> 무슨 일이 일어날까요</h1>
+    <p class="sub">Vue가 처음이라도 괜찮습니다. 이 프로젝트는 거의 모든 화면이 똑같은 한 가지 흐름으로 동작합니다. 그 흐름만 손에 익히면, 어떤 화면을 고치든 새로 만들든 길을 잃지 않습니다.</p>
+    <span class="hero-note">●&nbsp; 아래 노선도의 역(점)을 눌러 각 단계가 무엇인지 확인해 보세요</span>
+
+    <!-- 시그니처: 라우팅 노선도 -->
+    <div class="linemap" id="flow-map">
+      <div class="linemap-track" role="list">
+        <button class="station" role="listitem" data-stop="menu" style="--st-c:var(--c-menu);--st-c-next:var(--c-url);">
+          <div class="station-top"><span class="station-rail" aria-hidden="true"></span><span class="station-dot">1</span></div>
+          <div class="station-name">메뉴 클릭</div>
+          <div class="station-hint">ocr_menu (DB)</div>
+        </button>
+        <button class="station" role="listitem" data-stop="url" style="--st-c:var(--c-url);--st-c-next:var(--c-router);">
+          <div class="station-top"><span class="station-rail" aria-hidden="true"></span><span class="station-dot">2</span></div>
+          <div class="station-name">URL 이동</div>
+          <div class="station-hint">/template</div>
+        </button>
+        <button class="station" role="listitem" data-stop="router" style="--st-c:var(--c-router);--st-c-next:var(--c-index);">
+          <div class="station-top"><span class="station-rail" aria-hidden="true"></span><span class="station-dot">3</span></div>
+          <div class="station-name">경로 매칭</div>
+          <div class="station-hint">router/index.js</div>
+        </button>
+        <button class="station" role="listitem" data-stop="index" style="--st-c:var(--c-index);--st-c-next:var(--c-view);">
+          <div class="station-top"><span class="station-rail" aria-hidden="true"></span><span class="station-dot">4</span></div>
+          <div class="station-name">상위 페이지</div>
+          <div class="station-hint">Index.vue</div>
+        </button>
+        <button class="station" role="listitem" data-stop="view" style="--st-c:var(--c-view);--st-c-next:var(--c-screen);">
+          <div class="station-top"><span class="station-rail" aria-hidden="true"></span><span class="station-dot">5</span></div>
+          <div class="station-name">자리 비움</div>
+          <div class="station-hint">&lt;router-view&gt;</div>
+        </button>
+        <button class="station" role="listitem" data-stop="screen" style="--st-c:var(--c-screen);--st-c-next:var(--c-screen);">
+          <div class="station-top"><span class="station-rail" aria-hidden="true"></span><span class="station-dot">6</span></div>
+          <div class="station-name">실제 화면</div>
+          <div class="station-hint">Group.vue 등</div>
+        </button>
+      </div>
+      <div class="linemap-tip">이 6단계 색깔은 문서 전체에서 같은 의미로 쓰입니다 — 색만 봐도 어느 단계 이야기인지 알 수 있어요</div>
+    </div>
+  </section>
+
+  <!-- ===================== 핵심 흐름 ===================== -->
+  <section id="flow">
+    <div class="eyebrow">한눈에 보는 큰 그림</div>
+    <h2 class="sect-title">이 프로젝트의 거의 모든 화면은 이렇게 동작합니다</h2>
+    <p class="sect-lead">아래 흐름을 외워두면 절반은 끝납니다. 화면을 고칠 때도, 만들 때도 매번 이 순서를 거꾸로 혹은 정방향으로 따라가게 됩니다.</p>
+
+    <div class="card">
+      <div class="code">
+        <div class="code-head">
+          <span class="code-dot" style="background:#FF5F57"></span>
+          <span class="code-dot" style="background:#FEBC2E"></span>
+          <span class="code-dot" style="background:#28C840"></span>
+          <span class="code-fname">rendering-flow.txt</span>
+        </div>
+<pre><span class="t-com">브라우저에서 URL이 정해짐</span>
+        ↓
+<span class="t-fn">router/index.js</span>   <span class="t-com">— 이 URL이 어떤 컴포넌트인지 사전(辭典)에서 찾음</span>
+        ↓
+   해당 Route 매칭
+        ↓
+   <span class="t-tag">Index.vue</span>   <span class="t-com">— 그 영역의 "틀(레이아웃)"이 되는 상위 페이지</span>
+        ↓
+&lt;<span class="t-tag">router-view</span> /&gt;   <span class="t-com">— 자식 화면이 들어올 "빈자리"</span>
+        ↓
+   <span class="t-path">실제 화면.vue</span>   <span class="t-com">— 우리가 보통 실제로 고치는 파일</span></pre>
+      </div>
+      <div class="callout">
+        <span class="co-ico">▶</span>
+        <p><strong>핵심 한 줄.</strong> URL은 스스로 화면을 알지 못합니다. <code>router/index.js</code>라는 "주소록"이 "이 URL이면 이 컴포넌트"라고 일일이 연결해 줍니다. 이게 Next.js와 가장 다른 점입니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 폴더 구조 ===================== -->
+  <section id="structure">
+    <div class="eyebrow">지도부터 펴기</div>
+    <h2 class="sect-title">폴더 구조 — 어디에 뭐가 있나</h2>
+    <p class="sect-lead">전부 외울 필요는 없습니다. 실제로 자주 여는 폴더는 <code>router</code>, <code>views</code>, <code>menu</code> 세 군데입니다.</p>
+
+    <div class="card">
+      <pre class="tree"><span class="dir">src</span>
+├── <span class="dir">api</span>          <span class="cmt"># 서버와 통신하는 함수 모음</span>
+├── <span class="dir">assets</span>       <span class="cmt"># 이미지·폰트 등 정적 파일</span>
+├── <span class="dir">components</span>   <span class="cmt"># 여러 화면이 공유하는 작은 부품</span>
+├── <span class="dir">router</span>
+│   └── <span class="file">index.js</span>         <span class="cmt"># ★★★ URL ↔ 컴포넌트 연결 주소록</span>
+├── <span class="dir">store</span>        <span class="cmt"># 전역 상태(여러 화면이 공유하는 데이터)</span>
+├── <span class="dir">utils</span>        <span class="cmt"># 공통 유틸 함수</span>
+├── <span class="dir">views</span>        <span class="cmt"># ★★★ 화면(페이지) 단위 .vue 파일들</span>
+│   ├── <span class="dir">Template</span>      <span class="cmt"># 메뉴 한 덩어리 = 폴더 하나</span>
+│   ├── <span class="dir">Project</span>
+│   ├── <span class="dir">OCR</span>
+│   ├── <span class="dir">Learning</span> ...
+│   ├── <span class="file">Login.vue</span>
+│   └── <span class="file">User.vue</span>
+├── <span class="file">App.vue</span>      <span class="cmt"># 최상위 껍데기. 현재 URL의 화면을 출력</span>
+└── <span class="file">main.js</span>      <span class="cmt"># 앱 시작점</span></pre>
+      <div class="callout" style="margin-bottom:0;">
+        <span class="co-ico">▶</span>
+        <p><code>views</code> 안에서 <strong>메뉴 하나가 폴더 하나</strong>로 묶이는 경우가 많습니다. 예) 템플릿 관련 화면들은 전부 <code>views/Template/</code> 안에 모여 있습니다.</p>
+      </div>
+      <div class="callout warn" style="margin-bottom:0;">
+        <span class="co-ico">⚠</span>
+        <p><strong>중요.</strong> 좌측 메뉴는 더 이상 <code>adminMenu.json</code>으로 만들지 않습니다. 지금은 <strong>DB의 <code>ocr_menu</code> 테이블</strong>에 메뉴 이름과 링크(URL)를 넣어두고, 그 링크가 라우트와 매칭되면 연결되는 방식입니다. 그래서 메뉴를 손볼 땐 파일이 아니라 <code>ocr_menu</code> 테이블을 봐야 합니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== Next vs Vue ===================== -->
+  <section id="diff">
+    <div class="eyebrow">헷갈리는 지점 먼저 정리</div>
+    <h2 class="sect-title">Next.js를 써봤다면, 딱 이 차이만 기억하세요</h2>
+    <p class="sect-lead">Next.js는 "폴더를 만들면 URL이 자동으로 생긴다"였지만, 이 Vue 프로젝트는 "내가 직접 주소록에 등록해야 URL이 생긴다"입니다.</p>
+
+    <div class="vs">
+      <div class="vs-col">
+        <span class="vs-tag next">Next.js</span>
+        <h4>자동 연결</h4>
+        <p class="small" style="margin:8px 0 14px;">파일 위치가 곧 URL입니다. 폴더만 만들면 라우팅이 따라옵니다.</p>
+        <div class="code" style="margin:0;">
+<pre><span class="t-path">app/template/page.tsx</span>
+        ↓  <span class="t-com">(자동)</span>
+   <span class="t-str">/template</span></pre>
+        </div>
+      </div>
+      <div class="vs-mid">VS</div>
+      <div class="vs-col">
+        <span class="vs-tag vue">이 Vue 프로젝트</span>
+        <h4>수동 연결</h4>
+        <p class="small" style="margin:8px 0 14px;">파일을 만들어도 자동 연결되지 않습니다. <code>router/index.js</code>에 직접 등록해야 URL이 생깁니다.</p>
+        <div class="code" style="margin:0;">
+<pre><span class="t-path">views/Template/Group.vue</span>
+        +
+<span class="t-fn">router/index.js</span> <span class="t-com">에 등록</span>
+        ↓  <span class="t-com">(수동)</span>
+   <span class="t-str">/template</span></pre>
+        </div>
+      </div>
+    </div>
+    <div class="callout warn">
+      <span class="co-ico">⚠</span>
+      <p><strong>가장 흔한 실수.</strong> <code>.vue</code> 파일만 만들고 "왜 화면이 안 떠?" 하는 경우 — 십중팔구 <code>router/index.js</code> 등록을 빠뜨린 것입니다.</p>
+    </div>
+  </section>
+
+  <!-- ===================== 핵심 파일 역할 ===================== -->
+  <section id="roles">
+    <div class="eyebrow">등장인물 소개</div>
+    <h2 class="sect-title">자주 만나게 될 핵심 파일 4가지</h2>
+    <p class="sect-lead">각각이 무슨 일을 하는지만 알면 됩니다. 카드를 눌러 더 자세히 볼 수 있습니다.</p>
+
+    <div class="role-grid">
+      <button class="role-card" data-role="menu" style="cursor:pointer;text-align:left;font-family:inherit;border-left:4px solid var(--c-menu);">
+        <span class="chip" style="background:rgba(124,92,252,.12);color:var(--c-menu)">ocr_menu 테이블 (DB)</span>
+        <h4>메뉴 목록 (DB에서 관리)</h4>
+        <p>좌측 메뉴 이름과 누르면 갈 URL(link)을 담아둔 DB 테이블입니다. 메뉴가 가진 link가 라우트와 매칭되면 화면으로 연결됩니다. 메뉴 자체가 화면을 만들지는 않습니다.</p>
+      </button>
+      <button class="role-card" data-role="router" style="cursor:pointer;text-align:left;font-family:inherit;border-left:4px solid var(--c-router);">
+        <span class="chip" style="background:rgba(46,158,110,.12);color:var(--c-router)">router/index.js</span>
+        <h4>URL 주소록 (가장 중요)</h4>
+        <p>"이 URL이면 이 컴포넌트를 보여줘"를 전부 적어둔 사전입니다. 화면을 찾거나 새로 만들 때 반드시 거쳐 갑니다.</p>
+      </button>
+      <button class="role-card" data-role="app" style="cursor:pointer;text-align:left;font-family:inherit;border-left:4px solid var(--c-index);">
+        <span class="chip" style="background:rgba(14,154,167,.12);color:var(--c-index)">App.vue / Index.vue</span>
+        <h4>화면을 담는 틀</h4>
+        <p>App.vue는 앱 전체 껍데기, 각 Index.vue는 한 영역의 레이아웃(제목·메뉴 등 공통 부분)입니다.</p>
+      </button>
+      <button class="role-card" data-role="view" style="cursor:pointer;text-align:left;font-family:inherit;border-left:4px solid var(--c-view);">
+        <span class="chip" style="background:rgba(224,121,28,.12);color:var(--c-view)">&lt;router-view /&gt;</span>
+        <h4>자식 화면이 들어올 빈자리</h4>
+        <p>Index.vue 안에 뚫어둔 구멍입니다. 현재 URL에 맞는 자식 화면이 이 자리에 끼워집니다.</p>
+      </button>
+    </div>
+  </section>
+
+  <!-- ===================== 화면 찾기 (인터랙티브 추적) ===================== -->
+  <section id="find">
+    <div class="eyebrow">실전 1 · 고칠 파일 찾기</div>
+    <h2 class="sect-title">"이 화면, 대체 어느 파일이지?" 추적하기</h2>
+    <p class="sect-lead">화면은 보이는데 어떤 파일인지 모를 때, 메뉴 이름에서 출발해 실제 파일까지 따라가는 7단계입니다. <strong>다음</strong>을 눌러 한 단계씩 따라와 보세요.</p>
+
+    <div class="tracer">
+      <div class="tracer-progress" id="tracer-bars" aria-hidden="true"></div>
+
+      <!-- step 1 -->
+      <div class="tracer-step active" data-i="0">
+        <span class="tracer-badge" style="background:var(--c-menu)">출발 · 메뉴</span>
+        <h4>화면에 보이는 메뉴 이름을 확인</h4>
+        <p class="why">예시로 좌측 메뉴 <b>"템플릿 관리"</b>를 고치고 싶다고 합시다.</p>
+        <div class="code"><div class="code-head"><span class="code-fname">화면에서 본 메뉴</span></div><pre>템플릿 관리</pre></div>
+      </div>
+      <!-- step 2 -->
+      <div class="tracer-step" data-i="1">
+        <span class="tracer-badge" style="background:var(--c-menu)">메뉴 → URL</span>
+        <h4>ocr_menu 테이블에서 그 메뉴의 link(URL) 확인</h4>
+        <p class="why">DB의 <code>ocr_menu</code> 테이블에서 메뉴 이름으로 조회해 어떤 URL로 가는지 알아냅니다. (컬럼명은 프로젝트 스키마에 맞게)</p>
+        <div class="code"><div class="code-head"><span class="code-fname">ocr_menu 테이블 조회</span></div><pre><span class="t-kw">SELECT</span> link <span class="t-kw">FROM</span> ocr_menu
+<span class="t-kw">WHERE</span> menu_name = <span class="t-str">'템플릿 관리'</span>;
+<span class="t-com">-- 결과: /template</span></pre></div>
+      </div>
+      <!-- step 3 -->
+      <div class="tracer-step" data-i="2">
+        <span class="tracer-badge" style="background:var(--c-router)">URL → Route</span>
+        <h4>router/index.js에서 그 URL(path)을 검색</h4>
+        <p class="why"><code>path: "/template"</code>로 검색하면 해당 Route 블록이 나옵니다.</p>
+        <div class="code"><div class="code-head"><span class="code-fname">src/router/index.js</span></div><pre>{
+  <span class="t-prop">path</span>: <span class="t-str">"/template"</span>,
+  <span class="t-prop">component</span>: Template,   <span class="t-com">// ← 이 컴포넌트가 상위 페이지</span>
+  <span class="t-prop">children</span>: [ ... ]
+}</pre></div>
+      </div>
+      <!-- step 4 -->
+      <div class="tracer-step" data-i="3">
+        <span class="tracer-badge" style="background:var(--c-index)">Route → 파일 위치</span>
+        <h4>그 component가 어디서 import 됐는지 확인</h4>
+        <p class="why">파일 위 import 구문을 보면 실제 파일 경로를 알 수 있습니다.</p>
+        <div class="code"><div class="code-head"><span class="code-fname">src/router/index.js (상단)</span></div><pre><span class="t-kw">import</span> Template <span class="t-kw">from</span> <span class="t-str">"@/views/Template/Index.vue"</span>;</pre></div>
+      </div>
+      <!-- step 5 -->
+      <div class="tracer-step" data-i="4">
+        <span class="tracer-badge" style="background:var(--c-index)">상위 페이지 열기</span>
+        <h4>Index.vue를 열어 &lt;router-view&gt;가 있는지 본다</h4>
+        <p class="why">자리만 비어 있다는 건, <b>진짜 내용은 자식(children) 화면에 있다</b>는 신호입니다.</p>
+        <div class="code"><div class="code-head"><span class="code-fname">views/Template/Index.vue</span></div><pre>&lt;<span class="t-tag">template</span>&gt;
+  &lt;<span class="t-tag">Layout</span>&gt;
+    &lt;<span class="t-tag">Title</span> /&gt;
+    &lt;<span class="t-tag">router-view</span> /&gt;   <span class="t-com">&lt;!-- 자식 화면이 여기로 --&gt;</span>
+  &lt;/<span class="t-tag">Layout</span>&gt;
+&lt;/<span class="t-tag">template</span>&gt;</pre></div>
+      </div>
+      <!-- step 6 -->
+      <div class="tracer-step" data-i="5">
+        <span class="tracer-badge" style="background:var(--c-router)">children 확인</span>
+        <h4>router의 children에서 기본 화면을 찾는다</h4>
+        <p class="why"><code>path: ""</code> (빈 문자열)이 <code>/template</code>의 기본 화면입니다.</p>
+        <div class="code"><div class="code-head"><span class="code-fname">src/router/index.js (children)</span></div><pre>children: [
+  { <span class="t-prop">path</span>: <span class="t-str">""</span>, <span class="t-prop">component</span>: TemplateGroup },  <span class="t-com">// ← 기본 화면</span>
+  { <span class="t-prop">path</span>: <span class="t-str">"group/add"</span>, <span class="t-prop">component</span>: GroupAdd },
+  { <span class="t-prop">path</span>: <span class="t-str">"add"</span>, <span class="t-prop">component</span>: TemplateAdd }
+]</pre></div>
+      </div>
+      <!-- step 7 -->
+      <div class="tracer-step" data-i="6">
+        <span class="tracer-badge" style="background:var(--c-screen)">도착 · 고칠 파일</span>
+        <h4>그 component의 실제 .vue 파일이 정답</h4>
+        <p class="why">결국 우리가 손대야 할 파일은 자식 컴포넌트입니다.</p>
+        <div class="code"><div class="code-head"><span class="code-dot" style="background:#28C840"></span><span class="code-fname">고치면 되는 파일</span></div><pre><span class="t-path">src/views/Template/Group.vue</span>   <span class="t-com">✓</span></pre></div>
+        <div class="callout" style="margin-bottom:0;"><span class="co-ico">▶</span><p><strong>요약.</strong> 메뉴 이름 → link(URL) → router의 path → component → import 경로 → Index.vue의 router-view → children의 실제 파일. 이 사슬을 거꾸로 타고 내려오면 됩니다.</p></div>
+      </div>
+
+      <div class="tracer-controls">
+        <button class="btn btn-ghost" id="tr-prev">← 이전</button>
+        <button class="btn btn-primary" id="tr-next">다음 →</button>
+        <span class="tracer-count" id="tr-count">1 / 7</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 새 페이지 만들기 ===================== -->
+  <section id="create">
+    <div class="eyebrow">실전 2 · 화면 새로 만들기</div>
+    <h2 class="sect-title">새 페이지 추가하기 — "템플릿 복사" 화면 예시</h2>
+    <p class="sect-lead">순서가 핵심입니다. ① 파일을 만들고 → ② 주소록(router)에 등록하면 URL이 살아납니다. 메뉴 등록은 선택입니다.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num"></div>
+        <h4><code>.vue</code> 파일 생성</h4>
+        <p class="step-desc">화면 폴더 안에 새 파일을 만듭니다. 위치는 같은 메뉴 그룹 폴더 안이 자연스럽습니다.</p>
+        <div class="code">
+          <div class="code-head"><span class="code-fname">src/views/Template/TemplateCopy.vue</span><button class="code-copy" data-copy="tc1">복사</button></div>
+<pre id="tc1">&lt;<span class="t-tag">template</span>&gt;
+  &lt;<span class="t-tag">div</span>&gt;템플릿 복사 화면&lt;/<span class="t-tag">div</span>&gt;
+&lt;/<span class="t-tag">template</span>&gt;
+
+&lt;<span class="t-tag">script</span>&gt;
+<span class="t-kw">export default</span> {
+  <span class="t-prop">name</span>: <span class="t-str">"TemplateCopy"</span>,
+};
+&lt;/<span class="t-tag">script</span>&gt;</pre>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num"></div>
+        <h4><code>router/index.js</code>에 등록</h4>
+        <p class="step-desc">해당 영역의 <code>children</code> 배열에 한 줄 추가합니다. <code>import(...)</code> 방식은 "필요할 때 불러오기"라 무거운 화면에 좋습니다.</p>
+        <div class="code">
+          <div class="code-head"><span class="code-fname">src/router/index.js</span><button class="code-copy" data-copy="tc2">복사</button></div>
+<pre id="tc2">{
+  <span class="t-prop">path</span>: <span class="t-str">"copy"</span>,
+  <span class="t-prop">name</span>: <span class="t-str">"TemplateCopy"</span>,
+  <span class="t-prop">component</span>: () =&gt; <span class="t-kw">import</span>(<span class="t-str">"@/views/Template/TemplateCopy.vue"</span>),
+}</pre>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num"></div>
+        <h4>최종 Route 모습 확인</h4>
+        <p class="step-desc">기존 children에 <code>copy</code>가 자연스럽게 끼어든 형태가 됩니다.</p>
+        <div class="code">
+          <div class="code-head"><span class="code-fname">완성된 children</span><button class="code-copy" data-copy="tc3">복사</button></div>
+<pre id="tc3">children: [
+  { <span class="t-prop">path</span>: <span class="t-str">""</span>,          <span class="t-prop">component</span>: TemplateGroup },
+  { <span class="t-prop">path</span>: <span class="t-str">"group/add"</span>, <span class="t-prop">component</span>: GroupAdd },
+  { <span class="t-prop">path</span>: <span class="t-str">"add"</span>,       <span class="t-prop">component</span>: TemplateAdd },
+  { <span class="t-prop">path</span>: <span class="t-str">"copy"</span>,      <span class="t-prop">component</span>: () =&gt; <span class="t-kw">import</span>(<span class="t-str">"@/views/Template/TemplateCopy.vue"</span>) },
+]</pre>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num"></div>
+        <h4>접속 URL 확인</h4>
+        <p class="step-desc">상위 <code>/template</code> + 자식 <code>copy</code> = 최종 URL. 부모 path와 자식 path가 합쳐집니다.</p>
+        <div class="code"><div class="code-head"><span class="code-fname">브라우저 주소</span></div><pre><span class="t-str">/template/copy</span></pre></div>
+      </div>
+
+      <div class="step optional">
+        <div class="step-num"></div>
+        <h4>메뉴에 노출 <span style="font-weight:600;color:var(--ink-faint);font-size:13px;">(선택)</span></h4>
+        <p class="step-desc">좌측 메뉴에서 바로 들어가게 하려면 DB의 <code>ocr_menu</code> 테이블에 행을 추가합니다. link가 방금 만든 URL과 같으면 메뉴 → 화면이 연결됩니다. 직접 URL로 접속한다면 생략해도 됩니다.</p>
+        <div class="code">
+          <div class="code-head"><span class="code-fname">ocr_menu 테이블에 행 추가</span><button class="code-copy" data-copy="tc4">복사</button></div>
+<pre id="tc4"><span class="t-kw">INSERT INTO</span> ocr_menu (menu_name, link)
+<span class="t-kw">VALUES</span> (<span class="t-str">'템플릿 복사'</span>, <span class="t-str">'/template/copy'</span>);</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== .vue 파일 구조 ===================== -->
+  <section id="sfc">
+    <div class="eyebrow">가장 궁금했던 부분</div>
+    <h2 class="sect-title"><code>.vue</code> 파일은 어떻게 생겼나 — 3칸 구조</h2>
+    <p class="sect-lead">하나의 <code>.vue</code> 파일은 세 칸으로 나뉩니다. 화면 모양(<code>template</code>), 동작·데이터(<code>script</code>), 꾸밈(<code>style</code>). 이 셋이 한 파일에 모여 "한 화면"을 이룹니다.</p>
+
+    <div class="sfc">
+      <div class="sfc-row">
+        <div class="sfc-label tmpl"><div class="tag">&lt;template&gt;</div><div class="role">화면 모양 (HTML)</div></div>
+        <div class="sfc-body">
+          눈에 보이는 화면을 그리는 칸입니다. 일반 HTML에 Vue 문법(<code>{{ }}</code>, <code>@click</code>, <code>v-if</code> 등)을 섞어 씁니다.
+          <div class="code" style="margin-bottom:0;"><pre>&lt;<span class="t-tag">div</span>&gt;
+  &lt;<span class="t-tag">h2</span>&gt;{{ <span class="t-prop">title</span> }}&lt;/<span class="t-tag">h2</span>&gt;        <span class="t-com">&lt;!-- 데이터 표시 --&gt;</span>
+  &lt;<span class="t-tag">button</span> <span class="t-attr">@click</span>=<span class="t-str">"save"</span>&gt;저장&lt;/<span class="t-tag">button</span>&gt;  <span class="t-com">&lt;!-- 클릭 시 save 실행 --&gt;</span>
+&lt;/<span class="t-tag">div</span>&gt;</pre></div>
+        </div>
+      </div>
+      <div class="sfc-row">
+        <div class="sfc-label scr"><div class="tag">&lt;script&gt;</div><div class="role">동작 · 데이터 (JS)</div></div>
+        <div class="sfc-body">
+          이 화면의 "두뇌"입니다. <code>export default { ... }</code> 안에 데이터와 함수를 정해진 이름의 칸(옵션)에 나눠 담습니다. 아래에서 칸마다 자세히 봅니다.
+          <div class="code" style="margin-bottom:0;"><pre>&lt;<span class="t-tag">script</span>&gt;
+<span class="t-kw">export default</span> {
+  <span class="t-prop">name</span>: <span class="t-str">"TemplateCopy"</span>,
+  <span class="t-prop">data</span>() { <span class="t-kw">return</span> { <span class="t-prop">title</span>: <span class="t-str">"템플릿 복사"</span> }; },
+  <span class="t-prop">methods</span>: { <span class="t-fn">save</span>() { <span class="t-com">/* 저장 로직 */</span> } },
+};
+&lt;/<span class="t-tag">script</span>&gt;</pre></div>
+        </div>
+      </div>
+      <div class="sfc-row">
+        <div class="sfc-label sty"><div class="tag">&lt;style&gt;</div><div class="role">꾸밈 (CSS)</div></div>
+        <div class="sfc-body">
+          이 화면의 디자인을 입히는 칸입니다. <code>scoped</code>를 붙이면 <b>이 파일 안에서만</b> 적용돼, 다른 화면 디자인을 건드리지 않습니다.
+          <div class="code" style="margin-bottom:0;"><pre>&lt;<span class="t-tag">style</span> <span class="t-attr">scoped</span>&gt;
+h2 { color: <span class="t-str">#2E9E6E</span>; }   <span class="t-com">/* 이 화면의 h2에만 적용 */</span>
+&lt;/<span class="t-tag">style</span>&gt;</pre></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>그래서 <code>&lt;script&gt;</code> 안에는 뭘 적나요? — 옵션(칸) 사전</h3>
+    <p class="muted" style="font-size:14.5px;margin-bottom:6px;">이 프로젝트는 <b>Options API</b> 방식입니다. 즉 정해진 이름의 칸에 내용을 나눠 담습니다. 칸을 눌러 펼쳐 보세요.</p>
+
+    <div class="opts" id="opts">
+      <div class="opt">
+        <button class="opt-head"><span class="opt-key">name</span><span class="opt-onel">컴포넌트 이름표</span><span class="req opt">선택</span><span class="opt-chev">▾</span></button>
+        <div class="opt-body"><div class="opt-inner">
+          <p>이 컴포넌트의 이름입니다. 개발자 도구나 에러 메시지에서 화면을 알아보기 쉽게 해줍니다. <b>보통 파일명과 같게</b> 짓습니다. 동작에 큰 영향은 없지만 적어두는 습관이 좋습니다.</p>
+          <div class="code" style="margin-bottom:0;"><pre><span class="t-prop">name</span>: <span class="t-str">"TemplateCopy"</span>,</pre></div>
+        </div></div>
+      </div>
+
+      <div class="opt">
+        <button class="opt-head"><span class="opt-key">components</span><span class="opt-onel">이 화면에서 쓸 다른 부품 등록</span><span class="req opt">선택</span><span class="opt-chev">▾</span></button>
+        <div class="opt-body"><div class="opt-inner">
+          <p>다른 <code>.vue</code> 컴포넌트(예: 공통 버튼, 모달, 표)를 이 화면에서 쓰려면 먼저 <b>import 하고 여기에 등록</b>해야 <code>&lt;template&gt;</code>에서 태그처럼 쓸 수 있습니다.</p>
+          <div class="code" style="margin-bottom:0;"><pre><span class="t-kw">import</span> Modal <span class="t-kw">from</span> <span class="t-str">"@/components/Modal.vue"</span>;
+<span class="t-com">// ...</span>
+<span class="t-prop">components</span>: { Modal },   <span class="t-com">// 이후 &lt;Modal /&gt; 로 사용 가능</span></pre></div>
+        </div></div>
+      </div>
+
+      <div class="opt">
+        <button class="opt-head"><span class="opt-key">props</span><span class="opt-onel">부모(또는 URL)에서 받는 값</span><span class="req opt">선택</span><span class="opt-chev">▾</span></button>
+        <div class="opt-body"><div class="opt-inner">
+          <p>바깥에서 <b>전달받는 값</b>입니다. 부모 컴포넌트가 넘겨주거나, router에서 <code>props: true</code>로 설정하면 URL 파라미터가 props로 들어옵니다. 받은 값은 <code>&lt;template&gt;</code>에서 바로 쓸 수 있습니다.</p>
+          <div class="code" style="margin-bottom:0;"><pre><span class="t-prop">props</span>: {
+  <span class="t-prop">id</span>: <span class="t-fn">String</span>,   <span class="t-com">// /detail/123 → id 가 "123"</span>
+},</pre></div>
+        </div></div>
+      </div>
+
+      <div class="opt">
+        <button class="opt-head"><span class="opt-key">data()</span><span class="opt-onel">이 화면이 들고 있는 값(상태)</span><span class="req must">자주 씀</span><span class="opt-chev">▾</span></button>
+        <div class="opt-body"><div class="opt-inner">
+          <p>화면 안에서 바뀌는 값들을 담는 곳입니다. 입력창 내용, 목록 데이터, 로딩 여부 등. <b>반드시 함수로 만들어 객체를 <code>return</code></b> 합니다. 여기 담긴 값이 바뀌면 화면이 자동으로 다시 그려집니다.</p>
+          <div class="code" style="margin-bottom:0;"><pre><span class="t-prop">data</span>() {
+  <span class="t-kw">return</span> {
+    <span class="t-prop">keyword</span>: <span class="t-str">""</span>,      <span class="t-com">// 검색어 입력값</span>
+    <span class="t-prop">list</span>: [],         <span class="t-com">// 화면에 뿌릴 목록</span>
+    <span class="t-prop">isLoading</span>: <span class="t-kw">false</span>,
+  };
+},</pre></div>
+        </div></div>
+      </div>
+
+      <div class="opt">
+        <button class="opt-head"><span class="opt-key">computed</span><span class="opt-onel">기존 값으로 계산해 만든 값</span><span class="req opt">선택</span><span class="opt-chev">▾</span></button>
+        <div class="opt-body"><div class="opt-inner">
+          <p>다른 값들을 조합해 <b>자동으로 계산되는 값</b>입니다. 재료가 되는 값이 바뀌면 알아서 다시 계산됩니다. "필터링된 목록", "합계" 같은 데 씁니다. 첨부 문서의 <code>setTitle</code>처럼 화면 제목을 상황에 따라 바꾸는 데도 좋습니다.</p>
+          <div class="code" style="margin-bottom:0;"><pre><span class="t-prop">computed</span>: {
+  <span class="t-fn">title</span>() {
+    <span class="t-kw">return this</span>.$route.query.tpType === <span class="t-str">"R"</span>
+      ? <span class="t-str">"인식 템플릿 관리"</span>
+      : <span class="t-str">"분류 템플릿 관리"</span>;
+  },
+},</pre></div>
+        </div></div>
+      </div>
+
+      <div class="opt">
+        <button class="opt-head"><span class="opt-key">watch</span><span class="opt-onel">특정 값이 바뀌는 순간 감지</span><span class="req opt">선택</span><span class="opt-chev">▾</span></button>
+        <div class="opt-body"><div class="opt-inner">
+          <p>어떤 값이 <b>바뀌는 순간</b> 무언가를 실행하고 싶을 때 씁니다. 예) 검색어가 바뀌면 서버에 다시 요청. (계산된 결과가 필요하면 computed, "바뀌면 ~해라"가 필요하면 watch)</p>
+          <div class="code" style="margin-bottom:0;"><pre><span class="t-prop">watch</span>: {
+  <span class="t-fn">keyword</span>(newVal) {
+    <span class="t-kw">this</span>.<span class="t-fn">search</span>(newVal);   <span class="t-com">// 검색어가 바뀌면 재검색</span>
+  },
+},</pre></div>
+        </div></div>
+      </div>
+
+      <div class="opt">
+        <button class="opt-head"><span class="opt-key">methods</span><span class="opt-onel">버튼 클릭 등으로 실행할 함수들</span><span class="req must">자주 씀</span><span class="opt-chev">▾</span></button>
+        <div class="opt-body"><div class="opt-inner">
+          <p>이 화면의 <b>동작(함수)</b>을 모아두는 곳입니다. 버튼 클릭, 저장, 페이지 이동 등. <code>&lt;template&gt;</code>에서 <code>@click="save"</code>처럼 연결해 호출합니다. 안에서는 <code>this.데이터</code>로 data 값에 접근합니다.</p>
+          <div class="code" style="margin-bottom:0;"><pre><span class="t-prop">methods</span>: {
+  <span class="t-fn">save</span>() { <span class="t-com">/* 저장 처리 */</span> },
+  <span class="t-fn">moveCopy</span>() {
+    <span class="t-kw">this</span>.$router.<span class="t-fn">push</span>(<span class="t-str">"/template/copy"</span>);  <span class="t-com">// 페이지 이동</span>
+  },
+},</pre></div>
+        </div></div>
+      </div>
+
+      <div class="opt">
+        <button class="opt-head"><span class="opt-key">created / mounted</span><span class="opt-onel">화면이 켜질 때 자동 실행 (생명주기)</span><span class="req opt">자주 씀</span><span class="opt-chev">▾</span></button>
+        <div class="opt-body"><div class="opt-inner">
+          <p>화면이 만들어지는 <b>특정 시점에 자동으로</b> 실행되는 칸입니다(생명주기 훅). 보통 <b>화면이 열리자마자 서버에서 데이터를 가져올 때</b> <code>created</code>나 <code>mounted</code>를 씁니다.</p>
+          <p style="margin-bottom:8px;"><b>created</b>: 데이터·로직 준비가 끝난 직후 (화면 그려지기 전). <b>mounted</b>: 화면이 실제 화면에 붙은 직후 (DOM 사용 가능).</p>
+          <div class="code" style="margin-bottom:0;"><pre><span class="t-prop">created</span>() {
+  <span class="t-kw">this</span>.<span class="t-fn">fetchList</span>();   <span class="t-com">// 화면 열리자마자 목록 불러오기</span>
+},</pre></div>
+        </div></div>
+      </div>
+    </div>
+
+    <div class="callout"><span class="co-ico">▶</span><p><strong>순서 팁.</strong> 보통 위에서부터 <code>name → components → props → data → computed → watch → created/mounted → methods</code> 순으로 적습니다. 정해진 규칙은 아니지만, 팀 코드가 이 순서면 맞춰주는 게 읽기 좋습니다.</p></div>
+  </section>
+
+  <!-- ===================== 페이지 이동 / 파라미터 ===================== -->
+  <section id="nav">
+    <div class="eyebrow">자주 쓰는 동작</div>
+    <h2 class="sect-title">페이지 이동 · 값 전달하기</h2>
+    <p class="sect-lead">버튼을 눌러 다른 화면으로 보내거나, 다음 화면에 값을 넘겨주는 두 가지 방법입니다.</p>
+
+    <h3>① 버튼으로 페이지 이동</h3>
+    <div class="code">
+      <div class="code-head"><span class="code-fname">이동시킬 화면.vue</span><button class="code-copy" data-copy="nv1">복사</button></div>
+<pre id="nv1">&lt;<span class="t-tag">template</span>&gt;
+  &lt;<span class="t-tag">button</span> <span class="t-attr">@click</span>=<span class="t-str">"moveCopy"</span>&gt;복사 화면으로 이동&lt;/<span class="t-tag">button</span>&gt;
+&lt;/<span class="t-tag">template</span>&gt;
+
+&lt;<span class="t-tag">script</span>&gt;
+<span class="t-kw">export default</span> {
+  <span class="t-prop">methods</span>: {
+    <span class="t-fn">moveCopy</span>() {
+      <span class="t-kw">this</span>.$router.<span class="t-fn">push</span>(<span class="t-str">"/template/copy"</span>);
+    },
+  },
+};
+&lt;/<span class="t-tag">script</span>&gt;</pre>
+    </div>
+
+    <h3>② 값 넘기는 2가지 방법 — Path 파라미터 vs Query String</h3>
+    <div class="vs" style="margin-top:6px;">
+      <div class="vs-col">
+        <span class="vs-tag vue" style="background:rgba(214,69,125,.12);color:var(--c-screen)">Path 파라미터</span>
+        <h4>/detail/<u>123</u></h4>
+        <p class="small" style="margin:8px 0 12px;">"무엇을 볼지" 대상을 정할 때. router에 <code>:id</code>로 자리를 만들고 <code>props:true</code>를 켜면 props로 받습니다.</p>
+        <div class="code" style="margin:0;"><pre><span class="t-com">// router</span>
+{ <span class="t-prop">path</span>: <span class="t-str">"detail/:id"</span>, <span class="t-prop">props</span>: <span class="t-kw">true</span> }
+
+<span class="t-com">// 컴포넌트</span>
+<span class="t-prop">props</span>: { <span class="t-prop">id</span>: <span class="t-fn">String</span> }
+<span class="t-com">// id === "123"</span></pre></div>
+      </div>
+      <div class="vs-mid">또는</div>
+      <div class="vs-col">
+        <span class="vs-tag vue">Query String</span>
+        <h4>/template<u>?tpType=R</u></h4>
+        <p class="small" style="margin:8px 0 12px;">"어떻게 볼지" 옵션을 줄 때(필터·모드 등). <code>this.$route.query</code>로 읽습니다. 첨부 문서의 제목 분기와 동일합니다.</p>
+        <div class="code" style="margin:0;"><pre><span class="t-com">// 컴포넌트</span>
+<span class="t-kw">this</span>.$route.query.tpType
+<span class="t-com">// "R" → 인식 템플릿 관리</span>
+<span class="t-com">// "C" → 분류 템플릿 관리</span></pre></div>
+      </div>
+    </div>
+    <div class="callout"><span class="co-ico">▶</span><p><strong>구분 요령.</strong> URL 경로에 박히는 "그 대상"이면 <b>path 파라미터</b>(<code>/detail/123</code>), 화면을 보는 "옵션/모드"면 <b>query</b>(<code>?tpType=R</code>)를 씁니다.</p></div>
+  </section>
+
+  <!-- ===================== 체크리스트 ===================== -->
+  <section id="checklist">
+    <div class="eyebrow">마무리 · 손에 익히기</div>
+    <h2 class="sect-title">새 기능 작업할 때 이 순서대로</h2>
+    <p class="sect-lead">막힐 때마다 위에서부터 하나씩 짚어 내려오면 길을 잃지 않습니다.</p>
+
+    <div class="card">
+      <div class="checklist">
+        <div class="ck-item" style="--ck-c:var(--c-menu)"><span class="ck-box"></span><span class="ck-text">DB <code>ocr_menu</code> 테이블에서 관련 메뉴와 link 확인</span></div>
+        <div class="ck-item" style="--ck-c:var(--c-url)"><span class="ck-box"></span><span class="ck-text">그 메뉴가 가리키는 <b>URL</b> 파악</span></div>
+        <div class="ck-item" style="--ck-c:var(--c-router)"><span class="ck-box"></span><span class="ck-text"><code>router/index.js</code>에서 그 <b>path</b> 검색</span></div>
+        <div class="ck-item" style="--ck-c:var(--c-router)"><span class="ck-box"></span><span class="ck-text">연결된 <b>component</b>와 <b>import 경로</b> 확인</span></div>
+        <div class="ck-item" style="--ck-c:var(--c-index)"><span class="ck-box"></span><span class="ck-text"><code>Index.vue</code>를 열어 <code>&lt;router-view&gt;</code> 위치 확인</span></div>
+        <div class="ck-item" style="--ck-c:var(--c-view)"><span class="ck-box"></span><span class="ck-text"><code>children</code> route에서 실제 화면 파일 찾기</span></div>
+        <div class="ck-item" style="--ck-c:var(--c-screen)"><span class="ck-box"></span><span class="ck-text">그 <b>.vue 파일</b>을 수정 (또는 새로 만들고 router에 등록)</span></div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:24px;"><span class="co-ico">▶</span><p><strong>딱 하나만 외운다면.</strong> 화면이 안 보이거나 어디를 고칠지 모를 땐 무조건 <code>router/index.js</code>부터 엽니다. 이 프로젝트의 모든 길은 여기로 통합니다.</p></div>
+  </section>
+
+  <footer>
+    <div>Vue 프로젝트 길잡이 · 중간 합류자를 위한 입문 가이드</div>
+    <div class="meta">최초 생성 2026-06-09 · 최종 수정 2026-06-09</div>
+  </footer>
+
+</main>
+
+<!-- ===================== 모달 ===================== -->
+<div class="modal-overlay" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal">
+    <div class="modal-top" id="modal-top"></div>
+    <div class="modal-head">
+      <div class="modal-icon" id="modal-icon">?</div>
+      <div>
+        <h3 id="modal-title">제목</h3>
+        <div class="modal-sub" id="modal-sub"></div>
+      </div>
+      <button class="modal-close" id="modal-close" aria-label="닫기">×</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- 모달 내용 데이터 ---------- */
+  var COLORS = {
+    menu:"var(--c-menu)", url:"var(--c-url)", router:"var(--c-router)",
+    index:"var(--c-index)", view:"var(--c-view)", screen:"var(--c-screen)", app:"var(--c-index)"
+  };
+  var MODALS = {
+    menu:{ icon:"1", title:"메뉴 클릭", sub:"DB · ocr_menu 테이블", body:
+      "<p>좌측 메뉴는 DB의 <strong>ocr_menu 테이블</strong>에 저장된 목록을 읽어와 그려집니다. 각 행에는 보여줄 메뉴 이름과 누르면 갈 주소(link)가 들어 있습니다.</p>"+
+      "<p>예전에 쓰던 <strong>adminMenu.json은 더 이상 사용하지 않습니다.</strong> 메뉴를 추가·수정하려면 파일이 아니라 ocr_menu 테이블을 손봅니다.</p>"+
+      "<p>중요한 점: 메뉴 자체는 <strong>화면을 만들지 않습니다.</strong> 메뉴가 가진 link가 라우트와 매칭되어 화면으로 이어질 뿐입니다.</p>" },
+    url:{ icon:"2", title:"URL 이동", sub:"예: /template", body:
+      "<p>메뉴를 누르면 브라우저 주소가 link에 적힌 URL로 바뀝니다. 이 순간부터는 '주소(URL)'가 무엇을 보여줄지의 기준이 됩니다.</p>"+
+      "<p>하지만 URL 스스로는 화면을 모릅니다. 다음 단계인 라우터가 통역해 줍니다.</p>" },
+    router:{ icon:"3", title:"경로 매칭", sub:"src/router/index.js", body:
+      "<p>이 프로젝트에서 <strong>가장 중요한 파일</strong>입니다. 'URL이 이거면 이 컴포넌트를 보여줘'를 전부 적어둔 주소록입니다.</p>"+
+      "<p>현재 URL과 일치하는 path를 찾아, 거기 연결된 component를 화면으로 띄웁니다. 화면을 찾거나 새로 만들 때 반드시 거쳐 가는 길목입니다.</p>" },
+    index:{ icon:"4", title:"상위 페이지 (Index.vue)", sub:"views/○○/Index.vue", body:
+      "<p>한 메뉴 영역의 <strong>공통 틀(레이아웃)</strong> 역할입니다. 제목, 공통 레이아웃 등 그 영역에서 늘 보이는 부분을 담고, 가운데에 자식 화면이 들어올 자리를 비워둡니다.</p>"+
+      "<p>그래서 Index.vue를 열면 내용이 비어 보일 수 있습니다 — 진짜 내용은 자식(children) 화면에 있기 때문입니다.</p>" },
+    app:{ icon:"4", title:"App.vue / Index.vue", sub:"틀(레이아웃) 담당", body:
+      "<p><strong>App.vue</strong>는 앱 전체의 가장 바깥 껍데기로, 현재 URL에 맞는 최상위 화면을 출력합니다.</p>"+
+      "<p>각 영역의 <strong>Index.vue</strong>는 그 영역의 공통 레이아웃을 담고, 안쪽에 &lt;router-view&gt;로 자식 화면 자리를 비워둡니다.</p>" },
+    view:{ icon:"5", title:"&lt;router-view /&gt;", sub:"자식 화면이 들어올 빈자리", body:
+      "<p>Index.vue 안에 뚫어둔 <strong>구멍</strong>입니다. 현재 URL에 맞는 자식 화면이 이 자리에 정확히 끼워집니다.</p>"+
+      "<p>URL이 바뀌면 이 빈자리에 들어오는 화면만 바뀌고, 둘러싼 레이아웃(제목 등)은 그대로 유지됩니다.</p>" },
+    screen:{ icon:"6", title:"실제 화면.vue", sub:"예: views/Template/Group.vue", body:
+      "<p>우리가 <strong>실제로 가장 많이 손대는 파일</strong>입니다. 목록, 폼, 버튼 등 진짜 내용이 여기 들어 있습니다.</p>"+
+      "<p>화면을 고치라는 요청이 오면, 결국 이 단계의 .vue 파일에 도착하게 됩니다.</p>" }
+  };
+
+  var modal = document.getElementById("modal");
+  function openModal(key){
+    var d = MODALS[key]; if(!d) return;
+    var c = COLORS[key] || "var(--c-router)";
+    document.getElementById("modal-top").style.background = c;
+    var ic = document.getElementById("modal-icon");
+    ic.style.background = c; ic.innerHTML = d.icon;
+    document.getElementById("modal-title").innerHTML = d.title;
+    document.getElementById("modal-sub").textContent = d.sub;
+    document.getElementById("modal-body").innerHTML = d.body;
+    modal.classList.add("show");
+    document.getElementById("modal-close").focus();
+  }
+  function closeModal(){ modal.classList.remove("show"); }
+  document.getElementById("modal-close").addEventListener("click", closeModal);
+  modal.addEventListener("click", function(e){ if(e.target === modal) closeModal(); });
+  document.addEventListener("keydown", function(e){ if(e.key === "Escape") closeModal(); });
+
+  /* 노선도 역 클릭 */
+  document.querySelectorAll(".station").forEach(function(s){
+    s.addEventListener("click", function(){ openModal(s.getAttribute("data-stop")); });
+  });
+  /* 역할 카드 클릭 */
+  document.querySelectorAll(".role-card").forEach(function(r){
+    r.addEventListener("click", function(){ openModal(r.getAttribute("data-role")); });
+  });
+
+  /* ---------- 화면 찾기 추적기 ---------- */
+  var steps = Array.prototype.slice.call(document.querySelectorAll(".tracer-step"));
+  var total = steps.length;
+  var cur = 0;
+  var bars = document.getElementById("tracer-bars");
+  for(var i=0;i<total;i++){ var b=document.createElement("span"); bars.appendChild(b); }
+  var barEls = bars.querySelectorAll("span");
+  var prevBtn = document.getElementById("tr-prev");
+  var nextBtn = document.getElementById("tr-next");
+  var countEl = document.getElementById("tr-count");
+  function renderTracer(){
+    steps.forEach(function(s,idx){ s.classList.toggle("active", idx===cur); });
+    barEls.forEach(function(b,idx){ b.classList.toggle("on", idx<=cur); });
+    countEl.textContent = (cur+1)+" / "+total;
+    prevBtn.disabled = cur===0;
+    nextBtn.textContent = cur===total-1 ? "처음으로 ↺" : "다음 →";
+  }
+  nextBtn.addEventListener("click", function(){ cur = (cur===total-1)?0:cur+1; renderTracer(); });
+  prevBtn.addEventListener("click", function(){ if(cur>0){ cur--; renderTracer(); } });
+  renderTracer();
+
+  /* ---------- script 옵션 아코디언 ---------- */
+  document.querySelectorAll(".opt-head").forEach(function(h){
+    h.addEventListener("click", function(){ h.parentElement.classList.toggle("open"); });
+  });
+
+  /* ---------- 코드 복사 ---------- */
+  document.querySelectorAll(".code-copy").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var el = document.getElementById(btn.getAttribute("data-copy"));
+      if(!el) return;
+      var text = el.innerText;
+      var done = function(){ var o=btn.textContent; btn.textContent="복사됨 ✓"; setTimeout(function(){ btn.textContent=o; },1400); };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done).catch(function(){ fallback(text,done); });
+      } else { fallback(text,done); }
+    });
+  });
+  function fallback(text, cb){
+    var ta=document.createElement("textarea"); ta.value=text;
+    ta.style.position="fixed"; ta.style.opacity="0"; document.body.appendChild(ta);
+    ta.select(); try{ document.execCommand("copy"); }catch(e){}
+    document.body.removeChild(ta); cb();
+  }
+})();
+</script>
+</body>
+</html>

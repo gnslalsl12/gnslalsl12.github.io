@@ -45,7 +45,7 @@ export default function Tools() {
                     onClick={() => open(t.id)}
                     initial={{ opacity: 0, y: 16 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-40px" }}
+                    viewport={{ once: true, amount: 0.2 }}
                     transition={{ duration: 0.4, delay: 0.03 * i }}
                     className="bento group flex items-start gap-4 p-5 text-left"
                   >
