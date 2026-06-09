@@ -1,0 +1,20 @@
+{
+  "docs": [
+    {
+      "slug": "japan-small-cities-2026",
+      "title": "일본 소도시 여행 도감 · 2026년 8~10월 커플 3박 4일",
+      "category": "travel",
+      "description": "2026년 8~10월, 커플 3박 4일 일정으로 정리한 일본 소도시 여행 정보 도감.",
+      "path": "archive/travel/japan-small-cities-2026.html",
+      "date": "2026-06-08"
+    },
+    {
+      "slug": "vue-project-guide",
+      "title": "Vue 프로젝트 길잡이 — 메뉴에서 화면까지",
+      "category": "dev",
+      "description": "메뉴 클릭에서 화면 렌더링까지, Vue 프로젝트의 동작 흐름을 따라가며 정리한 가이드.",
+      "path": "archive/dev/vue-project-guide.html",
+      "date": "2026-06-08"
+    }
+  ]
+}
