@@ -5,7 +5,7 @@
       "title": "이집트 9박 10일 겨울 여행 완전 가이드",
       "category": "travel",
       "description": "",
-      "path": "archive/travel/이집트-9박-10일-겨울-여행-완전-가이드.html",
+      "path": "docs/travel/이집트-9박-10일-겨울-여행-완전-가이드.html",
       "date": "2026-06-10"
     },
     {
@@ -13,7 +13,7 @@
       "title": "이집트 9박 10일 겨울 여행 완전 가이드",
       "category": "dev",
       "description": "",
-      "path": "archive/dev/이집트-9박-10일-겨울-여행-완전-가이드.html",
+      "path": "docs/dev/이집트-9박-10일-겨울-여행-완전-가이드.html",
       "date": "2026-06-10"
     },
     {
@@ -21,7 +21,7 @@
       "title": "Vue 데이터 다루기 — 직접 만져보는 데모",
       "category": "dev",
       "description": "",
-      "path": "archive/dev/vue-데이터-다루기-직접-만져보는-데모.html",
+      "path": "docs/dev/vue-데이터-다루기-직접-만져보는-데모.html",
       "date": "2026-06-10"
     },
     {
@@ -29,7 +29,7 @@
       "title": "나트랑 4박 5일 커플여행 완전 가이드 (2026년 7월)",
       "category": "travel",
       "description": "",
-      "path": "archive/travel/나트랑-4박-5일-커플여행-완전-가이드-2026년-7월.html",
+      "path": "docs/travel/나트랑-4박-5일-커플여행-완전-가이드-2026년-7월.html",
       "date": "2026-06-09"
     },
     {
@@ -37,7 +37,7 @@
       "title": "삿포로 4박5일 커플 겨울여행 완전가이드 · 온천·먹거리·볼거리",
       "category": "travel",
       "description": "2026년 12월 초·중순 출발, 휴양형 커플 4박5일 삿포로 겨울 여행 가이드. 최적 시기·연말 휴무 회피·조잔케이 온천·맛집·예산까지 정리.",
-      "path": "archive/travel/sapporo-winter-couple-2026.html",
+      "path": "docs/travel/sapporo-winter-couple-2026.html",
       "date": "2026-06-09"
     },
     {
@@ -45,7 +45,7 @@
       "title": "일본 소도시 여행 도감 · 2026년 8~10월 커플 3박 4일",
       "category": "travel",
       "description": "2026년 8~10월, 커플 3박 4일 일정으로 정리한 일본 소도시 여행 정보 도감.",
-      "path": "archive/travel/japan-small-cities-2026.html",
+      "path": "docs/travel/japan-small-cities-2026.html",
       "date": "2026-06-08"
     },
     {
@@ -53,7 +53,7 @@
       "title": "Vue 프로젝트 길잡이 — 메뉴에서 화면까지",
       "category": "dev",
       "description": "메뉴 클릭에서 화면 렌더링까지, Vue 프로젝트의 동작 흐름을 따라가며 정리한 가이드.",
-      "path": "archive/dev/vue-project-guide.html",
+      "path": "docs/dev/vue-project-guide.html",
       "date": "2026-06-08"
     }
   ]
