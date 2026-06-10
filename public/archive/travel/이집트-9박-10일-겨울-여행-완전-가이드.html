@@ -1,0 +1,1618 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>이집트 9박 10일 겨울 여행 완전 가이드</title>
+<!--
+========================================================================
+문서 정보
+========================================================================
+최초 생성일시 : 2026-06-10 (KST)
+최종 수정일시 : 2026-06-10 (KST)
+수정 이력 :
+  - 2026-06-10 : 최초 작성 — 카이로·룩소르·후루가다·백사막·알렉산드리아 통합
+  - 2026-06-10 : 메뉴 탭 + 페이지 분리 구조로 UX 개편
+작성 관점     : 겨울(12~2월) 출발, 관광+사막/바다 휴양, 커플/친구 2~4인
+환율 기준     : US$1 = 51.77 EGP (2026-06-10 기준)
+========================================================================
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#C8922A; --gold-lt:#E8B84D; --gold-pale:#FBF1DC;
+  --teal:#1A7A6E; --teal-lt:#25A898; --teal-pale:#E0F4F2;
+  --deep:#1C1610; --warm:#F9F3E8; --mid:#EDE4D0;
+  --text:#2D2416; --text-lt:#5C4A30; --muted:#8B7355;
+  --info:#2563EB; --warn:#C0392B; --ok:#1E8449;
+  --nav-h:60px; --radius:12px;
+  --shadow:0 4px 18px rgba(28,22,16,.10);
+  --font-head:'Gowun Batang',serif;
+  --font-body:'IBM Plex Sans KR',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--warm);color:var(--text);font-family:var(--font-body);font-size:15px;line-height:1.75;padding-top:var(--nav-h);}
+
+/* ── TOP NAV ──────────────────────────── */
+.topnav{
+  position:fixed;top:0;left:0;right:0;height:var(--nav-h);
+  background:var(--deep);z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 20px;box-shadow:0 2px 12px rgba(0,0,0,.35);
+}
+.nav-logo{
+  font-family:var(--font-head);color:var(--gold-lt);font-size:1rem;
+  white-space:nowrap;cursor:pointer;flex-shrink:0;
+}
+.nav-logo span{color:rgba(255,255,255,.5);font-size:.75rem;margin-left:8px;font-family:var(--font-body);}
+.hamburger{
+  display:flex;flex-direction:column;gap:5px;cursor:pointer;
+  padding:8px;border-radius:6px;transition:background .2s;flex-shrink:0;
+}
+.hamburger:hover{background:rgba(255,255,255,.08);}
+.hamburger span{display:block;width:24px;height:2px;background:var(--gold-lt);border-radius:2px;transition:all .3s;}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+/* ── SLIDE-IN MENU ────────────────────── */
+.menu-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:999;
+  opacity:0;pointer-events:none;transition:opacity .25s;
+}
+.menu-overlay.open{opacity:1;pointer-events:all;}
+.sidemenu{
+  position:fixed;top:0;right:-300px;width:280px;height:100vh;
+  background:var(--deep);z-index:1001;
+  transition:right .3s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;padding-top:var(--nav-h);
+  overflow-y:auto;
+}
+.sidemenu.open{right:0;}
+.sidemenu-inner{padding:16px 0 40px;}
+.menu-section-label{
+  font-size:10px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--gold);padding:12px 20px 6px;opacity:.8;
+}
+.menu-item{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 20px;cursor:pointer;
+  color:rgba(255,255,255,.75);font-size:14px;
+  transition:all .15s;border-left:3px solid transparent;
+}
+.menu-item:hover{background:rgba(255,255,255,.06);color:#fff;border-left-color:var(--gold);}
+.menu-item.active{background:rgba(200,146,42,.12);color:var(--gold-lt);border-left-color:var(--gold-lt);}
+.menu-item .mi-icon{font-size:1.1rem;width:24px;text-align:center;flex-shrink:0;}
+.menu-divider{height:1px;background:rgba(255,255,255,.07);margin:8px 16px;}
+
+/* ── PAGES ────────────────────────────── */
+.page{display:none;min-height:calc(100vh - var(--nav-h));}
+.page.active{display:block;}
+
+/* ── HERO ─────────────────────────────── */
+.hero{
+  background:linear-gradient(135deg,#1C1610 0%,#3A2A0C 45%,#1A4A43 100%);
+  padding:56px 24px 48px;text-align:center;position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='60'%3E%3Cpolygon points='60,4 116,56 4,56' fill='none' stroke='rgba(200,146,42,.12)' stroke-width='1.5'/%3E%3C/svg%3E") repeat;
+  pointer-events:none;
+}
+.hero-eyebrow{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-lt);margin-bottom:14px;}
+.hero h1{font-family:var(--font-head);font-size:clamp(1.8rem,5vw,3rem);color:#fff;line-height:1.25;margin-bottom:12px;}
+.hero h1 em{color:var(--gold-lt);font-style:normal;}
+.hero-sub{font-size:14px;color:rgba(255,255,255,.68);margin-bottom:28px;}
+.hero-badges{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;}
+.hbadge{background:rgba(255,255,255,.08);border:1px solid rgba(200,146,42,.3);color:rgba(255,255,255,.82);border-radius:50px;padding:5px 14px;font-size:12.5px;}
+.hbadge strong{color:var(--gold-lt);}
+.meta-bar{background:var(--deep);color:rgba(255,255,255,.55);font-size:11.5px;padding:10px 20px;text-align:center;}
+.meta-bar span{margin:0 8px;}
+
+/* ── QUICK GRID (홈) ──────────────────── */
+.home-grid{max-width:1000px;margin:32px auto;padding:0 20px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.home-card{
+  background:#fff;border-radius:var(--radius);padding:20px 16px;text-align:center;
+  box-shadow:var(--shadow);cursor:pointer;transition:all .2s;
+  border-top:4px solid var(--gold);
+}
+.home-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(28,22,16,.16);}
+.home-card.teal{border-top-color:var(--teal);}
+.home-card.deep{border-top-color:var(--deep);}
+.home-card.ok{border-top-color:var(--ok);}
+.home-card .hc-icon{font-size:2rem;margin-bottom:8px;}
+.home-card h3{font-size:13.5px;font-weight:600;color:var(--text);margin-bottom:4px;}
+.home-card p{font-size:12px;color:var(--muted);}
+
+/* QF 빠른 정보 */
+.qf-row{max-width:1000px;margin:0 auto 32px;padding:0 20px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+.qf{background:linear-gradient(135deg,var(--deep),#2E1F06);border-radius:var(--radius);padding:18px 14px;text-align:center;color:#fff;}
+.qf-icon{font-size:1.6rem;margin-bottom:6px;}
+.qf-label{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-lt);margin-bottom:3px;}
+.qf-val{font-family:var(--font-head);font-size:1.1rem;color:#fff;line-height:1.3;}
+.qf-sub{font-size:11px;color:rgba(255,255,255,.5);margin-top:3px;}
+
+/* ── TLDR BOX ─────────────────────────── */
+.tldr{background:linear-gradient(135deg,var(--teal),#0F5048);border-radius:var(--radius);padding:24px 28px;max-width:1000px;margin:0 auto 32px;padding-left:28px;}
+.tldr h3{font-family:var(--font-head);color:#fff;font-size:1.05rem;margin-bottom:12px;}
+.tldr ul{list-style:none;}
+.tldr li{color:rgba(255,255,255,.86);font-size:13.5px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.1);display:flex;gap:10px;align-items:flex-start;}
+.tldr li:last-child{border-bottom:none;}
+.tldr li::before{content:'✦';color:var(--gold-lt);flex-shrink:0;margin-top:2px;}
+
+/* ── PAGE INNER ───────────────────────── */
+.page-inner{max-width:1000px;margin:0 auto;padding:32px 20px 60px;}
+.page-title{font-family:var(--font-head);font-size:1.6rem;color:var(--text);margin-bottom:6px;display:flex;align-items:center;gap:12px;}
+.page-title .pt-icon{font-size:1.8rem;}
+.page-desc{font-size:13px;color:var(--muted);margin-bottom:28px;padding-bottom:16px;border-bottom:2px solid var(--mid);}
+
+/* ── GENERIC CARDS ────────────────────── */
+.card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;border-top:4px solid var(--gold);}
+.card.teal{border-top-color:var(--teal);}
+.card.warn{border-top-color:var(--warn);}
+.card.ok{border-top-color:var(--ok);}
+.card.deep{border-top-color:var(--deep);}
+.card h3{font-family:var(--font-head);font-size:1rem;margin-bottom:10px;}
+.card p,.card li{font-size:13.5px;color:var(--text-lt);line-height:1.7;}
+.card ul{padding-left:18px;}
+.card li{margin-bottom:4px;}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:20px;}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px;}
+
+/* ── CALLOUT ──────────────────────────── */
+.callout{border-radius:var(--radius);padding:14px 18px;margin:14px 0;font-size:13.5px;display:flex;gap:12px;align-items:flex-start;}
+.callout-icon{font-size:1.2rem;flex-shrink:0;}
+.callout.ok{background:#E9F7EF;border-left:4px solid var(--ok);}
+.callout.warn{background:#FDEDEC;border-left:4px solid var(--warn);}
+.callout.info{background:#EBF5FB;border-left:4px solid var(--info);}
+.callout.gold{background:var(--gold-pale);border-left:4px solid var(--gold);}
+
+/* ── BADGE ────────────────────────────── */
+.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:20px;font-weight:600;vertical-align:middle;margin-left:4px;}
+.badge.hot{background:#FDEDEC;color:#C0392B;}
+.badge.must{background:#EBF5FB;color:#1A5276;}
+.badge.new{background:#E8F8F5;color:#1A7A6E;}
+.badge.gold{background:#FBF1DC;color:#7D5A0A;}
+
+/* ── TABLE ────────────────────────────── */
+.tbl-wrap{overflow-x:auto;border-radius:var(--radius);box-shadow:var(--shadow);margin:14px 0;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+thead tr{background:linear-gradient(90deg,var(--deep),#2E1F06);color:#fff;}
+thead th{padding:11px 13px;text-align:left;font-weight:500;white-space:nowrap;}
+tbody tr{border-bottom:1px solid var(--mid);}
+tbody tr:last-child{border-bottom:none;}
+tbody td{padding:10px 13px;vertical-align:top;color:var(--text-lt);}
+tbody tr:hover{background:var(--gold-pale);}
+.tbl-sum td{background:#FBF1DC;font-weight:700;color:var(--text);}
+
+/* ── PLACE CARDS ──────────────────────── */
+.place-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-bottom:20px;}
+.pcard{background:#fff;border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);border-left:5px solid var(--gold);}
+.pcard.teal{border-left-color:var(--teal);}
+.pcard.deep{border-left-color:var(--deep);}
+.pcard h4{font-family:var(--font-head);font-size:.95rem;color:var(--text);margin-bottom:5px;}
+.pcard .pinfo{font-size:12px;color:var(--muted);margin-bottom:7px;}
+.pcard p{font-size:13px;color:var(--text-lt);line-height:1.6;}
+.pcard .price-tag{display:inline-block;background:var(--gold-pale);color:var(--gold);border-radius:6px;padding:2px 10px;font-size:12px;font-weight:600;margin-top:8px;}
+
+/* ── WEATHER CARDS ────────────────────── */
+.weather-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:14px;margin-bottom:20px;}
+.wcard{background:#fff;border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);text-align:center;border-top:4px solid var(--gold);}
+.wcard.teal{border-top-color:var(--teal);}
+.wcard.info{border-top-color:var(--info);}
+.wcard.deep{border-top-color:var(--deep);}
+.wcard-city{font-weight:600;font-size:.95rem;margin-bottom:6px;}
+.wcard-temp{font-size:1.3rem;font-family:var(--font-head);color:var(--gold);}
+.wcard-temp span{font-size:.85rem;color:var(--teal);}
+.wcard-desc{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.5;}
+
+/* ── FOOD GRID ────────────────────────── */
+.food-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin-bottom:20px;}
+.fcard{background:#fff;border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);border-top:3px solid var(--gold);}
+.fcard.teal{border-top-color:var(--teal);}
+.fcard h4{font-family:var(--font-head);font-size:.92rem;margin-bottom:5px;}
+.fcard p{font-size:13px;color:var(--text-lt);line-height:1.55;}
+.fcard .fprice{font-size:12px;color:var(--muted);margin-top:5px;}
+
+/* ── TIMELINE ─────────────────────────── */
+.timeline{list-style:none;padding:0;position:relative;margin-bottom:24px;}
+.timeline::before{content:'';position:absolute;left:45px;top:0;bottom:0;width:2px;background:var(--mid);}
+.timeline li{display:flex;gap:16px;margin-bottom:16px;position:relative;}
+.tl-time{flex-shrink:0;width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-lt));color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;text-align:center;line-height:1.2;z-index:1;}
+.tl-body{background:#fff;border-radius:var(--radius);padding:12px 16px;flex:1;box-shadow:var(--shadow);border-left:3px solid var(--gold);}
+.tl-body.teal{border-left-color:var(--teal);}
+.tl-body.night{border-left-color:var(--deep);background:#F9F3E8;}
+.tl-title{font-weight:600;color:var(--text);font-size:13.5px;margin-bottom:3px;}
+.tl-desc{font-size:12.5px;color:var(--text-lt);line-height:1.55;}
+
+/* ── DAY BLOCKS ───────────────────────── */
+.day-block{margin-bottom:28px;}
+.day-tag{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(90deg,var(--deep),#3A2A0C);color:#fff;border-radius:8px;padding:9px 18px;font-family:var(--font-head);font-size:.95rem;margin-bottom:14px;}
+.day-tag em{color:var(--gold-lt);font-style:normal;}
+.day-tag .dtag-city{background:var(--gold);color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-family:var(--font-body);}
+
+/* ── DAY TABS (일정 내 탭) ─────────────── */
+.day-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px;}
+.day-tab{padding:7px 14px;border-radius:8px;font-size:12.5px;cursor:pointer;border:1.5px solid var(--mid);background:#fff;color:var(--text-lt);transition:all .15s;font-family:var(--font-body);}
+.day-tab:hover{border-color:var(--gold);color:var(--gold);}
+.day-tab.active{background:var(--gold);color:#fff;border-color:var(--gold);}
+.day-content{display:none;}
+.day-content.active{display:block;}
+
+/* ── BUDGET CARDS ─────────────────────── */
+.budget-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:20px;}
+.bcard{border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);}
+.bcard.eco{background:linear-gradient(135deg,#E8F8F5,#D1F2EB);border-top:5px solid var(--ok);}
+.bcard.mid{background:linear-gradient(135deg,#EBF5FB,#D6EAF8);border-top:5px solid var(--info);}
+.bcard.lux{background:linear-gradient(135deg,var(--gold-pale),#FDE8A0);border-top:5px solid var(--gold);}
+.bcard h3{font-family:var(--font-head);font-size:1rem;margin-bottom:5px;}
+.bcard .bprice{font-size:1.8rem;font-weight:700;font-family:var(--font-head);margin:6px 0;color:var(--text);}
+.bcard .bprice sub{font-size:.65em;color:var(--muted);}
+.bcard ul{list-style:none;}
+.bcard li{font-size:12.5px;color:var(--text-lt);padding:4px 0;border-bottom:1px solid rgba(0,0,0,.07);}
+.bcard li::before{content:'·  ';}
+
+/* ── HOTEL CARDS ──────────────────────── */
+.hotel-tier{margin-bottom:22px;}
+.hotel-tier h4{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--mid);padding-bottom:5px;margin-bottom:12px;}
+.hotel-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;}
+.hcard{background:#fff;border-radius:var(--radius);padding:14px;box-shadow:var(--shadow);border-left:4px solid var(--mid);}
+.hcard.eco{border-left-color:var(--ok);}
+.hcard.mid2{border-left-color:var(--info);}
+.hcard.lux2{border-left-color:var(--gold);}
+.hcard h5{font-weight:600;font-size:13.5px;color:var(--text);margin-bottom:3px;}
+.hcard p{font-size:12px;color:var(--muted);}
+.hcard .hprice{font-size:12.5px;color:var(--gold);font-weight:600;margin-top:5px;}
+
+/* ── CHECKLIST ────────────────────────── */
+.checklist{list-style:none;padding:0;}
+.checklist li{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--mid);font-size:13px;color:var(--text-lt);align-items:flex-start;}
+.checklist li::before{content:'☐';color:var(--gold);font-size:.95rem;flex-shrink:0;}
+.checklist li strong{color:var(--text);}
+
+/* ── SECTION DIVIDER ──────────────────── */
+.sdiv{border:none;border-top:2px solid var(--mid);margin:24px 0;}
+.sh2{font-family:var(--font-head);font-size:1.1rem;color:var(--text);margin:24px 0 14px;}
+
+/* ── TRANSPORT BADGE ──────────────────── */
+.tr-badge{display:inline-block;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;}
+.tr-badge.air{background:#EBF5FB;color:#1A5276;}
+.tr-badge.train{background:#E8F8F5;color:#1E8449;}
+.tr-badge.road{background:#FBF1DC;color:#7D5A0A;}
+
+/* ── FOOTER ───────────────────────────── */
+.page-footer{background:var(--deep);color:rgba(255,255,255,.5);text-align:center;padding:32px 20px;font-size:12.5px;margin-top:40px;}
+.page-footer strong{color:var(--gold-lt);}
+
+/* ── RESPONSIVE ───────────────────────── */
+@media(max-width:700px){
+  .home-grid,.qf-row{grid-template-columns:1fr 1fr;}
+  .grid-2,.grid-3,.budget-cards{grid-template-columns:1fr;}
+  .place-grid,.food-grid,.hotel-grid,.weather-grid{grid-template-columns:1fr;}
+  .timeline::before{left:38px;}
+  .tl-time{width:36px;height:36px;font-size:9px;}
+}
+@media(max-width:420px){
+  .home-grid,.qf-row{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════ TOP NAV ═══════ -->
+<nav class="topnav">
+  <div class="nav-logo" onclick="showPage('home')">
+    🏺 이집트 가이드<span>9박 10일 겨울</span>
+  </div>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ═══════ SIDE MENU ═══════ -->
+<div class="menu-overlay" id="overlay" onclick="closeMenu()"></div>
+<aside class="sidemenu" id="sidemenu">
+  <div class="sidemenu-inner">
+    <div class="menu-section-label">홈</div>
+    <div class="menu-item active" id="mi-home" onclick="showPage('home')">
+      <span class="mi-icon">🏠</span>개요 & 핵심 요약
+    </div>
+
+    <div class="menu-divider"></div>
+    <div class="menu-section-label">입국 & 기초 정보</div>
+    <div class="menu-item" id="mi-visa" onclick="showPage('visa')">
+      <span class="mi-icon">🛂</span>비자 & 입국
+    </div>
+    <div class="menu-item" id="mi-weather" onclick="showPage('weather')">
+      <span class="mi-icon">🌤️</span>날씨 & 시기
+    </div>
+    <div class="menu-item" id="mi-route" onclick="showPage('route')">
+      <span class="mi-icon">🗺️</span>추천 동선 & 이동
+    </div>
+
+    <div class="menu-divider"></div>
+    <div class="menu-section-label">도시별 관광</div>
+    <div class="menu-item" id="mi-cairo" onclick="showPage('cairo')">
+      <span class="mi-icon">🏛️</span>카이로
+    </div>
+    <div class="menu-item" id="mi-luxor" onclick="showPage('luxor')">
+      <span class="mi-icon">🏺</span>룩소르
+    </div>
+    <div class="menu-item" id="mi-hurghada" onclick="showPage('hurghada')">
+      <span class="mi-icon">🏖️</span>후루가다
+    </div>
+    <div class="menu-item" id="mi-desert" onclick="showPage('desert')">
+      <span class="mi-icon">🏜️</span>백사막 & 흑사막
+    </div>
+    <div class="menu-item" id="mi-alex" onclick="showPage('alex')">
+      <span class="mi-icon">🌊</span>알렉산드리아
+    </div>
+
+    <div class="menu-divider"></div>
+    <div class="menu-section-label">먹거리 & 쇼핑</div>
+    <div class="menu-item" id="mi-food" onclick="showPage('food')">
+      <span class="mi-icon">🍽️</span>음식 & 맛집
+    </div>
+    <div class="menu-item" id="mi-shopping" onclick="showPage('shopping')">
+      <span class="mi-icon">🛍️</span>쇼핑 & 기념품
+    </div>
+
+    <div class="menu-divider"></div>
+    <div class="menu-section-label">여행 계획</div>
+    <div class="menu-item" id="mi-itinerary" onclick="showPage('itinerary')">
+      <span class="mi-icon">📅</span>9박 10일 일정
+    </div>
+    <div class="menu-item" id="mi-hotels" onclick="showPage('hotels')">
+      <span class="mi-icon">🏨</span>숙박 추천
+    </div>
+    <div class="menu-item" id="mi-budget" onclick="showPage('budget')">
+      <span class="mi-icon">💰</span>예산 계획
+    </div>
+
+    <div class="menu-divider"></div>
+    <div class="menu-section-label">실전 준비</div>
+    <div class="menu-item" id="mi-practical" onclick="showPage('practical')">
+      <span class="mi-icon">🔧</span>실용 정보
+    </div>
+    <div class="menu-item" id="mi-checklist" onclick="showPage('checklist')">
+      <span class="mi-icon">✅</span>준비 체크리스트
+    </div>
+    <div class="menu-item" id="mi-caveats" onclick="showPage('caveats')">
+      <span class="mi-icon">⚠️</span>주의사항
+    </div>
+  </div>
+</aside>
+
+<!-- ══════════════════════════════════════
+     PAGE: HOME
+══════════════════════════════════════ -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <p class="hero-eyebrow">🇪🇬 Egypt Winter Travel Guide 2026</p>
+    <h1>이집트 9박 10일<br><em>겨울 완전 가이드</em></h1>
+    <p class="hero-sub">카이로 · 룩소르 · 후루가다 · 백사막 · 알렉산드리아<br>커플 또는 친구 2~4인 · 관광 + 사막/바다 휴양</p>
+    <div class="hero-badges">
+      <span class="hbadge">📅 <strong>9박 10일</strong></span>
+      <span class="hbadge">❄️ <strong>겨울(12~2월)</strong></span>
+      <span class="hbadge">💑 <strong>커플/친구 2~4인</strong></span>
+      <span class="hbadge">🏛️ <strong>관광+사막+바다</strong></span>
+      <span class="hbadge">💰 <strong>가성비~럭셔리 3단계</strong></span>
+    </div>
+  </div>
+  <div class="meta-bar">
+    <span>📝 작성: 2026-06-10</span><span>|</span>
+    <span>💱 환율: $1 = 51.77 EGP</span><span>|</span>
+    <span>⚠️ 가격·정책은 변경될 수 있습니다</span>
+  </div>
+
+  <div style="max-width:1000px;margin:32px auto 0;padding:0 20px;">
+    <div class="tldr">
+      <h3>⭐ 핵심 요약 (TL;DR)</h3>
+      <ul>
+        <li>겨울(12~2월)은 이집트 <strong>최적 여행 시즌</strong>. 낮 18~25℃로 유적 관람에 이상적이지만 사막 야간은 5~9℃로 방한 필수.</li>
+        <li><strong>카이로(3박)→룩소르(2박)→후루가다(2박)</strong> + 백사막 또는 알렉산드리아 중 1곳 추가가 최적 동선. 5곳 모두는 이동 과다.</li>
+        <li>한국인 입국: <strong>VOA $30</strong>(2026.3.1 이후) 또는 <strong>e-Visa $25</strong>(사전). 여권 유효기간 6개월 이상 필수.</li>
+        <li><strong>GEM(대이집트박물관) 2025년 11월 개관</strong>, 2025년 12월부터 온라인 전용 예약. 방문 전 반드시 예약.</li>
+        <li>2인 현지 경비(항공 제외): <strong>가성비 약 150~200만원 / 중간 250~350만원 / 럭셔리 500만원+</strong>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="qf-row">
+    <div class="qf"><div class="qf-icon">✈️</div><div class="qf-label">비행 시간</div><div class="qf-val">약 15~20시간</div><div class="qf-sub">인천→카이로 경유 (직항 없음)</div></div>
+    <div class="qf"><div class="qf-icon">🛂</div><div class="qf-label">비자</div><div class="qf-val">VOA $30 / e-Visa $25</div><div class="qf-sub">여권 유효기간 6개월+</div></div>
+    <div class="qf"><div class="qf-icon">🌡️</div><div class="qf-label">겨울 기온</div><div class="qf-val">낮 18~25℃</div><div class="qf-sub">사막 야간 5~9℃ · 방한 필수</div></div>
+    <div class="qf"><div class="qf-icon">💱</div><div class="qf-label">환율</div><div class="qf-val">$1 ≈ 51.77 EGP</div><div class="qf-sub">2026-06-10 기준 · 변동 큼</div></div>
+  </div>
+
+  <div class="home-grid">
+    <div class="home-card" onclick="showPage('visa')"><div class="hc-icon">🛂</div><h3>비자 & 입국</h3><p>VOA vs e-Visa 비교</p></div>
+    <div class="home-card teal" onclick="showPage('weather')"><div class="hc-icon">🌤️</div><h3>날씨 & 시기</h3><p>도시별 기온·주의사항</p></div>
+    <div class="home-card" onclick="showPage('route')"><div class="hc-icon">🗺️</div><h3>동선 & 이동</h3><p>국내선·기차·차량 비교</p></div>
+    <div class="home-card deep" onclick="showPage('cairo')"><div class="hc-icon">🏛️</div><h3>카이로</h3><p>피라미드·GEM·박물관</p></div>
+    <div class="home-card teal" onclick="showPage('luxor')"><div class="hc-icon">🏺</div><h3>룩소르</h3><p>왕가의 계곡·열기구</p></div>
+    <div class="home-card" onclick="showPage('hurghada')"><div class="hc-icon">🏖️</div><h3>후루가다</h3><p>홍해·스노클링·AI 리조트</p></div>
+    <div class="home-card ok" onclick="showPage('desert')"><div class="hc-icon">🏜️</div><h3>백·흑사막</h3><p>1박2일 캠핑 투어</p></div>
+    <div class="home-card teal" onclick="showPage('alex')"><div class="hc-icon">🌊</div><h3>알렉산드리아</h3><p>지중해·해산물·유적</p></div>
+    <div class="home-card" onclick="showPage('food')"><div class="hc-icon">🍽️</div><h3>음식 & 맛집</h3><p>코샤리·추천 식당</p></div>
+    <div class="home-card deep" onclick="showPage('shopping')"><div class="hc-icon">🛍️</div><h3>쇼핑 & 기념품</h3><p>칸 엘 할릴리·흥정 팁</p></div>
+    <div class="home-card teal" onclick="showPage('itinerary')"><div class="hc-icon">📅</div><h3>9박 10일 일정</h3><p>A안·B안 두 루트</p></div>
+    <div class="home-card" onclick="showPage('budget')"><div class="hc-icon">💰</div><h3>예산 계획</h3><p>3단계 시뮬레이션</p></div>
+    <div class="home-card ok" onclick="showPage('hotels')"><div class="hc-icon">🏨</div><h3>숙박 추천</h3><p>도시별 3단계 호텔</p></div>
+    <div class="home-card" onclick="showPage('practical')"><div class="hc-icon">🔧</div><h3>실용 정보</h3><p>환전·교통·치안·문화</p></div>
+    <div class="home-card teal" onclick="showPage('checklist')"><div class="hc-icon">✅</div><h3>체크리스트</h3><p>짐·예약 타임라인</p></div>
+    <div class="home-card deep" onclick="showPage('caveats')"><div class="hc-icon">⚠️</div><h3>주의사항</h3><p>변경 가능 정보·리스크</p></div>
+  </div>
+
+  <div class="page-footer">
+    <p><strong>이집트 9박 10일 겨울 여행 완전 가이드</strong></p>
+    <p>최초 생성: 2026-06-10 · 환율 기준: $1 = 51.77 EGP</p>
+    <p style="margin-top:8px;font-size:1.4rem;">🏺 🐪 🌊 ☀️ 🏛️</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE: VISA
+══════════════════════════════════════ -->
+<div class="page" id="page-visa">
+<div class="page-inner">
+  <div class="page-title"><span class="pt-icon">🛂</span>비자 & 입국 정보</div>
+  <div class="page-desc">2025-2026 최신 기준 · 한국 여권 소지자</div>
+
+  <div class="callout warn">
+    <span class="callout-icon">⚠️</span>
+    <div><strong>VOA 가격 인상 (2026년 3월 1일부터):</strong> 도착비자(VOA) 수수료가 $25 → <strong>$30로 인상</strong>. e-Visa 단수는 $25 유지 중.</div>
+  </div>
+
+  <div class="grid-2" style="margin-top:18px;">
+    <div class="card">
+      <h3>🏷️ 도착비자 (VOA) — 가장 보편적</h3>
+      <ul>
+        <li>공항 입국심사 전 <strong>은행 창구</strong>에서 비자 스티커 구매 후 여권에 부착</li>
+        <li>비용: <strong>$30</strong> (2026년 3월 1일 이후 / 이전 $25)</li>
+        <li>결제: <strong>USD 현금 권장</strong> (EUR도 수락하나 환율 불리)</li>
+        <li>30일 체류 가능</li>
+        <li>카이로·룩소르·샴엘셰이크 공항에서 발급 가능</li>
+        <li>성수기(12월 말~1월)에는 줄이 길어짐 — 도착 후 바로 이동</li>
+      </ul>
+    </div>
+    <div class="card teal">
+      <h3>💻 e-Visa — 사전 신청 추천</h3>
+      <ul>
+        <li>공식 포털: <strong>visa2egypt.gov.eg</strong></li>
+        <li>비용: 단수 약 <strong>$25</strong></li>
+        <li>처리 기간: 보통 <strong>수일~1주일</strong>, 최소 7일 전 신청</li>
+        <li>승인서 프린트 또는 모바일 저장 후 입국장 제시</li>
+        <li>성수기에 줄 없이 빠른 입국 가능</li>
+        <li>⚠️ 비공식 사기 사이트 주의 — 반드시 공식 포털만</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout gold">
+    <span class="callout-icon">📌</span>
+    <div><strong>입국 공통 주의사항:</strong> 여권 유효기간 입국일 기준 <strong>6개월 이상</strong> 필수. 시나이반도 리조트(샴엘셰이크·다합)는 15일 무료 스탬프가 있으나 본토(카이로·룩소르)로 이동 불가 — 본 일정은 반드시 정식 비자 필요.</div>
+  </div>
+  <div class="callout info">
+    <span class="callout-icon">🇰🇷</span>
+    <div><strong>한국 외교부 여행경보:</strong> 시나이 내륙·리비아 국경 100km 이내 <strong>3단계(여행제한)</strong>. 카이로·룩소르·후루가다·알렉산드리아 등 주요 관광지 <strong>1~2단계</strong>로 일반 관광 가능. 출발 전 0404.go.kr에서 최신 확인.</div>
+  </div>
+
+  <hr class="sdiv">
+  <h2 class="sh2">🏥 입국 준비 체크</h2>
+  <div class="grid-2">
+    <div class="card ok">
+      <h3>✅ 출발 전 준비 사항</h3>
+      <ul>
+        <li>여권 유효기간 6개월 이상 확인</li>
+        <li>e-Visa 사전 신청 (7일 전까지)</li>
+        <li>USD 현금 $200~300 준비 (VOA + 초기 비용)</li>
+        <li>여권 사본·사진 2매 별도 보관</li>
+        <li>외교부 여행경보 최신 확인 (0404.go.kr)</li>
+        <li>여행자 보험 가입 (의료비 포함)</li>
+      </ul>
+    </div>
+    <div class="card warn">
+      <h3>🚫 입국 시 금지·주의</h3>
+      <ul>
+        <li>드론 반입 시 신고 필수 (미신고 시 압수)</li>
+        <li>마약류·이집트 역사 유물 반출 금지</li>
+        <li>군사 시설·경찰·공식 건물 사진 촬영 금지</li>
+        <li>이집트 파운드(EGP) 반입·반출 상한 있음</li>
+        <li>현금 $10,000+ 신고 의무</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE: WEATHER
+══════════════════════════════════════ -->
+<div class="page" id="page-weather">
+<div class="page-inner">
+  <div class="page-title"><span class="pt-icon">🌤️</span>날씨 & 겨울 시기 특성</div>
+  <div class="page-desc">12월 ~ 2월 도시별 기온·주의사항</div>
+
+  <div class="callout ok">
+    <span class="callout-icon">✅</span>
+    <div><strong>겨울 = 이집트 여행 최고 시즌!</strong> 40℃를 넘는 여름과 달리 유적 관람·사막 캠핑에 이상적입니다. 단, 사막 야간은 매우 춥고 일교차가 크니 방한 준비 필수.</div>
+  </div>
+
+  <div class="weather-grid" style="margin-top:18px;">
+    <div class="wcard">
+      <div class="wcard-city">🏙️ 카이로</div>
+      <div class="wcard-temp">낮 18~20℃<br><span>밤 9~11℃</span></div>
+      <div class="wcard-desc">강수량 약 8mm. 맑고 청명. 아침·저녁 자켓 필수. 모래먼지 주의.</div>
+    </div>
+    <div class="wcard teal">
+      <div class="wcard-city">🏺 룩소르</div>
+      <div class="wcard-temp">낮 22~25℃<br><span>밤 6~9℃</span></div>
+      <div class="wcard-desc">건조하고 맑음. 강수량 사실상 0. 열기구 새벽은 두꺼운 외투 필수.</div>
+    </div>
+    <div class="wcard">
+      <div class="wcard-city">🏖️ 후루가다</div>
+      <div class="wcard-temp">낮 21~24℃<br><span>밤 13~16℃</span></div>
+      <div class="wcard-desc">해수온 22~23℃. 스노클링 가능. 1~2월 바람·파도 강해 투어 취소 가능.</div>
+    </div>
+    <div class="wcard info">
+      <div class="wcard-city">🏛️ 알렉산드리아</div>
+      <div class="wcard-temp">낮 17~18℃<br><span>밤 10~12℃</span></div>
+      <div class="wcard-desc">지중해성. 구름·바람·비 가능성 가장 높음. 우산·외투 권장.</div>
+    </div>
+    <div class="wcard deep">
+      <div class="wcard-city">🏜️ 사막 야간</div>
+      <div class="wcard-temp" style="color:var(--info);">야간 5~9℃</div>
+      <div class="wcard-desc">캠핑 시 매우 추움. 두꺼운 침낭·내복·모자·장갑 필수.</div>
+    </div>
+    <div class="wcard teal">
+      <div class="wcard-city">☀️ UV 지수</div>
+      <div class="wcard-temp">겨울에도 <span>높음</span></div>
+      <div class="wcard-desc">SPF50+ 선크림·모자·선글라스 연중 필수.</div>
+    </div>
+  </div>
+
+  <div class="callout warn">
+    <span class="callout-icon">📅</span>
+    <div><strong>2026년 라마단 (약 2월 19일~3월 19일):</strong> 2월 하순~3월 여행 시 낮 시간 일부 식당 단축, 알코올 제한 가능. 관광지는 대부분 정상 운영.</div>
+  </div>
+  <div class="callout gold">
+    <span class="callout-icon">🎄</span>
+    <div><strong>성수기 주의:</strong> 12월 말~1월 초(크리스마스·신정)는 가격이 25~50% 오르고 인기 호텔이 조기 마감됩니다. 12월 24·31일 다수 리조트에서 갈라디너 의무/추가요금.</div>
+  </div>
+
+  <hr class="sdiv">
+  <h2 class="sh2">📊 월별 비교</h2>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>월</th><th>특징</th><th>장점</th><th>단점</th></tr></thead>
+      <tbody>
+        <tr><td><strong>12월</strong></td><td>초반 비수기, 말 성수기</td><td>여행객 적어 쾌적, 가격 안정</td><td>12월 말 가격 급등, 갈라디너 추가요금</td></tr>
+        <tr><td><strong>1월</strong></td><td>성수기 피크</td><td>맑은 날씨, 홍해 다이빙 최적</td><td>가격 최고 수준, 호텔 예약 어려움</td></tr>
+        <tr><td><strong>2월</strong></td><td>비수기 전환, 라마단 말</td><td>가격 안정, 여행객 감소</td><td>2월 말 라마단 시작(2026년 2월 19일)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE: ROUTE
+══════════════════════════════════════ -->
+<div class="page" id="page-route">
+<div class="page-inner">
+  <div class="page-title"><span class="pt-icon">🗺️</span>추천 동선 & 도시 간 이동</div>
+  <div class="page-desc">혼합형 (국내선 + 차량) · 9박 10일 기준</div>
+
+  <div class="callout gold">
+    <span class="callout-icon">💡</span>
+    <div><strong>최적 동선:</strong> 카이로(3박) → 룩소르(2박) → 후루가다(2박) → 카이로 복귀 후 [A] 백·흑사막 1박 OR [B] 알렉산드리아 1박. <strong>5개 권역 모두는 이동 과다 — 사막·알렉 중 반드시 1곳만 선택.</strong></div>
+  </div>
+
+  <div class="tbl-wrap" style="margin-top:18px;">
+    <table>
+      <thead><tr><th>구간</th><th>수단</th><th>소요 시간</th><th>비용 (1인)</th><th>추천</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>카이로 ↔ 룩소르</strong></td>
+          <td><span class="tr-badge air">국내선 항공</span></td>
+          <td>약 1시간</td>
+          <td>편도 $35~72<br><small>(약 1.8만~3.7만원)</small></td>
+          <td>⭐⭐⭐ 가장 효율적</td>
+        </tr>
+        <tr>
+          <td><strong>카이로 ↔ 룩소르</strong></td>
+          <td><span class="tr-badge train">야간 침대기차</span></td>
+          <td>9~10시간 (야간)</td>
+          <td>2인 1실 약 $180~300<br><small>(1인 $90~150)</small></td>
+          <td>⭐⭐ 호텔 1박 절약·운치</td>
+        </tr>
+        <tr>
+          <td><strong>카이로 ↔ 후루가다</strong></td>
+          <td><span class="tr-badge air">국내선 항공</span></td>
+          <td>약 1시간</td>
+          <td>편도 약 $30~60</td>
+          <td>⭐⭐⭐ 추천</td>
+        </tr>
+        <tr>
+          <td><strong>룩소르 ↔ 후루가다</strong></td>
+          <td><span class="tr-badge road">차량/미니밴</span></td>
+          <td>약 4시간</td>
+          <td>프라이빗 약 $50~80 (2인)</td>
+          <td>⭐⭐⭐ 직항 없어 차량이 유일</td>
+        </tr>
+        <tr>
+          <td><strong>카이로 ↔ 알렉산드리아</strong></td>
+          <td><span class="tr-badge train">고속기차</span></td>
+          <td>약 2~2.5시간</td>
+          <td>65~80 EGP<br><small>(약 1,200~1,500원)</small></td>
+          <td>⭐⭐⭐ 저렴하고 편리</td>
+        </tr>
+        <tr>
+          <td><strong>카이로 ↔ 바하리야(사막)</strong></td>
+          <td><span class="tr-badge road">차량/투어버스</span></td>
+          <td>약 4시간 (350km)</td>
+          <td>투어 포함 또는 버스 $15~20</td>
+          <td>⭐⭐ 사막 투어 패키지 포함</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout info">
+    <span class="callout-icon">🚂</span>
+    <div><strong>야간 침대기차 예약:</strong> Watania (wataniasleepingtrains.com) 또는 Abela (abelatrains.com)에서 여권 정보로 예약. 외국인 전용 "Foreigner" 등급 선택. 저녁·아침 식사 포함. 차 내 추울 수 있으니 방한복 지참.</div>
+  </div>
+
+  <hr class="sdiv">
+  <h2 class="sh2">✈️ 국제선 (인천 ↔ 카이로)</h2>
+  <div class="callout gold">
+    <span class="callout-icon">✈️</span>
+    <div>직항 없음. 중국동방·에티하드·카타르·터키항공·에미레이트 경유가 일반적. 겨울 왕복 약 <strong>70만~110만원대</strong> (1월이 상대적 저렴). 2~3개월 전 예약 권장.</div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE: CAIRO
+══════════════════════════════════════ -->
+<div class="page" id="page-cairo">
+<div class="page-inner">
+  <div class="page-title"><span class="pt-icon">🏛️</span>카이로</div>
+  <div class="page-desc">3박 권장 · 기자 피라미드 · GEM · 이슬람 구시가 · 나일강</div>
+
+  <div class="callout new" style="background:#E8F8F5;border-left:4px solid var(--teal);">
+    <span class="callout-icon">🆕</span>
+    <div><strong>대이집트박물관(GEM) 2025년 11월 개관!</strong> 2025년 12월부터 온라인 전용 예약, <strong>현장 판매 없음</strong>. 공식 사이트(visit-gem.com)에서 출발 전 반드시 예약하세요.</div>
+  </div>
+
+  <div class="place-grid" style="margin-top:18px;">
+    <div class="pcard deep">
+      <h4>🔺 기자 피라미드 & 스핑크스</h4>
+      <div class="pinfo">08:00~17:00 | 카드 결제 전환 중</div>
+      <p>쿠푸·카프레·멘카우레 3대 피라미드와 스핑크스. 기본 입장권에 스핑크스 포함. 공식 매표소에서만 구매. 낙타·마차는 사전 가격 합의 필수(30분~1시간 약 300~800 EGP). 호객·가짜 가이드 주의. 우버로 "Pyramids View Inn" 목적지 추천.</p>
+      <div class="price-tag">기본 입장 700 EGP (약 13,500원)</div>
+    </div>
+    <div class="pcard">
+      <h4>➕ 피라미드 내부 옵션</h4>
+      <div class="pinfo">별도 티켓 · 공식 매표소만</div>
+      <p>쿠푸 내부: 1,500 EGP / 카프레: 280 EGP / 멘카우레: 200 EGP / 메레스앙크 3세 무덤: 200 EGP. 내부는 좁고 습해 체력 소모 고려.</p>
+      <div class="price-tag">쿠푸 내부 1,500 EGP (약 29,000원)</div>
+    </div>
+    <div class="pcard teal">
+      <h4>🏛️ 대이집트박물관 (GEM) <span class="badge new">2025.11 개관</span></h4>
+      <div class="pinfo">기자 피라미드 도보권 | 온라인 예약 필수</div>
+      <p>세계 최대 고대 이집트 박물관. 투탕카멘 전체 유물·쿠푸 태양선 포함, 별도 추가요금 없음. 비공식 사기 사이트 주의(공식: visit-gem.com). 현장판매 완전 중단.</p>
+      <div class="price-tag">외국인 1,700 EGP (약 32,800원) / 학생 850 EGP</div>
+    </div>
+    <div class="pcard">
+      <h4>🏺 이집트 박물관 (타흐리르)</h4>
+      <div class="pinfo">다운타운 타흐리르 | 09:00~17:00</div>
+      <p>GEM 개관 후에도 수천 점 소장 중인 구 박물관. 투탕카멘 황금 마스크, 미라 등.</p>
+      <div class="price-tag">외국인 약 550 EGP (약 10,600원)</div>
+    </div>
+    <div class="pcard teal">
+      <h4>🏛️ 국립이집트문명박물관 (NMEC)</h4>
+      <div class="pinfo">푸스타트 | 09:00~17:00 / 야간 18:00~21:00</div>
+      <p><strong>왕실 미라관(22구)</strong>이 하이라이트. 입장권에 포함. 미라관 내 촬영 금지. 콥트 카이로와 묶어 방문 추천.</p>
+      <div class="price-tag">외국인 500 EGP (약 9,700원) / 학생 250 EGP</div>
+    </div>
+    <div class="pcard">
+      <h4>🕌 이슬람 카이로</h4>
+      <div class="pinfo">칸 엘 할릴리 · 알아즈하르 · 무에즈 거리</div>
+      <p>14세기 이슬람 구시가. 칸 엘 할릴리 시장 쇼핑, 알 피샤위 카페 민트티. 야경·쇼핑 최적. 소매치기 주의.</p>
+      <div class="price-tag">무료 입장 (모스크 내부 별도)</div>
+    </div>
+    <div class="pcard teal">
+      <h4>✝️ 콥트 카이로</h4>
+      <div class="pinfo">매달림 교회 등</div>
+      <p>이집트 기독교(콥트) 역사 지구. 매달림 교회(알무알라카), 성 게오르기우스 교회. NMEC와 함께 방문 추천. 복장 주의.</p>
+      <div class="price-tag">무료~소액</div>
+    </div>
+    <div class="pcard deep">
+      <h4>🌙 나일강 디너 크루즈 <span class="badge must">커플 추천</span></h4>
+      <div class="pinfo">저녁 출항 | 약 2~3시간</div>
+      <p>나일강 위에서 벨리댄스·전통 공연을 보며 저녁 식사. 로맨틱 경험. 사전 예약 권장.</p>
+      <div class="price-tag">약 $30~80 / 1인</div>
+    </div>
+  </div>
+
+  <div class="callout warn">
+    <span class="callout-icon">🚫</span>
+    <div><strong>피라미드 사기 주의:</strong> "공짜 정상 안내", 사진 후 돈 요구, 낙타 올라탄 뒤 내려주지 않는 수법이 매우 흔합니다. 모든 서비스는 사전 가격 합의 필수. 현금 선불 금지.</div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE: LUXOR
+══════════════════════════════════════ -->
+<div class="page" id="page-luxor">
+<div class="page-inner">
+  <div class="page-title"><span class="pt-icon">🏺</span>룩소르</div>
+  <div class="page-desc">2박 권장 · 세계 최대 야외 박물관 · 왕가의 계곡 · 열기구</div>
+
+  <div class="callout gold">
+    <span class="callout-icon">🌄</span>
+    <div><strong>동안(카르낙·룩소르 신전)과 서안(왕가의 계곡·하트셉수트·멤논)을 나눠 방문하는 것이 효율적.</strong> 첫날 새벽 열기구 → 서안 유적 → 저녁 카르낙 야간쇼를 권장합니다.</div>
+  </div>
+
+  <div class="place-grid" style="margin-top:18px;">
+    <div class="pcard deep">
+      <h4>👑 왕가의 계곡</h4>
+      <div class="pinfo">서안 | 06:00~17:00 (겨울)</div>
+      <p>기본 입장 3개 무덤 포함. 셔틀 트램 약 20 EGP. 생수 필수. 3~4시간 소요.</p>
+      <div class="price-tag">기본 750 EGP (약 14,500원)</div>
+    </div>
+    <div class="pcard">
+      <h4>➕ 왕가의 계곡 추가 무덤</h4>
+      <div class="pinfo">별도 티켓 · 취향에 따라 선택</div>
+      <p>투탕카멘(KV62): 700 EGP · 람세스 5·6세: 220 EGP · 세티 1세(최고 명작): 2,000 EGP · 아이(Ay): 200 EGP.</p>
+      <div class="price-tag">투탕카멘 700 EGP (약 13,500원)</div>
+    </div>
+    <div class="pcard teal">
+      <h4>🛕 카르낙 신전</h4>
+      <div class="pinfo">동안 | 06:00~17:30 | 야간 음향조명쇼 운영</div>
+      <p>세계 최대 신전 단지. 하이포스타일 홀 134개 기둥이 압도적. 야간 Sound & Light Show 추천.</p>
+      <div class="price-tag">약 450~550 EGP (약 8,700~10,600원)</div>
+    </div>
+    <div class="pcard teal">
+      <h4>🌃 룩소르 신전</h4>
+      <div class="pinfo">동안 나일강변 | 야간 조명 운영</div>
+      <p>도심에 위치해 접근 편리. 야간 조명이 아름다워 저녁 방문 추천.</p>
+      <div class="price-tag">약 400 EGP (약 7,700원)</div>
+    </div>
+    <div class="pcard">
+      <h4>🏛️ 하트셉수트 신전</h4>
+      <div class="pinfo">서안 | 이집트 최초 여성 파라오</div>
+      <p>3단 테라스와 뒤편 절벽이 어우러진 경관이 압도적. 이른 아침이 가장 아름다움.</p>
+      <div class="price-tag">약 360 EGP (약 6,900원)</div>
+    </div>
+    <div class="pcard">
+      <h4>🗿 멤논의 거상</h4>
+      <div class="pinfo">서안 도로변 | 무료</div>
+      <p>아멘호테프 3세 두 개 거대 석상. 서안 이동 중 무료 관람·사진 명소.</p>
+      <div class="price-tag">무료 관람</div>
+    </div>
+    <div class="pcard deep">
+      <h4>🎈 열기구 투어 <span class="badge must">강력 추천</span></h4>
+      <div class="pinfo">새벽 4시 반 기상 | 45~60분 비행</div>
+      <p>나일강·왕가의 계곡·신전을 새벽 하늘에서 조망. King Tut Balloons, Sindbad Balloons 등. 날씨 취소 시 환불. <strong>새벽 5~9℃ — 두꺼운 외투 필수.</strong></p>
+      <div class="price-tag">그룹 $70~100 / 1인 | 프라이빗 $97~220</div>
+    </div>
+    <div class="pcard teal">
+      <h4>⛵ 나일강 펠루카 유람</h4>
+      <div class="pinfo">약 1~2시간 | 일몰 추천</div>
+      <p>전통 삼각 돛단배로 나일강 유람. 저렴하고 낭만적. 흥정 필수. 커플에게 특히 추천.</p>
+      <div class="price-tag">약 50~150 EGP / 시간</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE: HURGHADA
+══════════════════════════════════════ -->
+<div class="page" id="page-hurghada">
+<div class="page-inner">
+  <div class="page-title"><span class="pt-icon">🏖️</span>후루가다</div>
+  <div class="page-desc">2박 권장 · 홍해 휴양 · 스노클링 · 올인클루시브 리조트</div>
+
+  <div class="callout info">
+    <span class="callout-icon">🌊</span>
+    <div><strong>후루가다는 올인클루시브(AI) 리조트 휴양이 핵심.</strong> 1~2월은 바람이 강해 보트 투어가 취소될 수 있으니 일정에 유연성을 두세요.</div>
+  </div>
+
+  <div class="place-grid" style="margin-top:18px;">
+    <div class="pcard deep">
+      <h4>🤿 오렌지베이 보트투어 <span class="badge must">강력 추천</span></h4>
+      <div class="pinfo">후루가다 마리나 출발 | 종일 코스</div>
+      <p>스노클링 2회, 점심 포함, 오렌지베이 해변 자유시간. 클라운피시·앵무고기·엔젤피시, 운 좋으면 거북·돌고래·가오리. 1~2월 바람으로 취소 가능.</p>
+      <div class="price-tag">약 €19~ (약 3만원~) | 점심 포함</div>
+    </div>
+    <div class="pcard teal">
+      <h4>🐬 돌고래 투어</h4>
+      <div class="pinfo">새벽 출발 | 사다나 섬·기프툰 주변</div>
+      <p>홍해 야생 돌고래 관찰. 스노클링·수영 결합. 100% 보장은 어렵고 운 기반. 업체별 환불 정책 확인.</p>
+      <div class="price-tag">약 $25~50 / 1인</div>
+    </div>
+    <div class="pcard">
+      <h4>🤿 스쿠버 다이빙</h4>
+      <div class="pinfo">후루가다 다이브 센터 | 초보~고급</div>
+      <p>세계 최고 다이빙 명소 중 하나. 겨울에도 시야 30m+. 수온 22~23℃로 5~7mm 웻수트 착용. 체험 다이빙부터 PADI 코스까지.</p>
+      <div class="price-tag">체험 다이빙 약 $40~60 / 1회</div>
+    </div>
+    <div class="pcard teal">
+      <h4>🏄 워터파크</h4>
+      <div class="pinfo">슐라야 · 아쿠아 블루 등</div>
+      <p>겨울에는 히팅 풀 보유 여부 확인 필요. 가족·친구 그룹에 인기.</p>
+      <div class="price-tag">약 $15~30 / 1인</div>
+    </div>
+    <div class="pcard">
+      <h4>🏜️ 쿼드바이크 & 사막 사파리</h4>
+      <div class="pinfo">후루가다 뒤편 사막 | 1~3시간</div>
+      <p>쿼드바이크·샌드보딩·낙타 체험. 저녁 베두인 캠프 디너 결합 패키지 인기.</p>
+      <div class="price-tag">약 $30~60 / 1인</div>
+    </div>
+    <div class="pcard deep">
+      <h4>🏨 올인클루시브 리조트</h4>
+      <div class="pinfo">식사·음료·액티비티 포함</div>
+      <p>후루가다 AI 리조트가 주류. 하루 종일 뷔페·음료·풀이 포함되어 가성비 높음. 프라이빗 비치 보유 여부 확인.</p>
+      <div class="price-tag">AI 리조트 1박 약 $80~250 (2인)</div>
+    </div>
+  </div>
+
+  <div class="callout warn">
+    <span class="callout-icon">🌊</span>
+    <div><strong>1~2월 바다 날씨 주의:</strong> 겨울 바람과 파도로 보트투어·스노클링 투어가 취소될 수 있습니다. 대체 액티비티(쿼드바이크·다이빙·리조트 휴식)를 미리 준비하세요.</div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE: DESERT
+══════════════════════════════════════ -->
+<div class="page" id="page-desert">
+<div class="page-inner">
+  <div class="page-title"><span class="pt-icon">🏜️</span>백사막 & 흑사막</div>
+  <div class="page-desc">1박 2일 투어 · 카이로 서쪽 350km · 바하리야 오아시스 출발</div>
+
+  <div class="callout gold">
+    <span class="callout-icon">⭐</span>
+    <div><strong>이집트 최고의 사막 경험.</strong> 눈처럼 하얀 석회암 버섯 바위, 별이 쏟아지는 사막 야영, 베두인 모닥불. 카이로 출발·복귀로 귀국 전날~당일 또는 도착 1~2일에 배치하세요.</div>
+  </div>
+
+  <div class="grid-2" style="margin-top:18px;">
+    <div class="card">
+      <h3>🗺️ 1박 2일 투어 코스</h3>
+      <ul>
+        <li><strong>카이로 → 바하리야 오아시스</strong> (차량 약 4시간)</li>
+        <li><strong>흑사막</strong> — 화산 폭발 현무암·먼지화산</li>
+        <li><strong>크리스탈 마운틴</strong> — 수정·방해석 결정 암반</li>
+        <li><strong>아가바트 협곡</strong> — 기이한 모래 조각 지형</li>
+        <li><strong>백사막</strong> — 눈 덮인 흰 석회암 버섯 바위군 (석양 최고)</li>
+        <li><strong>베두인 캠프</strong> — 모닥불·타진 요리·아랍 차·별 관측</li>
+        <li>다음날 온천 방문 후 카이로 복귀</li>
+      </ul>
+    </div>
+    <div class="card teal">
+      <h3>💰 가격 & 포함 사항</h3>
+      <ul>
+        <li>그룹 오버나잇 투어: <strong>1인 약 $130~235</strong></li>
+        <li>프라이빗 투어: 상기보다 높음</li>
+        <li>포함: 4×4 지프, 베두인 식사(저녁·아침), 캠핑 장비, 영어 가이드</li>
+        <li>별도: 국립공원 입장료 약 15~30 EGP</li>
+        <li>한국어 가이드는 드묾 — 마이리얼트립에서 검색 가능</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout warn">
+    <span class="callout-icon">🥶</span>
+    <div><strong>겨울 사막 야간 방한 필수!</strong> 낮에는 포근해도 해가 지면 <strong>5~9℃</strong>까지 하강. 두꺼운 다운 재킷·내복·모자·장갑·두꺼운 양말을 반드시 챙기세요.</div>
+  </div>
+  <div class="callout info">
+    <span class="callout-icon">📍</span>
+    <div><strong>동선 팁:</strong> 백·흑사막은 카이로 서쪽, 후루가다와 동선이 반대입니다. 후루가다 → 카이로 복귀 후 사막 투어를 붙이거나 카이로 도착 1~2일에 배치하는 것이 가장 효율적. 사막을 넣으면 알렉산드리아는 포기를 권장합니다.</div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE: ALEX
+══════════════════════════════════════ -->
+<div class="page" id="page-alex">
+<div class="page-inner">
+  <div class="page-title"><span class="pt-icon">🌊</span>알렉산드리아</div>
+  <div class="page-desc">2순위 · 당일치기 또는 1박 · 지중해의 진주</div>
+
+  <div class="callout info">
+    <span class="callout-icon">🚂</span>
+    <div>카이로에서 고속기차로 <strong>약 2~2.5시간, 65~80 EGP</strong>(약 1,200~1,500원). 당일치기 가능하나, 코르니쉬 일몰과 지중해 해산물을 여유롭게 즐기려면 1박 추천.</div>
+  </div>
+
+  <div class="place-grid" style="margin-top:18px;">
+    <div class="pcard deep">
+      <h4>🏯 카이트베이 요새</h4>
+      <div class="pinfo">지중해 연안 | 09:00~16:00</div>
+      <p>고대 알렉산드리아 대등대(7대 불가사의) 터에 세운 15세기 맘루크 요새. 지중해 전망·사진 명소.</p>
+      <div class="price-tag">약 60~80 EGP (약 1,200~1,500원)</div>
+    </div>
+    <div class="pcard teal">
+      <h4>📚 알렉산드리아 도서관 (비블리오테카)</h4>
+      <div class="pinfo">11:00~19:00 | 현대식 재건 도서관</div>
+      <p>고대 도서관 터 옆 2002년 개관. 내부 열람실·박물관·플라네타리움. 건축 자체가 볼거리.</p>
+      <div class="price-tag">약 70~100 EGP (약 1,400~1,900원)</div>
+    </div>
+    <div class="pcard">
+      <h4>🗿 폼페이의 기둥 & 카타콤</h4>
+      <div class="pinfo">카라무스 지구 | 09:00~16:30</div>
+      <p>로마 시대 높이 27m 화강암 기둥. 인근 콤 엘 슈카파 카타콤(지하 로마·이집트 혼합 무덤)과 묶어 방문.</p>
+      <div class="price-tag">각 약 60~100 EGP</div>
+    </div>
+    <div class="pcard teal">
+      <h4>🌊 코르니쉬 해변도로</h4>
+      <div class="pinfo">지중해 연안 | 무료</div>
+      <p>알렉산드리아 지중해 해안 산책로. 겨울 파도 거세 수영 어렵지만 산책·사진으로 인기. 일몰 명소.</p>
+      <div class="price-tag">무료</div>
+    </div>
+    <div class="pcard">
+      <h4>🏰 몬타자 궁전 & 정원</h4>
+      <div class="pinfo">동부 해안 | 정원 개방</div>
+      <p>이집트 왕실 여름 별장. 궁전 내부 비공개, 지중해 연안 정원 산책 코스로 인기.</p>
+      <div class="price-tag">정원 약 20~30 EGP</div>
+    </div>
+    <div class="pcard deep">
+      <h4>🦞 지중해 해산물 식당</h4>
+      <div class="pinfo">코르니쉬 · 아부 케이르 지구</div>
+      <p>알렉산드리아 최고의 특권. 아부 케이르 해산물 거리의 <strong>Kadoura, Balbaa</strong>가 유명. 신선한 생선·새우·오징어를 합리적 가격에.</p>
+      <div class="price-tag">2인 약 300~600 EGP</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE: FOOD
+══════════════════════════════════════ -->
+<div class="page" id="page-food">
+<div class="page-inner">
+  <div class="page-title"><span class="pt-icon">🍽️</span>음식 & 맛집</div>
+  <div class="page-desc">이집트 대표 음식 · 추천 식당 · 위생 팁</div>
+
+  <h2 class="sh2">🥘 이집트 대표 음식</h2>
+  <div class="food-grid">
+    <div class="fcard"><h4>🥣 코샤리 (Koshari)</h4><p>국민 음식. 쌀·렌틸·파스타·병아리콩+토마토소스+튀긴양파. 비건. 맛있고 저렴해 한국인에게 인기.</p><div class="fprice">1그릇 약 30~60 EGP (약 580~1,160원)</div></div>
+    <div class="fcard teal"><h4>🫘 풀 메다메스</h4><p>파바콩을 오일·레몬·마늘로 조린 전통 아침 식사. 타마야(팔라펠)와 함께 먹는 것이 정석.</p><div class="fprice">약 20~40 EGP</div></div>
+    <div class="fcard"><h4>🧆 타마야 (이집트식 팔라펠)</h4><p>병아리콩 대신 파바콩으로 만들어 독특한 식감. 아이시(납작 빵)에 싸서 먹음.</p><div class="fprice">약 10~20 EGP / 1개</div></div>
+    <div class="fcard teal"><h4>🥩 하와시</h4><p>빵 속에 다진 고기·양파·향신료를 넣고 구운 이집트식 고기 샌드위치. 길거리 음식으로 인기.</p><div class="fprice">약 40~80 EGP</div></div>
+    <div class="fcard"><h4>🥬 몰로키야</h4><p>멀구슬 잎 걸쭉한 수프. 닭고기·토끼고기와 함께 쌀밥에 곁들임. 점성이 있어 처음엔 낯설 수 있음.</p><div class="fprice">약 60~120 EGP (메인 요리)</div></div>
+    <div class="fcard teal"><h4>🍮 움 알리 (Om Ali)</h4><p>이집트 국민 디저트. 빵 조각을 우유·크림·설탕에 적셔 견과류 얹어 구운 푸딩. 따뜻하게 서빙.</p><div class="fprice">약 50~120 EGP</div></div>
+    <div class="fcard"><h4>🧁 바스부사 & 코나파</h4><p>바스부사: 세몰리나 케이크·시럽. 코나파: 크림 치즈를 실 반죽으로 감싼 아랍 디저트.</p><div class="fprice">약 20~50 EGP</div></div>
+    <div class="fcard teal"><h4>🍵 민트티 & 아라비카 커피</h4><p>진한 민트티(샤이 나나)와 아라비카 커피가 기본. 엘 피샤위 카페(칸 엘 할릴리, 1798년~)가 가장 유명.</p><div class="fprice">약 20~50 EGP</div></div>
+  </div>
+
+  <hr class="sdiv">
+  <h2 class="sh2">🏪 추천 식당</h2>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>식당명</th><th>위치</th><th>대표 메뉴</th><th>가격대 (2인)</th><th>특징</th></tr></thead>
+      <tbody>
+        <tr><td><strong>아부 타렉</strong> <span class="badge gold">코샤리 1위</span></td><td>카이로 다운타운 (16 Marouf St)</td><td>코샤리 (전 메뉴)</td><td>60~120 EGP</td><td>1950년 창업, 3층 규모</td></tr>
+        <tr><td><strong>코샤리 엘 타흐리르</strong></td><td>카이로 타흐리르 근처</td><td>코샤리</td><td>40~100 EGP</td><td>깔끔한 환경, 영어 메뉴</td></tr>
+        <tr><td><strong>펠펠라 (Felfela)</strong></td><td>카이로 다운타운</td><td>이집트 전통 요리</td><td>400~700 EGP</td><td>관광객 친화적, 알코올 없음</td></tr>
+        <tr><td><strong>아불 시드 (Abou El Sid)</strong></td><td>카이로 자말렉 섬</td><td>고급 전통요리, 움 알리</td><td>600~1,200 EGP</td><td>고급 레스토랑, 예약 권장</td></tr>
+        <tr><td><strong>소프라 (Sofra)</strong></td><td>룩소르 다운타운</td><td>이집트 전통, 그릴</td><td>440~700 EGP</td><td>한국인 관광객 인기</td></tr>
+        <tr><td><strong>엘 피샤위 카페</strong> <span class="badge gold">1798년</span></td><td>카이로 칸 엘 할릴리</td><td>민트티, 커피</td><td>40~100 EGP</td><td>카이로 최고 유서 깊은 카페</td></tr>
+        <tr><td><strong>Kadoura / Balbaa</strong></td><td>알렉산드리아 아부 케이르</td><td>해산물 그릴·튀김</td><td>400~800 EGP</td><td>지중해 신선 해산물</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout warn">
+    <span class="callout-icon">🚿</span>
+    <div><strong>위생 주의:</strong> 생수만 음용 (Nestle/Hayat/Baraka 1.5L 약 5~15 EGP). 생야채·생과일·길거리 얼음 주의. 지사제·경구수액(ORS) 지참 권장.</div>
+  </div>
+  <div class="callout ok">
+    <span class="callout-icon">🥗</span>
+    <div><strong>채식·비건 여행자 천국:</strong> 코샤리·풀·타마야 등 비건 옵션이 매우 풍부합니다.</div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE: SHOPPING
+══════════════════════════════════════ -->
+<div class="page" id="page-shopping">
+<div class="page-inner">
+  <div class="page-title"><span class="pt-icon">🛍️</span>쇼핑 & 기념품</div>
+  <div class="page-desc">칸 엘 할릴리 · 흥정 팁 · 추천 아이템</div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>🏪 칸 엘 할릴리 쇼핑 가이드</h3>
+      <ul>
+        <li><strong>파피루스 그림</strong> — 소형 100~500 EGP. 가짜(바나나 잎) 주의: 진짜는 반으로 접어도 찢어지지 않음</li>
+        <li><strong>향수 & 에센셜 오일</strong> — 이집트산 로즈워터·재스민. 소형 100~300 EGP</li>
+        <li><strong>향신료</strong> — 커민·코리앤더·자타르·사프란. 팩 30~100 EGP</li>
+        <li><strong>은제품</strong> — 귀걸이·팔찌·카르투슈 목걸이. 200~800 EGP</li>
+        <li><strong>이집트 면 제품</strong> — 스카프·의류. 150~400 EGP</li>
+      </ul>
+    </div>
+    <div class="card teal">
+      <h3>💬 흥정 방법 & 주의사항</h3>
+      <ul>
+        <li>제시 가격의 <strong>50~60%</strong>로 역제안 시작</li>
+        <li>"오늘 마지막 가격!" 등은 마케팅 — 무시 가능</li>
+        <li>마음 없으면 가게 들어가지 않기 (압박 발생)</li>
+        <li>현금이 흥정에 유리</li>
+        <li><strong>파피루스 박물관 초대 거부!</strong> — 사기 가게로 안내하는 수법</li>
+        <li>합의 후에는 번복하지 않는 것이 에티켓</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="sdiv">
+  <h2 class="sh2">🎁 추천 기념품 BEST</h2>
+  <div class="grid-3">
+    <div class="card ok">
+      <h3>✅ 1순위</h3>
+      <ul>
+        <li>파피루스 그림 (진품 확인 후)</li>
+        <li>카르투슈 목걸이 (이름 새김)</li>
+        <li>향신료 세트 (커민·자타르·수막)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>✅ 2순위</h3>
+      <ul>
+        <li>이집트 면 스카프/파시미나</li>
+        <li>파라오 마그넷·소형 조각상</li>
+        <li>이집트 커피 카르다몸 혼합</li>
+      </ul>
+    </div>
+    <div class="card teal">
+      <h3>🏬 쇼핑 장소</h3>
+      <ul>
+        <li>칸 엘 할릴리 — 전통 기념품</li>
+        <li>카르푸/스핀니스 — 마트 식품류</li>
+        <li>공항 면세점 — 귀국 전 비교</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE: ITINERARY
+══════════════════════════════════════ -->
+<div class="page" id="page-itinerary">
+<div class="page-inner">
+  <div class="page-title"><span class="pt-icon">📅</span>9박 10일 샘플 일정</div>
+  <div class="page-desc">A안 (백·흑사막) / B안 (알렉산드리아) 두 루트 선택</div>
+
+  <div class="callout gold">
+    <span class="callout-icon">🔀</span>
+    <div>Day 8~9를 <strong>[A안] 백·흑사막 1박</strong> 또는 <strong>[B안] 알렉산드리아 1박</strong> 중 선택하세요. 사막을 원하면 A, 도시·지중해를 원하면 B.</div>
+  </div>
+
+  <!-- 일정 탭 -->
+  <div class="day-tabs" style="margin-top:20px;">
+    <button class="day-tab active" onclick="showDay('d1')">DAY 1</button>
+    <button class="day-tab" onclick="showDay('d2')">DAY 2</button>
+    <button class="day-tab" onclick="showDay('d3')">DAY 3</button>
+    <button class="day-tab" onclick="showDay('d4')">DAY 4</button>
+    <button class="day-tab" onclick="showDay('d5')">DAY 5</button>
+    <button class="day-tab" onclick="showDay('d6')">DAY 6</button>
+    <button class="day-tab" onclick="showDay('d7')">DAY 7</button>
+    <button class="day-tab" onclick="showDay('d8a')">DAY 8~9 [A안]</button>
+    <button class="day-tab" onclick="showDay('d8b')">DAY 8~9 [B안]</button>
+    <button class="day-tab" onclick="showDay('d10')">DAY 10</button>
+  </div>
+
+  <div class="day-content active" id="day-d1">
+    <div class="day-tag">DAY 1 <em>도착</em> <span class="dtag-city">인천 → 카이로</span></div>
+    <ul class="timeline">
+      <li><div class="tl-time">오전</div><div class="tl-body night"><div class="tl-title">인천 공항 출발</div><div class="tl-desc">중동·유럽 경유 카이로행 탑승. 총 비행 약 15~20시간. 경유 환승 시간 여유 확인.</div></div></li>
+      <li><div class="tl-time">밤</div><div class="tl-body"><div class="tl-title">카이로 국제공항(CAI) 도착</div><div class="tl-desc">VOA 은행 창구에서 구매($30). 짐 수령 후 우버로 호텔. 다운타운 또는 기자 숙박. 간단한 저녁 후 휴식.</div></div></li>
+    </ul>
+  </div>
+
+  <div class="day-content" id="day-d2">
+    <div class="day-tag">DAY 2 <em>기자·GEM</em> <span class="dtag-city">카이로</span></div>
+    <ul class="timeline">
+      <li><div class="tl-time">07:00</div><div class="tl-body"><div class="tl-title">기자 피라미드 & 스핑크스</div><div class="tl-desc">개장 전 도착해 일출과 함께 감상. 공식 매표소에서만 입장권 구매(700 EGP). 낙타는 사전 가격 합의. 약 4~5시간.</div></div></li>
+      <li><div class="tl-time">12:00</div><div class="tl-body night"><div class="tl-title">피라미드 인근 점심</div><div class="tl-desc">피라미드 뷰 레스토랑. 약 150~300 EGP (2인).</div></div></li>
+      <li><div class="tl-time">14:00</div><div class="tl-body teal"><div class="tl-title">🆕 대이집트박물관 (GEM)</div><div class="tl-desc">사전 예약 필수 (visit-gem.com). 투탕카멘 전체 컬렉션·태양선. 3~4시간 권장. 1,700 EGP.</div></div></li>
+      <li><div class="tl-time">저녁</div><div class="tl-body"><div class="tl-title">나일강 디너 크루즈 (선택)</div><div class="tl-desc">벨리댄스·전통 공연 포함. 약 $30~80 / 1인. 사전 예약 권장.</div></div></li>
+    </ul>
+  </div>
+
+  <div class="day-content" id="day-d3">
+    <div class="day-tag">DAY 3 <em>박물관·이슬람 구시가</em> <span class="dtag-city">카이로</span></div>
+    <ul class="timeline">
+      <li><div class="tl-time">09:00</div><div class="tl-body teal"><div class="tl-title">NMEC — 왕실 미라관</div><div class="tl-desc">22구 파라오·왕비 미라 관람. 500 EGP. 미라관 내 촬영 금지. 콥트 카이로와 묶어 방문.</div></div></li>
+      <li><div class="tl-time">11:00</div><div class="tl-body"><div class="tl-title">콥트 카이로</div><div class="tl-desc">매달림 교회·성 게오르기우스 교회. 이집트 기독교 역사 지구. NMEC 인근.</div></div></li>
+      <li><div class="tl-time">12:30</div><div class="tl-body night"><div class="tl-title">코샤리 점심 (아부 타렉)</div><div class="tl-desc">1인 30~60 EGP. 다운타운 16 Marouf St.</div></div></li>
+      <li><div class="tl-time">14:00</div><div class="tl-body teal"><div class="tl-title">이슬람 카이로 — 칸 엘 할릴리</div><div class="tl-desc">알아즈하르 모스크 (복장 주의). 무에즈 거리 산책. 시장 쇼핑·흥정. 엘 피샤위 카페 민트티.</div></div></li>
+      <li><div class="tl-time">밤</div><div class="tl-body night"><div class="tl-title">룩소르 이동</div><div class="tl-desc">[A] 야간 침대기차(저녁 출발, 이튿날 아침 도착, 2인 $180~300) 또는 [B] 익일 새벽 국내선($35~72).</div></div></li>
+    </ul>
+  </div>
+
+  <div class="day-content" id="day-d4">
+    <div class="day-tag">DAY 4 <em>룩소르 서안</em> <span class="dtag-city">룩소르</span></div>
+    <ul class="timeline">
+      <li><div class="tl-time">04:30</div><div class="tl-body teal"><div class="tl-title">🎈 새벽 열기구 탑승 (선택)</div><div class="tl-desc">호텔 픽업 후 탑승. 45~60분 비행. $70~100/1인. 두꺼운 외투 필수. 날씨 취소 시 환불.</div></div></li>
+      <li><div class="tl-time">08:30</div><div class="tl-body"><div class="tl-title">왕가의 계곡</div><div class="tl-desc">기본 750 EGP + 원하는 추가 무덤. 투탕카멘 700 EGP 추천. 셔틀 트램 20 EGP. 생수 필수. 3~4시간.</div></div></li>
+      <li><div class="tl-time">12:00</div><div class="tl-body teal"><div class="tl-title">하트셉수트 신전 & 멤논의 거상</div><div class="tl-desc">3단 테라스 신전(360 EGP). 이동 중 멤논 거상 무료 사진. 약 1.5시간.</div></div></li>
+      <li><div class="tl-time">14:00</div><div class="tl-body night"><div class="tl-title">나일강 도하 & 점심</div><div class="tl-desc">소프라 또는 나일뷰 레스토랑. 약 440~700 EGP (2인).</div></div></li>
+      <li><div class="tl-time">저녁</div><div class="tl-body teal"><div class="tl-title">룩소르 신전 야경</div><div class="tl-desc">야간 조명이 아름다운 룩소르 신전(400 EGP). 카르낙 야간 음향쇼 선택 가능.</div></div></li>
+    </ul>
+  </div>
+
+  <div class="day-content" id="day-d5">
+    <div class="day-tag">DAY 5 <em>카르낙 → 후루가다</em> <span class="dtag-city">룩소르 → 후루가다</span></div>
+    <ul class="timeline">
+      <li><div class="tl-time">09:00</div><div class="tl-body teal"><div class="tl-title">카르낙 신전</div><div class="tl-desc">세계 최대 신전 단지. 450~550 EGP. 하이포스타일 홀 134개 기둥. 2~3시간.</div></div></li>
+      <li><div class="tl-time">12:00</div><div class="tl-body night"><div class="tl-title">룩소르 점심 & 쇼핑</div><div class="tl-desc">룩소르 시내 점심 후 기념품 쇼핑. 짐 정리.</div></div></li>
+      <li><div class="tl-time">14:00</div><div class="tl-body"><div class="tl-title">차량으로 후루가다 이동</div><div class="tl-desc">프라이빗 차량 또는 셔틀. 약 4시간. 홍해 도착 시 풍경 감상.</div></div></li>
+      <li><div class="tl-time">저녁</div><div class="tl-body teal"><div class="tl-title">AI 리조트 체크인 & 해변 휴식</div><div class="tl-desc">첫 홍해 감상. 리조트 저녁 뷔페. 내일 보트투어 예약 확인.</div></div></li>
+    </ul>
+  </div>
+
+  <div class="day-content" id="day-d6">
+    <div class="day-tag">DAY 6 <em>홍해 보트투어</em> <span class="dtag-city">후루가다</span></div>
+    <ul class="timeline">
+      <li><div class="tl-time">08:00</div><div class="tl-body teal"><div class="tl-title">오렌지베이 보트투어</div><div class="tl-desc">마리나 출발. 스노클링 2회·점심 포함. 약 €19~/1인. 방수 카메라·선크림 지참. 1~2월 취소 시 대체 투어.</div></div></li>
+      <li><div class="tl-time">16:00</div><div class="tl-body night"><div class="tl-title">리조트 복귀 & 풀 휴식</div><div class="tl-desc">보트 복귀 후 리조트 풀·비치 자유 시간. 석양 감상.</div></div></li>
+      <li><div class="tl-time">저녁</div><div class="tl-body"><div class="tl-title">해산물 식당 또는 AI 뷔페</div><div class="tl-desc">시내 해산물 레스토랑(약 400~600 EGP/2인) 또는 리조트 뷔페.</div></div></li>
+    </ul>
+  </div>
+
+  <div class="day-content" id="day-d7">
+    <div class="day-tag">DAY 7 <em>휴양 & 카이로 복귀</em> <span class="dtag-city">후루가다 → 카이로</span></div>
+    <ul class="timeline">
+      <li><div class="tl-time">오전</div><div class="tl-body teal"><div class="tl-title">선택 액티비티</div><div class="tl-desc">쿼드바이크($30~60) / 스쿠버다이빙($40~60) / 돌고래 투어($25~50) 중 선택. 또는 리조트 완전 휴양.</div></div></li>
+      <li><div class="tl-time">오후</div><div class="tl-body night"><div class="tl-title">체크아웃 & 카이로 이동</div><div class="tl-desc">국내선 항공 약 1시간. 저녁 카이로 도착.</div></div></li>
+    </ul>
+  </div>
+
+  <div class="day-content" id="day-d8a">
+    <div class="day-tag">DAY 8~9 <em>[A안] 백·흑사막</em> <span class="dtag-city">카이로 → 사막 → 카이로</span></div>
+    <ul class="timeline">
+      <li><div class="tl-time">Day8 아침</div><div class="tl-body teal"><div class="tl-title">바하리야 오아시스 출발</div><div class="tl-desc">투어 차량 약 4시간(350km). 흑사막·크리스탈 마운틴·아가바트 협곡 경유.</div></div></li>
+      <li><div class="tl-time">Day8 오후</div><div class="tl-body"><div class="tl-title">백사막 도착 & 석양 감상</div><div class="tl-desc">4×4 지프로 백사막 진입. 눈부신 흰 석회암 버섯 바위군 탐험. 석양이 황금빛으로 물드는 최고 순간.</div></div></li>
+      <li><div class="tl-time">Day8 밤</div><div class="tl-body teal"><div class="tl-title">베두인 캠프 & 별 관측</div><div class="tl-desc">타진 요리 저녁. 모닥불·아랍 차. 사막 별 관측. 야간 5~9℃ → 두꺼운 외투·침낭 필수.</div></div></li>
+      <li><div class="tl-time">Day9 아침</div><div class="tl-body night"><div class="tl-title">온천 방문 & 카이로 복귀</div><div class="tl-desc">바하리야 온천 후 카이로 귀환. 오후 칸 엘 할릴리 쇼핑 마무리.</div></div></li>
+    </ul>
+  </div>
+
+  <div class="day-content" id="day-d8b">
+    <div class="day-tag">DAY 8~9 <em>[B안] 알렉산드리아</em> <span class="dtag-city">카이로 → 알렉산드리아 → 카이로</span></div>
+    <ul class="timeline">
+      <li><div class="tl-time">Day8 아침</div><div class="tl-body teal"><div class="tl-title">고속기차로 알렉산드리아 출발</div><div class="tl-desc">카이로 람세스역 출발. 약 2~2.5시간, 65~80 EGP. 사전 예약 권장.</div></div></li>
+      <li><div class="tl-time">Day8 오전</div><div class="tl-body"><div class="tl-title">비블리오테카 & 카이트베이 요새</div><div class="tl-desc">알렉산드리아 도서관(70~100 EGP) → 카이트베이 요새(60~80 EGP).</div></div></li>
+      <li><div class="tl-time">Day8 점심</div><div class="tl-body teal"><div class="tl-title">아부 케이르 지중해 해산물</div><div class="tl-desc">Kadoura 또는 Balbaa. 2인 약 400~800 EGP. 알렉 여행 하이라이트.</div></div></li>
+      <li><div class="tl-time">Day8 오후</div><div class="tl-body night"><div class="tl-title">폼페이의 기둥 & 코르니쉬 산책</div><div class="tl-desc">로마 기둥 관람 후 지중해 해변 산책·석양. 1박 시 몬타자 궁전 정원 방문.</div></div></li>
+      <li><div class="tl-time">Day9 아침</div><div class="tl-body"><div class="tl-title">카이로 복귀 & 마무리 쇼핑</div><div class="tl-desc">기차로 카이로 복귀. 칸 엘 할릴리 쇼핑 마무리.</div></div></li>
+    </ul>
+  </div>
+
+  <div class="day-content" id="day-d10">
+    <div class="day-tag">DAY 10 <em>귀국</em> <span class="dtag-city">카이로 → 인천</span></div>
+    <ul class="timeline">
+      <li><div class="tl-time">오전</div><div class="tl-body night"><div class="tl-title">호텔 체크아웃 & 마지막 쇼핑</div><div class="tl-desc">남은 EGP 소진, 기념품 최종 구매. 짐 패킹.</div></div></li>
+      <li><div class="tl-time">오후</div><div class="tl-body teal"><div class="tl-title">카이로 공항 출발</div><div class="tl-desc">출발 3시간 전 도착 권장. 면세점 쇼핑. 경유 후 인천 도착.</div></div></li>
+    </ul>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE: HOTELS
+══════════════════════════════════════ -->
+<div class="page" id="page-hotels">
+<div class="page-inner">
+  <div class="page-title"><span class="pt-icon">🏨</span>숙박 추천</div>
+  <div class="page-desc">카이로·룩소르·후루가다 도시별 3단계</div>
+
+  <div class="callout gold">
+    <span class="callout-icon">📌</span>
+    <div>겨울 성수기로 <strong>12월 말~1월 초 가격이 25~50%+ 높습니다.</strong> 12월 24·31일 갈라디너 의무/추가요금. <strong>2~3개월 전 예약 강력 권장.</strong></div>
+  </div>
+
+  <hr class="sdiv">
+  <h2 class="sh2">🏙️ 카이로</h2>
+  <div class="hotel-tier">
+    <h4>💚 가성비 (1박 2인 기준)</h4>
+    <div class="hotel-grid">
+      <div class="hcard eco"><h5>Pyramids View Inn</h5><p>기자 | 옥상 피라미드 직접 조망</p><div class="hprice">약 $30~60 / 1박</div></div>
+      <div class="hcard eco"><h5>Horus Guest House</h5><p>기자 | 예산 여행자 인기</p><div class="hprice">약 $25~45 / 1박</div></div>
+      <div class="hcard eco"><h5>Brothers Pyramids View</h5><p>기자 | 피라미드뷰, 가족 운영</p><div class="hprice">약 $30~50 / 1박</div></div>
+    </div>
+  </div>
+  <div class="hotel-tier">
+    <h4>💙 중간급 (4성급)</h4>
+    <div class="hotel-grid">
+      <div class="hcard mid2"><h5>Steigenberger Pyramids Cairo</h5><p>기자 | GEM 맞은편, 피라미드뷰</p><div class="hprice">약 $130~236 / 1박</div></div>
+      <div class="hcard mid2"><h5>Cairo Marriott Hotel</h5><p>자말렉 섬 | 나일강변, 19세기 궁전 건물</p><div class="hprice">약 $150~200 / 1박</div></div>
+    </div>
+  </div>
+  <div class="hotel-tier">
+    <h4>⭐ 럭셔리 (5성급)</h4>
+    <div class="hotel-grid">
+      <div class="hcard lux2"><h5>Marriott Mena House</h5><p>기자 | 피라미드뷰 아이콘, 1869년 역사</p><div class="hprice">약 $272~450+ / 1박</div></div>
+      <div class="hcard lux2"><h5>Nile Ritz-Carlton Cairo</h5><p>다운타운 | 나일강 직접 조망</p><div class="hprice">약 $164~280 / 1박</div></div>
+      <div class="hcard lux2"><h5>Four Seasons Nile Plaza</h5><p>가든 시티 | 나일강뷰, 최상급</p><div class="hprice">약 $250~400+ / 1박</div></div>
+    </div>
+  </div>
+
+  <hr class="sdiv">
+  <h2 class="sh2">🏺 룩소르</h2>
+  <div class="hotel-tier">
+    <h4>💚 가성비</h4>
+    <div class="hotel-grid">
+      <div class="hcard eco"><h5>Nefertiti Hotel</h5><p>다운타운 | 나일강뷰 테라스</p><div class="hprice">약 $33~53 / 1박</div></div>
+      <div class="hcard eco"><h5>Susanna Hotel</h5><p>다운타운 | 예산 최저가</p><div class="hprice">약 $26 / 1박</div></div>
+    </div>
+  </div>
+  <div class="hotel-tier">
+    <h4>💙 중간급</h4>
+    <div class="hotel-grid">
+      <div class="hcard mid2"><h5>Iberotel Luxor</h5><p>나일강 위 플로팅 풀</p><div class="hprice">약 $53~90 / 1박</div></div>
+      <div class="hcard mid2"><h5>Hilton Luxor Resort & Spa</h5><p>나일강 | 5성, 수영장·스파</p><div class="hprice">약 $167~253 / 1박</div></div>
+    </div>
+  </div>
+  <div class="hotel-tier">
+    <h4>⭐ 럭셔리</h4>
+    <div class="hotel-grid">
+      <div class="hcard lux2"><h5>Sofitel Winter Palace Luxor</h5><p>나일강변 | 1886년 역사, 빅토리아 스타일</p><div class="hprice">약 $195~280 / 1박</div></div>
+    </div>
+  </div>
+
+  <hr class="sdiv">
+  <h2 class="sh2">🏖️ 후루가다 (올인클루시브)</h2>
+  <div class="hotel-tier">
+    <h4>💚 가성비 AI</h4>
+    <div class="hotel-grid">
+      <div class="hcard eco"><h5>Steigenberger Aqua Magic</h5><p>워터파크 포함 5성 AI</p><div class="hprice">약 $80~150 / 1박 (AI)</div></div>
+      <div class="hcard eco"><h5>Continental Hotel Hurghada</h5><p>비치프런트 AI</p><div class="hprice">약 $80~145 / 1박 (AI)</div></div>
+    </div>
+  </div>
+  <div class="hotel-tier">
+    <h4>💙 중간급 AI</h4>
+    <div class="hotel-grid">
+      <div class="hcard mid2"><h5>SUNRISE Garden Beach Resort</h5><p>프라이빗 비치, 성인 전용 구역</p><div class="hprice">약 $110~195 / 1박 (AI)</div></div>
+      <div class="hcard mid2"><h5>JAZ Aquamarine Resort</h5><p>수상 스포츠 포함, 다이브센터</p><div class="hprice">약 $130~200 / 1박 (AI)</div></div>
+    </div>
+  </div>
+  <div class="hotel-tier">
+    <h4>⭐ 럭셔리 AI</h4>
+    <div class="hotel-grid">
+      <div class="hcard lux2"><h5>Baron Palace Sahl Hasheesh</h5><p>성인 전용, 프리미엄 AI</p><div class="hprice">약 $184~377 / 1박 (AI)</div></div>
+      <div class="hcard lux2"><h5>Steigenberger ALDAU Beach</h5><p>최고급 시설, 마리나 전망</p><div class="hprice">약 $211~359 / 1박 (AI)</div></div>
+      <div class="hcard lux2"><h5>Rixos Premium Magawish</h5><p>울트라 AI, 워터파크 포함</p><div class="hprice">약 $250~400+ / 1박 (AI)</div></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE: BUDGET
+══════════════════════════════════════ -->
+<div class="page" id="page-budget">
+<div class="page-inner">
+  <div class="page-title"><span class="pt-icon">💰</span>예산 계획</div>
+  <div class="page-desc">2인 9박 10일 기준 · 국제선 항공 제외</div>
+
+  <div class="budget-cards">
+    <div class="bcard eco">
+      <h3>💚 가성비</h3>
+      <div class="bprice">150~200<sub>만원 (2인)</sub></div>
+      <ul>
+        <li>숙박: 게스트하우스 (9박 $200~400)</li>
+        <li>식사: 현지식 위주 ($10~15/인/일)</li>
+        <li>국내선 2회 ($70~144)</li>
+        <li>유적 입장: 기본권 위주 ($80~120)</li>
+        <li>액티비티: 그룹 투어 ($100~150)</li>
+        <li>팁·잡비: $50~80</li>
+      </ul>
+    </div>
+    <div class="bcard mid">
+      <h3>💙 중간급</h3>
+      <div class="bprice">250~350<sub>만원 (2인)</sub></div>
+      <ul>
+        <li>숙박: 4성 나일뷰 ($600~1,200)</li>
+        <li>식사: 중급 레스토랑 ($20~35/인/일)</li>
+        <li>국내선 3회 ($100~210)</li>
+        <li>GEM·추가 무덤 포함 ($150~200)</li>
+        <li>열기구·AI 리조트 ($200~350)</li>
+        <li>팁·잡비: $80~120</li>
+      </ul>
+    </div>
+    <div class="bcard lux">
+      <h3>⭐ 럭셔리</h3>
+      <div class="bprice">500+<sub>만원 (2인)</sub></div>
+      <ul>
+        <li>숙박: 5성 ($1,800~4,000)</li>
+        <li>식사: 고급 레스토랑 ($50~100/인/일)</li>
+        <li>프라이빗 차량 + 국내선 풀</li>
+        <li>모든 추가 입장권 포함</li>
+        <li>프라이빗 열기구·사막·다이빙</li>
+        <li>팁·잡비: $150~200+</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="tbl-wrap" style="margin-top:20px;">
+    <table>
+      <thead><tr><th>항목</th><th>가성비 (2인)</th><th>중간급 (2인)</th><th>럭셔리 (2인)</th></tr></thead>
+      <tbody>
+        <tr><td>국제선 항공 (인천↔카이로)</td><td>약 140~200만원</td><td>약 160~220만원</td><td>약 200만원+</td></tr>
+        <tr><td>숙박 (9박)</td><td>약 25~50만원</td><td>약 80~160만원</td><td>약 240~540만원+</td></tr>
+        <tr><td>식사</td><td>약 15~25만원</td><td>약 30~55만원</td><td>약 70~120만원</td></tr>
+        <tr><td>유적 입장료</td><td>약 10~15만원</td><td>약 18~25만원</td><td>약 25~35만원</td></tr>
+        <tr><td>국내선 항공</td><td>약 9~18만원</td><td>약 13~27만원</td><td>약 18~30만원+</td></tr>
+        <tr><td>액티비티</td><td>약 15~22만원</td><td>약 30~50만원</td><td>약 70~120만원</td></tr>
+        <tr><td>교통·팁·기타</td><td>약 8~12만원</td><td>약 12~18만원</td><td>약 20~30만원</td></tr>
+        <tr class="tbl-sum"><td><strong>현지 경비 합계 (항공 제외)</strong></td><td><strong>약 150~200만원</strong></td><td><strong>약 250~350만원</strong></td><td><strong>약 500만원+</strong></td></tr>
+        <tr class="tbl-sum" style="background:#E8F8F5!important;"><td><strong>총합 (항공 포함)</strong></td><td><strong>약 290~400만원</strong></td><td><strong>약 410~570만원</strong></td><td><strong>약 700만원+</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout warn">
+    <span class="callout-icon">⚠️</span>
+    <div><strong>예산 참고 주의:</strong> 환율 변동, 예약 시점(성수기/비수기), 개인 소비 패턴에 따라 크게 달라집니다. 12월 말~1월 초 성수기에는 전반적으로 20~40% 높게 예상하세요.</div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE: PRACTICAL
+══════════════════════════════════════ -->
+<div class="page" id="page-practical">
+<div class="page-inner">
+  <div class="page-title"><span class="pt-icon">🔧</span>실용 정보</div>
+  <div class="page-desc">환전 · 교통 · 통신 · 치안 · 문화 에티켓</div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>💱 환전 & 결제</h3>
+      <ul>
+        <li><strong>공식 환율:</strong> $1 = 약 51.77 EGP (2026-06-10)</li>
+        <li><strong>변동성 큼:</strong> 2026년 최저 46.63~최고 54.69 EGP</li>
+        <li><strong>환전:</strong> 현지 ATM 또는 공식 환전소(호텔·은행). 암환전 절대 금지</li>
+        <li><strong>현금 중심:</strong> 시장·택시·팁 모두 현금. 소액 EGP 지폐 항상 지참</li>
+        <li><strong>카드:</strong> GEM·대형 호텔·레스토랑 카드 가능 (GEM은 비자·마스터만)</li>
+        <li><strong>USD:</strong> VOA·일부 투어는 USD 결제. $30 단위 지폐 여러 장 준비</li>
+      </ul>
+    </div>
+    <div class="card teal">
+      <h3>📱 통신 & 유심</h3>
+      <ul>
+        <li><strong>Vodafone</strong> — 전국 커버리지 최강, 추천 1순위</li>
+        <li>Orange / e& / WE 도 선택 가능</li>
+        <li><strong>가격:</strong> 데이터 약 20GB ≒ EGP 200(약 3,900원)~</li>
+        <li>카이로 공항 또는 시내 공식 매장 구매 (여권 등록 필요)</li>
+        <li>eSIM 가능 (Airalo 등 사전 구매)</li>
+        <li>⚠️ VoIP(왓츠앱 음성통화) 제한 가능</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>🚕 현지 교통</h3>
+      <ul>
+        <li><strong>우버/카림</strong> — 카이로·알렉에서 작동. 투명한 가격, 안전</li>
+        <li><strong>흥정 택시</strong> — 반드시 사전 금액 합의</li>
+        <li><strong>투크투크</strong> — 단거리 약 10~30 EGP. 흥정 필수</li>
+        <li>후루가다·룩소르는 리조트·투어 차량 이용</li>
+        <li>카이로 메트로 1회 약 10 EGP (관광지 도달 제한적)</li>
+      </ul>
+    </div>
+    <div class="card warn">
+      <h3>🛡️ 치안 & 안전</h3>
+      <ul>
+        <li>한국 대사관(카이로) 대표: <strong>(20)2-3761-1234~7</strong></li>
+        <li>긴급: <strong>(20)12-8333-3236</strong></li>
+        <li>현지 범죄신고: <strong>122</strong> / 관광경찰: <strong>126</strong></li>
+        <li>혼잡한 관광지 소매치기, 여성 성추행 주의</li>
+        <li>야간 외진 골목 혼자 이동 자제</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card teal">
+      <h3>🕌 문화 에티켓</h3>
+      <ul>
+        <li>모스크·교회 입장 시 어깨·무릎 가리기 필수</li>
+        <li>현지인 사진 촬영 전 허락 구하기</li>
+        <li>군사·경찰 시설 촬영 금지</li>
+        <li>왼손 대신 오른손으로 음식 전달·악수</li>
+        <li>공공장소 과도한 스킨십 자제</li>
+        <li>라마단 중 공공 음식·흡연 자제</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>💰 팁 (박시시) 문화</h3>
+      <ul>
+        <li>식당: <strong>10~15%</strong></li>
+        <li>가이드: 하루 약 $5~10</li>
+        <li>기사: 하루 약 $3~5</li>
+        <li>호텔 포터: 가방 1개당 $1~2</li>
+        <li>화장실: 약 5~10 EGP</li>
+        <li>소액 EGP 지폐 별도 보관 필수</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE: CHECKLIST
+══════════════════════════════════════ -->
+<div class="page" id="page-checklist">
+<div class="page-inner">
+  <div class="page-title"><span class="pt-icon">✅</span>준비 체크리스트</div>
+  <div class="page-desc">예약 타임라인 · 짐 목록 · 도착 후 할 일</div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>📅 예약 타임라인</h3>
+      <ul class="checklist">
+        <li><strong>[3개월 전]</strong> 인천↔카이로 국제선 예약</li>
+        <li><strong>[2~3개월 전]</strong> 카이로·룩소르·후루가다 호텔 예약</li>
+        <li><strong>[1~2개월 전]</strong> GEM 입장권 온라인 예약 (visit-gem.com)</li>
+        <li><strong>[1~2개월 전]</strong> 룩소르 열기구 투어 예약</li>
+        <li><strong>[1개월 전]</strong> 백·흑사막 투어 예약</li>
+        <li><strong>[1개월 전]</strong> 카이로↔룩소르 야간 기차 예약 (선택)</li>
+        <li><strong>[7일 전]</strong> e-Visa 신청 (또는 현장 VOA)</li>
+        <li><strong>[1주일 전]</strong> 여행자 보험 가입</li>
+        <li><strong>[전날]</strong> 여권 유효기간·비자 최종 확인</li>
+      </ul>
+    </div>
+    <div class="card teal">
+      <h3>🧳 짐 체크리스트</h3>
+      <ul class="checklist">
+        <li><strong>두꺼운 다운 재킷</strong> (사막 야간·열기구 필수)</li>
+        <li><strong>내복·두꺼운 양말·장갑·모자</strong></li>
+        <li><strong>자켓/가디건</strong> (카이로·후루가다 저녁용)</li>
+        <li><strong>통기성 의류</strong> (유적지 낮 방문용)</li>
+        <li><strong>스카프</strong> (모스크·교회 복장)</li>
+        <li><strong>수영복</strong> (후루가다 스노클링·풀)</li>
+        <li><strong>SPF50+ 선크림</strong></li>
+        <li><strong>모자·선글라스</strong></li>
+        <li><strong>편한 운동화/샌들</strong></li>
+        <li><strong>지사제·소화제·경구수액(ORS)</strong></li>
+        <li><strong>손 세정제·물티슈</strong></li>
+        <li><strong>USD 현금</strong> ($200~300)</li>
+        <li><strong>여권 사본·사진 2매</strong> (분실 대비)</li>
+        <li><strong>멀티 어댑터</strong> (이집트 220V·C형/F형 플러그)</li>
+        <li><strong>카메라 + 보조배터리</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:18px;">
+    <h3>📋 현지 도착 후 즉시 할 일</h3>
+    <ul class="checklist">
+      <li>공항 은행 창구에서 <strong>VOA 구매 ($30)</strong> — 줄 빨리 서기</li>
+      <li><strong>Vodafone 이집트 유심</strong> 구매 (공항 공식 매장)</li>
+      <li>현지 ATM 또는 환전소에서 <strong>EGP 환전</strong></li>
+      <li><strong>우버/카림 앱</strong> 설치 및 카드 등록</li>
+      <li>호텔 도착 후 <strong>GEM 예약·열기구 픽업 시간</strong> 재확인</li>
+      <li><strong>생수 구매</strong> (마트에서 6병 묶음이 저렴) — 생수만 음용</li>
+    </ul>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE: CAVEATS
+══════════════════════════════════════ -->
+<div class="page" id="page-caveats">
+<div class="page-inner">
+  <div class="page-title"><span class="pt-icon">⚠️</span>주의사항 & 변경 가능성</div>
+  <div class="page-desc">방문 전 반드시 재확인이 필요한 정보</div>
+
+  <div class="callout warn"><span class="callout-icon">🔄</span><div><strong>VOA 가격 인상 (2026.3.1~):</strong> $25 → <strong>$30</strong>로 인상. 추가 인상 가능성 있으니 출발 전 재확인.</div></div>
+  <div class="callout warn"><span class="callout-icon">🏛️</span><div><strong>GEM 운영 정책 변동:</strong> 온라인 전용 예약·현장판매 중단. 방문 2~4주 전 공식 사이트(visit-gem.com) 재확인 필수. 비공식 사이트 사기 주의.</div></div>
+  <div class="callout warn"><span class="callout-icon">📅</span><div><strong>라마단 2026년 (약 2.19~3.19):</strong> 2월 하순~3월 여행 시 일부 식당·카페 운영 단축, 알코올 제한 가능.</div></div>
+  <div class="callout info"><span class="callout-icon">💱</span><div><strong>EGP 환율 변동:</strong> 2026년 $1 = 46.63~54.69 EGP로 출렁임. 현지 ATM·공식 환전소 이용. 암환전 절대 금지.</div></div>
+  <div class="callout info"><span class="callout-icon">🌊</span><div><strong>후루가다 1~2월 바다:</strong> 겨울 바람·파도로 보트투어 취소 가능. 대체 액티비티 미리 준비.</div></div>
+  <div class="callout gold"><span class="callout-icon">📌</span><div><strong>입장료 수시 인상:</strong> 이집트 관광유물부는 외국인 입장료를 수시로 인상. 현장 재확인 권장.</div></div>
+  <div class="callout gold"><span class="callout-icon">🚂</span><div><strong>야간 침대기차:</strong> 운행 일정·외국인 예약 가능 여부가 변경될 수 있음. 1개월 전 공식 사이트 재확인 후 예약.</div></div>
+  <div class="callout info"><span class="callout-icon">🛡️</span><div><strong>외교부 경보 상시 확인:</strong> 출발 직전 0404.go.kr에서 최신 여행경보 확인 필수.</div></div>
+
+  <hr class="sdiv">
+  <h2 class="sh2">📚 주요 참고 출처</h2>
+  <div class="card">
+    <ul>
+      <li>이집트 관광유물부 공식 발표 (GEM 개관·입장료)</li>
+      <li>이집트 항공여행국(E.T.A.A.) VOA 인상 회람 (2026.3.1)</li>
+      <li>한국 외교부 해외안전여행 (0404.go.kr)</li>
+      <li>Rough Guides — 이집트 겨울 날씨</li>
+      <li>Discovery Tours Egypt, Egypt Tours Plus — 피라미드 입장료</li>
+      <li>Day Tours Egypt — 룩소르 열기구 가격</li>
+      <li>One Nation Travel — 카이로↔알렉산드리아 이동</li>
+      <li>Trading Economics / Exchange Rates UK — EGP 환율 2026</li>
+      <li>Kayak, Booking.com — 호텔 가격 참고</li>
+      <li>Watania Sleep Trains / Abela Trains — 야간 침대기차</li>
+      <li>Dar Al-Ifta — 라마단 2026 시작일</li>
+    </ul>
+  </div>
+
+  <div class="page-footer">
+    <p><strong>이집트 9박 10일 겨울 여행 완전 가이드</strong></p>
+    <p>최초 생성: 2026-06-10 · 최종 수정: 2026-06-10</p>
+    <p>환율 기준: $1 = 51.77 EGP (2026-06-10)</p>
+    <p style="margin-top:10px;font-size:1.3rem;">🏺 🐪 🌊 ☀️ 🏛️</p>
+    <p style="margin-top:8px;font-size:11px;">본 문서의 가격·운영시간·정책은 변경될 수 있습니다. 방문 전 공식 채널에서 재확인하세요.</p>
+  </div>
+</div>
+</div>
+
+<script>
+// ── 메뉴 토글 ──────────────────────────
+function toggleMenu(){
+  const h=document.getElementById('hamburger');
+  const m=document.getElementById('sidemenu');
+  const o=document.getElementById('overlay');
+  const open=m.classList.contains('open');
+  if(open){ closeMenu(); } else {
+    h.classList.add('open');
+    m.classList.add('open');
+    o.classList.add('open');
+  }
+}
+function closeMenu(){
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('sidemenu').classList.remove('open');
+  document.getElementById('overlay').classList.remove('open');
+}
+
+// ── 페이지 전환 ──────────────────────────
+function showPage(id){
+  // 모든 페이지 숨기기
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  // 모든 메뉴 아이템 비활성화
+  document.querySelectorAll('.menu-item').forEach(m=>m.classList.remove('active'));
+  // 선택 페이지 활성화
+  const page=document.getElementById('page-'+id);
+  if(page){ page.classList.add('active'); }
+  // 선택 메뉴 활성화
+  const mi=document.getElementById('mi-'+id);
+  if(mi){ mi.classList.add('active'); }
+  // 맨 위로 스크롤
+  window.scrollTo({top:0,behavior:'smooth'});
+  // 메뉴 닫기
+  closeMenu();
+}
+
+// ── 일정 탭 전환 ─────────────────────────
+function showDay(id){
+  document.querySelectorAll('.day-content').forEach(d=>d.classList.remove('active'));
+  document.querySelectorAll('.day-tab').forEach(t=>t.classList.remove('active'));
+  const content=document.getElementById('day-'+id);
+  if(content){ content.classList.add('active'); }
+  // 해당 탭 버튼 활성화
+  const tabs=document.querySelectorAll('.day-tab');
+  tabs.forEach(t=>{
+    if(t.getAttribute('onclick')===`showDay('${id}')`){ t.classList.add('active'); }
+  });
+}
+
+// ── 키보드 ESC 닫기 ────────────────────
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape') closeMenu();
+});
+</script>
+</body>
+</html>
