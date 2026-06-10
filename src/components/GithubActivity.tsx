@@ -4,26 +4,31 @@ import { REPO_OWNER } from "../lib/blog";
 
 // Public, tokenless contribution data. Returns the last year of daily counts
 // with a precomputed intensity level (0–4) we map straight onto color steps.
+// NOTE: this is an unofficial community proxy (no SLA) — if it goes down or
+// changes shape, the component falls back to a quiet error message. The
+// `ApiResponse` type is a trust assertion, not a validated schema.
 const API = `https://github-contributions-api.jogruber.de/v4/${REPO_OWNER}?y=last`;
 
 type Day = { date: string; count: number; level: 0 | 1 | 2 | 3 | 4 };
+type MaybeDay = Day | null; // null = padding cell to align the first week
 type ApiResponse = { total: Record<string, number>; contributions: Day[] };
 
-// Brand-tinted intensity ramp (level 0 = empty cell).
+// Brand-tinted intensity ramp (level 0 = empty cell). Derived from the
+// --color-brand token via color-mix so it tracks the design system.
 const LEVEL_BG = [
   "rgba(255,255,255,0.05)",
-  "rgba(139,92,246,0.28)",
-  "rgba(139,92,246,0.48)",
-  "rgba(139,92,246,0.72)",
-  "rgba(139,92,246,1)",
+  "color-mix(in srgb, var(--color-brand) 28%, transparent)",
+  "color-mix(in srgb, var(--color-brand) 48%, transparent)",
+  "color-mix(in srgb, var(--color-brand) 72%, transparent)",
+  "var(--color-brand)",
 ];
 
 /** Split a flat day list into week columns (each column = 7 days, Sun→Sat). */
-function toWeeks(days: Day[]): Day[][] {
-  const weeks: Day[][] = [];
+function toWeeks(days: Day[]): MaybeDay[][] {
+  const weeks: MaybeDay[][] = [];
   // Pad the first week so the grid aligns to the weekday of the first entry.
   const firstWeekday = days.length ? new Date(days[0].date).getDay() : 0;
-  let current: Day[] = new Array(firstWeekday).fill(null);
+  let current: MaybeDay[] = new Array<MaybeDay>(firstWeekday).fill(null);
   for (const d of days) {
     current.push(d);
     if (current.length === 7) {
@@ -32,7 +37,7 @@ function toWeeks(days: Day[]): Day[][] {
     }
   }
   if (current.length) {
-    while (current.length < 7) current.push(null as unknown as Day);
+    while (current.length < 7) current.push(null);
     weeks.push(current);
   }
   return weeks;
@@ -40,7 +45,7 @@ function toWeeks(days: Day[]): Day[][] {
 
 export default function GithubActivity() {
   const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
-  const [weeks, setWeeks] = useState<Day[][]>([]);
+  const [weeks, setWeeks] = useState<MaybeDay[][]>([]);
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
@@ -100,7 +105,11 @@ export default function GithubActivity() {
           <p className="text-sm text-muted">잔디를 불러오지 못했어요. GitHub에서 직접 확인해 주세요.</p>
         )}
         {status === "ready" && (
-          <div className="overflow-x-auto pb-1">
+          <div
+            role="img"
+            aria-label={`지난 1년 GitHub 기여 히트맵 · 총 ${total.toLocaleString()} contributions`}
+            className="overflow-x-auto pb-1"
+          >
             <div className="flex gap-[3px]">
               {weeks.map((week, wi) => (
                 <div key={wi} className="flex flex-col gap-[3px]">

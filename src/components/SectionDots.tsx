@@ -42,7 +42,10 @@ export default function SectionDots() {
   }, []);
 
   const jump = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    document.getElementById(id)?.scrollIntoView({
+      behavior: reduced ? "auto" : "smooth",
+    });
   };
 
   return (
@@ -68,7 +71,7 @@ export default function SectionDots() {
                   : "h-2 w-2 bg-white/25 group-hover:bg-white/60")
               }
             />
-            <span className="pointer-events-none absolute right-6 whitespace-nowrap rounded-md bg-surface/90 px-2 py-1 text-xs text-muted opacity-0 ring-1 ring-white/10 transition-opacity duration-200 group-hover:opacity-100">
+            <span className="pointer-events-none absolute right-full mr-3 whitespace-nowrap rounded-md bg-surface/90 px-2 py-1 text-xs text-muted opacity-0 ring-1 ring-white/10 transition-opacity duration-200 group-hover:opacity-100">
               {s.label}
             </span>
           </button>

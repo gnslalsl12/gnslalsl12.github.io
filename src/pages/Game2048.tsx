@@ -170,7 +170,9 @@ export default function Game2048() {
         w: "up",
         s: "down",
       };
-      const dir = map[e.key];
+      // Fall back to the lowercased key so WASD works under caps lock too
+      // (arrow keys keep their original PascalCase names).
+      const dir = map[e.key] ?? map[e.key.toLowerCase()];
       if (!dir) return;
       e.preventDefault();
       apply(dir);
@@ -269,7 +271,7 @@ export default function Game2048() {
                       계속하기
                     </button>
                   )}
-                  <button onClick={reset} className="btn btn-primary">
+                  <button onClick={reset} autoFocus className="btn btn-primary">
                     <RotateCcw size={16} />
                     다시 시작
                   </button>
