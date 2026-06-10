@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Github, Loader2 } from "lucide-react";
 import { REPO_OWNER } from "../lib/blog";
 
@@ -47,6 +47,14 @@ export default function GithubActivity() {
   const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
   const [weeks, setWeeks] = useState<MaybeDay[][]>([]);
   const [total, setTotal] = useState(0);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  // When the heatmap overflows on narrow screens, start scrolled to the right
+  // so the most recent weeks are visible first (oldest is off to the left).
+  useLayoutEffect(() => {
+    const el = scrollRef.current;
+    if (el) el.scrollLeft = el.scrollWidth;
+  }, [weeks]);
 
   useEffect(() => {
     let alive = true;
@@ -106,6 +114,7 @@ export default function GithubActivity() {
         )}
         {status === "ready" && (
           <div
+            ref={scrollRef}
             role="img"
             aria-label={`지난 1년 GitHub 기여 히트맵 · 총 ${total.toLocaleString()} contributions`}
             className="overflow-x-auto pb-1"
