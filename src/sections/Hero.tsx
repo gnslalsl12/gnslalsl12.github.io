@@ -19,7 +19,7 @@ const MARQUEE = [
 
 export default function Hero() {
   return (
-    <section className="relative flex min-h-[100svh] items-center overflow-hidden">
+    <section id="hero" className="relative flex min-h-[100svh] items-center overflow-hidden">
       {/* ambient orbs */}
       <div className="pointer-events-none absolute -left-24 top-20 h-72 w-72 rounded-full bg-brand/25 blur-[100px]" />
       <div className="pointer-events-none absolute right-0 top-1/3 h-80 w-80 rounded-full bg-brand-3/20 blur-[120px]" />

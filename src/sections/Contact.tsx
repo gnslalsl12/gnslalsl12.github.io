@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Check, Copy, Github, Mail, Code2, ArrowUpRight } from "lucide-react";
 import SectionHeader from "../components/SectionHeader";
 import Reveal from "../components/Reveal";
+import GithubActivity from "../components/GithubActivity";
 
 const EMAIL = "wjdgnsxhsl@naver.com";
 
@@ -88,6 +89,10 @@ export default function Contact() {
               </div>
               <ArrowUpRight size={18} className="text-muted transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
+          </Reveal>
+
+          <Reveal className="sm:col-span-2" delay={0.15}>
+            <GithubActivity />
           </Reveal>
         </div>
       </div>

@@ -1,4 +1,5 @@
-import { Github, Mail } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Github, Mail, MessageSquareHeart } from "lucide-react";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -9,6 +10,14 @@ export default function Footer() {
           © {year} Jeong Hoon. Built with React · Vite · Tailwind.
         </p>
         <div className="flex items-center gap-4 text-muted">
+          <Link
+            to="/guestbook"
+            className="inline-flex items-center gap-1.5 text-sm transition-colors hover:text-text"
+          >
+            <MessageSquareHeart size={16} />
+            방명록
+          </Link>
+          <span className="h-3 w-px bg-white/10" aria-hidden="true" />
           <a
             href="https://github.com/gnslalsl12"
             target="_blank"
