@@ -79,15 +79,21 @@ src/
 ## 문서 아카이브 (Archive)
 
 - Claude로 만든 **완성된 HTML 문서**를 그대로 한 페이지로 보여주는 허브.
-- 문서는 **실제 정적 파일** `public/archive/<category>/<slug>.html` 로 저장되어
-  `/archive/<category>/<slug>.html` 로 직접 서빙됨(원본 스타일·스크립트 그대로).
-- 목록은 매니페스트 `public/archive/index.json`(`docs[]`: slug·title·category·
+- 문서는 **실제 정적 파일** `public/docs/<category>/<slug>.html` 로 저장되어
+  `/docs/<category>/<slug>.html` 로 직접 서빙됨(원본 스타일·스크립트 그대로).
+  > ⚠️ 정적 파일은 일부러 `archive/`가 아닌 **`docs/`** 네임스페이스에 둠. SPA가
+  > `/archive`·`/archive/upload` 라우트를 소유하는데, 정적 파일이 같은 접두사를
+  > 쓰면 GitHub Pages가 `/archive/`를 실제 디렉터리로 처리해 새로고침 시 SPA 폴백
+  > 대신 디렉터리 내용을 내보내는 충돌이 생김. `docs/`로 분리해 회피.
+- 목록은 매니페스트 `public/docs/index.json`(`docs[]`: slug·title·category·
   description·path·date)로 관리. 허브(`/archive`)가 런타임에 읽어 카테고리별로 묶어 표시.
 - 카테고리 정의는 `src/lib/archive.ts`의 `CATEGORIES`(id↔라벨).
 - `/archive/upload`는 **소유자 전용 자가 업로드**: HTML 파일 선택 → 토큰으로
   `main`에 HTML + 매니페스트를 **한 커밋**(Git Data API)으로 푸시 → GitHub Actions가
   자동 빌드·배포(`.github/workflows/deploy.yml`) → 1~2분 뒤 반영.
-- 핵심 로직 `src/lib/archive.ts` (`fetchDocs`/`publishDoc`/`commitFiles`).
+- 허브(`/archive`)에서 **소유자만** 각 카드의 삭제 버튼으로 문서 삭제 가능(파일+매니페스트
+  한 커밋 제거 → 재배포). 핵심 로직 `src/lib/archive.ts`
+  (`fetchDocs`/`publishDoc`/`deleteDoc`/`commitFiles`).
   토큰·소유자 검증은 블로그와 동일(`blog.ts`의 `getToken`/`verifyToken`/`isAllowedAuthor` 재사용).
 
 ## 배포 주의

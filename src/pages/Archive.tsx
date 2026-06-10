@@ -8,11 +8,13 @@ import {
   FileText,
   Loader2,
   Plane,
+  Trash2,
   Upload,
 } from "lucide-react";
 import {
   CATEGORIES,
   categoryLabel,
+  deleteDoc,
   docUrl,
   fetchDocs,
   getToken,
@@ -46,6 +48,7 @@ export default function Archive() {
   const [error, setError] = useState("");
   const [canUpload, setCanUpload] = useState(false);
   const [secretOpen, setSecretOpen] = useState(false);
+  const [deletingPath, setDeletingPath] = useState<string | null>(null);
   const reduceMotion = useReducedMotion();
   const tapsRef = useRef(0);
   const timerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
@@ -100,6 +103,22 @@ export default function Archive() {
     const extras = [...byCat.keys()].filter((id) => !CATEGORIES.some((c) => c.id === id));
     return [...known, ...extras].map((id) => ({ id, docs: byCat.get(id)! }));
   }, [docs]);
+
+  // Owner-only delete. Commits to `main` (file + manifest), then optimistically
+  // drops the card; the live deploy catches up in 1~2 minutes.
+  const handleDelete = async (doc: ArchiveDoc) => {
+    if (deletingPath) return;
+    if (!window.confirm(`'${doc.title}' 문서를 삭제할까요? 되돌릴 수 없습니다.`)) return;
+    setDeletingPath(doc.path);
+    try {
+      await deleteDoc(doc);
+      setDocs((prev) => prev.filter((d) => d.path !== doc.path));
+    } catch (e: unknown) {
+      window.alert(e instanceof Error ? e.message : String(e));
+    } finally {
+      setDeletingPath(null);
+    }
+  };
 
   return (
     <div className="container-x pb-20 pt-28">
@@ -167,33 +186,54 @@ export default function Archive() {
                 </h2>
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                   {group.docs.map((doc, i) => (
-                    <motion.a
+                    <motion.div
                       key={doc.path}
-                      href={docUrl(doc.path)}
-                      target="_blank"
-                      rel="noopener noreferrer"
                       initial={{ opacity: 0, y: 16 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true, amount: 0.2 }}
                       transition={{ duration: 0.4, delay: 0.03 * i }}
-                      className="bento group flex flex-col p-5"
+                      className="group relative"
                     >
-                      <div className="flex items-start justify-between gap-2">
-                        <h3 className="font-semibold leading-snug transition-colors group-hover:text-brand">
-                          {doc.title}
-                        </h3>
-                        <ArrowUpRight
-                          size={16}
-                          className="mt-0.5 shrink-0 text-muted transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-brand"
-                        />
-                      </div>
-                      {doc.description && (
-                        <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-muted">
-                          {doc.description}
-                        </p>
+                      <a
+                        href={docUrl(doc.path)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bento flex h-full flex-col p-5"
+                      >
+                        <div className="flex items-start justify-between gap-2">
+                          <h3 className="font-semibold leading-snug transition-colors group-hover:text-brand">
+                            {doc.title}
+                          </h3>
+                          <ArrowUpRight
+                            size={16}
+                            className="mt-0.5 shrink-0 text-muted transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-brand"
+                          />
+                        </div>
+                        {doc.description && (
+                          <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-muted">
+                            {doc.description}
+                          </p>
+                        )}
+                        <span className="mt-4 text-xs text-muted">{formatDate(doc.date)}</span>
+                      </a>
+
+                      {canUpload && (
+                        <button
+                          type="button"
+                          onClick={() => handleDelete(doc)}
+                          disabled={deletingPath === doc.path}
+                          aria-label="문서 삭제"
+                          title="문서 삭제"
+                          className="absolute bottom-3 right-3 grid h-8 w-8 place-items-center rounded-lg border border-white/10 bg-white/5 text-muted opacity-0 transition-all hover:border-red-500/40 hover:bg-red-500/10 hover:text-red-300 focus-visible:opacity-100 group-hover:opacity-100 disabled:opacity-100"
+                        >
+                          {deletingPath === doc.path ? (
+                            <Loader2 size={15} className="animate-spin" />
+                          ) : (
+                            <Trash2 size={15} />
+                          )}
+                        </button>
                       )}
-                      <span className="mt-4 text-xs text-muted">{formatDate(doc.date)}</span>
-                    </motion.a>
+                    </motion.div>
                   ))}
                 </div>
               </section>
