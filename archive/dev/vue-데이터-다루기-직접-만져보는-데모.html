@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  파일명 : vue-data-playground.html
+  설명   : Vue 2 (Options API) 데이터 다루기 라이브 학습 데모
+           (data / {{ }} / @click / v-model / v-if·v-else / v-for·:key / v-bind)
+           왼쪽 코드 ↔ 오른쪽 실제 동작을 나란히 보며 직접 만져볼 수 있음
+  최초 생성 일시 : 2026-06-09
+  최종 수정 일시 : 2026-06-09 (2차)
+  수정 내용 :
+    - 2026-06-09 : 최초 생성 (기호 3종 정리 + 6개 라이브 데모, 실제 Vue 2.7 CDN 구동)
+    - 2026-06-09 (2차) : script 사용법 3개 섹션 추가
+                         (⑦ setup vs Options API 비교 / ⑧ 생명주기 created·mounted /
+                          ⑨ async·await 비동기 데이터 로딩) — 생명주기·async는 라이브 구동
+  ============================================================
+-->
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vue 데이터 다루기 — 직접 만져보는 데모</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<style>
+  :root{
+    --bg:#F4F5F8; --surface:#FFFFFF; --surface-2:#FBFBFD;
+    --ink:#161A26; --ink-soft:#5A6072; --ink-faint:#8C92A4;
+    --line:#E4E6EE; --line-soft:#EEF0F5;
+    --code-bg:#161B27; --code-line:#232A3A;
+    --c-data:#2E9E6E;   /* data / {{ }} */
+    --c-model:#2B7FD4;  /* v-model */
+    --c-if:#E0791C;     /* v-if */
+    --c-for:#7C5CFC;    /* v-for / :key */
+    --c-bind:#0E9AA7;   /* v-bind : */
+    --c-ev:#D6457D;     /* @ 이벤트 */
+    --c-setup:#6366F1;  /* setup vs options */
+    --c-life:#D97706;   /* 생명주기 */
+    --c-async:#0891B2;  /* async 비동기 */
+    --radius:16px; --radius-sm:10px;
+    --shadow:0 1px 2px rgba(22,26,38,.04), 0 8px 28px rgba(22,26,38,.07);
+    --mono:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, "D2Coding", monospace;
+  }
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; scroll-padding-top:78px; }
+  body{ margin:0; font-family:"Pretendard",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+        background:var(--bg); color:var(--ink); line-height:1.7; -webkit-font-smoothing:antialiased; letter-spacing:-0.01em; }
+  @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto;} *{animation:none!important;transition:none!important;} }
+
+  header.topbar{ position:sticky; top:0; z-index:50; background:rgba(244,245,248,.85);
+    backdrop-filter:saturate(160%) blur(12px); border-bottom:1px solid var(--line); }
+  .topbar-inner{ max-width:1080px; margin:0 auto; padding:12px 24px; display:flex; align-items:center; gap:16px; }
+  .brand{ display:flex; align-items:center; gap:10px; font-weight:800; font-size:15px; white-space:nowrap; }
+  .brand .logo{ width:26px; height:26px; border-radius:8px; flex:none;
+    background:conic-gradient(from 200deg,var(--c-data),var(--c-model),var(--c-if),var(--c-for),var(--c-bind),var(--c-ev),var(--c-data)); }
+  .navlinks{ display:flex; gap:3px; margin-left:auto; overflow-x:auto; }
+  .navlinks a{ color:var(--ink-soft); text-decoration:none; font-size:13px; font-weight:600; padding:6px 10px; border-radius:8px; white-space:nowrap; transition:.16s; }
+  .navlinks a:hover{ color:var(--ink); background:var(--line-soft); }
+  @media (max-width:860px){ .navlinks{ display:none; } }
+
+  main{ max-width:1080px; margin:0 auto; padding:0 24px 110px; }
+  .hero{ padding:54px 0 8px; }
+  .eyebrow{ font-family:var(--mono); font-size:12px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-faint); }
+  .hero h1{ font-size:clamp(30px,4.6vw,46px); font-weight:800; line-height:1.12; letter-spacing:-0.035em; margin:14px 0 14px; }
+  .hero p{ font-size:17px; color:var(--ink-soft); max-width:64ch; margin:0; }
+  .hero .badge{ display:inline-flex; align-items:center; gap:8px; margin-top:20px; font-size:13px; font-weight:600;
+    color:var(--c-data); background:rgba(46,158,110,.1); border:1px solid rgba(46,158,110,.25); padding:8px 14px; border-radius:999px; }
+
+  /* 기호 3종 요약 */
+  .keys{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:34px 0 10px; }
+  .key{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:20px; box-shadow:var(--shadow); border-top:3px solid var(--k-c); }
+  .key .sym{ font-family:var(--mono); font-size:22px; font-weight:800; color:var(--k-c); }
+  .key h4{ margin:8px 0 4px; font-size:15px; }
+  .key p{ margin:0; font-size:13px; color:var(--ink-soft); }
+  .key .ex{ font-family:var(--mono); font-size:12px; color:var(--ink-faint); margin-top:8px; }
+  @media (max-width:680px){ .keys{ grid-template-columns:1fr; } }
+
+  .note{ display:flex; gap:12px; padding:16px 18px; border-radius:var(--radius-sm); margin:18px 0 0;
+    background:rgba(224,121,28,.08); border:1px solid rgba(224,121,28,.25); }
+  .note .i{ font-weight:800; color:var(--c-if); flex:none; }
+  .note p{ margin:0; font-size:14px; }
+  .note code{ font-family:var(--mono); font-size:13px; background:rgba(0,0,0,.05); padding:1px 6px; border-radius:5px; }
+
+  /* 데모 카드 */
+  .demo{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); margin-top:24px; overflow:hidden; }
+  .demo-head{ padding:22px 24px 16px; border-bottom:1px solid var(--line-soft); }
+  .demo-tag{ font-family:var(--mono); font-size:12px; font-weight:700; padding:4px 10px; border-radius:7px; display:inline-block; color:#fff; background:var(--d-c); }
+  .demo-head h3{ margin:11px 0 5px; font-size:18px; letter-spacing:-0.02em; }
+  .demo-head p{ margin:0; font-size:14px; color:var(--ink-soft); }
+  .demo-body{ display:grid; grid-template-columns:1fr 1fr; }
+  .code-side{ background:var(--code-bg); padding:0; border-right:1px solid var(--code-line); }
+  .code-tab{ display:flex; align-items:center; gap:7px; padding:9px 16px; border-bottom:1px solid var(--code-line); background:#11151F; }
+  .code-tab .dot{ width:9px; height:9px; border-radius:50%; }
+  .code-tab span{ font-family:var(--mono); font-size:11.5px; color:#9CA6BC; margin-left:4px; }
+  pre.code{ margin:0; padding:16px 18px; overflow-x:auto; font-family:var(--mono); font-size:12.5px; line-height:1.7; color:#D6DCEA; }
+  pre.code + pre.code{ border-top:1px solid var(--code-line); }
+  .t-kw{color:#C792EA;} .t-str{color:#9ECE6A;} .t-com{color:#5C6678;font-style:italic;}
+  .t-fn{color:#82AAFF;} .t-tag{color:#F07178;} .t-dir{color:#FFCB6B;} .t-prop{color:#7FDBCA;} .t-mus{color:#F78C6C;}
+
+  .live-side{ padding:22px 24px; background:var(--surface-2); display:flex; flex-direction:column; gap:14px; }
+  .live-label{ font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint); }
+  @media (max-width:760px){
+    .demo-body{ grid-template-columns:1fr; }
+    .code-side{ border-right:none; border-bottom:1px solid var(--code-line); }
+  }
+
+  /* 라이브 위젯 공통 요소 */
+  .v-btn{ font-family:inherit; font-weight:700; font-size:14px; border:none; border-radius:9px; padding:9px 16px; cursor:pointer;
+    background:var(--ink); color:#fff; transition:.15s; }
+  .v-btn:hover{ background:#000; }
+  .v-btn.ghost{ background:#fff; color:var(--ink); border:1px solid var(--line); }
+  .v-btn.ghost:hover{ border-color:var(--ink-soft); }
+  .v-btn.accent{ background:var(--d-c); }
+  .v-btn:disabled{ opacity:.4; cursor:not-allowed; }
+  .v-row{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+  .v-input{ font-family:inherit; font-size:15px; padding:10px 13px; border:1.5px solid var(--line); border-radius:9px; width:100%;
+    background:#fff; color:var(--ink); transition:.15s; }
+  .v-input:focus{ outline:none; border-color:var(--d-c); box-shadow:0 0 0 3px color-mix(in srgb,var(--d-c) 16%,transparent); }
+  .v-big{ font-family:var(--mono); font-size:40px; font-weight:800; color:var(--d-c); line-height:1; }
+  .v-result{ background:#fff; border:1px dashed var(--line); border-radius:10px; padding:14px 16px; font-size:15px; min-height:20px; }
+  .v-result b{ color:var(--d-c); }
+  .v-pill{ display:inline-block; font-size:13px; font-weight:600; padding:5px 12px; border-radius:999px; }
+  .v-on{ background:rgba(46,158,110,.14); color:#1f7a51; }
+  .v-off{ background:rgba(214,69,125,.12); color:#b3325f; }
+  ul.v-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px; }
+  ul.v-list li{ display:flex; align-items:center; gap:10px; background:#fff; border:1px solid var(--line); border-radius:10px; padding:10px 12px; font-size:14px; }
+  ul.v-list li .x{ margin-left:auto; cursor:pointer; border:none; background:var(--line-soft); color:var(--ink-soft); width:26px; height:26px; border-radius:7px; font-size:15px; line-height:1; }
+  ul.v-list li .x:hover{ background:var(--c-ev); color:#fff; }
+  .v-empty{ color:var(--ink-faint); font-size:13px; text-align:center; padding:8px; }
+  input[type=range]{ width:100%; accent-color:var(--d-c); }
+  .v-note{ font-size:12px; color:var(--ink-faint); }
+
+  footer{ text-align:center; padding:46px 24px 0; color:var(--ink-faint); font-size:13px; border-top:1px solid var(--line); margin-top:70px; }
+  footer .meta{ font-family:var(--mono); font-size:11.5px; margin-top:8px; }
+  ::selection{ background:rgba(46,158,110,.22); }
+
+  #vue-fail{ display:none; background:rgba(214,69,125,.1); border:1px solid rgba(214,69,125,.3); color:#b3325f;
+    padding:14px 18px; border-radius:12px; margin:20px 0; font-size:14px; }
+
+  /* setup 비교 결론 박스 */
+  .verdict{ padding:18px 24px; background:color-mix(in srgb,var(--c-setup) 7%, #fff); border-top:1px solid var(--line-soft); font-size:14px; color:var(--ink-soft); }
+  .verdict b{ color:var(--c-setup); }
+  .verdict strong{ color:var(--ink); }
+  .cmp-pick{ font-family:var(--mono); font-size:11px; font-weight:700; padding:2px 8px; border-radius:6px; margin-left:6px; }
+  .cmp-pick.yes{ background:rgba(46,158,110,.16); color:#1f7a51; }
+  .cmp-pick.no{ background:var(--line-soft); color:var(--ink-faint); }
+
+  /* 생명주기 타임라인 */
+  .timeline{ display:flex; flex-direction:column; }
+  .tl-step{ display:flex; gap:13px; padding-bottom:18px; position:relative; }
+  .tl-step:last-child{ padding-bottom:0; }
+  .tl-step:not(:last-child)::before{ content:""; position:absolute; left:7px; top:18px; bottom:0; width:2px; background:var(--line); }
+  .tl-dot{ width:16px; height:16px; border-radius:50%; border:2px solid var(--line); background:#fff; flex:none; margin-top:2px; z-index:1; }
+  .tl-step.done .tl-dot{ background:var(--d-c); border-color:var(--d-c); }
+  .tl-body b{ font-family:var(--mono); font-size:13.5px; }
+  .tl-body .tl-desc{ font-size:13px; color:var(--ink-soft); }
+  .tl-time{ font-family:var(--mono); font-size:11.5px; color:var(--d-c); margin-top:3px; font-weight:600; }
+  .tl-time.dim{ color:var(--ink-faint); font-weight:400; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand"><span class="logo"></span>Vue 데이터 다루기</div>
+    <nav class="navlinks">
+      <a href="#d1">data·표시·클릭</a>
+      <a href="#d2">v-model</a>
+      <a href="#d3">v-if / v-else</a>
+      <a href="#d4">v-for · :key</a>
+      <a href="#d5">: 바인딩</a>
+      <a href="#d6">합쳐보기</a>
+      <a href="#s1">setup vs Options</a>
+      <a href="#s2">생명주기·mounted</a>
+      <a href="#s3">async 비동기</a>
+    </nav>
+  </div>
+</header>
+
+<div id="app">
+<main>
+
+  <section class="hero">
+    <div class="eyebrow">실제 Vue 2로 동작하는 데모 · 직접 만져보세요</div>
+    <h1>데이터를 넣고, 보여주고,<br>바꾸는 법</h1>
+    <p>왼쪽은 코드, 오른쪽은 그 코드가 실제로 돌아가는 화면입니다. 버튼을 누르고 글자를 입력하면 데이터가 어떻게 따라 움직이는지 눈으로 확인할 수 있습니다.</p>
+    <span class="badge">●&nbsp; 오른쪽 영역은 진짜 Vue가 구동 중입니다 — 마음껏 눌러보세요</span>
+
+    <div id="vue-fail">⚠ Vue 라이브러리를 불러오지 못해 오른쪽 데모가 동작하지 않을 수 있습니다(네트워크 환경 영향). 코드 설명은 그대로 보실 수 있습니다.</div>
+
+    <!-- 기호 3종 -->
+    <div class="keys">
+      <div class="key" style="--k-c:var(--c-data)">
+        <div class="sym" v-pre>{{ }}</div>
+        <h4>화면에 글자로 표시</h4>
+        <p>데이터를 텍스트로 꺼내 보여줍니다.</p>
+        <div class="ex" v-pre>{{ name }} → 홍길동</div>
+      </div>
+      <div class="key" style="--k-c:var(--c-bind)">
+        <div class="sym">:</div>
+        <h4>속성 값에 연결 (v-bind)</h4>
+        <p>데이터를 HTML 속성에 넣습니다.</p>
+        <div class="ex">:key="id" · :src="url"</div>
+      </div>
+      <div class="key" style="--k-c:var(--c-ev)">
+        <div class="sym">@</div>
+        <h4>동작에 반응 (v-on)</h4>
+        <p>클릭·입력 등 이벤트를 듣습니다.</p>
+        <div class="ex">@click · @input · @keyup</div>
+      </div>
+    </div>
+    <div class="note">
+      <span class="i">⚠</span>
+      <p><b>자주 하는 오해.</b> <code>@key</code> 라는 건 없습니다. 목록에서 쓰는 건 <code>:key</code>(데이터를 key 속성에 <i>연결</i>). <code>@</code>는 오직 <b>이벤트를 들을 때</b>만 씁니다.</p>
+    </div>
+  </section>
+
+  <!-- ① data + {{ }} + @click -->
+  <section class="demo" id="d1" style="--d-c:var(--c-data)">
+    <div class="demo-head">
+      <span class="demo-tag" v-pre>data + {{ }} + @click</span>
+      <h3>① 넣기 → 보여주기 → 바꾸기 (데이터 한 바퀴)</h3>
+      <p>data에 <code>count</code>를 넣고, <span v-pre>{{ count }}</span>로 보여주고, 버튼 클릭(@click)으로 this.count 를 바꿉니다.</p>
+    </div>
+    <div class="demo-body">
+      <div class="code-side">
+        <div class="code-tab"><span class="dot" style="background:#FF5F57"></span><span class="dot" style="background:#FEBC2E"></span><span class="dot" style="background:#28C840"></span><span>&lt;script&gt;</span></div>
+<pre class="code" v-pre><span class="t-kw">export default</span> {
+  <span class="t-prop">data</span>() {
+    <span class="t-kw">return</span> { <span class="t-prop">count</span>: <span class="t-mus">0</span> };   <span class="t-com">// ① 넣기</span>
+  },
+  <span class="t-prop">methods</span>: {
+    <span class="t-fn">plus</span>() { <span class="t-kw">this</span>.count++; }   <span class="t-com">// ③ this 로 바꾸기</span>
+  }
+};</pre>
+        <div class="code-tab"><span>&lt;template&gt;</span></div>
+<pre class="code" v-pre>&lt;<span class="t-tag">p</span>&gt;{{ count }}&lt;/<span class="t-tag">p</span>&gt;             <span class="t-com">&lt;!-- ② 보여주기 --&gt;</span>
+&lt;<span class="t-tag">button</span> <span class="t-dir">@click</span>=<span class="t-str">"plus"</span>&gt;+1&lt;/<span class="t-tag">button</span>&gt;</pre>
+      </div>
+      <div class="live-side">
+        <div class="live-label">실제 동작</div>
+        <div class="v-big">{{ count }}</div>
+        <div class="v-row">
+          <button class="v-btn accent" @click="count++">+1</button>
+          <button class="v-btn ghost" @click="count--">−1</button>
+          <button class="v-btn ghost" @click="count = 0">리셋</button>
+        </div>
+        <p class="v-note">버튼을 누르면 <b>count</b> 데이터가 바뀌고, <span v-pre>{{ count }}</span> 부분이 자동으로 다시 그려집니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ② v-model -->
+  <section class="demo" id="d2" style="--d-c:var(--c-model)">
+    <div class="demo-head">
+      <span class="demo-tag">v-model</span>
+      <h3>② 입력창과 데이터를 양쪽으로 묶기</h3>
+      <p>v-model 한 줄이면 입력한 글자가 곧바로 <code>name</code> 데이터가 되고, 그 데이터가 화면에도 즉시 반영됩니다.</p>
+    </div>
+    <div class="demo-body">
+      <div class="code-side">
+        <div class="code-tab"><span class="dot" style="background:#FF5F57"></span><span class="dot" style="background:#FEBC2E"></span><span class="dot" style="background:#28C840"></span><span>&lt;script&gt;</span></div>
+<pre class="code" v-pre><span class="t-prop">data</span>() {
+  <span class="t-kw">return</span> { <span class="t-prop">name</span>: <span class="t-str">""</span> };
+}</pre>
+        <div class="code-tab"><span>&lt;template&gt;</span></div>
+<pre class="code" v-pre>&lt;<span class="t-tag">input</span> <span class="t-dir">v-model</span>=<span class="t-str">"name"</span>&gt;
+&lt;<span class="t-tag">p</span>&gt;{{ name }}님, 환영합니다&lt;/<span class="t-tag">p</span>&gt;</pre>
+      </div>
+      <div class="live-side">
+        <div class="live-label">실제 동작</div>
+        <input class="v-input" v-model="name" placeholder="이름을 입력해 보세요" />
+        <div class="v-result"><b>{{ name || '...' }}</b>님, 환영합니다</div>
+        <p class="v-note">타이핑하는 즉시 아래 글자가 따라옵니다. 이게 "양방향 바인딩"입니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ③ v-if / v-else -->
+  <section class="demo" id="d3" style="--d-c:var(--c-if)">
+    <div class="demo-head">
+      <span class="demo-tag">v-if / v-else</span>
+      <h3>③ 조건에 따라 화면을 넣었다 뺐다</h3>
+      <p><code>show</code>가 참이면 v-if 쪽이, 거짓이면 v-else 쪽이 그려집니다. 거짓인 요소는 화면에서 아예 사라집니다.</p>
+    </div>
+    <div class="demo-body">
+      <div class="code-side">
+        <div class="code-tab"><span class="dot" style="background:#FF5F57"></span><span class="dot" style="background:#FEBC2E"></span><span class="dot" style="background:#28C840"></span><span>&lt;script&gt;</span></div>
+<pre class="code" v-pre><span class="t-prop">data</span>() {
+  <span class="t-kw">return</span> { <span class="t-prop">show</span>: <span class="t-kw">true</span> };
+}</pre>
+        <div class="code-tab"><span>&lt;template&gt;</span></div>
+<pre class="code" v-pre>&lt;<span class="t-tag">button</span> <span class="t-dir">@click</span>=<span class="t-str">"show = !show"</span>&gt;토글&lt;/<span class="t-tag">button</span>&gt;
+
+&lt;<span class="t-tag">p</span> <span class="t-dir">v-if</span>=<span class="t-str">"show"</span>&gt;보입니다 👀&lt;/<span class="t-tag">p</span>&gt;
+&lt;<span class="t-tag">p</span> <span class="t-dir">v-else</span>&gt;숨었습니다 🙈&lt;/<span class="t-tag">p</span>&gt;</pre>
+      </div>
+      <div class="live-side">
+        <div class="live-label">실제 동작</div>
+        <div class="v-row">
+          <button class="v-btn accent" @click="show = !show">토글</button>
+          <span class="v-pill" :class="show ? 'v-on' : 'v-off'">show = {{ show }}</span>
+        </div>
+        <div class="v-result">
+          <span v-if="show">보입니다 👀</span>
+          <span v-else>숨었습니다 🙈</span>
+        </div>
+        <p class="v-note"><code>!show</code>는 "반대로 뒤집기"입니다(참↔거짓). v-if가 거짓이면 그 문장은 DOM에서 통째로 빠집니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ④ v-for + :key -->
+  <section class="demo" id="d4" style="--d-c:var(--c-for)">
+    <div class="demo-head">
+      <span class="demo-tag">v-for + :key</span>
+      <h3>④ 목록(배열)을 반복해서 그리기</h3>
+      <p>배열을 v-for로 한 줄씩 그립니다. 이때 각 줄을 구분할 고유값을 <code>:key</code>에 연결해 줍니다(@key 아님!).</p>
+    </div>
+    <div class="demo-body">
+      <div class="code-side">
+        <div class="code-tab"><span class="dot" style="background:#FF5F57"></span><span class="dot" style="background:#FEBC2E"></span><span class="dot" style="background:#28C840"></span><span>&lt;script&gt;</span></div>
+<pre class="code" v-pre><span class="t-prop">data</span>() {
+  <span class="t-kw">return</span> { <span class="t-prop">todos</span>: [ <span class="t-com">/* {id, text} 배열 */</span> ] };
+},
+<span class="t-prop">methods</span>: {
+  <span class="t-fn">remove</span>(<span class="t-prop">id</span>) {
+    <span class="t-kw">this</span>.todos = <span class="t-kw">this</span>.todos.<span class="t-fn">filter</span>(t =&gt; t.id !== id);
+  }
+}</pre>
+        <div class="code-tab"><span>&lt;template&gt;</span></div>
+<pre class="code" v-pre>&lt;<span class="t-tag">li</span> <span class="t-dir">v-for</span>=<span class="t-str">"t in todos"</span> <span class="t-dir">:key</span>=<span class="t-str">"t.id"</span>&gt;
+  {{ t.text }}
+  &lt;<span class="t-tag">button</span> <span class="t-dir">@click</span>=<span class="t-str">"remove(t.id)"</span>&gt;삭제&lt;/<span class="t-tag">button</span>&gt;
+&lt;/<span class="t-tag">li</span>&gt;</pre>
+      </div>
+      <div class="live-side">
+        <div class="live-label">실제 동작</div>
+        <div class="v-row">
+          <input class="v-input" style="flex:1; width:auto;" v-model="newTodo" @keyup.enter="addTodo" placeholder="할 일 입력 후 추가" />
+          <button class="v-btn accent" @click="addTodo">추가</button>
+        </div>
+        <ul class="v-list">
+          <li v-for="t in todos" :key="t.id">
+            {{ t.text }}
+            <button class="x" @click="remove(t.id)" title="삭제">×</button>
+          </li>
+        </ul>
+        <div class="v-empty" v-if="todos.length === 0">목록이 비었습니다. 위에서 추가해 보세요.</div>
+        <p class="v-note">추가하면 배열에 들어가 한 줄이 늘고, 삭제하면 그 줄만 빠집니다. <code>@keyup.enter</code>로 엔터 입력도 받았습니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑤ v-bind (:) -->
+  <section class="demo" id="d5" style="--d-c:var(--c-bind)">
+    <div class="demo-head">
+      <span class="demo-tag">: (v-bind)</span>
+      <h3>⑤ 데이터를 "속성 값"에 넣기</h3>
+      <p>글자 표시가 아니라 style·disabled 같은 <b>속성</b>에 데이터를 꽂을 땐 콜론(:)을 씁니다.</p>
+    </div>
+    <div class="demo-body">
+      <div class="code-side">
+        <div class="code-tab"><span class="dot" style="background:#FF5F57"></span><span class="dot" style="background:#FEBC2E"></span><span class="dot" style="background:#28C840"></span><span>&lt;script&gt;</span></div>
+<pre class="code" v-pre><span class="t-prop">data</span>() {
+  <span class="t-kw">return</span> { <span class="t-prop">size</span>: <span class="t-mus">20</span> };
+}</pre>
+        <div class="code-tab"><span>&lt;template&gt;</span></div>
+<pre class="code" v-pre>&lt;<span class="t-tag">input</span> <span class="t-dir">type</span>=<span class="t-str">"range"</span> <span class="t-dir">v-model</span>=<span class="t-str">"size"</span>&gt;
+
+&lt;<span class="t-tag">p</span> <span class="t-dir">:style</span>=<span class="t-str">"{ fontSize: size + 'px' }"</span>&gt;
+  글자 크기 {{ size }}px
+&lt;/<span class="t-tag">p</span>&gt;</pre>
+      </div>
+      <div class="live-side">
+        <div class="live-label">실제 동작</div>
+        <input type="range" v-model.number="size" min="14" max="48" />
+        <div class="v-result"><span :style="{ fontSize: size + 'px', fontWeight: 700, color: 'var(--c-bind)' }">글자 크기 {{ size }}px</span></div>
+        <p class="v-note">슬라이더(size 데이터)를 움직이면 :style에 연결된 글자 크기가 실시간으로 바뀝니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑥ 합쳐보기 -->
+  <section class="demo" id="d6" style="--d-c:var(--c-ev)">
+    <div class="demo-head">
+      <span class="demo-tag">전부 합쳐보기</span>
+      <h3>⑥ 미니 장바구니 — 배운 걸 한 화면에</h3>
+      <p>v-model(입력) · @click(담기) · v-for·:key(목록) · <span v-pre>{{ }}</span>(합계) · v-if(빈 목록 안내) · :disabled(빈 입력 막기)를 모두 씁니다.</p>
+    </div>
+    <div class="demo-body">
+      <div class="code-side">
+        <div class="code-tab"><span class="dot" style="background:#FF5F57"></span><span class="dot" style="background:#FEBC2E"></span><span class="dot" style="background:#28C840"></span><span>&lt;script&gt;</span></div>
+<pre class="code" v-pre><span class="t-prop">data</span>() {
+  <span class="t-kw">return</span> { <span class="t-prop">item</span>: <span class="t-str">""</span>, <span class="t-prop">price</span>: <span class="t-mus">0</span>, <span class="t-prop">cart</span>: [] };
+},
+<span class="t-prop">computed</span>: {
+  <span class="t-fn">total</span>() {                       <span class="t-com">// 합계 자동 계산</span>
+    <span class="t-kw">return this</span>.cart.<span class="t-fn">reduce</span>((s, c) =&gt; s + c.price, <span class="t-mus">0</span>);
+  }
+},
+<span class="t-prop">methods</span>: {
+  <span class="t-fn">add</span>() {
+    <span class="t-kw">if</span> (!<span class="t-kw">this</span>.item) <span class="t-kw">return</span>;
+    <span class="t-kw">this</span>.cart.<span class="t-fn">push</span>({ <span class="t-prop">id</span>: <span class="t-fn">Date</span>.<span class="t-fn">now</span>(), <span class="t-prop">name</span>: <span class="t-kw">this</span>.item, <span class="t-prop">price</span>: +<span class="t-kw">this</span>.price });
+    <span class="t-kw">this</span>.item = <span class="t-str">""</span>; <span class="t-kw">this</span>.price = <span class="t-mus">0</span>;
+  }
+}</pre>
+      </div>
+      <div class="live-side">
+        <div class="live-label">실제 동작</div>
+        <div class="v-row">
+          <input class="v-input" style="flex:2; width:auto;" v-model="item" placeholder="상품명" @keyup.enter="add" />
+          <input class="v-input" style="flex:1; width:auto;" type="number" v-model.number="price" placeholder="가격" @keyup.enter="add" />
+        </div>
+        <button class="v-btn accent" @click="add" :disabled="!item">장바구니에 담기</button>
+        <ul class="v-list">
+          <li v-for="c in cart" :key="c.id">
+            {{ c.name }} <span style="color:var(--ink-faint)">{{ c.price.toLocaleString() }}원</span>
+            <button class="x" @click="cart = cart.filter(x => x.id !== c.id)" title="삭제">×</button>
+          </li>
+        </ul>
+        <div class="v-empty" v-if="cart.length === 0">담은 상품이 없습니다.</div>
+        <div class="v-result" v-else>합계 <b>{{ total.toLocaleString() }}원</b> ({{ cart.length }}개)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑦ setup vs Options API -->
+  <section class="demo" id="s1" style="--d-c:var(--c-setup)">
+    <div class="demo-head">
+      <span class="demo-tag">작성 방식 2가지</span>
+      <h3>⑦ setup은 뭐고, 나는 뭘 써야 하나?</h3>
+      <p>Vue 코드를 쓰는 방식은 두 가지입니다. 같은 카운터를 양쪽으로 써봤습니다. 결과는 똑같습니다.</p>
+    </div>
+    <div class="demo-body">
+      <div class="code-side">
+        <div class="code-tab"><span class="dot" style="background:#28C840"></span><span>Options API · 이 프로젝트 ✓</span></div>
+<pre class="code" v-pre><span class="t-kw">export default</span> {
+  <span class="t-prop">data</span>() {
+    <span class="t-kw">return</span> { <span class="t-prop">count</span>: <span class="t-mus">0</span> };  <span class="t-com">// 데이터 칸</span>
+  },
+  <span class="t-prop">methods</span>: {
+    <span class="t-fn">plus</span>() { <span class="t-kw">this</span>.count++; }  <span class="t-com">// 함수 칸</span>
+  }
+};</pre>
+      </div>
+      <div class="code-side" style="border-right:none">
+        <div class="code-tab"><span class="dot" style="background:#6366F1"></span><span>Composition API · setup (Vue 3)</span></div>
+<pre class="code" v-pre><span class="t-kw">import</span> { <span class="t-fn">ref</span> } <span class="t-kw">from</span> <span class="t-str">"vue"</span>;
+<span class="t-kw">export default</span> {
+  <span class="t-fn">setup</span>() {
+    <span class="t-kw">const</span> count = <span class="t-fn">ref</span>(<span class="t-mus">0</span>);        <span class="t-com">// 데이터</span>
+    <span class="t-kw">const</span> <span class="t-fn">plus</span> = () =&gt; count.value++; <span class="t-com">// 함수</span>
+    <span class="t-kw">return</span> { count, plus };       <span class="t-com">// 화면에 넘김</span>
+  }
+};</pre>
+      </div>
+    </div>
+    <div class="verdict">
+      <p style="margin:0 0 8px"><strong>차이.</strong> Options API는 <code>data</code>·<code>methods</code> 같은 <b>정해진 칸</b>에 나눠 담습니다. Composition API는 <code>setup()</code> <b>함수 하나</b>에 다 모으고 값을 <code>ref()</code>로 감쌉니다(읽을 땐 <code>.value</code>).</p>
+      <p style="margin:0"><strong>결론.</strong> 이 프로젝트는 <b>Vue 2 + Options API</b>입니다. <code>setup</code>은 Vue 3에서 주로 쓰는 방식이라 <b>여기서는 쓸 일이 없습니다.</b> <code>data</code>·<code>methods</code>·<code>computed</code>·<code>mounted</code>만 익히면 충분합니다. setup 코드를 마주치면 "아, Vue 3 방식이구나" 정도로 알아두시면 됩니다.<br>
+      <span style="font-family:var(--mono);font-size:12.5px">Options API<span class="cmp-pick yes">이걸 쓰세요</span> &nbsp; setup<span class="cmp-pick no">이 프로젝트에선 불필요</span></span></p>
+    </div>
+  </section>
+
+  <!-- ⑧ 생명주기 (data → created → mounted) -->
+  <section class="demo" id="s2" style="--d-c:var(--c-life)">
+    <div class="demo-head">
+      <span class="demo-tag">생명주기 · created / mounted</span>
+      <h3>⑧ 화면이 켜질 때 자동으로 실행되는 칸</h3>
+      <p>컴포넌트는 정해진 순서로 "태어납니다". 그 특정 시점에 자동 실행되는 칸이 생명주기 훅입니다. 가장 많이 쓰는 건 <code>mounted</code>입니다.</p>
+    </div>
+    <div class="demo-body">
+      <div class="code-side">
+        <div class="code-tab"><span class="dot" style="background:#FF5F57"></span><span class="dot" style="background:#FEBC2E"></span><span class="dot" style="background:#28C840"></span><span>&lt;script&gt;</span></div>
+<pre class="code" v-pre><span class="t-kw">export default</span> {
+  <span class="t-prop">data</span>() {
+    <span class="t-kw">return</span> { list: [] };
+  },
+  <span class="t-prop">created</span>() {
+    <span class="t-com">// 데이터 준비됨 (화면 그리기 전)</span>
+    <span class="t-com">// 보통 여기서 서버 호출 시작</span>
+  },
+  <span class="t-prop">mounted</span>() {
+    <span class="t-com">// 화면이 실제로 붙은 직후</span>
+    <span class="t-com">// DOM을 만져야 할 때 사용</span>
+  }
+};</pre>
+      </div>
+      <div class="live-side">
+        <div class="live-label">이 데모가 켜질 때 실제로 실행된 순서</div>
+        <div class="timeline">
+          <div class="tl-step done">
+            <span class="tl-dot"></span>
+            <div class="tl-body"><b>data()</b><div class="tl-desc">데이터 초기값을 준비</div><div class="tl-time dim">컴포넌트 생성 시작</div></div>
+          </div>
+          <div class="tl-step done">
+            <span class="tl-dot"></span>
+            <div class="tl-body"><b>created()</b><div class="tl-desc">데이터 준비 완료 · 아직 화면은 없음</div><div class="tl-time">{{ logTime('created') }}</div></div>
+          </div>
+          <div class="tl-step">
+            <span class="tl-dot"></span>
+            <div class="tl-body"><b>화면 렌더링</b><div class="tl-desc">template → 실제 DOM으로 그려짐</div></div>
+          </div>
+          <div class="tl-step done">
+            <span class="tl-dot"></span>
+            <div class="tl-body"><b>mounted()</b><div class="tl-desc">화면이 붙음 · 이제 DOM 조작 가능</div><div class="tl-time">{{ logTime('mounted') }}</div></div>
+          </div>
+        </div>
+        <p class="v-note"><b>created vs mounted</b> — 서버에서 데이터만 가져오면 <code>created</code>, 그려진 화면(요소 크기·포커스 등)을 만져야 하면 <code>mounted</code>. 헷갈리면 <code>mounted</code>를 쓰면 대체로 안전합니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑨ async / await -->
+  <section class="demo" id="s3" style="--d-c:var(--c-async)">
+    <div class="demo-head">
+      <span class="demo-tag">methods + async / await</span>
+      <h3>⑨ 서버에서 데이터 가져오기 (비동기)</h3>
+      <p>서버 응답은 시간이 걸립니다. <code>async</code> 함수 안에서 <code>await</code>로 "응답이 올 때까지 기다렸다가" 다음 줄로 넘어갑니다. 보통 <code>mounted</code>에서 호출합니다.</p>
+    </div>
+    <div class="demo-body">
+      <div class="code-side">
+        <div class="code-tab"><span class="dot" style="background:#FF5F57"></span><span class="dot" style="background:#FEBC2E"></span><span class="dot" style="background:#28C840"></span><span>&lt;script&gt;</span></div>
+<pre class="code" v-pre><span class="t-prop">methods</span>: {
+  <span class="t-kw">async</span> <span class="t-fn">loadUsers</span>() {
+    <span class="t-kw">this</span>.loading = <span class="t-kw">true</span>;             <span class="t-com">// 로딩 시작</span>
+    <span class="t-kw">const</span> res = <span class="t-kw">await</span> <span class="t-fn">fetch</span>(<span class="t-str">"/api/users"</span>); <span class="t-com">// 응답 기다림</span>
+    <span class="t-kw">this</span>.users = <span class="t-kw">await</span> res.<span class="t-fn">json</span>();   <span class="t-com">// 받은 데이터 저장</span>
+    <span class="t-kw">this</span>.loading = <span class="t-kw">false</span>;            <span class="t-com">// 로딩 끝</span>
+  }
+},
+<span class="t-prop">mounted</span>() {
+  <span class="t-kw">this</span>.<span class="t-fn">loadUsers</span>();   <span class="t-com">// 화면 켜지면 자동 호출</span>
+}</pre>
+      </div>
+      <div class="live-side">
+        <div class="live-label">실제 동작 (응답 지연을 흉내냅니다)</div>
+        <button class="v-btn accent" @click="loadUsers" :disabled="loading">{{ loading ? '불러오는 중...' : '서버에서 불러오기' }}</button>
+        <div class="v-result" v-if="loading">⏳ 응답을 기다리는 중...</div>
+        <ul class="v-list" v-else-if="loaded">
+          <li v-for="u in users" :key="u.id">{{ u.name }}</li>
+        </ul>
+        <div class="v-empty" v-else>버튼을 눌러 데이터를 불러오세요.</div>
+        <p class="v-note"><code>await</code>로 기다리는 동안 <b>loading</b>이 true라 "불러오는 중"이 보이고, 응답이 도착하면 목록으로 바뀝니다. 실제로는 <code>fetch</code>나 <code>axios</code>로 서버를 호출합니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div>Vue 데이터 다루기 · 직접 만져보는 라이브 데모</div>
+    <div class="meta">최초 생성 2026-06-09 · 최종 수정 2026-06-09</div>
+  </footer>
+
+</main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.7.16/vue.min.js"></script>
+<script>
+  if (typeof Vue === "undefined") {
+    var f = document.getElementById("vue-fail");
+    if (f) f.style.display = "block";
+  } else {
+    new Vue({
+      el: "#app",
+      data() {
+        return {
+          // ① 카운터
+          count: 0,
+          // ② v-model
+          name: "",
+          // ③ v-if
+          show: true,
+          // ④ v-for
+          newTodo: "",
+          todos: [
+            { id: 1, text: "기획서 초안 작성" },
+            { id: 2, text: "회의 자료 준비" },
+          ],
+          // ⑤ v-bind
+          size: 20,
+          // ⑥ 합쳐보기
+          item: "",
+          price: 0,
+          cart: [],
+          // ⑧ 생명주기
+          lifeLog: [],
+          // ⑨ async
+          loading: false,
+          loaded: false,
+          users: [],
+        };
+      },
+      created() {
+        // 데이터 준비 직후 자동 실행 — 실행된 시각을 기록
+        this.lifeLog.push({ step: "created", time: this.stamp() });
+      },
+      mounted() {
+        // 화면이 DOM에 붙은 직후 자동 실행
+        this.lifeLog.push({ step: "mounted", time: this.stamp() });
+      },
+      computed: {
+        total() {
+          return this.cart.reduce(function (sum, c) { return sum + c.price; }, 0);
+        },
+      },
+      methods: {
+        addTodo() {
+          var text = this.newTodo.trim();
+          if (!text) return;
+          this.todos.push({ id: Date.now(), text: text });
+          this.newTodo = "";
+        },
+        remove(id) {
+          this.todos = this.todos.filter(function (t) { return t.id !== id; });
+        },
+        add() {
+          if (!this.item) return;
+          this.cart.push({ id: Date.now(), name: this.item, price: +this.price || 0 });
+          this.item = "";
+          this.price = 0;
+        },
+        // 시각 도장 (HH:MM:SS.mmm)
+        stamp() {
+          var d = new Date();
+          return (
+            d.toLocaleTimeString("ko-KR", { hour12: false }) +
+            "." +
+            String(d.getMilliseconds()).padStart(3, "0")
+          );
+        },
+        // 생명주기 로그에서 해당 단계의 시각을 꺼냄
+        logTime(step) {
+          var e = this.lifeLog.find(function (x) {
+            return x.step === step;
+          });
+          return e ? "✓ " + e.time : "—";
+        },
+        // 서버에서 데이터 가져오기 (지연을 흉내낸 가짜 비동기)
+        async loadUsers() {
+          this.loading = true;
+          this.loaded = false;
+          this.users = [];
+          await new Promise(function (resolve) {
+            setTimeout(resolve, 1200);
+          });
+          this.users = [
+            { id: 1, name: "김하늘" },
+            { id: 2, name: "이준호" },
+            { id: 3, name: "박서연" },
+          ];
+          this.loading = false;
+          this.loaded = true;
+        },
+      },
+    });
+  }
+</script>
+</body>
+</html>
