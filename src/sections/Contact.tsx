@@ -91,7 +91,7 @@ export default function Contact() {
             </a>
           </Reveal>
 
-          <Reveal className="sm:col-span-2" delay={0.15}>
+          <Reveal className="min-w-0 sm:col-span-2" delay={0.15}>
             <GithubActivity />
           </Reveal>
         </div>

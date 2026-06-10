@@ -73,10 +73,10 @@ export default function GithubActivity() {
       href={`https://github.com/${REPO_OWNER}`}
       target="_blank"
       rel="noopener noreferrer"
-      className="bento group block p-6"
+      className="bento group block min-w-0 p-6"
     >
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
+      <div className="flex items-center justify-between gap-2">
+        <div className="flex min-w-0 items-center gap-3">
           <span className="grid h-10 w-10 place-items-center rounded-xl bg-white/5 ring-1 ring-white/10">
             <Github size={20} className="text-brand" />
           </span>
