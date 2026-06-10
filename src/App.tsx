@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Backdrop from "./components/Backdrop";
+import ScrollProgress from "./components/ScrollProgress";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Portfolio from "./pages/Portfolio";
@@ -10,6 +11,8 @@ import BlogPost from "./pages/BlogPost";
 import BlogWrite from "./pages/BlogWrite";
 import Archive from "./pages/Archive";
 import ArchiveUpload from "./pages/ArchiveUpload";
+import Guestbook from "./pages/Guestbook";
+import Game2048 from "./pages/Game2048";
 
 export default function App() {
   const location = useLocation();
@@ -22,6 +25,7 @@ export default function App() {
   return (
     <>
       <Backdrop />
+      <ScrollProgress />
       <Navbar />
       <main>
         <Routes>
@@ -32,6 +36,8 @@ export default function App() {
           <Route path="/blog/:number" element={<BlogPost />} />
           <Route path="/archive" element={<Archive />} />
           <Route path="/archive/upload" element={<ArchiveUpload />} />
+          <Route path="/guestbook" element={<Guestbook />} />
+          <Route path="/2048" element={<Game2048 />} />
           <Route path="*" element={<Portfolio />} />
         </Routes>
       </main>

@@ -9,6 +9,7 @@ import {
   Briefcase,
   LayoutGrid,
   Library,
+  Gamepad2,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import profileImage from "../assets/images/profileImage.jpg";
@@ -101,6 +102,10 @@ export default function About() {
                       <Link to="/archive" className="btn btn-ghost w-full justify-start">
                         <Library size={16} className="text-brand" />
                         Archive
+                      </Link>
+                      <Link to="/2048" className="btn btn-ghost w-full justify-start">
+                        <Gamepad2 size={16} className="text-accent" />
+                        2048
                       </Link>
                     </div>
                   </motion.div>

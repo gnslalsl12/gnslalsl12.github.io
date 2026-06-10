@@ -8,10 +8,15 @@
 - **성격**: 백엔드 없는 **정적 SPA**. GitHub Pages **사용자 페이지**(`gnslalsl12.github.io`)로
   루트 도메인에 배포되므로 Vite `base`는 `/`.
 - **라우트**
-  - `/` — 포트폴리오 (Hero · About · Skills · Projects · Contact)
+  - `/` — 포트폴리오 (Hero · About · Journey(타임라인) · Skills · Projects · Contact).
+    전역 스크롤 진행바(`ScrollProgress`)·우측 섹션 도트 내비(`SectionDots`, 데스크톱) 포함.
   - `/tools` — 도구함 14종 (전부 브라우저 로컬 저장, 설치 불필요)
   - `/blog` · `/blog/:number` · `/blog/write` — 블로그 (목록 / 상세 / 작성·게시, GitHub Issues 기반)
   - `/archive` · `/archive/upload` — 문서 아카이브 (standalone HTML 문서 허브 / 업로드)
+  - `/guestbook` — 방명록 (giscus = GitHub Discussions 기반. `src/pages/Guestbook.tsx`의
+    `GISCUS.repoId`/`categoryId`를 채우기 전엔 설정 안내가 표시됨)
+  - `/2048` — 숨겨진 2048 미니게임 이스터에그 (키보드·WASD·모바일 스와이프, 최고점 localStorage).
+    About 프로필 5탭 시크릿 내비로 진입 가능.
 
 ## 기술 스택
 
