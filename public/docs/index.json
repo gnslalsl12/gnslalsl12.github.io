@@ -1,6 +1,14 @@
 {
   "docs": [
     {
+      "slug": "ios-실기기-빌드-가이드",
+      "title": "iOS 실기기 빌드 가이드",
+      "category": "dev",
+      "description": "",
+      "path": "docs/dev/ios-실기기-빌드-가이드.html",
+      "date": "2026-06-11"
+    },
+    {
       "slug": "이집트-9박-10일-겨울-여행-완전-가이드",
       "title": "이집트 9박 10일 겨울 여행 완전 가이드",
       "category": "travel",
