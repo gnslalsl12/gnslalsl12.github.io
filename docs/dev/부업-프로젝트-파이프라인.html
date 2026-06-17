@@ -1,0 +1,298 @@
+<!doctype html>
+<!-- 최초 생성 일시: 2026-06-17 / 수정 일시: 2026-06-17 / 수정 내용: 최초 작성 -->
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>부업 프로젝트 파이프라인</title>
+<style>
+  :root{
+    --ink:#1b1d26;
+    --paper:#f3f2ec;
+    --card:#ffffff;
+    --line:#e4e1d7;
+    --muted:#6c6f79;
+    --a:#3f54ad;   /* Claude.ai */
+    --b:#1f8a78;   /* 로컬·디자인 */
+    --c:#bf5630;   /* Claude Code */
+    --a-soft:#eef0fb;
+    --b-soft:#e8f5f1;
+    --c-soft:#faefe9;
+    --mono:"SF Mono","JetBrains Mono",ui-monospace,"Cascadia Code",Menlo,Consolas,monospace;
+    --sans:-apple-system,"Segoe UI",system-ui,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:var(--sans); line-height:1.6;
+    padding:40px 20px 64px;
+  }
+  .wrap{max-width:860px; margin:0 auto}
+
+  .eyebrow{
+    font-family:var(--mono); font-size:12px; letter-spacing:.22em;
+    text-transform:uppercase; color:var(--muted); margin:0 0 10px;
+  }
+  h1{
+    font-size:clamp(28px,5vw,40px); line-height:1.1; letter-spacing:-.02em;
+    font-weight:800; margin:0 0 10px;
+  }
+  .lede{font-size:16px; color:#3c3f49; margin:0 0 22px; max-width:60ch}
+
+  .legend{display:flex; flex-wrap:wrap; gap:8px; margin:0 0 36px}
+  .tag{
+    font-family:var(--mono); font-size:12px; font-weight:600;
+    padding:5px 11px; border-radius:999px; border:1px solid transparent;
+    display:inline-flex; align-items:center; gap:7px;
+  }
+  .tag::before{content:""; width:8px; height:8px; border-radius:50%; background:currentColor}
+  .tag.a{color:var(--a); background:var(--a-soft); border-color:#d6dbf3}
+  .tag.b{color:var(--b); background:var(--b-soft); border-color:#cfe9e1}
+  .tag.c{color:var(--c); background:var(--c-soft); border-color:#f1d8cb}
+
+  .stage{
+    --s:var(--ink); background:var(--card);
+    border:1px solid var(--line); border-left:4px solid var(--s);
+    border-radius:12px; padding:20px 22px; margin:0 0 6px;
+  }
+  .stage.a{--s:var(--a)}
+  .stage.b{--s:var(--b)}
+  .stage.c{--s:var(--c)}
+  .stage-head{display:flex; align-items:baseline; gap:10px; margin:0 0 16px; flex-wrap:wrap}
+  .stage-kbd{
+    font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--s); padding:3px 8px;
+    border:1px solid var(--s); border-radius:6px; opacity:.9;
+  }
+  .stage-title{font-size:18px; font-weight:700; margin:0}
+  .stage-env{font-family:var(--mono); font-size:12px; color:var(--muted)}
+
+  .step{display:grid; grid-template-columns:34px 1fr; gap:14px; padding:13px 0; border-top:1px dashed var(--line)}
+  .step:first-of-type{border-top:0; padding-top:2px}
+  .num{
+    font-family:var(--mono); font-weight:700; font-size:15px; color:var(--s);
+    width:34px; height:34px; display:grid; place-items:center;
+    border:1.5px solid var(--s); border-radius:9px; line-height:1;
+  }
+  .step h3{font-size:15.5px; font-weight:700; margin:5px 0 4px}
+  .step p{margin:0 0 8px; color:#3c3f49; font-size:14.5px}
+  .note{font-size:13px; color:var(--muted)}
+  .note b{color:var(--c); font-weight:700}
+
+  .chips{display:flex; flex-wrap:wrap; gap:6px; margin:8px 0 2px}
+  .chip{
+    font-family:var(--mono); font-size:12px; color:#2a2c34;
+    background:#f6f5f0; border:1px solid var(--line); border-radius:6px;
+    padding:3px 8px; white-space:nowrap;
+  }
+  .chip.out{background:#fffaf2; border-color:#ecdcc2}
+  .out-label{font-family:var(--mono); font-size:11px; color:var(--muted); align-self:center; margin-right:2px}
+
+  .arrow{text-align:center; font-family:var(--mono); color:#bdbbb1; font-size:20px; line-height:1; margin:2px 0}
+
+  .ref{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:34px 0 0}
+  .ref-card{background:var(--card); border:1px solid var(--line); border-radius:11px; padding:15px 16px}
+  .ref-card .where{font-family:var(--mono); font-size:12px; font-weight:700; margin:0 0 3px}
+  .ref-card.a .where{color:var(--a)} .ref-card.b .where{color:var(--b)} .ref-card.c .where{color:var(--c)}
+  .ref-card .scope{font-size:12px; color:var(--muted); margin:0 0 11px}
+  .ref-card ul{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:6px}
+  .ref-card li{font-family:var(--mono); font-size:12px; color:#2a2c34; line-height:1.45}
+  .ref-card li span{font-family:var(--sans); color:var(--muted); font-size:11.5px}
+
+  .remember{
+    margin:30px 0 0; background:var(--card); border:1px solid var(--line);
+    border-left:4px solid var(--ink); border-radius:11px; padding:16px 18px;
+  }
+  .remember h2{font-size:14px; font-family:var(--mono); letter-spacing:.04em; margin:0 0 10px; text-transform:uppercase}
+  .remember ol{margin:0; padding-left:20px; display:flex; flex-direction:column; gap:7px}
+  .remember li{font-size:14.5px}
+  .remember li b{font-weight:700}
+
+  h2.section{font-size:13px; font-family:var(--mono); letter-spacing:.06em; text-transform:uppercase; color:var(--muted); margin:34px 0 12px}
+
+  @media (max-width:620px){
+    body{padding:28px 14px 48px}
+    .ref{grid-template-columns:1fr}
+    .step{grid-template-columns:30px 1fr; gap:11px}
+    .num{width:30px; height:30px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="eyebrow">Workflow</p>
+  <h1>부업 프로젝트 파이프라인</h1>
+  <p class="lede">아이디어 하나를 서비스로 — 리서치부터 원격 바이브 코딩까지 9단계. 단계마다 어떤 도구에서, 어떤 파일이 오가는지 한눈에.</p>
+
+  <div class="legend">
+    <span class="tag a">Claude.ai · 브라우저</span>
+    <span class="tag b">로컬 · Claude Design</span>
+    <span class="tag c">Claude Code · 맥북</span>
+  </div>
+
+  <!-- STAGE A -->
+  <section class="stage a">
+    <div class="stage-head">
+      <span class="stage-kbd">Stage A</span>
+      <h2 class="stage-title">기획 · 마스터 프롬프트 생성</h2>
+      <span class="stage-env">Claude.ai 프로젝트 3종</span>
+    </div>
+
+    <div class="step">
+      <div class="num">1</div>
+      <div>
+        <h3>주제 선정</h3>
+        <p>리서치 Claude 프로젝트에서 시장·수요·실현 가능성을 조사하고 주제를 고른다.</p>
+        <div class="chips"><span class="out-label">산출</span><span class="chip out">선정 주제 정의서</span></div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">2</div>
+      <div>
+        <h3>기획 마스터 프롬프트 생성</h3>
+        <p>기획 Claude 프로젝트에 선정 주제 자료를 넣고 기획을 구체화한다.</p>
+        <div class="chips"><span class="out-label">산출</span><span class="chip out">기획 산출물 (PRD 등)</span></div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">3</div>
+      <div>
+        <h3>개발 마스터 프롬프트 생성</h3>
+        <p>개발 Claude 프로젝트에 기획 산출물을 넣으면 개발용 문서 세트가 나온다.</p>
+        <div class="chips">
+          <span class="out-label">산출</span>
+          <span class="chip out">master_prompt.md</span>
+          <span class="chip out">progress.md</span>
+          <span class="chip out">CLAUDE.md 업데이트 명세</span>
+        </div>
+        <p class="note" style="margin-top:8px">CLAUDE.md 파일 자체는 여기서 안 만들어진다 — 8단계에서 생성. 이 자료에 <b>design-system-base.md</b>를 함께 두면 토큰 구조가 매번 일관된다.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="arrow">↓</div>
+
+  <!-- STAGE B -->
+  <section class="stage b">
+    <div class="stage-head">
+      <span class="stage-kbd">Stage B</span>
+      <h2 class="stage-title">폴더 준비 · 디자인</h2>
+      <span class="stage-env">로컬 + Claude Design</span>
+    </div>
+
+    <div class="step">
+      <div class="num">4</div>
+      <div>
+        <h3>새 프로젝트 폴더 만들기 <span style="color:var(--c);font-size:12px;font-family:var(--mono)">＊ 빠뜨리기 쉬움</span></h3>
+        <p>견본을 복사해 새 폴더를 만든다. <b style="color:var(--c)">이후 전부 이 복사본 안에서</b> 진행. 견본 원본은 손대지 않는다.</p>
+        <div class="chips"><span class="chip">cp -r ~/project-template ~/projects/내프로젝트</span></div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">5</div>
+      <div>
+        <h3>Claude Design에서 디자인</h3>
+        <p>master_prompt.md의 <b style="color:var(--b)">Design 부분</b>으로 화면을 디자인한다.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">6</div>
+      <div>
+        <h3>디자인 결과물 배치</h3>
+        <p>결과물을 <b style="color:var(--c)">복사한 프로젝트의</b> <span class="chip" style="display:inline-block">design/</span> 에 넣는다. 견본의 design-system-base.md 옆에 쌓인다.</p>
+        <div class="chips"><span class="chip">INDEX.md</span><span class="chip">tokens.css / tokens.json</span><span class="chip">[Design-N]_*.md</span></div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">7</div>
+      <div>
+        <h3>문서 저장</h3>
+        <p>master_prompt.md와 progress.md를 <b style="color:var(--c)">프로젝트 루트</b>에 둔다. progress.md를 루트에 둬야 슬래시 커맨드가 찾는다.</p>
+        <div class="chips"><span class="chip">/master_prompt.md</span><span class="chip">/progress.md</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="arrow">↓</div>
+
+  <!-- STAGE C -->
+  <section class="stage c">
+    <div class="stage-head">
+      <span class="stage-kbd">Stage C</span>
+      <h2 class="stage-title">개발</h2>
+      <span class="stage-env">Claude Code · 원격 워크트리</span>
+    </div>
+
+    <div class="step">
+      <div class="num">8</div>
+      <div>
+        <h3>에이전트 세팅 → 세션 재시작</h3>
+        <p>Claude Code를 연 뒤 <b>그 안에서</b> agent-team-setup을 실행한다. CLAUDE.md와 .claude/agents가 만들어지면 <b style="color:var(--c)">세션을 재시작</b>해야 인식된다. 견본의 에이전트 2개는 보존하고 프로젝트 고유 에이전트만 추가된다.</p>
+        <div class="chips"><span class="out-label">생성</span><span class="chip out">.claude/CLAUDE.md</span><span class="chip out">.claude/agents/ (db·auth 등)</span></div>
+        <p class="note" style="margin-top:8px">재시작 후 <span class="chip" style="display:inline-block">/agents</span> 로 목록 확인.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">9</div>
+      <div>
+        <h3>개발 진행</h3>
+        <p>master_prompt.md의 Code Phase부터 시작 → 에이전트 기반으로 작업 수행.</p>
+        <div class="chips"><span class="chip">/start</span><span class="chip">/safe-stop</span><span class="chip">/resume</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REFERENCE -->
+  <h2 class="section">어디에 뭐가 사는지</h2>
+  <div class="ref">
+    <div class="ref-card a">
+      <p class="where">~/.claude/</p>
+      <p class="scope">맥북 · 모든 프로젝트 공통</p>
+      <ul>
+        <li>CLAUDE.md <span>공통 규칙</span></li>
+        <li>commands/ <span>/start /safe-stop /resume /precheck /revert</span></li>
+      </ul>
+    </div>
+    <div class="ref-card b">
+      <p class="where">project-template/</p>
+      <p class="scope">복사용 원본 (붕어빵 틀)</p>
+      <ul>
+        <li>.claude/settings.json <span>세션 훅</span></li>
+        <li>.claude/agents/ <span>orchestrator · code-reviewer</span></li>
+        <li>design/design-system-base.md</li>
+        <li>.gitignore</li>
+      </ul>
+    </div>
+    <div class="ref-card c">
+      <p class="where">각 프로젝트 (복사본)</p>
+      <p class="scope">cp 로 만든 실제 작업 폴더</p>
+      <ul>
+        <li>design/ <span>디자인 산출물</span></li>
+        <li>master_prompt.md · progress.md</li>
+        <li>.claude/CLAUDE.md <span>고유 + 업데이트 명세</span></li>
+        <li>.claude/agents/ <span>고유 추가분</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- REMEMBER -->
+  <div class="remember">
+    <h2>꼭 기억할 것</h2>
+    <ol>
+      <li><b>견본은 복사해서 쓴다.</b> design/도, 문서도, 에이전트도 전부 복사본 안에. 원본엔 넣지 않는다.</li>
+      <li><b>progress.md는 프로젝트 루트에.</b> 안 그러면 슬래시 커맨드가 헛돈다.</li>
+      <li><b>에이전트 세팅 후 세션 재시작.</b> 재시작 전엔 새 에이전트가 안 보인다.</li>
+    </ol>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,6 +1,14 @@
 {
   "docs": [
     {
+      "slug": "부업-프로젝트-파이프라인",
+      "title": "CLAUDE 프로젝트 파이프라인",
+      "category": "dev",
+      "description": "",
+      "path": "docs/dev/부업-프로젝트-파이프라인.html",
+      "date": "2026-06-17"
+    },
+    {
       "slug": "ios-실기기-빌드-가이드",
       "title": "iOS 실기기 빌드 가이드",
       "category": "dev",
