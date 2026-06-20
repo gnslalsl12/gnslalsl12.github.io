@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CapCut Mac 데스크톱 가이드</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700;900&family=JetBrains+Mono:wght@500;700&display=swap');
+
+  :root{
+    --bg:#f4f5f9;
+    --panel:#ffffff;
+    --panel-2:#eef0f6;
+    --line:#dde0ea;
+    --ink:#1a1d26;
+    --ink-dim:#545b6e;
+    --ink-faint:#8a91a6;
+    --accent:#6a45f5;      /* 편집 타임라인 보라 */
+    --accent-2:#0b9e7a;    /* 클립 그린 */
+    --warn:#c77a14;
+    --danger:#e03e5f;
+    --keycap:#f7f8fc;
+    --keycap-edge:#c4c9d8;
+    --radius:14px;
+    --max:1080px;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Noto Sans KR',sans-serif;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--accent);color:#fff}
+
+  .tldr,.price-card,.feat,.vlog-item,.kbd-row,.callout,.step,.thr,.table-scroll{
+    box-shadow:0 1px 2px rgba(26,29,38,.04),0 4px 16px -10px rgba(26,29,38,.12);
+  }
+
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding:90px 0 60px;
+    border-bottom:1px solid var(--line);
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;inset:0;
+    background:
+      radial-gradient(700px 320px at 18% -10%, rgba(106,69,245,.12), transparent 60%),
+      radial-gradient(600px 300px at 95% 0%, rgba(11,158,122,.10), transparent 55%);
+    pointer-events:none;
+  }
+  /* 필름 스트립 모티프 */
+  .filmstrip{
+    position:absolute;top:0;left:0;right:0;height:14px;
+    background:
+      repeating-linear-gradient(90deg, var(--accent) 0 10px, transparent 10px 26px);
+    opacity:.35;
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--accent-2);
+    border:1px solid var(--line);
+    background:rgba(34,211,168,.05);
+    padding:7px 14px;border-radius:100px;
+    margin-bottom:26px;
+  }
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--accent-2);box-shadow:0 0 12px var(--accent-2)}
+  h1.title{
+    font-family:'Space Grotesk','Noto Sans KR',sans-serif;
+    font-size:clamp(2.4rem,6vw,4.3rem);
+    font-weight:700;line-height:1.02;letter-spacing:-.02em;
+    margin-bottom:22px;
+  }
+  h1.title .hl{
+    background:linear-gradient(120deg,var(--accent),var(--accent-2));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .lede{font-size:1.12rem;color:var(--ink-dim);max-width:640px;font-weight:300}
+  .meta-row{
+    display:flex;flex-wrap:wrap;gap:10px;margin-top:34px;
+  }
+  .chip{
+    font-family:'JetBrains Mono',monospace;font-size:.74rem;
+    color:var(--ink-dim);background:var(--panel);
+    border:1px solid var(--line);border-radius:8px;
+    padding:8px 13px;
+  }
+  .chip b{color:var(--ink)}
+
+  /* ---------- NAV ---------- */
+  nav.toc{
+    position:sticky;top:0;z-index:50;
+    background:rgba(244,245,249,.85);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.toc .wrap{display:flex;gap:6px;overflow-x:auto;padding-top:12px;padding-bottom:12px}
+  nav.toc a{
+    white-space:nowrap;
+    font-family:'Space Grotesk',sans-serif;font-size:.86rem;font-weight:500;
+    color:var(--ink-dim);text-decoration:none;
+    padding:8px 14px;border-radius:8px;transition:.18s;
+  }
+  nav.toc a:hover{color:var(--ink);background:var(--panel)}
+  nav.toc a .num{font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:.78rem;margin-right:7px}
+
+  /* ---------- SECTION ---------- */
+  section{padding:64px 0;border-bottom:1px solid var(--line)}
+  .sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:34px}
+  .sec-num{
+    font-family:'JetBrains Mono',monospace;font-size:.9rem;font-weight:700;
+    color:var(--accent);border:1px solid var(--line);border-radius:8px;
+    padding:5px 11px;background:var(--panel);flex-shrink:0;
+  }
+  h2{
+    font-family:'Space Grotesk','Noto Sans KR',sans-serif;
+    font-size:clamp(1.6rem,3.4vw,2.3rem);font-weight:700;letter-spacing:-.01em;line-height:1.15;
+  }
+  .sec-sub{color:var(--ink-dim);margin-top:8px;font-weight:300;font-size:1rem}
+  h3{
+    font-family:'Space Grotesk','Noto Sans KR',sans-serif;
+    font-size:1.18rem;font-weight:600;margin:30px 0 14px;
+    display:flex;align-items:center;gap:10px;
+  }
+  h3::before{content:"";width:4px;height:18px;background:var(--accent);border-radius:2px;display:inline-block}
+  p{color:var(--ink-dim);margin-bottom:14px}
+  p strong, li strong{color:var(--ink);font-weight:500}
+
+  /* ---------- TLDR CARDS ---------- */
+  .tldr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .tldr{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:24px;position:relative;overflow:hidden;
+  }
+  .tldr::after{content:"";position:absolute;top:0;left:0;width:100%;height:3px;
+    background:linear-gradient(90deg,var(--accent),var(--accent-2))}
+  .tldr .ic{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.15em;
+    text-transform:uppercase;color:var(--accent-2);margin-bottom:12px}
+  .tldr h4{font-family:'Space Grotesk',sans-serif;font-size:1.05rem;color:var(--ink);margin-bottom:8px}
+  .tldr p{font-size:.92rem;margin:0}
+
+  /* ---------- PRICING ---------- */
+  .price-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:6px}
+  .price-card{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px 20px;display:flex;flex-direction:column;transition:.2s;position:relative;
+  }
+  .price-card.feature{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),0 16px 40px -20px rgba(106,69,245,.5)}
+  .price-card .tier{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:1.05rem;color:var(--ink)}
+  .price-card .badge{position:absolute;top:-10px;right:16px;font-family:'JetBrains Mono',monospace;
+    font-size:.62rem;letter-spacing:.12em;background:var(--accent);color:#fff;padding:4px 9px;border-radius:6px;text-transform:uppercase}
+  .price-card .amt{font-family:'Space Grotesk',sans-serif;font-size:1.7rem;font-weight:700;margin:12px 0 2px;color:var(--ink)}
+  .price-card .amt .per{font-size:.8rem;color:var(--ink-faint);font-weight:400}
+  .price-card .krw{font-family:'JetBrains Mono',monospace;font-size:.74rem;color:var(--accent-2);margin-bottom:14px}
+  .price-card ul{list-style:none;margin-top:auto}
+  .price-card li{font-size:.84rem;color:var(--ink-dim);padding:5px 0 5px 18px;position:relative}
+  .price-card li::before{content:"›";position:absolute;left:0;color:var(--accent);font-weight:700}
+
+  /* ---------- TABLE ---------- */
+  .table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel)}
+  table{width:100%;border-collapse:collapse;min-width:520px}
+  th,td{text-align:left;padding:14px 18px;border-bottom:1px solid var(--line);font-size:.9rem}
+  thead th{
+    font-family:'Space Grotesk',sans-serif;font-weight:600;color:var(--ink);
+    background:var(--panel-2);position:sticky;top:0;
+  }
+  thead th:first-child{color:var(--ink-dim);font-weight:500}
+  tbody td:first-child{color:var(--ink);font-weight:500}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr:hover{background:var(--panel-2)}
+  td.yes{color:var(--accent-2);font-weight:600}
+  td.no{color:var(--ink-faint)}
+  .free-col{color:var(--ink-dim)}
+  .pro-col{color:var(--ink)}
+
+  /* ---------- FEATURE GRID ---------- */
+  .feat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  .feat{
+    background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px 22px;
+  }
+  .feat .label{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.12em;
+    color:var(--accent-2);text-transform:uppercase;margin-bottom:9px}
+  .feat h4{font-family:'Space Grotesk','Noto Sans KR',sans-serif;font-size:1.02rem;color:var(--ink);margin-bottom:6px}
+  .feat p{font-size:.88rem;margin:0}
+
+  /* vlog highlight */
+  .vlog-list{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:4px}
+  .vlog-item{
+    display:flex;gap:14px;align-items:flex-start;
+    background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent-2);
+    border-radius:10px;padding:16px 18px;
+  }
+  .vlog-item .vn{font-family:'JetBrains Mono',monospace;font-size:.9rem;color:var(--accent-2);font-weight:700;flex-shrink:0}
+  .vlog-item h4{font-size:.96rem;color:var(--ink);margin-bottom:3px;font-family:'Noto Sans KR',sans-serif;font-weight:500}
+  .vlog-item p{font-size:.84rem;margin:0}
+
+  /* ---------- KEYCAPS (signature) ---------- */
+  .kbd-group{margin-bottom:30px}
+  .kbd-group .gtitle{
+    font-family:'JetBrains Mono',monospace;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink-faint);margin-bottom:14px;display:flex;align-items:center;gap:12px;
+  }
+  .kbd-group .gtitle::after{content:"";flex:1;height:1px;background:var(--line)}
+  .kbd-rows{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+  .kbd-row{
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+    background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:11px 16px;
+  }
+  .kbd-row .desc{font-size:.9rem;color:var(--ink-dim)}
+  .keys{display:flex;gap:5px;align-items:center;flex-shrink:0}
+  kbd{
+    font-family:'JetBrains Mono',monospace;font-size:.78rem;font-weight:700;color:var(--ink);
+    background:linear-gradient(180deg,#ffffff,var(--keycap));
+    border:1px solid #ccd1de;
+    border-bottom:3px solid var(--keycap-edge);
+    border-radius:7px;padding:5px 9px;min-width:30px;text-align:center;
+    box-shadow:0 1px 0 rgba(255,255,255,.7) inset;
+  }
+  .keys .plus{color:var(--ink-faint);font-size:.7rem}
+
+  /* ---------- POLICY / CALLOUT ---------- */
+  .callout{
+    display:flex;gap:16px;background:var(--panel);border:1px solid var(--line);
+    border-radius:var(--radius);padding:22px 24px;margin:16px 0;
+  }
+  .callout.warn{border-left:3px solid var(--warn)}
+  .callout.tip{border-left:3px solid var(--accent-2)}
+  .callout.alert{border-left:3px solid var(--danger)}
+  .callout . co-ic{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.1rem;flex-shrink:0;width:30px}
+  .callout.warn .co-ic{color:var(--warn)}
+  .callout.tip .co-ic{color:var(--accent-2)}
+  .callout.alert .co-ic{color:var(--danger)}
+  .callout p{margin:0;font-size:.92rem}
+  .callout p+p{margin-top:8px}
+
+  /* recommend steps */
+  .steps{counter-reset:s;display:grid;gap:10px;margin-top:6px}
+  .step{
+    display:flex;gap:16px;align-items:flex-start;
+    background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:15px 18px;
+  }
+  .step::before{
+    counter-increment:s;content:counter(s,decimal-leading-zero);
+    font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--accent);
+    font-size:.82rem;flex-shrink:0;padding-top:1px;
+  }
+  .step p{margin:0;font-size:.92rem;color:var(--ink-dim)}
+  .step b{color:var(--ink)}
+
+  /* threshold cards */
+  .thr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:8px}
+  .thr{background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:20px}
+  .thr .tn{font-family:'JetBrains Mono',monospace;color:var(--accent);font-weight:700;font-size:.9rem;margin-bottom:8px}
+  .thr p{font-size:.88rem;margin:0}
+
+  ul.clean{list-style:none;display:grid;gap:9px;margin-top:4px}
+  ul.clean li{padding-left:22px;position:relative;color:var(--ink-dim);font-size:.94rem}
+  ul.clean li::before{content:"▸";position:absolute;left:0;color:var(--accent)}
+
+  /* ---------- FOOTER ---------- */
+  footer{padding:48px 0 70px;color:var(--ink-faint);font-size:.82rem}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:center}
+  footer .sources{font-family:'JetBrains Mono',monospace;line-height:1.9}
+  footer a{color:var(--ink-dim);text-decoration:none}
+  footer a:hover{color:var(--accent-2)}
+
+  .disclaimer{
+    background:var(--panel);border:1px dashed var(--line);border-radius:12px;
+    padding:18px 22px;margin-top:24px;font-size:.84rem;color:var(--ink-faint);line-height:1.7;
+  }
+  .disclaimer b{color:var(--ink-dim)}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:860px){
+    .tldr-grid,.price-grid,.feat-grid,.vlog-list,.kbd-rows,.thr-grid{grid-template-columns:1fr}
+    .price-grid{grid-template-columns:repeat(2,1fr)}
+  }
+  @media(max-width:560px){
+    .price-grid{grid-template-columns:1fr}
+    .hero{padding:64px 0 44px}
+    section{padding:48px 0}
+    .sec-head{flex-direction:column;gap:10px}
+  }
+  @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="filmstrip"></div>
+  <div class="wrap">
+    <span class="eyebrow"><span class="dot"></span>CapCut · Mac Desktop · 2026 기준</span>
+    <h1 class="title">여행 브이로그를 위한<br><span class="hl">CapCut Mac</span> 편집 가이드</h1>
+    <p class="lede">요금제 차이부터 핵심 편집 기능, 그리고 실제 키캡으로 정리한 Mac 단축키까지. 리서치 결과를 한 문서에 담았습니다.</p>
+    <div class="meta-row">
+      <span class="chip">버전 · <b>Mac 데스크톱</b></span>
+      <span class="chip">기준 · <b>2026년 중반</b></span>
+      <span class="chip">용도 · <b>여행 브이로그</b></span>
+      <span class="chip">요금제 · <b>4단계 개편 반영</b></span>
+    </div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap">
+    <a href="#tldr"><span class="num">00</span>요약</a>
+    <a href="#pricing"><span class="num">01</span>요금제</a>
+    <a href="#compare"><span class="num">02</span>무료 vs Pro</a>
+    <a href="#features"><span class="num">03</span>기본 기능</a>
+    <a href="#vlog"><span class="num">04</span>브이로그 기능</a>
+    <a href="#shortcuts"><span class="num">05</span>단축키</a>
+    <a href="#policy"><span class="num">06</span>정책·약관</a>
+    <a href="#reco"><span class="num">07</span>추천 전략</a>
+  </div>
+</nav>
+
+<!-- 00 TLDR -->
+<section id="tldr">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">00</span>
+      <div><h2>한눈에 보기</h2><p class="sec-sub">바쁘다면 이 세 가지만 기억하세요.</p></div>
+    </div>
+    <div class="tldr-grid">
+      <div class="tldr">
+        <div class="ic">Pricing</div>
+        <h4>요금제 4단계로 개편</h4>
+        <p>무료 / Standard($9.99) / Pro($19.99·₩19,800) / Team($24.99)으로 재편. Mac에서 4K 브이로그를 다룬다면 사실상 <strong>무료 또는 Pro</strong> 둘 중 하나입니다.</p>
+      </div>
+      <div class="tldr">
+        <div class="ic">Features</div>
+        <h4>무료로도 충분히 강력</h4>
+        <p>멀티트랙·키프레임·색보정·손떨림 보정·자동 자막까지 무료에서 가능. 순수 무료 자산만 쓰면 <strong>워터마크도 없습니다.</strong></p>
+      </div>
+      <div class="tldr">
+        <div class="ic">Shortcuts</div>
+        <h4>Mac은 Cmd 중심</h4>
+        <p>Windows의 Ctrl 자리에 Cmd. 핵심 4개는 <strong>Space · ⌘B · Delete · ⌘Z</strong>. 여기에 J/K/L 셔틀만 더하면 됩니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 01 PRICING -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">01</span>
+      <div><h2>요금제 (2025–2026 최신)</h2><p class="sec-sub">2026년 초 개편으로 구 Pro가 둘로 쪼개졌습니다.</p></div>
+    </div>
+
+    <div class="price-grid">
+      <div class="price-card">
+        <span class="tier">Free</span>
+        <span class="amt">₩0</span>
+        <span class="krw">무료</span>
+        <ul>
+          <li>1080p 내보내기</li>
+          <li>멀티트랙·키프레임</li>
+          <li>크로마키·속도 조절</li>
+          <li>일반 편집 워터마크 없음</li>
+        </ul>
+      </div>
+      <div class="price-card">
+        <span class="tier">Standard</span>
+        <span class="amt">$9.99<span class="per">/월</span></span>
+        <span class="krw">모바일 중심 · 월간만</span>
+        <ul>
+          <li>구 Pro 개명 버전</li>
+          <li>수동 편집 위주</li>
+          <li>4K·전체 AI 미포함</li>
+          <li>데스크톱 동기화 제한</li>
+        </ul>
+      </div>
+      <div class="price-card feature">
+        <span class="badge">Mac 권장</span>
+        <span class="tier">Pro</span>
+        <span class="amt">$19.99<span class="per">/월</span></span>
+        <span class="krw">₩19,800/월 · ₩178,000/년</span>
+        <ul>
+          <li>4K·HDR·60fps 내보내기</li>
+          <li>전체 AI 툴킷</li>
+          <li>클라우드 약 1TB</li>
+          <li>월 1,200 AI 크레딧</li>
+        </ul>
+      </div>
+      <div class="price-card">
+        <span class="tier">Team</span>
+        <span class="amt">$24.99<span class="per">/인·월</span></span>
+        <span class="krw">협업용</span>
+        <ul>
+          <li>공유 워크스페이스</li>
+          <li>브랜드킷</li>
+          <li>팀 협업 기능</li>
+          <li>월간 결제</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <span class="co-ic">!</span>
+      <div>
+        <p><strong>갱신가 인상 주의.</strong> 개편으로 연간 Pro가 약 $77.99 → $179.99로 100% 이상 올랐습니다. 구 플랜 연간 가입자도 갱신 시 새 요금이 적용됩니다.</p>
+        <p><strong>결제는 웹/데스크톱에서.</strong> 앱스토어 인앱 구독은 플랫폼 수수료로 $21.99~$22.99/월로 더 비쌉니다. 연간 결제 시 약 25% 절약, 학생은 .edu 인증으로 50% 할인.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 COMPARE -->
+<section id="compare">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">02</span>
+      <div><h2>무료 vs Pro</h2><p class="sec-sub">브이로그 편집 관점에서 실제로 갈리는 지점들.</p></div>
+    </div>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th>항목</th><th>무료 (Free)</th><th>Pro</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>내보내기 해상도</td><td class="free-col">1080p</td><td class="pro-col">4K(3840×2160)·HDR·60fps</td></tr>
+          <tr><td>워터마크</td><td class="free-col">일반 편집은 없음 / Pro 자산 사용 시 부착</td><td class="yes">전부 제거</td></tr>
+          <tr><td>클라우드 저장</td><td class="no">없음 (2024.8 무료 1GB 폐지)</td><td class="pro-col">약 1TB</td></tr>
+          <tr><td>AI 자동 편집</td><td class="free-col">월 5회</td><td class="yes">무제한</td></tr>
+          <tr><td>자동 자막</td><td class="free-col">영상당 10분</td><td class="yes">무제한</td></tr>
+          <tr><td>배경 제거</td><td class="free-col">월 5회</td><td class="yes">무제한</td></tr>
+          <tr><td>모션·카메라 트래킹 / 보컬 분리</td><td class="no">✕</td><td class="yes">○</td></tr>
+          <tr><td>프리미엄 템플릿·효과·폰트</td><td class="free-col">일부 잠금</td><td class="yes">전체</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout tip">
+      <span class="co-ic">i</span>
+      <div><p><strong>무료 내보내기 제한 메모.</strong> Pro 자산(프리미엄 템플릿·AI 효과)을 쓴 무료 사용자는 주당 export가 제한(보고에 따라 3~6회)되고 초과 시 워터마크가 붙습니다. 다만 이는 공식 단일 정책이 아니며, 순수 무료 자산만 쓴 편집은 횟수 제한 없이 워터마크 없이 내보내진다는 보고도 있습니다. 웹 버전은 제한이 없다는 보고도 있어 진화 중인 정책으로 보는 게 맞습니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 FEATURES -->
+<section id="features">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">03</span>
+      <div><h2>Mac 데스크톱 기본 기능</h2><p class="sec-sub">카테고리별로 정리한 핵심 편집 도구.</p></div>
+    </div>
+    <div class="feat-grid">
+      <div class="feat">
+        <div class="label">Timeline</div>
+        <h4>타임라인 편집</h4>
+        <p>분할(Split), 트림, 좌/우 삭제(Q/W), 속도 조절·속도 곡선, 멀티트랙, 컴파운드 클립·그룹화.</p>
+      </div>
+      <div class="feat">
+        <div class="label">Text</div>
+        <h4>텍스트·자막</h4>
+        <p>수동 텍스트, 자동 자막(AI 음성 인식 후 동기화), 스타일 자막, SRT 내보내기, 다국어 번역.</p>
+      </div>
+      <div class="feat">
+        <div class="label">Transitions</div>
+        <h4>전환·필터·효과</h4>
+        <p>Smooth·Glitch·Zoom·Wipe 전환, 필름·드리미·글리치 효과, 프리셋 필터.</p>
+      </div>
+      <div class="feat">
+        <div class="label">Audio</div>
+        <h4>오디오 편집</h4>
+        <p>무료 음악·사운드 이펙트, 노이즈 제거, 보컬 분리, 오디오 추출, 페이드·볼륨 키프레임, 비트 동기화.</p>
+      </div>
+      <div class="feat">
+        <div class="label">AI Tools</div>
+        <h4>AI 기능</h4>
+        <p>오토컷, 배경 제거(Auto Cutout), 크로마키, 모션 트래킹, 오토 리프레임, 손떨림 보정, TTS, AI 아바타.</p>
+      </div>
+      <div class="feat">
+        <div class="label">Color</div>
+        <h4>색보정</h4>
+        <p>컬러휠, 커브, HSL, LUT 임포트, AI 컬러 보정, 컬러 매치, 화이트밸런스.</p>
+      </div>
+      <div class="feat">
+        <div class="label">Keyframe</div>
+        <h4>키프레임 애니메이션</h4>
+        <p>위치·스케일·회전·불투명도·색상 애니메이션. Alt+K로 패널 표시, 속도 곡선과 결합.</p>
+      </div>
+      <div class="feat">
+        <div class="label">Format</div>
+        <h4>고해상도 푸티지</h4>
+        <p>4K·GoPro·드론 푸티지 지원. 멀티트랙으로 B-roll·내레이션·음악을 레이어링.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 VLOG -->
+<section id="vlog">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">04</span>
+      <div><h2>여행 브이로그에 특히 유용한 기능</h2><p class="sec-sub">현장 촬영본을 살리는 도구 모음.</p></div>
+    </div>
+    <div class="vlog-list">
+      <div class="vlog-item">
+        <span class="vn">01</span>
+        <div><h4>손떨림 보정 (Stabilizer)</h4><p>핸드헬드·걷기 영상용. Recommended / Minimum cut / Most stable 모드 제공.</p></div>
+      </div>
+      <div class="vlog-item">
+        <span class="vn">02</span>
+        <div><h4>오토 리프레임</h4><p>16:9 → 9:16 등 플랫폼별 자동 재구성. 안정화·카메라 이동 속도 조절 포함.</p></div>
+      </div>
+      <div class="vlog-item">
+        <span class="vn">03</span>
+        <div><h4>비트 동기화</h4><p>음악 비트에 컷을 맞춰 리드미컬한 몽타주를 빠르게 완성.</p></div>
+      </div>
+      <div class="vlog-item">
+        <span class="vn">04</span>
+        <div><h4>색보정·LUT</h4><p>시네마틱 룩, 여러 클립 컬러 매치로 영상 전체의 톤을 일관되게 유지.</p></div>
+      </div>
+      <div class="vlog-item">
+        <span class="vn">05</span>
+        <div><h4>자동 자막 + TTS</h4><p>현장 음성이 없는 장면에 내레이션과 자막을 자동으로 입힘.</p></div>
+      </div>
+      <div class="vlog-item">
+        <span class="vn">06</span>
+        <div><h4>멀티트랙 레이어링</h4><p>B-roll·내레이션·텍스트·음악을 별도 트랙으로 분리해 구조적으로 편집.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 SHORTCUTS -->
+<section id="shortcuts">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">05</span>
+      <div><h2>Mac 단축키</h2><p class="sec-sub">Windows의 Ctrl 자리에 Cmd를 씁니다. 앱 내 Help &gt; Shortcut에서 직접 확인·변경 가능.</p></div>
+    </div>
+
+    <div class="kbd-group">
+      <div class="gtitle">파일 · 편집 기본</div>
+      <div class="kbd-rows">
+        <div class="kbd-row"><span class="desc">새 프로젝트</span><span class="keys"><kbd>⌘</kbd><span class="plus">+</span><kbd>N</kbd></span></div>
+        <div class="kbd-row"><span class="desc">저장</span><span class="keys"><kbd>⌘</kbd><span class="plus">+</span><kbd>S</kbd></span></div>
+        <div class="kbd-row"><span class="desc">실행취소</span><span class="keys"><kbd>⌘</kbd><span class="plus">+</span><kbd>Z</kbd></span></div>
+        <div class="kbd-row"><span class="desc">재실행</span><span class="keys"><kbd>⌘</kbd><span class="plus">+</span><kbd>⇧</kbd><span class="plus">+</span><kbd>Z</kbd></span></div>
+        <div class="kbd-row"><span class="desc">복사 / 붙여넣기</span><span class="keys"><kbd>⌘</kbd><span class="plus">+</span><kbd>C/V</kbd></span></div>
+        <div class="kbd-row"><span class="desc">삭제</span><span class="keys"><kbd>Delete</kbd></span></div>
+      </div>
+    </div>
+
+    <div class="kbd-group">
+      <div class="gtitle">타임라인 · 편집</div>
+      <div class="kbd-rows">
+        <div class="kbd-row"><span class="desc">분할 (Split)</span><span class="keys"><kbd>⌘</kbd><span class="plus">+</span><kbd>B</kbd></span></div>
+        <div class="kbd-row"><span class="desc">전체 트랙 분할</span><span class="keys"><kbd>⌘</kbd><span class="plus">+</span><kbd>⇧</kbd><span class="plus">+</span><kbd>B</kbd></span></div>
+        <div class="kbd-row"><span class="desc">속도 패널</span><span class="keys"><kbd>⌘</kbd><span class="plus">+</span><kbd>R</kbd></span></div>
+        <div class="kbd-row"><span class="desc">키프레임 추가</span><span class="keys"><kbd>⌘</kbd><span class="plus">+</span><kbd>⇧</kbd><span class="plus">+</span><kbd>L</kbd></span></div>
+        <div class="kbd-row"><span class="desc">그룹 / 해제</span><span class="keys"><kbd>⌘</kbd><span class="plus">+</span><kbd>G</kbd></span></div>
+        <div class="kbd-row"><span class="desc">왼쪽 삭제 / 오른쪽 삭제</span><span class="keys"><kbd>Q</kbd><span class="plus">/</span><kbd>W</kbd></span></div>
+      </div>
+    </div>
+
+    <div class="kbd-group">
+      <div class="gtitle">모드 전환</div>
+      <div class="kbd-rows">
+        <div class="kbd-row"><span class="desc">선택 모드</span><span class="keys"><kbd>A</kbd></span></div>
+        <div class="kbd-row"><span class="desc">분할(블레이드) 모드</span><span class="keys"><kbd>B</kbd></span></div>
+        <div class="kbd-row"><span class="desc">클립 활성 / 비활성</span><span class="keys"><kbd>V</kbd></span></div>
+        <div class="kbd-row"><span class="desc">키프레임 패널</span><span class="keys"><kbd>⌥</kbd><span class="plus">+</span><kbd>K</kbd></span></div>
+      </div>
+    </div>
+
+    <div class="kbd-group">
+      <div class="gtitle">재생 · 탐색</div>
+      <div class="kbd-rows">
+        <div class="kbd-row"><span class="desc">재생 / 정지</span><span class="keys"><kbd>Space</kbd></span></div>
+        <div class="kbd-row"><span class="desc">셔틀 역방향 / 정지 / 정방향</span><span class="keys"><kbd>J</kbd><kbd>K</kbd><kbd>L</kbd></span></div>
+        <div class="kbd-row"><span class="desc">이전 / 다음 프레임</span><span class="keys"><kbd>←</kbd><kbd>→</kbd></span></div>
+        <div class="kbd-row"><span class="desc">이전 / 다음 컷</span><span class="keys"><kbd>↑</kbd><kbd>↓</kbd></span></div>
+        <div class="kbd-row"><span class="desc">첫 / 마지막 프레임</span><span class="keys"><kbd>Home</kbd><kbd>End</kbd></span></div>
+        <div class="kbd-row"><span class="desc">In점 / Out점</span><span class="keys"><kbd>I</kbd><kbd>O</kbd></span></div>
+      </div>
+    </div>
+
+    <div class="kbd-group">
+      <div class="gtitle">줌 · 마커 · 스내핑</div>
+      <div class="kbd-rows">
+        <div class="kbd-row"><span class="desc">줌인 / 줌아웃</span><span class="keys"><kbd>⌃</kbd><span class="plus">+</span><kbd>+</kbd><span class="plus">/</span><kbd>−</kbd></span></div>
+        <div class="kbd-row"><span class="desc">타임라인 맞춤</span><span class="keys"><kbd>⇧</kbd><span class="plus">+</span><kbd>Z</kbd></span></div>
+        <div class="kbd-row"><span class="desc">마커 추가</span><span class="keys"><kbd>M</kbd></span></div>
+        <div class="kbd-row"><span class="desc">오토 스내핑</span><span class="keys"><kbd>N</kbd></span></div>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <span class="co-ic">★</span>
+      <div><p><strong>입문 추천 순서.</strong> 먼저 <kbd style="font-size:.7rem">Space</kbd> · <kbd style="font-size:.7rem">⌘B</kbd> · <kbd style="font-size:.7rem">Delete</kbd> · <kbd style="font-size:.7rem">⌘Z</kbd> 네 개에 손을 익히고, 그다음 J/K/L 셔틀과 ← → 프레임 이동으로 정밀 컷을 잡으세요.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 POLICY -->
+<section id="policy">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">06</span>
+      <div><h2>정책·약관 (2026 확인 결과)</h2><p class="sec-sub">소유권과 데이터 관련 배경 정리.</p></div>
+    </div>
+    <ul class="clean">
+      <li>CapCut은 ByteDance 소유. 2025년 1월 미국에서 TikTok과 함께 일시 삭제됐다가 행정명령으로 복귀했습니다.</li>
+      <li><strong>2026년 1월 22일</strong> TikTok USDS 합작법인 거래가 종결되며 CapCut도 동일한 세이프가드 하에 들어가 법적 압력이 완화됐습니다. 2026년 중반 현재 미국에서 사용 가능합니다.</li>
+      <li>인도에서는 2020년 6월부터 영구 금지 상태가 유지됩니다.</li>
+    </ul>
+    <div class="callout alert">
+      <span class="co-ic">!</span>
+      <div>
+        <p><strong>약관 논쟁.</strong> 2025년 6월 발효된 약관을 두고 ByteDance에 광범위한 콘텐츠 사용 권리를 부여한다는 분석이 제기됐습니다.</p>
+        <p>이에 대해 CapCut은 사용자 생성 콘텐츠 조항이나 콘텐츠 사용 방식에는 수년간 변화가 없었다고 공식 반박했습니다. 양측 입장이 상충하므로, 민감한 클라이언트 작업 시에는 이 논쟁을 인지하고 완성본을 별도 보관하는 편이 안전합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 RECO -->
+<section id="reco">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">07</span>
+      <div><h2>추천 전략 &amp; 워크플로</h2><p class="sec-sub">언제 Pro로 넘어갈지, 어떤 순서로 편집할지.</p></div>
+    </div>
+
+    <h3>지금은 무료로 시작하고, 이 임계점에서 Pro로</h3>
+    <div class="thr-grid">
+      <div class="thr"><div class="tn">A</div><p><strong>4K 내보내기</strong>가 필요할 때 (대형 화면·유튜브 장편)</p></div>
+      <div class="thr"><div class="tn">B</div><p><strong>자동 자막·배경 제거</strong>를 매주 반복해 무료 한도(월 5회/영상당 10분)에 부딪힐 때</p></div>
+      <div class="thr"><div class="tn">C</div><p><strong>프리미엄 템플릿·효과</strong>를 워터마크 없이 쓰고 싶을 때</p></div>
+    </div>
+
+    <h3>여행 브이로그 편집 순서</h3>
+    <div class="steps">
+      <div class="step"><p>클립을 <b>위치·날짜별 폴더</b>로 정리한 뒤 임포트</p></div>
+      <div class="step"><p><b>⌘B</b>로 거친 컷을 정리하고 <b>Q/W</b>로 불필요한 부분 삭제</p></div>
+      <div class="step"><p>트랙 라벨링 — <b>B-roll·내레이션·텍스트</b>를 별도 트랙으로 분리</p></div>
+      <div class="step"><p><b>비트 동기화</b>로 음악에 컷 맞추기</p></div>
+      <div class="step"><p><b>색보정·LUT</b>로 영상 전체의 일관된 룩 만들기</p></div>
+      <div class="step"><p><b>자동 자막 + 위치 타이틀 카드</b> 추가</p></div>
+      <div class="step"><p><b>손떨림 보정·오토 리프레임</b> 적용 후 내보내기</p></div>
+    </div>
+
+    <div class="callout tip">
+      <span class="co-ic">✓</span>
+      <div>
+        <p><strong>결제 팁.</strong> 웹/데스크톱 결제가 앱스토어보다 저렴하고, 연간 결제 시 약 25% 절약됩니다. 학생은 50% 할인을 확인하세요.</p>
+        <p><strong>백업 습관.</strong> 정책·약관 불확실성과 무료 클라우드 폐지를 감안해, 완성본은 항상 로컬로 내보내 별도 보관하세요.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div class="disclaimer">
+        <b>참고 사항.</b> CapCut 공식 도움말은 지역·기기·프로모션에 따라 가격이 다르다며 고정 가격을 게시하지 않습니다. 달러 수치를 명시한 공식 자료는 "Standard vs Pro" 가이드($19.99 Pro·$179.99/년·약 $24.99 Team)이며, $9.99 Standard와 한국 원화 가격은 2차 출처 기반이라 실시간 결제창에서 확인이 필요합니다. 무료 export 제한 수치(주 3~6회)는 공식 단일 정책이 아닌 사용자 보고이며, 단축키는 버전 업데이트로 달라질 수 있어 앱 내 Help &gt; Shortcut에서 최신값 확인을 권장합니다.
+      </div>
+    </div>
+    <div class="sources">
+      출처 · CapCut 공식 · GamsGo · Flowith · Webeeky<br>
+      tutorialtactic · hotkeyguru · Newsweek · Alibaba Insights<br>
+      <span style="color:var(--ink-faint)">정리 기준 · 2026년 6월</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

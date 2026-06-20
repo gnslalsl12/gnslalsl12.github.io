@@ -1,6 +1,14 @@
 {
   "docs": [
     {
+      "slug": "capcut-mac-데스크톱-가이드",
+      "title": "CapCut Mac 데스크톱 가이드",
+      "category": "dev",
+      "description": "",
+      "path": "docs/dev/capcut-mac-데스크톱-가이드.html",
+      "date": "2026-06-20"
+    },
+    {
       "slug": "부업-프로젝트-파이프라인",
       "title": "CLAUDE 프로젝트 파이프라인",
       "category": "dev",
