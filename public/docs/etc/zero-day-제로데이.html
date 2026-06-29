@@ -12,6 +12,17 @@
   --void:#060912;--void2:#0a1020;--cyan:#16f0e0;--magenta:#ff2d95;--purple:#9b6bff;
   --warn:#ffcf2d;--danger:#ff3a55;--green:#4fe0c0;--ink:#dff6ff;--muted:#5d7d92;--line:rgba(22,240,224,.18);
 }
+/* ===== 캐릭터별 풀 리스킨 테마 (블랙햇 = 기본/:root) ===== */
+body.theme-ghost{--void:#08060f;--void2:#0e0a1e;--cyan:#8b7bff;--magenta:#ff4d9a;--purple:#c79bff;--danger:#ff4d6d;--green:#7c8cff;--ink:#e9e3ff;--muted:#7a6f9c;--line:rgba(139,123,255,.20)}
+body.theme-ghost .void{background:radial-gradient(120% 80% at 50% 6%,#1a1133 0%,var(--void2) 38%,var(--void) 75%)}
+body.theme-ghost .card.exploit{--c:#ff4d6d;--cb:rgba(255,77,109,.55);--cf:rgba(255,77,109,.15);--ch:rgba(255,77,109,.24)}
+body.theme-ghost .card.script{--c:#8b7bff;--cb:rgba(139,123,255,.55);--cf:rgba(139,123,255,.14);--ch:rgba(139,123,255,.24)}
+body.theme-ghost .card.daemon{--c:#c79bff;--cb:rgba(199,155,255,.6);--cf:rgba(199,155,255,.18);--ch:rgba(199,155,255,.26)}
+body.theme-daemon{--void:#050a07;--void2:#08140d;--cyan:#3fe0b0;--magenta:#ffb24d;--purple:#9be36a;--danger:#ff7a3a;--green:#3fe0b0;--ink:#e6fff2;--muted:#5f8d72;--line:rgba(63,224,176,.20)}
+body.theme-daemon .void{background:radial-gradient(120% 80% at 50% 6%,#0a2417 0%,var(--void2) 38%,var(--void) 75%)}
+body.theme-daemon .card.exploit{--c:#ff9d3a;--cb:rgba(255,157,58,.55);--cf:rgba(255,157,58,.15);--ch:rgba(255,157,58,.24)}
+body.theme-daemon .card.script{--c:#3fe0b0;--cb:rgba(63,224,176,.55);--cf:rgba(63,224,176,.13);--ch:rgba(63,224,176,.22)}
+body.theme-daemon .card.daemon{--c:#9be36a;--cb:rgba(155,227,106,.6);--cf:rgba(155,227,106,.16);--ch:rgba(155,227,106,.26)}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%}
 body{background:var(--void);color:var(--ink);font-family:'Share Tech Mono',ui-monospace,'Courier New',monospace;overflow:hidden;position:relative}
@@ -57,13 +68,21 @@ header{display:flex;align-items:baseline;justify-content:space-between;gap:8px;p
 .sk-name{font-size:13px;color:#fff;font-weight:700}
 .sk-now{font-family:'Orbitron';font-size:8px;color:#04121a;background:var(--danger);padding:2px 6px;border-radius:3px;margin-left:6px;vertical-align:1px}
 .sk-eff{flex:0 0 auto;font-size:11px;color:#9fc0d4;text-align:right}
-.ice{position:relative;width:128px;height:128px;display:grid;place-items:center;margin:2px 0 12px}
-.ice i{position:absolute;border:2px solid;border-radius:6px;inset:0;margin:auto}
-.ice .r1{width:108px;height:108px;border-color:var(--magenta);box-shadow:0 0 22px rgba(255,45,149,.45),inset 0 0 18px rgba(255,45,149,.25);animation:spin 9s linear infinite}
-.ice .r2{width:74px;height:74px;border-color:var(--cyan);box-shadow:0 0 18px rgba(22,240,224,.5),inset 0 0 14px rgba(22,240,224,.3);animation:spin 6s linear infinite reverse}
-.ice .core{position:absolute;width:26px;height:26px;background:var(--ink);border:0;border-radius:3px;box-shadow:0 0 24px var(--cyan),0 0 40px var(--magenta);animation:pulse 1.6s ease-in-out infinite}
+.ice{position:relative;display:grid;place-items:center;margin:2px 0 12px;min-height:150px;color:var(--c,#16f0e0);transition:color .3s}
+.ice svg{display:block;filter:drop-shadow(0 0 4px color-mix(in srgb,currentColor 70%,transparent))}
+.ice.r-normal svg{width:120px;height:120px}
+.ice.r-elite svg{width:134px;height:134px}
+.ice.r-boss svg{width:150px;height:150px}
+.ice.enraged svg{filter:drop-shadow(0 0 9px color-mix(in srgb,currentColor 85%,#fff))}
+.ice .ring-o{transform-origin:50px 50px;animation:spin 15s linear infinite}
+.ice .ring-i{transform-origin:50px 50px;animation:spin 9s linear infinite reverse}
+.ice .ring-m{transform-origin:50px 50px;animation:spin 26s linear infinite}
+.ice .sigil{transform-origin:50px 50px;animation:breathe 3.4s ease-in-out infinite}
+.ice .coreglow{transform-origin:50px 50px;animation:pulse 1.9s ease-in-out infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes pulse{0%,100%{transform:scale(1);opacity:.95}50%{transform:scale(.7);opacity:.6}}
+@keyframes breathe{0%,100%{opacity:.92}50%{opacity:.6}}
+@media(prefers-reduced-motion:reduce){.ice .ring-o,.ice .ring-i,.ice .ring-m,.ice .sigil,.ice .coreglow{animation:none}}
 .ename{font-size:11px;color:var(--muted);letter-spacing:.13em;margin-bottom:6px;text-align:center}
 
 /* bars */
@@ -80,6 +99,16 @@ header{display:flex;align-items:baseline;justify-content:space-between;gap:8px;p
 .chip.exp{color:#ffb3c8;border-color:var(--magenta);background:rgba(255,45,149,.12)}
 .chip.jam{color:#cdd6ff;border-color:#6b78ff;background:rgba(107,120,255,.12)}
 .chip.ovc{color:#ffe39a;border-color:var(--warn);background:rgba(255,207,45,.12)}
+.chip.leak{color:#9be38a;border-color:#6fcf5a;background:rgba(111,207,90,.12)}
+.daemonbar{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-start;padding:0 4px;margin:3px 0 0}
+.dchip{display:inline-flex;align-items:center;gap:4px;font-size:10px;padding:3px 9px;border-radius:20px;border:1px solid #4fe0c0;color:#cdeee6;background:rgba(79,224,192,.1)}
+.dchip .di{font-size:11px}
+.ic-svg{width:1em;height:1em;display:inline-block;vertical-align:-0.14em}
+.relic .ic-svg{width:16px;height:16px;vertical-align:middle}
+.ch-icon .ic-svg{width:27px;height:27px}
+.kic{margin-right:6px}
+.hrow .k .ic-svg{width:15px;height:15px}
+.dchip b{color:#eafffb;font-family:'Orbitron';font-size:9px}
 
 .mid{flex:1 1 auto;display:flex;align-items:center;justify-content:center;position:relative;min-height:10px;padding:6px 8px}
 
@@ -124,6 +153,40 @@ header{display:flex;align-items:baseline;justify-content:space-between;gap:8px;p
 .card.exploit::before{background:repeating-linear-gradient(0deg,var(--c) 0 6px,transparent 6px 9px)}
 .card.script::before{background:repeating-linear-gradient(0deg,var(--c) 0 2px,transparent 2px 4px)}
 .card.daemon::before{background:linear-gradient(90deg,var(--c) 0 1.5px,transparent 1.5px 4.5px,var(--c) 4.5px 6px)}
+/* ===== 고스트 카드 — 스텔스 HUD (와이어프레임) ===== */
+body.theme-ghost .card{background:linear-gradient(160deg,rgba(28,22,46,.93),rgba(13,11,23,.96));border:1px solid rgba(139,123,255,.32);-webkit-clip-path:none;clip-path:none;border-radius:2px}
+body.theme-ghost .card::after{background:none}
+body.theme-ghost .card::before{content:none}
+body.theme-ghost .card .cost{top:6px;left:7px;width:auto;height:auto;background:none;box-shadow:none;color:var(--c);border:1px solid var(--cb);border-radius:2px;padding:0 5px;font-size:11px;line-height:16px}
+body.theme-ghost .g-br{position:absolute;width:11px;height:11px;border:1.5px solid var(--c);z-index:3;opacity:.85}
+body.theme-ghost .g-br.tl{top:4px;left:4px;border-right:0;border-bottom:0}
+body.theme-ghost .g-br.tr{top:4px;right:4px;border-left:0;border-bottom:0}
+body.theme-ghost .g-br.bl{bottom:4px;left:4px;border-right:0;border-top:0}
+body.theme-ghost .g-br.brc{bottom:4px;right:4px;border-left:0;border-top:0}
+body.theme-ghost .g-ret{position:absolute;left:50%;top:47%;transform:translate(-50%,-50%);width:30px;height:30px;border:1px solid var(--cb);border-radius:50%;opacity:.38;z-index:1}
+body.theme-ghost .g-ret::before,body.theme-ghost .g-ret::after{content:'';position:absolute;background:var(--cb)}
+body.theme-ghost .g-ret::before{left:50%;top:-5px;bottom:-5px;width:1px;transform:translateX(-50%)}
+body.theme-ghost .g-ret::after{top:50%;left:-5px;right:-5px;height:1px;transform:translateY(-50%)}
+body.theme-ghost .g-top{position:relative;z-index:2;text-align:center;margin:7px 10px 0;font-family:'Orbitron';font-weight:700;font-size:8px;letter-spacing:.18em;color:var(--c);padding-bottom:5px;border-bottom:1px dashed var(--cb)}
+body.theme-ghost .g-name{position:relative;z-index:2;text-align:center;font-family:'Orbitron';font-weight:700;font-size:12px;color:#ece7ff;margin-top:11px;text-shadow:0 0 9px var(--cf);line-height:1.18;padding:0 4px}
+body.theme-ghost .g-desc{position:relative;z-index:2;text-align:center;font-size:10px;color:#c6b9f2;margin-top:auto;padding:0 7px 9px;white-space:pre-line;line-height:1.4}
+body.theme-ghost .g-tick{position:absolute;right:6px;top:44px;bottom:34px;width:3px;background:repeating-linear-gradient(0deg,var(--cb) 0 1px,transparent 1px 6px);z-index:2}
+
+/* ===== 데몬콜러 카드 — PCB 회로기판 ===== */
+body.theme-daemon .card{background:color-mix(in srgb,var(--c) 10%,#0a130e);border:1px solid var(--cb);-webkit-clip-path:none;clip-path:none;border-radius:5px}
+body.theme-daemon .card::after{background:none}
+body.theme-daemon .card::before{content:none}
+body.theme-daemon .card .cost{top:6px;left:7px;width:auto;height:auto;background:var(--cf);border:1px solid var(--cb);color:var(--c);border-radius:2px;padding:0 5px;font-size:11px;line-height:16px;box-shadow:none}
+body.theme-daemon .d-trace{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,transparent 49.5%,var(--cf) 49.5% 50.5%,transparent 50.5%),linear-gradient(0deg,transparent 70%,var(--cf) 70% 70.7%,transparent 70.7%)}
+body.theme-daemon .d-pads{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(circle at 10px 130px,#cf9a4a 1.6px,transparent 2.6px),radial-gradient(circle at 102px 130px,#cf9a4a 1.6px,transparent 2.6px),radial-gradient(circle at 56px 7px,#cf9a4a 1.6px,transparent 2.6px)}
+body.theme-daemon .d-led{position:absolute;top:8px;right:9px;width:5px;height:5px;border-radius:50%;background:var(--c);box-shadow:0 0 7px var(--c);z-index:3}
+body.theme-daemon .d-tag{position:absolute;top:8px;left:50%;transform:translateX(-50%);font-size:7px;color:var(--c);letter-spacing:.12em;z-index:3}
+body.theme-daemon .d-chip{position:relative;z-index:2;margin:30px auto 0;width:84px;background:#06120c;border:1px solid var(--c);border-radius:3px;padding:9px 6px;box-shadow:inset 0 0 10px rgba(0,0,0,.6)}
+body.theme-daemon .d-chip::before,body.theme-daemon .d-chip::after{content:'';position:absolute;top:5px;bottom:5px;width:4px;background:repeating-linear-gradient(0deg,#9fb0a8 0 3px,transparent 3px 6px)}
+body.theme-daemon .d-chip::before{left:-4px}
+body.theme-daemon .d-chip::after{right:-4px}
+body.theme-daemon .d-cn{display:block;font-family:'Orbitron';font-weight:700;font-size:11px;color:#e8f5ec;text-align:center;text-shadow:0 0 6px var(--cf);line-height:1.15}
+body.theme-daemon .d-desc{position:relative;z-index:2;text-align:center;margin-top:auto;padding:0 6px 11px;font-size:12.5px;font-weight:700;color:color-mix(in srgb,var(--c) 34%,#e3eae5);line-height:1.32;white-space:pre-line}
 
 .ctl{flex:0 0 auto;display:flex;justify-content:center;padding:4px 0 8px}
 #endbtn{font-family:'Orbitron';font-weight:700;font-size:13px;letter-spacing:.1em;padding:11px 30px;color:#04121a;background:var(--cyan);border:0;border-radius:4px;cursor:pointer;box-shadow:0 0 18px rgba(22,240,224,.45);text-transform:uppercase}
@@ -232,6 +295,46 @@ header{display:flex;align-items:baseline;justify-content:space-between;gap:8px;p
 .charcard.locked .ch-name{color:#bcd6e6}
 @media (max-width:520px){.sub{display:none}}
 @media (max-width:480px){.card{flex-basis:96px;height:140px}.bar{width:180px}.ram .num{font-size:20px}}
+
+/* 난이도 선택 */
+.diffsel{margin:4px 0 18px;width:100%;max-width:440px}
+.diff-lab{font-size:10px;letter-spacing:.22em;color:var(--muted);text-transform:uppercase;margin-bottom:9px;text-align:center}
+.diff-row{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+.diffbtn{font-family:'Share Tech Mono',monospace;background:rgba(255,255,255,.025);border:1px solid var(--line);border-radius:7px;padding:9px 4px;cursor:pointer;color:var(--muted);transition:.18s;display:flex;flex-direction:column;align-items:center;gap:3px}
+.diffbtn .dnm{font-family:'Orbitron',sans-serif;font-size:11.5px;font-weight:700;letter-spacing:.02em;color:#aebccb}
+.diffbtn:hover{border-color:var(--cyan)}
+.diffbtn.sel{border-color:var(--cyan);background:color-mix(in srgb,var(--cyan) 12%,transparent);box-shadow:0 0 14px color-mix(in srgb,var(--cyan) 28%,transparent)}
+.diffbtn.sel .dnm{color:var(--cyan)}
+.diffbtn.locked{opacity:.5;cursor:not-allowed;border-style:dashed}
+.diffbtn.locked:hover{border-color:var(--line)}
+.diffbtn .dlock{font-size:7.5px;letter-spacing:.04em;color:var(--muted);line-height:1.2}
+.diff-info{margin-top:11px;font-size:11px;color:#8295a6;text-align:center;line-height:1.55;min-height:32px}
+.diff-info b{color:var(--cyan)}
+/* 카드 스왑 버튼 */
+.rdbtn{font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:.05em;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:7px;padding:7px 13px;color:#9fb0c0;cursor:pointer;transition:.18s;white-space:nowrap}
+.rdbtn:hover:not(:disabled){border-color:var(--cyan);color:var(--txt)}
+.rdbtn.active{border-color:var(--magenta);background:color-mix(in srgb,var(--magenta) 14%,transparent);color:#ffd0e4}
+.rdbtn:disabled{opacity:.32;cursor:not-allowed}
+.rdbtn b{font-family:'Orbitron',sans-serif;color:var(--cyan)}
+.rdbtn.active b{color:var(--magenta)}
+.card.rdsel{cursor:pointer;outline:1px dashed color-mix(in srgb,var(--magenta) 60%,transparent);outline-offset:2px}
+.card.rdsel:hover{transform:translateY(-6px);box-shadow:0 0 16px color-mix(in srgb,var(--magenta) 40%,transparent)}
+/* 적 스킬 버튼 */
+.skbtn{margin-top:9px;font-family:'Share Tech Mono',monospace;font-size:10.5px;letter-spacing:.05em;color:var(--muted);background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:6px;padding:5px 11px;cursor:pointer;transition:.18s}
+.skbtn:hover{border-color:var(--cyan);color:var(--txt)}
+.skbtn.special{color:var(--cyan);border-color:color-mix(in srgb,var(--cyan) 45%,var(--line));background:color-mix(in srgb,var(--cyan) 9%,transparent)}
+.skbtn .sk-tag{margin-left:7px;font-family:'Orbitron',sans-serif;font-size:8px;font-weight:700;letter-spacing:.1em;padding:1px 5px;border-radius:3px;background:color-mix(in srgb,var(--cyan) 20%,transparent);border:1px solid color-mix(in srgb,var(--cyan) 45%,transparent);text-transform:uppercase}
+.exh-badge{position:absolute;bottom:6px;right:6px;z-index:3;font-family:'Orbitron',sans-serif;font-size:7px;font-weight:700;letter-spacing:.08em;color:var(--c);border:1px solid color-mix(in srgb,var(--c) 55%,transparent);background:color-mix(in srgb,var(--c) 16%,rgba(8,10,15,.88));border-radius:3px;padding:1px 4px;opacity:.95;pointer-events:none}
+.patchbtn{margin-top:22px;font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:.1em;color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:7px;padding:8px 18px;cursor:pointer;transition:.18s}
+.patchbtn:hover{border-color:var(--cyan);color:var(--cyan)}
+.pv{padding:15px 0;border-bottom:1px solid var(--line)}
+.pv:last-child{border-bottom:0;padding-bottom:4px}
+.pv-h{display:flex;align-items:baseline;gap:10px;margin-bottom:9px}
+.pv-v{font-size:14.5px;font-weight:700;color:var(--cyan);letter-spacing:.04em}
+.pv-t{font-size:10.5px;letter-spacing:.16em;color:var(--muted);text-transform:uppercase}
+.pv-n{margin:0;padding:0;list-style:none}
+.pv-n li{font-size:11.5px;color:#9fb0c0;line-height:1.6;margin-bottom:6px;position:relative;padding-left:14px}
+.pv-n li::before{content:'—';position:absolute;left:0;color:#4a5666}
 </style>
 </head>
 <body>
@@ -245,6 +348,8 @@ header{display:flex;align-items:baseline;justify-content:space-between;gap:8px;p
     <p style="font-size:12px;color:#9ab;max-width:380px;line-height:1.8;margin-bottom:26px">
       넷러너로 기업 메인프레임에 잠입합니다. 보안 계층을 한 겹씩 뚫고 코어로 하강하세요.<br>손에 쥔 프로그램이 곧 무기입니다.</p>
     <button class="go" id="startbtn">접속 시작</button>
+    <div style="margin-top:14px"><button class="sbtn" id="loadbtn">이어하기 // 세이브 불러오기</button></div>
+    <input type="file" id="loadfile" accept="application/json,.json" style="display:none">
     <div style="margin-top:18px"><button class="sbtn jhelp">용어 설명</button></div>
   </div>
 </div>
@@ -254,7 +359,9 @@ header{display:flex;align-items:baseline;justify-content:space-between;gap:8px;p
   <div class="center-screen">
     <div class="scr-h">캐릭터 선택</div>
     <div class="scr-sub">잠입할 넷러너를 고르세요</div>
+    <div class="diffsel" id="diffsel"></div>
     <div class="charlist" id="charlist"></div>
+    <button class="patchbtn" id="patchbtn">패치 노트 // CHANGELOG</button>
   </div>
 </div>
 
@@ -267,10 +374,11 @@ header{display:flex;align-items:baseline;justify-content:space-between;gap:8px;p
     </div>
     <div class="rbtns">
       <button class="sbtn" id="statusbtn">현황 · 덱 <span id="deckn">0</span></button>
+      <button class="sbtn" id="savebtn">저장</button>
       <button class="qbtn jhelp">?</button>
     </div>
   </div>
-  <div class="mapwrap"><div class="mtitle">// 다이브 경로 — 계층마다 노드 하나를 선택</div><div id="maptrack"></div></div>
+  <div class="mapwrap"><div class="mtitle" id="mtitle">// 다이브 경로</div><div id="maptrack"></div></div>
 </div>
 
 <!-- COMBAT -->
@@ -282,10 +390,11 @@ header{display:flex;align-items:baseline;justify-content:space-between;gap:8px;p
   </header>
   <section class="enemy">
     <div class="intent" id="intent"></div>
-    <div class="ice" id="ice"><i class="r1"></i><i class="r2"></i><i class="core"></i></div>
+    <div class="ice r-normal" id="ice"></div>
     <div class="ename disp" id="ename"></div>
     <div class="bar ico"><div class="fill" id="efill"></div><div class="txt" id="etxt"></div></div>
     <div class="status" id="estatus"></div>
+    <button class="skbtn" id="skbtn"></button>
   </section>
   <div class="mid"><div id="log"></div></div>
   <div class="phud">
@@ -296,12 +405,13 @@ header{display:flex;align-items:baseline;justify-content:space-between;gap:8px;p
     <div class="ram"><span class="lab disp">RAM</span><span class="num"><span id="ramcur">3</span><span class="mx">/<span id="rammax">3</span></span></span><span class="pips" id="rampips"></span></div>
   </div>
   <div class="status" id="pstatus" style="justify-content:flex-start;padding-left:4px"></div>
+  <div class="daemonbar" id="daemonbar"></div>
   <div class="crelics" id="crelics"></div>
   <div class="hand" id="hand"></div>
   <div class="phud" style="border-top:0;border-bottom:0;padding-top:0">
     <div class="piles" id="piles"></div>
     <div class="ctl" style="padding:0"><button id="endbtn" class="disp">턴 종료</button></div>
-    <div class="piles" style="opacity:0">.</div>
+    <div class="ctl" style="padding:0;justify-content:flex-end"><button id="redrawbtn" class="rdbtn disp" disabled>스왑 <b id="rdn">0</b></button></div>
   </div>
 </div>
 
@@ -340,19 +450,20 @@ header{display:flex;align-items:baseline;justify-content:space-between;gap:8px;p
       <div class="hrow"><span class="k">노출</span><span class="v">대상이 받는 피해 +50%. 매 턴 1씩 감소.</span></div>
       <div class="hrow"><span class="k">스로틀</span><span class="v">받는 쪽이 주는 피해 -25% (출력 제한). 매 턴 1씩 감소. 오버클럭의 반대.</span></div>
       <div class="hrow"><span class="k">오버클럭</span><span class="v">익스플로잇 피해 +수치. 전투가 끝날 때까지 지속.</span></div>
+      <div class="hrow"><span class="k">메모리 누수</span><span class="v">적의 매 턴 시작 시 누수 수치만큼 무결성 피해. 감소하지 않고 누적되는 지속 피해(DoT). 고스트 전용.</span></div>
     </div>
     <div class="hsec"><h3>카드 타입 // CARDS</h3>
       <div class="hrow"><span class="k">익스플로잇</span><span class="v">적에게 피해를 주는 공격 프로그램.</span></div>
       <div class="hrow"><span class="k">스크립트</span><span class="v">방화벽·디버프·드로우 등 일회성 효과.</span></div>
-      <div class="hrow"><span class="k">데몬</span><span class="v">전투 동안 지속되는 상주 프로그램.</span></div>
+      <div class="hrow"><span class="k">데몬</span><span class="v">전투 동안 지속되는 상주 프로그램. 여러 기 띄울 수 있고 화면 하단 데몬 바에 표시됩니다.</span></div>
     </div>
     <div class="hsec"><h3>노드 // MAP</h3>
-      <div class="hrow"><span class="k">⚔ 전투</span><span class="v">일반 ICE와 교전. 승리 시 프로그램 보상.</span></div>
-      <div class="hrow"><span class="k">☠ 정예</span><span class="v">강한 적. 승리 시 유물 + 프로그램.</span></div>
-      <div class="hrow"><span class="k">✚ 세이프</span><span class="v">무결성 30% 복구.</span></div>
-      <div class="hrow"><span class="k">▣ 캐시</span><span class="v">유물을 발견합니다.</span></div>
-      <div class="hrow"><span class="k">◇ 이상</span><span class="v">돌발 상황이 생성됩니다. 선택에 따라 보상 또는 위험.</span></div>
-      <div class="hrow"><span class="k">◈ 코어 ICE</span><span class="v">계층의 보스. 격파 시 다이브 성공.</span></div>
+      <div class="hrow"><span class="k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="ic-svg kic"><path d="M5.5 5.5L18.5 18.5"/><path d="M18.5 5.5L5.5 18.5"/><path d="M4 17l3-3M20 17l-3-3"/></svg> 전투</span><span class="v">일반 ICE와 교전. 승리 시 프로그램 보상.</span></div>
+      <div class="hrow"><span class="k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="ic-svg kic"><path d="M12 4a6.5 6.5 0 0 0-4.5 11.2V18h9v-2.8A6.5 6.5 0 0 0 12 4z"/><circle cx="9.6" cy="12" r="1.3"/><circle cx="14.4" cy="12" r="1.3"/><path d="M10.6 18v1.4M13.4 18v1.4"/></svg> 정예</span><span class="v">강한 적. 승리 시 유물 + 프로그램.</span></div>
+      <div class="hrow"><span class="k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="ic-svg kic"><circle cx="12" cy="12" r="8"/><path d="M12 8.3v7.4M8.3 12h7.4"/></svg> 세이프</span><span class="v">무결성 30% 복구.</span></div>
+      <div class="hrow"><span class="k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="ic-svg kic"><rect x="4.5" y="9" width="15" height="9.5" rx="1.4"/><path d="M4.5 13h15"/><path d="M5.5 9l2-3.5h9l2 3.5"/><rect x="10.5" y="12.2" width="3" height="3.2" rx=".5"/></svg> 캐시</span><span class="v">유물을 발견합니다.</span></div>
+      <div class="hrow"><span class="k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="ic-svg kic"><path d="M12 3.5l8.5 8.5L12 20.5 3.5 12z"/><path d="M12 8.5v4"/><circle cx="12" cy="15" r="0.7" fill="currentColor" stroke="none"/></svg> 이상</span><span class="v">돌발 상황이 생성됩니다. 선택에 따라 보상 또는 위험.</span></div>
+      <div class="hrow"><span class="k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="ic-svg kic"><path d="M12 3l9 9-9 9-9-9z"/><path d="M12 7.5l4.5 4.5L12 16.5 7.5 12z"/></svg> 코어 ICE</span><span class="v">계층의 보스. 격파 시 다이브 성공.</span></div>
     </div>
   </div>
   <div class="htip">전투 중 상태 칩을 눌러도 이 설명이 열립니다</div>
@@ -368,6 +479,10 @@ header{display:flex;align-items:baseline;justify-content:space-between;gap:8px;p
   <div class="hbody" id="pilesmbody"></div>
 </div></div>
 
+<div id="patch" class="modal"><div class="hbox">
+  <div class="htop"><span class="disp">패치 노트 // CHANGELOG</span><button id="patchclose">✕</button></div>
+  <div id="patchbody"></div>
+</div></div>
 <div id="skills" class="modal"><div class="hbox">
   <div class="htop"><span class="disp">적 스킬 // ICE MOVES</span><button id="skillsclose">✕</button></div>
   <div class="hbody" id="skillsbody"></div>
@@ -377,25 +492,52 @@ header{display:flex;align-items:baseline;justify-content:space-between;gap:8px;p
 "use strict";
 const $=id=>document.getElementById(id);
 function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+function nextRand(){let a=R.seed|0;a=a+0x6D2B79F5|0;R.seed=a;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;}
 
 /* ============ 데이터 ============ */
 const CARDS={
   inject:{name:'인젝션',cost:1,type:'exploit',tag:'EXPLOIT',desc:'적에게 6 피해',e:{dmg:6}},
   patch:{name:'패치',cost:1,type:'script',tag:'SCRIPT',desc:'방화벽 5',e:{block:5}},
   overflow:{name:'버퍼 오버플로',cost:2,type:'exploit',tag:'EXPLOIT',desc:'적에게 8 피해\n노출 +2',e:{dmg:8,exp:2}},
-  overdrive:{name:'코어 튜닝',cost:0,type:'script',tag:'SCRIPT',desc:'오버클럭 +2\n공격 피해 +2 (지속)',e:{ovc:2}},
+  overdrive:{name:'코어 튜닝',cost:1,type:'script',tag:'SCRIPT',desc:'오버클럭 +2\n공격 피해 +2 (지속)',e:{ovc:2}},
   forkbomb:{name:'포크 밤',cost:1,type:'exploit',tag:'EXPLOIT',desc:'적에게 4 피해 ×2',e:{dmg:4,hits:2}},
   zeroday:{name:'제로데이',cost:2,type:'exploit',tag:'EXPLOIT',desc:'적에게 14 피해',e:{dmg:14}},
   adaptarmor:{name:'샌드박스',cost:1,type:'script',tag:'SCRIPT',desc:'방화벽 8\n다음 턴 방화벽 +4',e:{block:8,nextFw:4}},
   jammer:{name:'레이트 리미터',cost:1,type:'script',tag:'SCRIPT',desc:'적 스로틀 +2',e:{jam:2}},
-  portscan:{name:'포트 스캔',cost:0,type:'script',tag:'SCRIPT',desc:'적 노출 +3',e:{exp:3}},
+  portscan:{name:'포트 스캔',cost:0,type:'script',tag:'SCRIPT',desc:'적 노출 +2',e:{exp:2}},
   leech:{name:'데이터 유출',cost:1,type:'exploit',tag:'EXPLOIT',desc:'적에게 7 피해\n준 피해만큼 회복',e:{dmg:7,leech:true}},
-  worm:{name:'웜',cost:2,type:'daemon',tag:'DAEMON',desc:'매 턴 종료 시\n적에게 5 피해',e:{daemon:'worm'}},
+  worm:{name:'웜',cost:2,type:'daemon',tag:'DAEMON',desc:'매 턴 종료 시\n적 5 · 자신 2 피해',e:{daemon:'worm'}},
   guardian:{name:'사이드카',cost:2,type:'daemon',tag:'DAEMON',desc:'매 턴 시작 시\n방화벽 +5',e:{daemon:'guardian'}},
   hotfix:{name:'핫픽스',cost:0,type:'script',tag:'SCRIPT',desc:'방화벽 4',e:{block:4}},
   backdoor:{name:'프리페치',cost:1,type:'script',tag:'SCRIPT',desc:'카드 2장 드로우',e:{draw:2}},
   sysdown:{name:'DDoS',cost:2,type:'script',tag:'SCRIPT',desc:'적 노출 +2\n적 스로틀 +2',e:{exp:2,jam:2}},
   bruteforce:{name:'브루트포스',cost:2,type:'exploit',tag:'EXPLOIT',desc:'적에게 16 피해',e:{dmg:16}},
+  probe:{name:'프로브',cost:1,type:'exploit',tag:'EXPLOIT',desc:'적에게 5 피해\n노출 +1',e:{dmg:5,exp:1}},
+  hardening:{name:'하드닝',cost:1,type:'script',tag:'SCRIPT',desc:'방화벽 5',e:{block:5}},
+  recon:{name:'정찰',cost:0,type:'script',tag:'SCRIPT',desc:'적 노출 +2',e:{exp:2}},
+  dangling:{name:'댕글링 포인터',cost:1,type:'script',tag:'SCRIPT',desc:'적 메모리 누수 +4',e:{leak:4}},
+  overread:{name:'버퍼 오버리드',cost:1,type:'exploit',tag:'EXPLOIT',desc:'적에게 6 피해\n노출 +2',e:{dmg:6,exp:2}},
+  doublefree:{name:'이중 해제',cost:2,type:'script',tag:'SCRIPT',desc:'적 메모리 누수 +6',e:{leak:6}},
+  heapspray:{name:'힙 스프레이',cost:1,type:'script',tag:'SCRIPT',desc:'적 메모리 누수 +3\n노출 +1',e:{leak:3,exp:1}},
+  heapdump:{name:'힙 덤프',cost:2,type:'exploit',tag:'EXPLOIT',desc:'적에게 (메모리 누수×2) 피해',e:{leakHit:2}},
+  pktdrop:{name:'패킷 드롭',cost:1,type:'script',tag:'SCRIPT',desc:'적 스로틀 +2\n방화벽 4',e:{jam:2,block:4}},
+  obfusc:{name:'난독화',cost:1,type:'script',tag:'SCRIPT',desc:'방화벽 8\n다음 턴 방화벽 +4',e:{block:8,nextFw:4}},
+  privesc:{name:'권한 상승',cost:2,type:'script',tag:'SCRIPT',desc:'적 노출 +3\n적 메모리 누수 +3',e:{exp:3,leak:3}},
+  rootkit:{name:'루트킷',cost:2,type:'daemon',tag:'DAEMON',desc:'매 턴 종료 시\n적 메모리 누수 +2',e:{daemon:'rootkit'}},
+  sigterm:{name:'SIGTERM',cost:1,type:'exploit',tag:'EXPLOIT',desc:'적에게 8 피해\n적 스로틀 +1',e:{dmg:8,jam:1}},
+  racecond:{name:'레이스 컨디션',cost:1,type:'script',tag:'SCRIPT',desc:'카드 2장 드로우\n방화벽 3',e:{draw:2,block:3}},
+  spawn:{name:'스폰',cost:1,type:'exploit',tag:'EXPLOIT',desc:'적에게 5 피해',e:{dmg:5}},
+  alloc:{name:'할당',cost:1,type:'script',tag:'SCRIPT',desc:'방화벽 5',e:{block:5}},
+  spawnd:{name:'데몬 스폰',cost:1,type:'daemon',tag:'DAEMON',desc:'봇넷 배포\n매 턴 종료 시 적에게 3 피해',e:{daemon:'botnet'}},
+  scaleout:{name:'스케일 아웃',cost:1,type:'exploit',tag:'EXPLOIT',desc:'적에게 (데몬 수×3) 피해',e:{dmgPerDaemon:3}},
+  deployw:{name:'워커 배포',cost:2,type:'daemon',tag:'DAEMON',desc:'웜 배포\n매 턴 종료 시 적 5 · 자신 2 피해',e:{daemon:'worm'}},
+  deploysc:{name:'사이드카 배포',cost:2,type:'daemon',tag:'DAEMON',desc:'사이드카 배포\n매 턴 시작 시 방화벽 +5',e:{daemon:'guardian'}},
+  deploym:{name:'마이너 배포',cost:2,type:'daemon',tag:'DAEMON',desc:'마이너 배포\n매 턴 시작 시 RAM +1',e:{daemon:'miner'}},
+  deployh:{name:'헬스체크 배포',cost:1,type:'daemon',tag:'DAEMON',desc:'헬스체크 배포\n매 턴 시작 시 무결성 +2',e:{daemon:'healthcheck'}},
+  loadbal:{name:'로드 밸런서',cost:2,type:'exploit',tag:'EXPLOIT',desc:'적에게 (데몬 수×4) 피해',e:{dmgPerDaemon:4}},
+  cluster:{name:'클러스터',cost:2,type:'script',tag:'SCRIPT',desc:'방화벽 +(데몬 수×4)',e:{blockPerDaemon:4}},
+  autoscale:{name:'오토스케일',cost:2,type:'script',tag:'SCRIPT',desc:'봇넷 배포\n방화벽 5',e:{daemon:'botnet',block:5}},
+  daemonize:{name:'데몬화',cost:2,type:'exploit',tag:'EXPLOIT',desc:'봇넷 배포\n적 노출 +2',e:{daemon:'botnet',exp:2}},
 };
 const STARTER_DECK=['inject','inject','inject','inject','inject','patch','patch','patch','overflow','overdrive'];
 const REWARD_POOL=['forkbomb','zeroday','adaptarmor','jammer','portscan','leech','worm','guardian','hotfix','backdoor','sysdown','bruteforce'];
@@ -409,42 +551,167 @@ const ENEMIES={
     moves:{slash:{label:'메모리 스파이크',dmg:11},charge:{label:'스왑 고갈',ovc:3},execute:{label:'kill -9',dmg:16}},pat:['slash','charge','execute']},
   barrier:{name:'WAF',sub:'WEB FIREWALL',hp:80,elite:1,
     moves:{rampart:{label:'룰셋 강화',gainFw:12},twin:{label:'패킷 필터',dmg:7,hits:2},fortify:{label:'정책 컴파일',ovc:2,gainFw:8},smash:{label:'커넥션 리셋',dmg:17}},pat:['rampart','twin','fortify','smash']},
-  cerberus:{name:'커베로스',sub:'ROOT AUTH // KERBEROS',hp:132,boss:1,enrageAt:0.5,
+  cerberus:{name:'커베로스',sub:'ROOT AUTH // KERBEROS',hp:132,boss:1,enrageAt:0.5,enrageMsg:'커베로스 권한 상승 — 출력 폭주!',
     moves:{bite:{label:'인증 거부',dmg:13},wall:{label:'정책 잠금',gainFw:14},triple:{label:'SYN 플러드',dmg:6,hits:3},corrupt:{label:'세션 하이재킹',jam:2,exp:0},maul:{label:'강제 종료',dmg:20}},pat:['bite','wall','triple','corrupt','maul']},
+  sentry:{name:'침입 탐지',sub:'IDS SENTRY',hp:60,
+    moves:{sig:{label:'시그니처 매칭',dmg:13},mark:{label:'트래픽 분석',gainFw:8,exp:1},sblock:{label:'차단 규칙',dmg:18}},pat:['sig','mark','sig','sblock']},
+  zombie:{name:'좀비 프로세스',sub:'ZOMBIE PROC',hp:56,
+    moves:{zfork:{label:'포크 폭탄',dmg:8,hits:2},respawn:{label:'리스폰',heal:12,gainFw:4},gnaw:{label:'메모리 잠식',dmg:15}},pat:['zfork','gnaw','respawn','zfork','gnaw']},
+  ransom:{name:'랜섬웨어 데몬',sub:'RANSOM-D',hp:64,
+    moves:{encrypt:{label:'암호화',jam:2,dmg:6},payload:{label:'페이로드',dmg:16},rlock:{label:'락다운',gainFw:10,ovc:2}},pat:['encrypt','payload','rlock','payload']},
+  lbwall:{name:'로드밸런서 클러스터',sub:'LB-WALL',hp:112,elite:1,
+    moves:{lbhc:{label:'헬스 체크',gainFw:14},lbrr:{label:'라운드 로빈',dmg:9,hits:2},lbscale:{label:'오토스케일',ovc:3,gainFw:8},lbdos:{label:'서비스 거부',dmg:23}},pat:['lbhc','lbrr','lbscale','lbdos']},
+  hydra:{name:'하이드라',sub:'CONSENSUS // RAFT-HYDRA',hp:168,boss:1,enrageAt:0.45,enrageMsg:'하이드라 — 네트워크 파티션, 출력 폭주!',
+    moves:{elect:{label:'리더 선출',gainFw:16},repl:{label:'로그 복제',dmg:7,hits:3},reject:{label:'합의 거부',jam:2,dmg:8},part:{label:'네트워크 파티션',dmg:13,exp:1},split:{label:'스플릿 브레인',dmg:24}},pat:['elect','repl','reject','part','split']},
+  kernel:{name:'커널 가드',sub:'KERNEL-GUARD',hp:78,
+    moves:{syscall:{label:'시스템 콜',dmg:17},irq:{label:'인터럽트',jam:1,dmg:10},panic:{label:'커널 패닉',dmg:25}},pat:['syscall','irq','syscall','panic']},
+  rootd:{name:'루트 데몬',sub:'ROOT-DAEMON',hp:72,
+    moves:{priv:{label:'권한 상승',ovc:4,gainFw:6},rfork:{label:'포크',dmg:13,hits:2},sigkill:{label:'SIGKILL',dmg:24}},pat:['priv','rfork','sigkill']},
+  cipher:{name:'암호 코프로세서',sub:'CIPHER-CORE',hp:84,
+    moves:{keyx:{label:'키 교환',gainFw:16},entropy:{label:'엔트로피 폭주',dmg:11,exp:2},cipherb:{label:'블록 암호',dmg:27}},pat:['keyx','entropy','cipherb']},
+  ngfw:{name:'차세대 방화벽',sub:'NGFW-CORE',hp:146,elite:1,
+    moves:{dpi:{label:'딥 패킷 검사',dmg:11,hits:2},threat:{label:'위협 인텔',exp:2,gainFw:10},inline:{label:'인라인 차단',gainFw:18,ovc:2},fullscan:{label:'풀 인스펙션',dmg:29}},pat:['dpi','threat','inline','fullscan']},
+  overseer:{name:'오버시어',sub:'MASTER CONTROL // OVERSEER',hp:232,boss:1,enrageAt:0.5,enrageMsg:'오버시어 — 코어 과부하, 전 출력 개방!',
+    moves:{olock:{label:'전역 락다운',gainFw:20},oban:{label:'프로세스 차단',dmg:9,hits:3},ointeg:{label:'무결성 스캔',exp:2,dmg:10},oauth:{label:'강제 인증',jam:2,dmg:14},ohalt:{label:'시스템 정지',dmg:31}},pat:['olock','oban','ointeg','oauth','ohalt']},
 };
 
 const RELICS={
-  startup:{name:'시동 칩',icon:'🔋',desc:'전투 승리 시 무결성 6 회복',onWin(){R.integ=Math.min(R.max,R.integ+6);}},
-  ocmod:{name:'오버클럭 모듈',icon:'▲',desc:'전투 시작 시 오버클럭 +1',onCombatStart(){addS(C.player,'ovc',1);}},
-  cacheb:{name:'캐시 부스터',icon:'＋',desc:'전투 첫 턴 카드 +1 드로우',onFirstTurn(){drawCards(1);}},
-  fwchip:{name:'방화벽 칩',icon:'🛡',desc:'전투 시작 시 방화벽 +8',onFirstTurn(){C.player.fw+=8;}},
-  rammod:{name:'증설 램',icon:'◆',desc:'램 최대치 +1',onCombatStart(){C.player.maxRam+=1;}},
+  startup:{name:'시동 칩',desc:'전투 승리 시 무결성 6 회복',onWin(){R.integ=Math.min(R.max,R.integ+6);}},
+  ocmod:{name:'오버클럭 모듈',desc:'전투 시작 시 오버클럭 +1',onCombatStart(){addS(C.player,'ovc',1);}},
+  cacheb:{name:'캐시 부스터',desc:'전투 첫 턴 카드 +1 드로우',onFirstTurn(){drawCards(1);}},
+  fwchip:{name:'방화벽 칩',desc:'전투 시작 시 방화벽 +8',onFirstTurn(){C.player.fw+=8;}},
+  rammod:{name:'증설 램',desc:'램 최대치 +1 · 모든 램 소진 시 다음 2턴 휴지',ram:1},
+  rootcert:{name:'루트 인증서',desc:'전투 시작 시 적에게 메모리 누수 +2',onCombatStart(){addS(C.enemy,'leak',2);}},
+  initd:{name:'init 데몬',desc:'전투 시작 시 봇넷 1기 자동 배포',onCombatStart(){C.player.daemons.push('botnet');}},
+  fwchip2:{name:'강화 방화벽 어레이',desc:'전투 첫 턴 방화벽 +14',onFirstTurn(){C.player.fw+=14;}},
+  ramx2:{name:'듀얼 채널 램',desc:'램 최대치 +2 · 모든 램 소진 시 다음 2턴 휴지',ram:2},
+  vitals:{name:'바이탈 모니터',desc:'전투 승리 시 무결성 10 회복',onWin(){R.integ=Math.min(R.max,R.integ+10);}},
+  coolant:{name:'리퀴드 쿨링',desc:'전투 시작 시 오버클럭 +2',onCombatStart(){addS(C.player,'ovc',2);}},
+  precache:{name:'프리캐시 유닛',desc:'전투 첫 턴 카드 +2 드로우',onFirstTurn(){drawCards(2);}},
+  shuffler:{name:'캐시 셔플러',desc:'매 턴 카드 스왑 기회 +1',redraw:1},
 };
-const RELIC_POOL=['ocmod','cacheb','fwchip','rammod'];
+const RELIC_POOL=['ocmod','cacheb','fwchip','rammod','fwchip2','vitals','coolant','precache','shuffler'];
 /* ============================================================
    PHASE 3 — 캐릭터 (확장 기반)
    각 캐릭터: {id,name,sub,role,icon,accent,locked, starter,pool,relic}
    새 캐릭터는 starter(시작덱)/pool(보상 카드풀)/relic(시작 유물)을 채우고 locked:false.
    ============================================================ */
 const CHARACTERS={
-  blackhat:{id:'blackhat',name:'블랙햇',sub:'BLACK HAT',role:'공격형',icon:'⚡',accent:'#16f0e0',locked:false,
+  blackhat:{id:'blackhat',name:'블랙햇',sub:'BLACK HAT',role:'공격형',accent:'#16f0e0',locked:false,
     desc:'직접 피해와 오버클럭으로 밀어붙이는 브루트포스 해커.',
     starter:['inject','inject','inject','inject','inject','patch','patch','patch','overflow','overdrive'],
     pool:REWARD_POOL,relic:'startup'},
-  ghost:{id:'ghost',name:'고스트',sub:'GHOST',role:'제어 / 디버프형',icon:'◐',accent:'#9b6bff',locked:true,
-    desc:'노출·스로틀을 쌓아 한 번에 터뜨리는 스텔스 해커. (준비 중)'},
-  daemon:{id:'daemon',name:'데몬콜러',sub:'DAEMON',role:'소환 / 스노볼형',icon:'✦',accent:'#4fe0c0',locked:true,
-    desc:'지속 데몬을 깔아 굴리는 소환사. (준비 중)'},
+  ghost:{id:'ghost',name:'고스트',sub:'GHOST',role:'제어 / DoT형',accent:'#9b6bff',locked:false,gate:'hard',
+    desc:'메모리 누수를 심어 지속 피해로 갉아먹는 루트킷 해커. 노출로 약점을 키우고 힙 덤프로 한 번에 회수한다.',
+    starter:['probe','probe','probe','probe','probe','hardening','hardening','hardening','dangling','recon'],
+    pool:['overread','doublefree','heapspray','heapdump','pktdrop','obfusc','privesc','rootkit','sigterm','racecond'],relic:'rootcert'},
+  daemon:{id:'daemon',name:'데몬콜러',sub:'DAEMON',role:'소환 / 스노볼형',accent:'#4fe0c0',locked:false,gate:'extreme',
+    desc:'백그라운드 데몬을 여러 기 띄워 굴리는 소환사. 데몬이 많을수록 스케일 아웃·로드 밸런서가 강해진다.',
+    starter:['spawn','spawn','spawn','spawn','alloc','alloc','alloc','spawnd','spawnd','scaleout'],
+    pool:['deployw','deploysc','deploym','deployh','loadbal','cluster','autoscale','daemonize','forkbomb','backdoor'],relic:'initd'},
 };
-const NODEICON={combat:'⚔',elite:'☠',safe:'✚',cache:'▣',anomaly:'◇',boss:'◈'};
+const _I=p=>'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="ic-svg">'+p+'</svg>';
+const ICONS={
+startup:_I('<rect x="5" y="5" width="14" height="14" rx="2"/><path d="M12 8.3v3.4"/><path d="M9.4 10.2a3.4 3.4 0 1 0 5.2 0"/>'),
+ocmod:_I('<rect x="5" y="5" width="14" height="14" rx="2"/><path d="M8.8 13.5l3.2-3 3.2 3"/><path d="M8.8 10.5l3.2-3 3.2 3"/>'),
+cacheb:_I('<rect x="5.5" y="7.5" width="9" height="11" rx="1.3"/><path d="M9 7.5V5h9.5v11H15"/><path d="M10 13h3.5M11.75 11.25v3.5"/>'),
+fwchip:_I('<path d="M12 3.6l6.4 2.3v4.6c0 4.1-2.7 6.9-6.4 8.1-3.7-1.2-6.4-4-6.4-8.1V5.9z"/><path d="M10 8.6v5.8M12 8.2v6.4M14 8.6v5.8"/>'),
+rammod:_I('<rect x="3.5" y="8" width="17" height="8.5" rx="1"/><path d="M6 16.5v2M9.5 16.5v2M14.5 16.5v2M18 16.5v2"/><rect x="6.5" y="10.3" width="3.2" height="3.6"/><rect x="14.3" y="10.3" width="3.2" height="3.6"/>'),
+rootcert:_I('<circle cx="9" cy="9" r="3.4"/><path d="M11.4 11.4l7.1 7.1"/><path d="M15.5 15.5l1.8 1.8M17 14l1.5 1.5"/>'),
+initd:_I('<circle cx="12" cy="12" r="3.1"/><path d="M12 4.2v2.4M12 17.4v2.4M4.2 12h2.4M17.4 12h2.4M6.5 6.5l1.7 1.7M15.8 15.8l1.7 1.7M17.5 6.5l-1.7 1.7M8.2 15.8l-1.7 1.7"/>'),
+worm:_I('<path d="M3.5 14.5c2.2 0 2.2-4.5 4.4-4.5s2.2 4.5 4.4 4.5 2.2-4.5 4.4-4.5 2.2 4.5 3.4 4.5"/><circle cx="4" cy="14.4" r="1.1" fill="currentColor" stroke="none"/>'),
+guardian:_I('<rect x="3.5" y="6.5" width="9.5" height="11" rx="1.5"/><rect x="15" y="10" width="5.5" height="7.5" rx="1.2"/><path d="M13 13h2"/>'),
+rootkit:_I('<rect x="4" y="4" width="16" height="16" rx="2.2"/><rect x="8.3" y="8.3" width="7.4" height="7.4" rx="1.3"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/>'),
+botnet:_I('<circle cx="12" cy="12" r="2.5"/><circle cx="6" cy="6" r="1.7"/><circle cx="18" cy="6" r="1.7"/><circle cx="6" cy="18" r="1.7"/><circle cx="18" cy="18" r="1.7"/><path d="M10.2 10.2L7.4 7.4M13.8 10.2l2.8-2.8M10.2 13.8l-2.8 2.8M13.8 13.8l2.8 2.8"/>'),
+miner:_I('<path d="M6 18.5l8-8"/><path d="M9 6.5a8.5 8.5 0 0 1 8.5 8.5"/><path d="M5 19.5l1.6-2.6"/>'),
+healthcheck:_I('<path d="M3 12.5h4l2-5.5 3 11 2-5.5h4.5"/>'),
+atk:_I('<path d="M12 3l1.6 1.6v7.4h-3.2V4.6z"/><path d="M8.5 12.6h7"/><path d="M12 14.5v5"/><path d="M10.3 18.8h3.4"/>'),
+shield:_I('<path d="M12 3.6l6.4 2.3v4.6c0 4.1-2.7 6.9-6.4 8.1-3.7-1.2-6.4-4-6.4-8.1V5.9z"/>'),
+warn:_I('<path d="M12 4.2l7.8 13.6H4.2z"/><path d="M12 10v4"/><circle cx="12" cy="16.2" r="0.7" fill="currentColor" stroke="none"/>'),
+blackhat:_I('<path d="M13 3L6 13.2h5l-2 7.8 9-11.4h-5z"/>'),
+ghost:_I('<path d="M6 19.2v-7.2a6 6 0 0 1 12 0v7.2l-2-1.5-2 1.5-2-1.5-2 1.5z"/><circle cx="10" cy="11" r="0.95" fill="currentColor" stroke="none"/><circle cx="14" cy="11" r="0.95" fill="currentColor" stroke="none"/>'),
+daemon:_I('<circle cx="12" cy="12" r="8"/><path d="M8 9.5h8l-4 6.5z"/>'),
+n_combat:_I('<path d="M5.5 5.5L18.5 18.5"/><path d="M18.5 5.5L5.5 18.5"/><path d="M4 17l3-3M20 17l-3-3"/>'),
+n_elite:_I('<path d="M12 4a6.5 6.5 0 0 0-4.5 11.2V18h9v-2.8A6.5 6.5 0 0 0 12 4z"/><circle cx="9.6" cy="12" r="1.3"/><circle cx="14.4" cy="12" r="1.3"/><path d="M10.6 18v1.4M13.4 18v1.4"/>'),
+n_safe:_I('<circle cx="12" cy="12" r="8"/><path d="M12 8.3v7.4M8.3 12h7.4"/>'),
+n_cache:_I('<rect x="4.5" y="9" width="15" height="9.5" rx="1.4"/><path d="M4.5 13h15"/><path d="M5.5 9l2-3.5h9l2 3.5"/><rect x="10.5" y="12.2" width="3" height="3.2" rx=".5"/>'),
+n_anomaly:_I('<path d="M12 3.5l8.5 8.5L12 20.5 3.5 12z"/><path d="M12 8.5v4"/><circle cx="12" cy="15" r="0.7" fill="currentColor" stroke="none"/>'),
+n_boss:_I('<path d="M12 3l9 9-9 9-9-9z"/><path d="M12 7.5l4.5 4.5L12 16.5 7.5 12z"/>'),
+fwchip2:_I('<path d="M12 3.6l6.4 2.3v4.6c0 4.1-2.7 6.9-6.4 8.1-3.7-1.2-6.4-4-6.4-8.1V5.9z"/><path d="M9.3 11.3l1.8 1.8 3.6-3.6"/>'),
+ramx2:_I('<rect x="3.5" y="7.5" width="17" height="9.5" rx="1"/><path d="M6 17v1.8M9.5 17v1.8M14.5 17v1.8M18 17v1.8"/><rect x="6" y="9.8" width="2.6" height="3.4"/><rect x="10.7" y="9.8" width="2.6" height="3.4"/><rect x="15.4" y="9.8" width="2.6" height="3.4"/>'),
+vitals:_I('<path d="M3 12.5h4l2-5.5 3 11 2-5.5h4.5"/>'),
+coolant:_I('<path d="M12 4v16"/><path d="M5.1 8l13.8 8"/><path d="M18.9 8L5.1 16"/>'),
+precache:_I('<rect x="5.5" y="7.5" width="9" height="11" rx="1.3"/><path d="M9 7.5V5h9.5v11H15"/><path d="M9.5 12.5h5M9.5 15h3"/>'),
+shuffler:_I('<path d="M7 8.5h7a3.5 3.5 0 0 1 3.5 3.5"/><path d="M17 15.5h-7a3.5 3.5 0 0 1-3.5-3.5"/><path d="M14.5 6l2.5 2.5-2.5 2.5"/><path d="M9.5 18l-2.5-2.5 2.5-2.5"/>'),
+};
+const NODEICON={combat:ICONS.n_combat,elite:ICONS.n_elite,safe:ICONS.n_safe,cache:ICONS.n_cache,anomaly:ICONS.n_anomaly,boss:ICONS.n_boss};
 const NODELABEL={combat:'전투',elite:'정예',safe:'세이프',cache:'캐시',anomaly:'이상',boss:'코어 ICE'};
+const ACT_META={1:{name:'외곽 방화벽'},2:{name:'내부 서브넷'},3:{name:'코어'}};
+const ACT_ENEMIES={1:{combat:['watchdog','tracer','hk'],elite:'barrier',boss:'cerberus'},2:{combat:['sentry','zombie','ransom'],elite:'lbwall',boss:'hydra'},3:{combat:['kernel','rootd','cipher'],elite:'ngfw',boss:'overseer'}};
+const ACT_MAPS={1:[['combat','combat'],['anomaly','cache'],['combat','elite'],['safe','anomaly'],['elite','cache'],['boss']],2:[['combat','combat'],['cache','anomaly'],['combat','elite'],['anomaly','combat'],['elite','safe'],['boss']],3:[['combat','combat'],['anomaly','combat'],['elite','cache'],['combat','anomaly'],['combat','elite'],['safe','cache'],['boss']]};
 
 /* ============ 상태 ============ */
+/* ===== 적 비주얼: ICE 컨스트럭트 ===== */
+function hexPts(r){let p=[];for(let k=0;k<6;k++){const a=(Math.PI/180)*(60*k-90);p.push((50+r*Math.cos(a)).toFixed(1)+','+(50+r*Math.sin(a)).toFixed(1));}return p.join(' ');}
+function eshape(kind,r,cls,dash){const da=dash?' stroke-dasharray="'+dash+'"':'';const c=cls?' class="'+cls+'"':'';if(kind==='circle')return '<circle cx="50" cy="50" r="'+r+'"'+c+da+'/>';if(kind==='square')return '<rect x="'+(50-r)+'" y="'+(50-r)+'" width="'+(2*r)+'" height="'+(2*r)+'" rx="5"'+c+da+'/>';if(kind==='diamond')return '<rect x="'+(50-r)+'" y="'+(50-r)+'" width="'+(2*r)+'" height="'+(2*r)+'" rx="4" transform="rotate(45 50 50)"'+c+da+'/>';if(kind==='hex')return '<polygon points="'+hexPts(r)+'"'+c+da+'/>';return '';}
+function ebrk(r,len){const a=r,b=r-len;return '<g class="brk">'+'<path d="M'+(50-a)+' '+(50-b)+'V'+(50-a)+'H'+(50-b)+'"/>'+'<path d="M'+(50+b)+' '+(50-a)+'H'+(50+a)+'V'+(50-b)+'"/>'+'<path d="M'+(50+a)+' '+(50+b)+'V'+(50+a)+'H'+(50+b)+'"/>'+'<path d="M'+(50-b)+' '+(50+a)+'H'+(50-a)+'V'+(50+b)+'"/>'+'</g>';}
+function construct(d){let f='';if(d.role==='boss'){f+='<polygon points="'+hexPts(47)+'" opacity=".28"/>';f+='<polygon points="'+hexPts(47)+'" class="ring-m" opacity=".55"/>';f+=eshape(d.outer,40,'ring-o','5 7');f+=eshape(d.inner,30,'ring-i');f+=ebrk(45,11);}else if(d.role==='elite'){f+=eshape(d.outer,45,'ring-o','5 7');f+=eshape('hex',37,'ring-m');f+=eshape(d.inner,27,'ring-i');f+=ebrk(44,10);}else{f+=eshape(d.outer,44,'ring-o','5 8');f+=eshape(d.inner,28,'ring-i');}const sw=d.role==='normal'?2.1:2.3;return '<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="'+sw+'" stroke-linecap="round" stroke-linejoin="round"><g opacity=".95">'+f+'</g><g class="sigil" stroke-width="2.2">'+(SIG[d.sigil]||'')+'</g></svg>';}
+const SIG={
+eye:'<path d="M30 50q20-15 40 0q-20 15-40 0z"/><circle cx="50" cy="50" r="5.5" fill="currentColor" stroke="none"/>',
+radar:'<circle cx="50" cy="50" r="13" opacity=".45"/><circle cx="50" cy="50" r="6.5"/><path d="M50 50L62 39"/><circle cx="62" cy="39" r="2.6" fill="currentColor" stroke="none"/>',
+kill:'<path d="M40 40L60 60M60 40L40 60"/><path d="M33 37v-5h5M67 37v-5h-5M33 63v5h5M67 63v5h-5"/>',
+wall:'<rect x="34" y="38" width="32" height="24" rx="2"/><path d="M34 46h32M34 54h32"/><path d="M50 38v8M42 46v8M58 46v8M46 54v8M54 54v8"/>',
+trihead:'<circle cx="50" cy="35" r="5.5"/><circle cx="37" cy="59" r="5.5"/><circle cx="63" cy="59" r="5.5"/><path d="M50 40.5L43 54M50 40.5L57 54M42.5 59h15"/>',
+scan:'<rect x="35" y="39" width="30" height="22" rx="3" opacity=".4"/><circle cx="50" cy="50" r="6.5"/><path d="M50 31v7M50 62v7M31 50h7M62 50h7"/>',
+glitch:'<path d="M37 37h11M52 37h11v11M63 52v11H52M48 63H37V52M37 48V37"/><path d="M44 47h13v6H44z" opacity=".5"/>',
+lock:'<rect x="38" y="48" width="24" height="18" rx="3"/><path d="M43 48v-6a7 7 0 0 1 14 0v6"/><circle cx="50" cy="56" r="2.4" fill="currentColor" stroke="none"/>',
+fanout:'<circle cx="50" cy="37" r="5"/><circle cx="36" cy="62" r="4"/><circle cx="50" cy="62" r="4"/><circle cx="64" cy="62" r="4"/><path d="M50 42L37 58M50 42v16M50 42l13 16"/>',
+cluster:'<circle cx="50" cy="50" r="5.5"/><circle cx="50" cy="32" r="3.4"/><circle cx="66" cy="44" r="3.4"/><circle cx="60" cy="65" r="3.4"/><circle cx="40" cy="65" r="3.4"/><circle cx="34" cy="44" r="3.4"/><path d="M50 44.5V35M53.5 47l10-1M55 54l4 8M45 54l-4 8M44.5 47l-9-1" opacity=".75"/>',
+chip:'<rect x="38" y="38" width="24" height="24" rx="2"/><rect x="45" y="45" width="10" height="10"/><path d="M44 38v-5M50 38v-5M56 38v-5M44 62v5M50 62v5M56 62v5M38 44h-5M38 50h-5M38 56h-5M62 44h5M62 50h5M62 56h5"/>',
+root:'<circle cx="50" cy="33" r="3" fill="currentColor" stroke="none"/><path d="M50 36v9M50 45q-9 3-12 16M50 45q9 3 12 16M50 45v16M43 61q-3 3-4 7M57 61q3 3 4 7"/>',
+key:'<circle cx="42" cy="44" r="7"/><path d="M47 49l16 16M58 60l5-5M61 63l4-4"/>',
+layers:'<path d="M50 33l15 6.5v8.5c0 9.5-6.5 14.5-15 17.5c-8.5-3-15-8-15-17.5v-8.5z" opacity=".4"/><path d="M50 42l8.5 3.7v5c0 5.5-3.8 8.5-8.5 10.5c-4.7-2-8.5-5-8.5-10.5v-5z"/>',
+master:'<polygon points="'+hexPts(17)+'" opacity=".5"/><path d="M38 50q12-9 24 0q-12 9-24 0z"/><circle cx="50" cy="50" r="4.5" fill="currentColor" stroke="none" class="coreglow"/>'
+};
+const EDESIGN={
+watchdog:{c:'#16f0e0',outer:'circle',inner:'square',sigil:'eye',role:'normal'},
+tracer:{c:'#16f0e0',outer:'diamond',inner:'circle',sigil:'radar',role:'normal'},
+hk:{c:'#16f0e0',outer:'square',inner:'diamond',sigil:'kill',role:'normal'},
+barrier:{c:'#ffb454',outer:'square',inner:'square',sigil:'wall',role:'elite'},
+cerberus:{c:'#ff2d95',outer:'hex',inner:'diamond',sigil:'trihead',role:'boss'},
+sentry:{c:'#9b6bff',outer:'diamond',inner:'square',sigil:'scan',role:'normal'},
+zombie:{c:'#9b6bff',outer:'square',inner:'circle',sigil:'glitch',role:'normal'},
+ransom:{c:'#9b6bff',outer:'circle',inner:'diamond',sigil:'lock',role:'normal'},
+lbwall:{c:'#4fc3ff',outer:'hex',inner:'circle',sigil:'fanout',role:'elite'},
+hydra:{c:'#c14fff',outer:'hex',inner:'hex',sigil:'cluster',role:'boss'},
+kernel:{c:'#ff6b4a',outer:'square',inner:'square',sigil:'chip',role:'normal'},
+rootd:{c:'#ff6b4a',outer:'circle',inner:'circle',sigil:'root',role:'normal'},
+cipher:{c:'#ff6b4a',outer:'hex',inner:'diamond',sigil:'key',role:'normal'},
+ngfw:{c:'#ff4f9d',outer:'hex',inner:'hex',sigil:'layers',role:'elite'},
+overseer:{c:'#ff2d55',outer:'hex',inner:'hex',sigil:'master',role:'boss'}
+};
+/* ===== 난이도 ===== */
+const DIFF={
+normal:{nm:'노말',sub:'NORMAL',ehp:1.0,edmg:1.0,ram:0,redraw:1,gate:null,desc:'표준 난이도'},
+hard:{nm:'하드',sub:'HARD',ehp:1.2,edmg:1.15,ram:0,redraw:2,gate:null,desc:'적 강화 · 매 턴 스왑 +1'},
+extreme:{nm:'익스트림',sub:'EXTREME',ehp:1.45,edmg:1.3,ram:1,redraw:2,gate:'hard',desc:'적 대폭 강화 · 램 +1 · 스왑 +1'},
+master:{nm:'마스터',sub:'MASTER',ehp:1.75,edmg:1.5,ram:2,redraw:3,gate:'extreme',desc:'최고 난이도 · 램 +2 · 스왑 +2'}
+};
+const DIFF_ORDER=['normal','hard','extreme','master'];
+let selDiff='normal';
+function curDiff(){return DIFF[(R&&R.diff)||'normal']||DIFF.normal;}
+function edmgScale(b){return Math.max(1,Math.round(b*curDiff().edmg));}
+function redrawMaxCalc(){let n=curDiff().redraw;R.relics.forEach(id=>{if(RELICS[id]&&RELICS[id].redraw)n+=RELICS[id].redraw;});return n;}
+function loadMeta(){try{const m=JSON.parse(localStorage.getItem('zeroday_meta')||'{}');return (m&&typeof m==='object')?m:{};}catch(e){return {};}}
+function saveMeta(m){try{localStorage.setItem('zeroday_meta',JSON.stringify(m));}catch(e){}}
+function diffUnlocked(id){const d=DIFF[id];if(!d||!d.gate)return true;const m=loadMeta();return !!(m.cleared&&m.cleared[d.gate]);}
+function markCleared(id){const m=loadMeta();m.cleared=m.cleared||{};m.cleared[id]=true;saveMeta(m);}
+function charUnlocked(ch){if(!ch||!ch.gate)return true;const m=loadMeta();return !!(m.cleared&&m.cleared[ch.gate]);}
 let R=null, C=null, logs=[];
 
 /* ============ 유틸 ============ */
-function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(R.rng()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
-function rint(n){return Math.floor(R.rng()*n);}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(nextRand()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function rint(n){return Math.floor(nextRand()*n);}
 function pickN(arr,n){const c=arr.slice(),out=[];for(let i=0;i<n&&c.length;i++)out.push(c.splice(rint(c.length),1)[0]);return out;}
 function addS(u,k,n){u.st[k]=(u.st[k]||0)+n;}
 function tick(u){['exp','jam'].forEach(k=>{if(u.st[k]>0)u.st[k]--;});}
@@ -457,7 +724,7 @@ function applyHit(tgt,amount){
   const who=(tgt===C.enemy)?'enemy':'player';
   floatDmg(who,rem>0?('-'+rem):'BLOCK',rem>0?'#ff3a55':'#16f0e0');glitch(who);
   if(who==='enemy'&&C.enemy.boss&&!C.enemy.enraged&&C.enemy.enrageAt>0&&C.enemy.integ<=C.enemy.max*C.enemy.enrageAt){
-    C.enemy.enraged=true;addS(C.enemy,'ovc',3);log('<span class="hi">커베로스 권한 상승 — 출력 폭주!</span>');
+    C.enemy.enraged=true;addS(C.enemy,'ovc',3);log('<span class="hi">'+(C.enemy.enrageMsg||(C.enemy.name+' — 출력 폭주!'))+'</span>');var _ic=$('ice');if(_ic){_ic.style.setProperty('--c','#ff2d55');_ic.classList.add('enraged');}
   }
   checkOver();
   return rem;
@@ -468,41 +735,60 @@ function hit(src,tgt,base){return applyHit(tgt,rawDamage(src,tgt,base));}
 function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));$(id).classList.add('active');}
 
 /* ============ 런(맵) ============ */
-function newRun(charId){
+function newRun(charId,diff){
   const ch=CHARACTERS[charId]||CHARACTERS.blackhat;
-  R={rng:mulberry32((Math.random()*1e9)|0),integ:80,max:80,char:ch.id,deck:ch.starter.slice(),relics:[ch.relic],pending:null,eventsSeen:[],map:{floors:genMap(),floor:0,chosen:{}}};
+  applyTheme(ch.id);
+  R={seed:(Math.random()*1e9)|0,integ:80,max:80,char:ch.id,diff:(diff&&DIFF[diff])?diff:'normal',deck:ch.starter.slice(),relics:[ch.relic],pending:null,eventsSeen:[],act:1,map:{floors:genMap(1),floor:0,chosen:{}}};
   showMap();
 }
 function rpool(){return (CHARACTERS[R.char]&&CHARACTERS[R.char].pool)||REWARD_POOL;}
-function openSelect(){show('select');renderSelect();}
+function applyTheme(id){document.body.classList.remove('theme-blackhat','theme-ghost','theme-daemon');document.body.classList.add('theme-'+(id||'blackhat'));}
+function openSelect(){applyTheme('blackhat');show('select');renderSelect();}
+function renderDiff(){
+  const box=$('diffsel');if(!box)return;
+  if(!diffUnlocked(selDiff))selDiff='normal';
+  let rows='';
+  DIFF_ORDER.forEach(id=>{
+    const d=DIFF[id],unl=diffUnlocked(id);
+    rows+='<button class="diffbtn'+(selDiff===id?' sel':'')+(unl?'':' locked')+'" data-d="'+id+'">'+
+      '<span class="dnm">'+d.nm+'</span>'+
+      (unl?'':'<span class="dlock">'+(DIFF[d.gate]?DIFF[d.gate].nm+' 클리어 필요':'잠김')+'</span>')+'</button>';
+  });
+  const sd=DIFF[selDiff];
+  box.innerHTML='<div class="diff-lab">난이도</div><div class="diff-row">'+rows+'</div><div class="diff-info"><b>'+sd.nm+'</b> — '+sd.desc+'</div>';
+  box.querySelectorAll('.diffbtn').forEach(b=>{const id=b.getAttribute('data-d');if(diffUnlocked(id))b.onclick=()=>{selDiff=id;renderDiff();};});
+}
 function renderSelect(){
+  renderDiff();
   const box=$('charlist');box.innerHTML='';
   Object.values(CHARACTERS).forEach(ch=>{
-    const el=document.createElement('div');el.className='charcard'+(ch.locked?' locked':'');el.style.setProperty('--ac',ch.accent);
-    el.innerHTML='<div class="ch-icon">'+ch.icon+'</div>'+
-      '<div class="ch-body"><div class="ch-name disp">'+ch.name+'</div><div class="ch-role">'+ch.sub+' · '+ch.role+'</div><div class="ch-desc">'+ch.desc+'</div></div>'+
-      (ch.locked?'<div class="ch-lock">준비 중</div>':'<div class="ch-go">선택</div>');
-    if(!ch.locked)el.onclick=()=>newRun(ch.id);
+    const unl=!ch.locked&&charUnlocked(ch);
+    const el=document.createElement('div');el.className='charcard'+(unl?'':' locked');el.style.setProperty('--ac',ch.accent);
+    var foot=ch.locked?'<div class="ch-lock">준비 중</div>':(!charUnlocked(ch)?('<div class="ch-lock">'+(((DIFF[ch.gate]||{}).nm)||'?')+' 클리어 필요</div>'):'<div class="ch-go">선택</div>');
+    el.innerHTML='<div class="ch-icon">'+ICONS[ch.id]+'</div>'+
+      '<div class="ch-body"><div class="ch-name disp">'+ch.name+'</div><div class="ch-role">'+ch.sub+' · '+ch.role+'</div><div class="ch-desc">'+ch.desc+'</div></div>'+foot;
+    if(unl)el.onclick=()=>newRun(ch.id,selDiff);
     box.appendChild(el);
   });
 }
-function genMap(){
-  const layout=[['combat','combat'],['anomaly','cache'],['combat','elite'],['safe','anomaly'],['elite','cache'],['boss']];
+function genMap(act){
+  const layout=ACT_MAPS[act]||ACT_MAPS[1];
   return layout.map(f=>f.map(t=>({type:t})));
 }
 function showMap(){show('map');renderMap();}
-function relicChips(){if(!R||R.relics.length===0)return '';return '<span class="rlabel">유물</span>'+R.relics.map(id=>{const r=RELICS[id];return '<span class="relic" title="'+r.name+' — '+r.desc+'">'+r.icon+'</span>';}).join('');}
+function relicChips(){if(!R||R.relics.length===0)return '';return '<span class="rlabel">유물</span>'+R.relics.map(id=>{const r=RELICS[id];return '<span class="relic" title="'+r.name+' — '+r.desc+'">'+ICONS[id]+'</span>';}).join('');}
 function renderMap(){
   $('rfill').style.transform='scaleX('+(R.integ/R.max)+')';
   $('rtxt').textContent=R.integ+' / '+R.max;
   $('relics').innerHTML=relicChips();
   $('deckn').textContent=R.deck.length;
+  $('mtitle').innerHTML='<b style="color:var(--cyan)">영역 '+R.act+' // '+((ACT_META[R.act]&&ACT_META[R.act].name)||'')+'</b> — 계층마다 노드 하나 선택';
   const t=$('maptrack');t.innerHTML='';
   R.map.floors.forEach((floor,fi)=>{
     if(fi>0){const c=document.createElement('div');c.className='conduit';t.appendChild(c);}
     const fd=document.createElement('div');fd.className='floor';if(fi===R.map.floor)fd.id='curfloor';
     const lab=document.createElement('div');lab.className='flabel';
-    lab.textContent=(fi===R.map.floors.length-1)?'코어 게이트':('계층 '+(fi+1));
+    lab.textContent=(fi===R.map.floors.length-1)?(R.act<3?'영역 보스':'코어 게이트'):('계층 '+(fi+1));
     fd.appendChild(lab);
     const fn=document.createElement('div');fn.className='fnodes';
     floor.forEach((node,ni)=>{
@@ -519,28 +805,42 @@ function renderMap(){
 }
 function onNode(ni){
   const node=R.map.floors[R.map.floor][ni];R.map.chosen[R.map.floor]=ni;
-  const t=node.type;
-  if(t==='combat')startCombat(['watchdog','tracer','hk'][rint(3)]);
-  else if(t==='elite')startCombat('barrier');
-  else if(t==='boss')startCombat('cerberus');
+  const t=node.type;const A=ACT_ENEMIES[R.act]||ACT_ENEMIES[1];
+  if(t==='combat')startCombat(A.combat[rint(A.combat.length)]);
+  else if(t==='elite')startCombat(A.elite);
+  else if(t==='boss')startCombat(A.boss);
   else if(t==='safe')openSafe();
   else if(t==='anomaly')openAnomaly();
   else if(t==='cache')openRelicReward('데이터 캐시',()=>{advanceFloor();showMap();});
 }
 function advanceFloor(){R.map.floor++;}
 function afterNode(){advanceFloor();showMap();}
+function actClear(){
+  const before=R.integ,after=Math.min(R.max,before+Math.floor(R.max*0.4));R.integ=after;
+  const nm=(ACT_META[R.act]&&ACT_META[R.act].name)||'';
+  $('evbody').innerHTML='<div class="scr-h" style="color:var(--cyan)">영역 돌파 // '+nm+'</div>'+
+    '<div class="scr-sub">방어선을 돌파했습니다. 더 깊은 계층으로 내려갑니다.</div>'+
+    '<div class="bigheal">+'+(after-before)+'</div>'+
+    '<div class="scr-sub">무결성 복구 — '+after+' / '+R.max+'</div>'+
+    '<button class="go" id="actgo">보상 수령 // 다음 영역 진입</button>';
+  show('event');
+  $('actgo').onclick=()=>openRelicReward('영역 돌파 — 코어 키 획득',()=>openCardReward(nextAct));
+}
+function nextAct(){R.act++;R.map={floors:genMap(R.act),floor:0,chosen:{}};showMap();}
 
 /* ============ 전투 ============ */
 function startCombat(enemyId){
-  const ed=ENEMIES[enemyId];
-  C={player:{integ:R.integ,max:R.max,ram:0,maxRam:3,fw:0,st:{exp:0,jam:0,ovc:0},daemons:[],nextFw:0},
-     enemy:{name:ed.name,sub:ed.sub,integ:ed.hp,max:ed.hp,fw:0,st:{exp:0,jam:0,ovc:0},moves:ed.moves,pat:ed.pat,idx:0,key:ed.pat[0],boss:!!ed.boss,elite:!!ed.elite,enraged:false,enrageAt:ed.enrageAt||0},
-     draw:[],hand:[],discard:[],turn:0,firstTurn:true,over:null,busy:false};
-  C.draw=shuffle(R.deck.slice());
+  const ed=ENEMIES[enemyId];const dc=curDiff();const ehp=Math.max(1,Math.round(ed.hp*dc.ehp));
+  C={player:{integ:R.integ,max:R.max,ram:0,baseRam:3+dc.ram,maxRam:3+dc.ram,fw:0,st:{exp:0,jam:0,ovc:0,leak:0},daemons:[],nextFw:0},
+     enemy:{name:ed.name,sub:ed.sub,integ:ehp,max:ehp,fw:0,st:{exp:0,jam:0,ovc:0,leak:0},moves:ed.moves,pat:ed.pat,idx:0,key:ed.pat[0],boss:!!ed.boss,elite:!!ed.elite,enraged:false,enrageAt:ed.enrageAt||0,enrageMsg:ed.enrageMsg||''},
+     draw:[],hand:[],discard:[],exhaust:[],ramRest:0,turn:0,firstTurn:true,over:null,busy:false};
+  C.draw=shuffle(R.deck.slice());C.redrawMax=redrawMaxCalc();C.redrawMode=false;
   R.relics.forEach(id=>{const r=RELICS[id];if(r.onCombatStart)r.onCombatStart();});
   C._pendFw=0;if(R.pending){if(R.pending.ovc)addS(C.player,'ovc',R.pending.ovc);C._pendFw=R.pending.fw||0;R.pending=null;}
   logs=[];$('log').innerHTML='';log('<span class="hi">// 조우</span> — '+ed.name);
   show('combat');
+  var _D=EDESIGN[enemyId]||{c:'#16f0e0',outer:'circle',inner:'square',sigil:'eye',role:(ed.boss?'boss':ed.elite?'elite':'normal')};
+  var _ice=$('ice');_ice.className='ice r-'+_D.role;_ice.classList.remove('enraged');_ice.style.setProperty('--c',_D.c);_ice.innerHTML=construct(_D);
   startPlayerTurn();
 }
 function drawCards(n){
@@ -549,10 +849,17 @@ function drawCards(n){
     C.hand.push(C.draw.pop());
   }
 }
+function redrawCard(i){
+  if(!C||C.over||C.busy||C.redrawLeft<=0||i<0||i>=C.hand.length)return;
+  const id=C.hand.splice(i,1)[0];C.discard.push(id);
+  drawCards(1);C.redrawLeft--;
+  if(C.redrawLeft<=0)C.redrawMode=false;
+  renderCombat();
+}
 function startPlayerTurn(){
-  C.turn++;C.player.fw=0;C.player.ram=C.player.maxRam;
+  C.turn++;C.player.fw=0;let _rb=0;if(C.ramRest>0){C.ramRest--;}else{R.relics.forEach(id=>{if(RELICS[id]&&RELICS[id].ram)_rb+=RELICS[id].ram;});}C.player.maxRam=C.player.baseRam+_rb;C.player.ram=C.player.maxRam;C.redrawLeft=C.redrawMax;C.redrawMode=false;
   if(C.player.nextFw){C.player.fw+=C.player.nextFw;C.player.nextFw=0;}
-  C.player.daemons.forEach(d=>{if(d==='guardian')C.player.fw+=5;});
+  C.player.daemons.forEach(d=>{if(d==='guardian')C.player.fw+=5;if(d==='miner')C.player.ram+=1;if(d==='healthcheck')heal(C.player,2);});
   drawCards(5);
   if(C.firstTurn){R.relics.forEach(id=>{const r=RELICS[id];if(r.onFirstTurn)r.onFirstTurn();});if(C._pendFw)C.player.fw+=C._pendFw;C.firstTurn=false;}
   C.busy=false;renderCombat();
@@ -560,38 +867,45 @@ function startPlayerTurn(){
 function applyCard(e){
   if(!e)return;
   if(e.dmg){const h=e.hits||1;for(let i=0;i<h;i++){const dealt=hit(C.player,C.enemy,e.dmg);if(e.leech)heal(C.player,dealt);if(C.over)break;}}
+  if(e.leakHit){const b=Math.floor((C.enemy.st.leak||0)*e.leakHit);if(b>0)hit(C.player,C.enemy,b);}
   if(e.block)C.player.fw+=e.block;
   if(e.exp)addS(C.enemy,'exp',e.exp);
+  if(e.leak)addS(C.enemy,'leak',e.leak);
   if(e.jam)addS(C.enemy,'jam',e.jam);
   if(e.ovc)addS(C.player,'ovc',e.ovc);
   if(e.draw)drawCards(e.draw);
   if(e.nextFw)C.player.nextFw=(C.player.nextFw||0)+e.nextFw;
+  if(e.dmgPerDaemon){const b=C.player.daemons.length*e.dmgPerDaemon;if(b>0)hit(C.player,C.enemy,b);}
+  if(e.blockPerDaemon)C.player.fw+=C.player.daemons.length*e.blockPerDaemon;
   if(e.daemon)C.player.daemons.push(e.daemon);
 }
 function playCard(i){
   if(C.over||C.busy)return;
   const id=C.hand[i],c=CARDS[id];if(!c||C.player.ram<c.cost)return;
-  C.player.ram-=c.cost;C.hand.splice(i,1);C.discard.push(id);
+  C.player.ram-=c.cost;C.hand.splice(i,1);if(c.type==='daemon')C.exhaust.push(id);else C.discard.push(id);
   log('· '+c.name);applyCard(c.e);renderCombat();
 }
 function endTurn(){
   if(C.over||C.busy)return;
-  C.player.daemons.forEach(d=>{if(d==='worm')applyHit(C.enemy,5);});
+  if(C.player.ram<=0&&R.relics.some(id=>RELICS[id]&&RELICS[id].ram)){C.ramRest=2;log('<span class="hi">증설 램 과부하</span> — 다음 2턴 최대 램 보너스 휴지');}
+  C.player.daemons.forEach(d=>{if(d==='worm'){applyHit(C.enemy,5);if(!C.over)applyHit(C.player,2);}if(d==='rootkit')addS(C.enemy,'leak',2);if(d==='botnet')applyHit(C.enemy,3);});
   if(C.over)return;
   tick(C.player);
   C.busy=true;C.discard.push(...C.hand);C.hand=[];renderCombat();
   setTimeout(enemyTurn,520);
 }
 function runMove(en,mv){
-  if(mv.dmg){const h=mv.hits||1;for(let i=0;i<h;i++){hit(en,C.player,mv.dmg);if(C.over)break;}}
+  if(mv.dmg){const h=mv.hits||1;for(let i=0;i<h;i++){hit(en,C.player,edmgScale(mv.dmg));if(C.over)break;}}
   if(mv.gainFw)en.fw+=mv.gainFw;
   if(mv.ovc)addS(en,'ovc',mv.ovc);
   if(mv.jam)addS(C.player,'jam',mv.jam);
   if(mv.exp)addS(C.player,'exp',mv.exp);
+  if(mv.heal){heal(en,mv.heal);floatDmg('enemy','+'+mv.heal,'#16f0e0');}
 }
 function enemyTurn(){
   if(C.over)return;
   C.enemy.fw=0;
+  if(C.enemy.st.leak>0){const lk=C.enemy.st.leak;log('<span class="hi">메모리 누수</span> 발동 — '+C.enemy.name+' -'+lk);applyHit(C.enemy,lk);renderCombat();if(C.over)return;}
   const mv=C.enemy.moves[C.enemy.key];
   log('<span class="hi">▶ '+C.enemy.name+'</span> : '+mv.label);
   runMove(C.enemy,mv);renderCombat();
@@ -607,15 +921,24 @@ function checkOver(){
 function winCombat(){
   R.integ=C.player.integ;
   R.relics.forEach(id=>{const r=RELICS[id];if(r.onWin)r.onWin();});
-  if(C.enemy.boss){endRun('win');return;}
+  if(C.enemy.boss){if(R.act<3){actClear();}else{endRun('win');}return;}
   if(C.enemy.elite){openRelicReward('정예 처치 — 유물 획득',()=>openCardReward(afterNode));}
   else{openCardReward(afterNode);}
 }
 
 /* ---- 렌더 (전투) ---- */
+const DAEMON_META={worm:{name:'웜'},guardian:{name:'사이드카'},rootkit:{name:'루트킷'},botnet:{name:'봇넷'},miner:{name:'마이너'},healthcheck:{name:'헬스체크'}};
+function daemonHtml(){
+  if(!C.player.daemons.length)return'';
+  const cnt={};C.player.daemons.forEach(d=>cnt[d]=(cnt[d]||0)+1);
+  return Object.keys(cnt).map(k=>{const m=DAEMON_META[k]||{name:k};return '<span class="dchip"><span class="di">'+(ICONS[k]||'')+'</span>'+m.name+(cnt[k]>1?(' <b>×'+cnt[k]+'</b>'):'')+'</span>';}).join('');
+}
 const TAG={exploit:'EXPLOIT',script:'SCRIPT',daemon:'DAEMON'};
-function cardInner(c){return '<span class="cost disp">'+c.cost+'</span><div class="chead">'+TAG[c.type]+'<span class="dot"></span></div><div class="cbody"><div class="cname">'+c.name+'</div><div class="cdesc">'+c.desc+'<span class="cur"></span></div></div>';}
-function stHtml(u){let s='';if(u.st.exp>0)s+='<span class="chip exp">노출 '+u.st.exp+'</span>';if(u.st.jam>0)s+='<span class="chip jam">스로틀 '+u.st.jam+'</span>';if(u.st.ovc>0)s+='<span class="chip ovc">오버클럭 '+u.st.ovc+'</span>';return s;}
+function bhInner(c){return '<span class="cost disp">'+c.cost+'</span><div class="chead">'+TAG[c.type]+'<span class="dot"></span></div><div class="cbody"><div class="cname">'+c.name+'</div><div class="cdesc">'+c.desc+'<span class="cur"></span></div></div>';}
+function ghostInner(c){return '<span class="cost disp">'+c.cost+'</span><span class="g-br tl"></span><span class="g-br tr"></span><span class="g-br bl"></span><span class="g-br brc"></span><div class="g-ret"></div><div class="g-top">'+TAG[c.type]+'</div><div class="g-name">'+c.name+'</div><div class="g-desc">'+c.desc+'</div><div class="g-tick"></div>';}
+function daemonInner(c){return '<span class="cost disp">'+c.cost+'</span><div class="d-trace"></div><div class="d-pads"></div><div class="d-led"></div><div class="d-tag">'+TAG[c.type]+'</div><div class="d-chip"><span class="d-cn">'+c.name+'</span></div><div class="d-desc">'+c.desc+'</div>';}
+function cardInner(c){var th=(R&&R.char)||'blackhat';var inner=(th==='ghost')?ghostInner(c):(th==='daemon')?daemonInner(c):bhInner(c);if(c.type==='daemon')inner+='<span class="exh-badge">소멸</span>';return inner;}
+function stHtml(u){let s='';if(u.st.exp>0)s+='<span class="chip exp">노출 '+u.st.exp+'</span>';if(u.st.jam>0)s+='<span class="chip jam">스로틀 '+u.st.jam+'</span>';if(u.st.ovc>0)s+='<span class="chip ovc">오버클럭 '+u.st.ovc+'</span>';if(u.st.leak>0)s+='<span class="chip leak">메모리 누수 '+u.st.leak+'</span>';return s;}
 function renderCombat(){
   const P=C.player,E=C.enemy;
   $('efill').style.transform='scaleX('+(E.integ/E.max)+')';$('etxt').textContent=E.integ+' / '+E.max;
@@ -623,19 +946,23 @@ function renderCombat(){
   $('pfw').textContent=P.fw;$('turn').textContent='TURN '+C.turn;
   $('ename').innerHTML=E.name+' // '+E.sub+(E.fw>0?' &nbsp;<span style="color:#16f0e0">[방화벽 '+E.fw+']</span>':'')+(E.enraged?' &nbsp;<span style="color:#ff3a55">[폭주]</span>':'');
   const mv=E.moves[E.key],it=$('intent');
-  if(mv.dmg){it.className='intent';const v=rawDamage(E,P,mv.dmg);it.innerHTML='<span class="ic">⚔</span> <b>'+v+'</b>'+((mv.hits&&mv.hits>1)?(' <span style="font-size:12px">× '+mv.hits+'</span>'):'')+' 피해';}
-  else{it.className='intent guard';const ic=(mv.jam||mv.exp)?'⚠':'🛡';it.innerHTML='<span class="ic">'+ic+'</span> '+mv.label;}
-  $('estatus').innerHTML=stHtml(E);$('pstatus').innerHTML=stHtml(P);
+  if(mv.dmg){it.className='intent';const v=rawDamage(E,P,edmgScale(mv.dmg));it.innerHTML='<span class="ic">'+ICONS.atk+'</span> <b>'+v+'</b>'+((mv.hits&&mv.hits>1)?(' <span style="font-size:12px">× '+mv.hits+'</span>'):'')+' 피해';}
+  else{it.className='intent guard';const ic=(mv.jam||mv.exp)?ICONS.warn:ICONS.shield;it.innerHTML='<span class="ic">'+ic+'</span> '+mv.label;}
+  $('estatus').innerHTML=stHtml(E);$('pstatus').innerHTML=stHtml(P);$('daemonbar').innerHTML=daemonHtml();
   $('ramcur').textContent=P.ram;$('rammax').textContent=P.maxRam;
   let pips='';for(let i=0;i<P.maxRam;i++)pips+='<span class="pip'+(i<P.ram?' on':'')+'"></span>';$('rampips').innerHTML=pips;
-  $('piles').innerHTML='덱 <b>'+C.draw.length+'</b> · 버림 <b>'+C.discard.length+'</b><br><span class="pview">▤ 더미 보기</span>';
+  $('piles').innerHTML='덱 <b>'+C.draw.length+'</b> · 버림 <b>'+C.discard.length+'</b>'+(C.exhaust.length?(' · 소멸 <b>'+C.exhaust.length+'</b>'):'')+'<br><span class="pview">▤ 더미 보기</span>';
   $('crelics').innerHTML=relicChips();
   const h=$('hand');h.innerHTML='';
   C.hand.forEach((id,i)=>{const c=CARDS[id],able=!C.over&&!C.busy&&P.ram>=c.cost;
-    const el=document.createElement('div');el.className='card '+c.type+' '+(able?'able':'unable');
+    const el=document.createElement('div');el.className='card '+c.type+' '+(C.redrawMode?'rdsel':(able?'able':'unable'));
     el.innerHTML=cardInner(c);
-    if(able)el.onclick=()=>playCard(i);h.appendChild(el);});
+    if(C.redrawMode&&!C.over&&!C.busy){el.onclick=()=>redrawCard(i);}
+    else if(able){el.onclick=()=>playCard(i);}
+    h.appendChild(el);});
   $('endbtn').disabled=C.over||C.busy;
+  var _rb=$('redrawbtn');if(_rb){$('rdn').textContent=C.redrawLeft;_rb.disabled=C.over||C.busy||C.redrawLeft<=0||C.hand.length===0;_rb.classList.toggle('active',!!C.redrawMode);}
+  var _sb=$('skbtn');if(_sb){if(R.char==='blackhat'){_sb.className='skbtn special';_sb.innerHTML='디컴파일<span class="sk-tag">블랙햇 특수</span>';}else{_sb.className='skbtn';_sb.innerHTML='행동 정보';}}
 }
 function floatDmg(who,txt,col){
   const host=who==='enemy'?$('ice'):$('combat');
@@ -663,7 +990,7 @@ function openRelicReward(title,next){
   rewardNext=next;$('rwh').textContent=title;$('rwsub').textContent='하나를 선택하세요';
   const picks=pickN(avail,Math.min(2,avail.length)),box=$('rwchoices');box.innerHTML='';
   picks.forEach(id=>{const r=RELICS[id];const el=document.createElement('div');el.className='relicpick';
-    el.innerHTML='<div class="ic">'+r.icon+'</div><div class="nm">'+r.name+'</div><div class="ds">'+r.desc+'</div>';
+    el.innerHTML='<div class="ic">'+ICONS[id]+'</div><div class="nm">'+r.name+'</div><div class="ds">'+r.desc+'</div>';
     el.onclick=()=>{R.relics.push(id);finishReward();};box.appendChild(el);});
   $('rwskip').style.display='';show('reward');
 }
@@ -757,7 +1084,7 @@ function pickEvent(){
 }
 function openAnomaly(){show('event');renderAnomaly(pickEvent());}
 function renderAnomaly(ev){
-  let h='<div class="scr-h" style="color:var(--magenta)">◇ 이상 신호</div>';
+  let h='<div class="scr-h" style="color:var(--magenta)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="ic-svg kic"><path d="M12 3.5l8.5 8.5L12 20.5 3.5 12z"/><path d="M12 8.5v4"/><circle cx="12" cy="15" r="0.7" fill="currentColor" stroke="none"/></svg> 이상 신호</div>';
   h+='<div class="anom-title disp">'+esc(ev.title||'알 수 없는 신호')+'</div>';
   h+='<div class="anom-text">'+esc(ev.text||'')+'</div>';
   h+='<div class="anom-choices">';
@@ -770,17 +1097,27 @@ function chooseAnomaly(ev,i){
   const c=ev.choices[i],d=DIM[c.dim]||{rolls:['nothing']};
   const eff=d.rolls[rint(d.rolls.length)],mech=resolveEffect(eff),sign=FX_SIGN[eff]||0;
   const cls=sign>0?'pos':(sign<0?'neg':'neu');
-  $('evbody').innerHTML='<div class="scr-h" style="color:var(--magenta)">◇ 이상 신호</div>'+
+  $('evbody').innerHTML='<div class="scr-h" style="color:var(--magenta)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="ic-svg kic"><path d="M12 3.5l8.5 8.5L12 20.5 3.5 12z"/><path d="M12 8.5v4"/><circle cx="12" cy="15" r="0.7" fill="currentColor" stroke="none"/></svg> 이상 신호</div>'+
     '<div class="anom-text" style="margin-bottom:16px">'+esc(FX_FLAVOR[eff]||'')+'</div>'+
     '<div class="anom-mech '+cls+'">'+esc(mech)+'</div>'+
     '<button class="go" id="anomgo" style="margin-top:24px">계속 // 다음 계층</button>';
   $('anomgo').onclick=()=>afterNode();
 }
 function endRun(res){
-  if(res==='win'){$('endh').textContent='코어 장악';$('endh').style.color='var(--cyan)';
-    $('endp').innerHTML='커베로스를 무력화하고 코어를 장악했습니다.<br>다이브 성공 — 시스템은 이제 당신의 것입니다.';}
+  if(res==='win'){
+    var _dn=curDiff().nm;
+    var _b={ext:diffUnlocked('extreme'),mas:diffUnlocked('master'),g:charUnlocked(CHARACTERS.ghost),d:charUnlocked(CHARACTERS.daemon)};
+    markCleared((R&&R.diff)||'normal');
+    var _ul=[];
+    if(!_b.ext&&diffUnlocked('extreme'))_ul.push('익스트림 난이도');
+    if(!_b.mas&&diffUnlocked('master'))_ul.push('마스터 난이도');
+    if(!_b.g&&charUnlocked(CHARACTERS.ghost))_ul.push('넷러너 고스트');
+    if(!_b.d&&charUnlocked(CHARACTERS.daemon))_ul.push('넷러너 데몬콜러');
+    var _unlock=_ul.length?('<br><span style="color:var(--cyan)">해금: '+_ul.join(' · ')+'</span>'):'';
+    $('endh').textContent='코어 장악';$('endh').style.color='var(--cyan)';
+    $('endp').innerHTML='최종 방어선 오버시어를 무너뜨리고 코어를 완전히 장악했습니다.<br>다이브 성공 — <b style="color:var(--cyan)">'+_dn+'</b> 난이도 클리어.'+_unlock;}
   else{$('endh').textContent='플랫라인';$('endh').style.color='var(--danger)';
-    $('endp').innerHTML='무결성이 0에 도달했습니다. 접속이 강제 종료되었습니다.<br>계층 '+(R.map.floor+1)+'에서 다이브 실패.';}
+    $('endp').innerHTML='무결성이 0에 도달했습니다. 접속이 강제 종료되었습니다.<br>영역 '+R.act+' · 계층 '+(R.map.floor+1)+'에서 다이브 실패.';}
   show('end');
 }
 
@@ -793,19 +1130,26 @@ function pileRows(arr){
 }
 function moveDesc(mv){
   const p=[];
-  if(mv.dmg)p.push('피해 '+mv.dmg+(mv.hits&&mv.hits>1?(' ×'+mv.hits):''));
+  if(mv.dmg)p.push('피해 '+edmgScale(mv.dmg)+(mv.hits&&mv.hits>1?(' ×'+mv.hits):''));
   if(mv.gainFw)p.push('방화벽 +'+mv.gainFw);
   if(mv.ovc)p.push('자신 오버클럭 +'+mv.ovc);
   if(mv.exp)p.push('당신에게 노출 +'+mv.exp);
   if(mv.jam)p.push('당신에게 스로틀 +'+mv.jam);
+  if(mv.heal)p.push('자신 회복 +'+mv.heal);
   return p.join(' · ')||'행동 없음';
 }
 function openSkills(){
-  if(!C)return;const E=C.enemy;
+  if(!C)return;const E=C.enemy;const full=(R.char==='blackhat');
   let h='<div class="sk-enemy disp">'+esc(E.name)+' <span class="sk-sub">'+esc(E.sub)+'</span></div>';
-  Object.keys(E.moves).forEach(k=>{const mv=E.moves[k],cur=(k===E.key);
-    h+='<div class="sk-row'+(cur?' cur':'')+'"><span class="sk-name">'+esc(mv.label)+(cur?' <span class="sk-now">다음</span>':'')+'</span><span class="sk-eff">'+moveDesc(mv)+'</span></div>';});
-  h+='<div class="htip">피해 수치는 기본값이며 노출·오버클럭 등으로 달라질 수 있습니다</div>';
+  if(full){
+    Object.keys(E.moves).forEach(k=>{const mv=E.moves[k],cur=(k===E.key);
+      h+='<div class="sk-row'+(cur?' cur':'')+'"><span class="sk-name">'+esc(mv.label)+(cur?' <span class="sk-now">다음</span>':'')+'</span><span class="sk-eff">'+moveDesc(mv)+'</span></div>';});
+    h+='<div class="htip">피해 수치는 현재 난이도 기준이며 노출·오버클럭 등으로 더 달라질 수 있습니다</div>';
+  }else{
+    const mv=E.moves[E.key];
+    h+='<div class="sk-row cur"><span class="sk-name">'+esc(mv.label)+' <span class="sk-now">다음</span></span><span class="sk-eff">'+moveDesc(mv)+'</span></div>';
+    h+='<div class="htip">행동 패턴 <b style="color:var(--cyan)">전체 분석</b>은 블랙햇의 특수 능력입니다 — 다른 넷러너는 다음 행동만 파악할 수 있습니다</div>';
+  }
   $('skillsbody').innerHTML=h;$('skills').classList.add('show');
 }
 function openPiles(){
@@ -828,8 +1172,44 @@ function openStatus(){
 }
 
 /* ============ 와이어링 ============ */
+function exportSave(){
+  if(!R){alert('저장할 진행이 없습니다.');return;}
+  const data={v:1,game:'zeroday',char:R.char,diff:R.diff||'normal',seed:R.seed|0,integ:R.integ,max:R.max,deck:R.deck,relics:R.relics,act:R.act,pending:R.pending||null,eventsSeen:R.eventsSeen||[],map:R.map};
+  const blob=new Blob([JSON.stringify(data)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);const a=document.createElement('a');
+  a.href=url;a.download='zeroday-save-'+R.char+'-act'+R.act+'-'+Date.now()+'.json';
+  document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+function loadSave(obj){
+  if(!obj||obj.game!=='zeroday'||!Array.isArray(obj.deck)||!obj.map||!Array.isArray(obj.map.floors)){alert('올바른 제로데이 세이브 파일이 아닙니다.');return false;}
+  const ch=CHARACTERS[obj.char]||CHARACTERS.blackhat;applyTheme(ch.id);
+  R={seed:(obj.seed|0)||((Math.random()*1e9)|0),integ:(typeof obj.integ==='number'?obj.integ:80),max:(typeof obj.max==='number'?obj.max:80),char:ch.id,diff:(obj.diff&&DIFF[obj.diff])?obj.diff:'normal',deck:obj.deck.slice(),relics:(obj.relics||[]).slice(),pending:obj.pending||null,eventsSeen:obj.eventsSeen||[],act:obj.act||1,map:obj.map};
+  C=null;logs=[];showMap();return true;
+}
+function onLoadFile(e){
+  const f=e.target.files&&e.target.files[0];if(!f)return;
+  const fr=new FileReader();
+  fr.onload=()=>{let obj=null;try{obj=JSON.parse(fr.result);}catch(err){alert('파일을 읽을 수 없습니다 — JSON 형식이 아닙니다.');return;}loadSave(obj);};
+  fr.onerror=()=>alert('파일 읽기에 실패했습니다.');
+  fr.readAsText(f);e.target.value='';
+}
+const PATCHES=[
+ {v:'v0.6.2',t:'해금 · 개선',n:['넷러너 해금을 추가했습니다 — 하드 클리어 시 고스트, 익스트림 클리어 시 데몬콜러가 열립니다.','데몬콜러 카드도 타입별로 색이 구분되도록 했습니다 — 익스플로잇·스크립트·데몬.','카드 "교체"의 명칭을 "스왑"으로 변경했습니다.']},
+ {v:'v0.6.1',t:'밸런스 조정',n:['데몬(보라) 카드는 사용 후 소멸합니다 — 같은 카드로 무한 중첩 불가.','웜 데몬의 능력이 조절되었습니다 — 여전히 강력하지만 매 턴 자신도 2 피해를 받습니다.','증설 램이 조절되었습니다 — 모든 램을 소진하면 다음 2턴간 보너스가 휴지하고, 등장 빈도도 낮췄습니다.','코어 튜닝과 포트 스캔의 수치가 하향되었습니다.','버전별 패치 노트를 추가했습니다.']},
+ {v:'v0.6.0',t:'운영 시스템',n:['매 턴 카드를 버리고 다시 뽑는 스왑(리드로우)를 추가했습니다.','난이도 4단계(노말·하드·익스트림·마스터)와 단계별 해금을 도입했습니다.','블랙햇 전용 특수 능력 — 적의 행동 패턴 전체를 읽는 디컴파일을 추가했습니다.','진행 상황을 JSON 파일로 저장하고 불러올 수 있습니다.']},
+ {v:'v0.5.0',t:'시각 개편',n:['모든 아이콘을 전용 라인아트 디자인으로 교체했습니다.','적마다 고유한 전투 비주얼(ICE 컨스트럭트)을 도입했습니다.']},
+ {v:'v0.4.0',t:'다이브 확장',n:['내부 서브넷·코어 영역을 추가해 총 3개 영역으로 확장했습니다.','신규 적 10종과 영역 보스, 신규 유물을 추가했습니다.','영역 돌파 시 회복과 보상을 받고 다음 영역으로 진입합니다.']},
+ {v:'v0.3.0',t:'넷러너 확장',n:['고스트와 데몬콜러, 두 넷러너를 추가했습니다.','각 넷러너에게 전용 테마·카드 프레임과 고유 메커니즘(메모리 누수·데몬 소환)을 부여했습니다.']}
+];
+function renderPatch(){
+  const box=$('patchbody');if(!box)return;
+  box.innerHTML=PATCHES.map(p=>'<div class="pv"><div class="pv-h"><span class="pv-v disp">'+p.v+'</span><span class="pv-t">'+p.t+'</span></div><ul class="pv-n">'+p.n.map(x=>'<li>'+x+'</li>').join('')+'</ul></div>').join('');
+}
 $('startbtn').onclick=openSelect;
 $('newrun').onclick=openSelect;
+$('loadbtn').onclick=()=>$('loadfile').click();
+$('loadfile').onchange=onLoadFile;
+$('savebtn').onclick=exportSave;
 $('statusbtn').onclick=openStatus;
 $('statusclose').onclick=()=>$('status').classList.remove('show');
 $('status').onclick=e=>{if(e.target.id==='status')$('status').classList.remove('show');};
@@ -837,16 +1217,21 @@ $('piles').onclick=openPiles;
 $('pilesmclose').onclick=()=>$('pilesm').classList.remove('show');
 $('pilesm').onclick=e=>{if(e.target.id==='pilesm')$('pilesm').classList.remove('show');};
 $('intent').onclick=openSkills;
+$('skbtn').onclick=openSkills;
+$('redrawbtn').onclick=()=>{if(!C||C.over||C.busy||C.redrawLeft<=0)return;C.redrawMode=!C.redrawMode;renderCombat();};
 $('skillsclose').onclick=()=>$('skills').classList.remove('show');
 $('skills').onclick=e=>{if(e.target.id==='skills')$('skills').classList.remove('show');};
 document.querySelectorAll('.jhelp').forEach(b=>b.onclick=()=>$('help').classList.add('show'));
 $('helpclose').onclick=()=>$('help').classList.remove('show');
 $('help').onclick=e=>{if(e.target.id==='help')$('help').classList.remove('show');};
+$('patchbtn').onclick=()=>{renderPatch();$('patch').classList.add('show');};
+$('patchclose').onclick=()=>$('patch').classList.remove('show');
+$('patch').onclick=e=>{if(e.target.id==='patch')$('patch').classList.remove('show');};
 document.addEventListener('click',e=>{if(e.target.closest('.chip'))$('help').classList.add('show');});
 document.addEventListener('click',e=>{if(e.target.closest('.relic'))openStatus();});
 $('endbtn').onclick=endTurn;
 $('rwskip').onclick=finishReward;
-show('title');
+applyTheme('blackhat');show('title');
 </script>
 </body>
 </html>
