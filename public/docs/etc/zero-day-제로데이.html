@@ -45,10 +45,18 @@ header{display:flex;align-items:baseline;justify-content:space-between;gap:8px;p
 
 /* enemy */
 .enemy{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;padding:14px 0 6px;position:relative}
-.intent{display:flex;align-items:center;gap:7px;font-size:13px;padding:5px 12px;border:1px solid var(--danger);border-radius:3px;background:rgba(255,58,85,.08);color:#ffd0d8;margin-bottom:10px;min-height:30px}
+.intent{display:flex;align-items:center;gap:7px;font-size:13px;padding:5px 12px;border:1px solid var(--danger);border-radius:3px;background:rgba(255,58,85,.08);color:#ffd0d8;margin-bottom:10px;min-height:30px;cursor:pointer;position:relative}
+.intent::after{content:'ⓘ';font-size:10px;opacity:.5;margin-left:1px}
 .intent.guard{border-color:var(--cyan);background:rgba(22,240,224,.07);color:#cdf}
 .intent .ic{font-size:15px}
 .intent b{color:#fff;font-family:'Orbitron';font-size:15px}
+.sk-enemy{font-size:13px;color:var(--magenta);margin-bottom:12px;letter-spacing:.04em}
+.sk-enemy .sk-sub{font-size:9px;color:var(--muted);letter-spacing:.1em}
+.sk-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 11px;border:1px solid var(--line);border-radius:7px;margin-bottom:8px}
+.sk-row.cur{border-color:var(--danger);background:rgba(255,58,85,.08)}
+.sk-name{font-size:13px;color:#fff;font-weight:700}
+.sk-now{font-family:'Orbitron';font-size:8px;color:#04121a;background:var(--danger);padding:2px 6px;border-radius:3px;margin-left:6px;vertical-align:1px}
+.sk-eff{flex:0 0 auto;font-size:11px;color:#9fc0d4;text-align:right}
 .ice{position:relative;width:128px;height:128px;display:grid;place-items:center;margin:2px 0 12px}
 .ice i{position:absolute;border:2px solid;border-radius:6px;inset:0;margin:auto}
 .ice .r1{width:108px;height:108px;border-color:var(--magenta);box-shadow:0 0 22px rgba(255,45,149,.45),inset 0 0 18px rgba(255,45,149,.25);animation:spin 9s linear infinite}
@@ -209,6 +217,19 @@ header{display:flex;align-items:baseline;justify-content:space-between;gap:8px;p
 .anom-mech.neg{color:var(--danger);border-color:rgba(255,58,85,.5);background:rgba(255,58,85,.08);box-shadow:0 0 14px rgba(255,58,85,.15)}
 .anom-mech.neu{color:#c9b8ef;border-color:rgba(155,107,255,.5);background:rgba(155,107,255,.08);box-shadow:0 0 14px rgba(155,107,255,.12)}
 
+.charlist{display:flex;flex-direction:column;gap:14px;width:100%;max-width:380px;margin:8px auto 0}
+.charcard{display:flex;align-items:center;gap:13px;padding:15px 16px;border:1px solid var(--ac,var(--cyan));border-radius:10px;background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(0,0,0,.18));cursor:pointer;text-align:left;transition:transform .12s ease,box-shadow .12s ease}
+.charcard:not(.locked):hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.5)}
+.charcard .ch-icon{flex:0 0 auto;width:46px;height:46px;display:grid;place-items:center;font-size:23px;border-radius:10px;border:1px solid var(--ac);color:var(--ac);background:rgba(255,255,255,.04)}
+.charcard .ch-body{flex:1 1 auto;min-width:0}
+.charcard .ch-name{font-size:16px;color:var(--ac);font-weight:700}
+.charcard .ch-role{font-size:9.5px;color:var(--muted);letter-spacing:.06em;margin:3px 0 5px}
+.charcard .ch-desc{font-size:11px;color:#9fc0d4;line-height:1.45}
+.charcard .ch-go{flex:0 0 auto;font-family:'Orbitron';font-weight:700;font-size:10px;color:#04121a;background:var(--ac);padding:7px 11px;border-radius:4px}
+.charcard .ch-lock{flex:0 0 auto;font-family:'Orbitron';font-size:9px;color:var(--muted);border:1px solid var(--muted);padding:6px 10px;border-radius:4px;white-space:nowrap}
+.charcard.locked{opacity:.55;cursor:default;border-color:var(--line)}
+.charcard.locked .ch-icon{border-color:var(--muted);color:var(--muted)}
+.charcard.locked .ch-name{color:#bcd6e6}
 @media (max-width:520px){.sub{display:none}}
 @media (max-width:480px){.card{flex-basis:96px;height:140px}.bar{width:180px}.ram .num{font-size:20px}}
 </style>
@@ -225,6 +246,15 @@ header{display:flex;align-items:baseline;justify-content:space-between;gap:8px;p
       넷러너로 기업 메인프레임에 잠입합니다. 보안 계층을 한 겹씩 뚫고 코어로 하강하세요.<br>손에 쥔 프로그램이 곧 무기입니다.</p>
     <button class="go" id="startbtn">접속 시작</button>
     <div style="margin-top:18px"><button class="sbtn jhelp">용어 설명</button></div>
+  </div>
+</div>
+
+<!-- SELECT -->
+<div id="select" class="screen">
+  <div class="center-screen">
+    <div class="scr-h">캐릭터 선택</div>
+    <div class="scr-sub">잠입할 넷러너를 고르세요</div>
+    <div class="charlist" id="charlist"></div>
   </div>
 </div>
 
@@ -308,7 +338,7 @@ header{display:flex;align-items:baseline;justify-content:space-between;gap:8px;p
     </div>
     <div class="hsec"><h3>상태이상 // STATUS</h3>
       <div class="hrow"><span class="k">노출</span><span class="v">대상이 받는 피해 +50%. 매 턴 1씩 감소.</span></div>
-      <div class="hrow"><span class="k">교란</span><span class="v">대상이 주는 피해 -25%. 매 턴 1씩 감소.</span></div>
+      <div class="hrow"><span class="k">스로틀</span><span class="v">받는 쪽이 주는 피해 -25% (출력 제한). 매 턴 1씩 감소. 오버클럭의 반대.</span></div>
       <div class="hrow"><span class="k">오버클럭</span><span class="v">익스플로잇 피해 +수치. 전투가 끝날 때까지 지속.</span></div>
     </div>
     <div class="hsec"><h3>카드 타입 // CARDS</h3>
@@ -338,6 +368,11 @@ header{display:flex;align-items:baseline;justify-content:space-between;gap:8px;p
   <div class="hbody" id="pilesmbody"></div>
 </div></div>
 
+<div id="skills" class="modal"><div class="hbox">
+  <div class="htop"><span class="disp">적 스킬 // ICE MOVES</span><button id="skillsclose">✕</button></div>
+  <div class="hbody" id="skillsbody"></div>
+</div></div>
+
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
@@ -348,18 +383,18 @@ const CARDS={
   inject:{name:'인젝션',cost:1,type:'exploit',tag:'EXPLOIT',desc:'적에게 6 피해',e:{dmg:6}},
   patch:{name:'패치',cost:1,type:'script',tag:'SCRIPT',desc:'방화벽 5',e:{block:5}},
   overflow:{name:'버퍼 오버플로',cost:2,type:'exploit',tag:'EXPLOIT',desc:'적에게 8 피해\n노출 +2',e:{dmg:8,exp:2}},
-  overdrive:{name:'오버드라이브',cost:0,type:'script',tag:'SCRIPT',desc:'오버클럭 +2\n공격 피해 +2 (지속)',e:{ovc:2}},
+  overdrive:{name:'코어 튜닝',cost:0,type:'script',tag:'SCRIPT',desc:'오버클럭 +2\n공격 피해 +2 (지속)',e:{ovc:2}},
   forkbomb:{name:'포크 밤',cost:1,type:'exploit',tag:'EXPLOIT',desc:'적에게 4 피해 ×2',e:{dmg:4,hits:2}},
   zeroday:{name:'제로데이',cost:2,type:'exploit',tag:'EXPLOIT',desc:'적에게 14 피해',e:{dmg:14}},
-  adaptarmor:{name:'적응형 방벽',cost:1,type:'script',tag:'SCRIPT',desc:'방화벽 8\n다음 턴 방화벽 +4',e:{block:8,nextFw:4}},
-  jammer:{name:'재밍 신호',cost:1,type:'script',tag:'SCRIPT',desc:'적 교란 +2',e:{jam:2}},
+  adaptarmor:{name:'샌드박스',cost:1,type:'script',tag:'SCRIPT',desc:'방화벽 8\n다음 턴 방화벽 +4',e:{block:8,nextFw:4}},
+  jammer:{name:'레이트 리미터',cost:1,type:'script',tag:'SCRIPT',desc:'적 스로틀 +2',e:{jam:2}},
   portscan:{name:'포트 스캔',cost:0,type:'script',tag:'SCRIPT',desc:'적 노출 +3',e:{exp:3}},
-  leech:{name:'데이터 추출',cost:1,type:'exploit',tag:'EXPLOIT',desc:'적에게 7 피해\n준 피해만큼 회복',e:{dmg:7,leech:true}},
+  leech:{name:'데이터 유출',cost:1,type:'exploit',tag:'EXPLOIT',desc:'적에게 7 피해\n준 피해만큼 회복',e:{dmg:7,leech:true}},
   worm:{name:'웜',cost:2,type:'daemon',tag:'DAEMON',desc:'매 턴 종료 시\n적에게 5 피해',e:{daemon:'worm'}},
-  guardian:{name:'가디언 데몬',cost:2,type:'daemon',tag:'DAEMON',desc:'매 턴 시작 시\n방화벽 +5',e:{daemon:'guardian'}},
+  guardian:{name:'사이드카',cost:2,type:'daemon',tag:'DAEMON',desc:'매 턴 시작 시\n방화벽 +5',e:{daemon:'guardian'}},
   hotfix:{name:'핫픽스',cost:0,type:'script',tag:'SCRIPT',desc:'방화벽 4',e:{block:4}},
-  backdoor:{name:'백도어',cost:1,type:'script',tag:'SCRIPT',desc:'카드 2장 드로우',e:{draw:2}},
-  sysdown:{name:'시스템 다운',cost:2,type:'script',tag:'SCRIPT',desc:'적 노출 +2\n적 교란 +2',e:{exp:2,jam:2}},
+  backdoor:{name:'프리페치',cost:1,type:'script',tag:'SCRIPT',desc:'카드 2장 드로우',e:{draw:2}},
+  sysdown:{name:'DDoS',cost:2,type:'script',tag:'SCRIPT',desc:'적 노출 +2\n적 스로틀 +2',e:{exp:2,jam:2}},
   bruteforce:{name:'브루트포스',cost:2,type:'exploit',tag:'EXPLOIT',desc:'적에게 16 피해',e:{dmg:16}},
 };
 const STARTER_DECK=['inject','inject','inject','inject','inject','patch','patch','patch','overflow','overdrive'];
@@ -370,12 +405,12 @@ const ENEMIES={
     moves:{scan:{label:'스캔',dmg:9},trace:{label:'추적',gainFw:6,jam:1},pulse:{label:'과부하 펄스',dmg:15}},pat:['scan','trace','scan','pulse']},
   tracer:{name:'트레이서',sub:'TRACER',hp:36,
     moves:{ping:{label:'핑',dmg:7},lock:{label:'락온',gainFw:5,jam:1},burst:{label:'버스트',dmg:12}},pat:['ping','lock','burst']},
-  hk:{name:'헌터킬러',sub:'HUNTER-KILLER',hp:50,
-    moves:{slash:{label:'슬래시',dmg:11},charge:{label:'차징',ovc:3},execute:{label:'처형',dmg:16}},pat:['slash','charge','execute']},
-  barrier:{name:'방벽 ICE',sub:'BARRIER ICE',hp:80,elite:1,
-    moves:{rampart:{label:'성벽',gainFw:12},twin:{label:'트윈 빔',dmg:7,hits:2},fortify:{label:'강화',ovc:2,gainFw:8},smash:{label:'스매시',dmg:17}},pat:['rampart','twin','fortify','smash']},
-  cerberus:{name:'블랙아이스 케르베로스',sub:'BLACK ICE // CERBERUS',hp:132,boss:1,enrageAt:0.5,
-    moves:{bite:{label:'바이트',dmg:13},wall:{label:'방화벽 가동',gainFw:14},triple:{label:'트리플 클로',dmg:6,hits:3},corrupt:{label:'커럽트',jam:2,exp:0},maul:{label:'마울',dmg:20}},pat:['bite','wall','triple','corrupt','maul']},
+  hk:{name:'OOM 킬러',sub:'OOM-KILLER',hp:50,
+    moves:{slash:{label:'메모리 스파이크',dmg:11},charge:{label:'스왑 고갈',ovc:3},execute:{label:'kill -9',dmg:16}},pat:['slash','charge','execute']},
+  barrier:{name:'WAF',sub:'WEB FIREWALL',hp:80,elite:1,
+    moves:{rampart:{label:'룰셋 강화',gainFw:12},twin:{label:'패킷 필터',dmg:7,hits:2},fortify:{label:'정책 컴파일',ovc:2,gainFw:8},smash:{label:'커넥션 리셋',dmg:17}},pat:['rampart','twin','fortify','smash']},
+  cerberus:{name:'커베로스',sub:'ROOT AUTH // KERBEROS',hp:132,boss:1,enrageAt:0.5,
+    moves:{bite:{label:'인증 거부',dmg:13},wall:{label:'정책 잠금',gainFw:14},triple:{label:'SYN 플러드',dmg:6,hits:3},corrupt:{label:'세션 하이재킹',jam:2,exp:0},maul:{label:'강제 종료',dmg:20}},pat:['bite','wall','triple','corrupt','maul']},
 };
 
 const RELICS={
@@ -386,6 +421,21 @@ const RELICS={
   rammod:{name:'증설 램',icon:'◆',desc:'램 최대치 +1',onCombatStart(){C.player.maxRam+=1;}},
 };
 const RELIC_POOL=['ocmod','cacheb','fwchip','rammod'];
+/* ============================================================
+   PHASE 3 — 캐릭터 (확장 기반)
+   각 캐릭터: {id,name,sub,role,icon,accent,locked, starter,pool,relic}
+   새 캐릭터는 starter(시작덱)/pool(보상 카드풀)/relic(시작 유물)을 채우고 locked:false.
+   ============================================================ */
+const CHARACTERS={
+  blackhat:{id:'blackhat',name:'블랙햇',sub:'BLACK HAT',role:'공격형',icon:'⚡',accent:'#16f0e0',locked:false,
+    desc:'직접 피해와 오버클럭으로 밀어붙이는 브루트포스 해커.',
+    starter:['inject','inject','inject','inject','inject','patch','patch','patch','overflow','overdrive'],
+    pool:REWARD_POOL,relic:'startup'},
+  ghost:{id:'ghost',name:'고스트',sub:'GHOST',role:'제어 / 디버프형',icon:'◐',accent:'#9b6bff',locked:true,
+    desc:'노출·스로틀을 쌓아 한 번에 터뜨리는 스텔스 해커. (준비 중)'},
+  daemon:{id:'daemon',name:'데몬콜러',sub:'DAEMON',role:'소환 / 스노볼형',icon:'✦',accent:'#4fe0c0',locked:true,
+    desc:'지속 데몬을 깔아 굴리는 소환사. (준비 중)'},
+};
 const NODEICON={combat:'⚔',elite:'☠',safe:'✚',cache:'▣',anomaly:'◇',boss:'◈'};
 const NODELABEL={combat:'전투',elite:'정예',safe:'세이프',cache:'캐시',anomaly:'이상',boss:'코어 ICE'};
 
@@ -407,7 +457,7 @@ function applyHit(tgt,amount){
   const who=(tgt===C.enemy)?'enemy':'player';
   floatDmg(who,rem>0?('-'+rem):'BLOCK',rem>0?'#ff3a55':'#16f0e0');glitch(who);
   if(who==='enemy'&&C.enemy.boss&&!C.enemy.enraged&&C.enemy.enrageAt>0&&C.enemy.integ<=C.enemy.max*C.enemy.enrageAt){
-    C.enemy.enraged=true;addS(C.enemy,'ovc',3);log('<span class="hi">케르베로스 과부하 — 출력 폭주!</span>');
+    C.enemy.enraged=true;addS(C.enemy,'ovc',3);log('<span class="hi">커베로스 권한 상승 — 출력 폭주!</span>');
   }
   checkOver();
   return rem;
@@ -418,9 +468,23 @@ function hit(src,tgt,base){return applyHit(tgt,rawDamage(src,tgt,base));}
 function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));$(id).classList.add('active');}
 
 /* ============ 런(맵) ============ */
-function newRun(){
-  R={rng:mulberry32((Math.random()*1e9)|0),integ:80,max:80,deck:STARTER_DECK.slice(),relics:['startup'],pending:null,eventsSeen:[],map:{floors:genMap(),floor:0,chosen:{}}};
+function newRun(charId){
+  const ch=CHARACTERS[charId]||CHARACTERS.blackhat;
+  R={rng:mulberry32((Math.random()*1e9)|0),integ:80,max:80,char:ch.id,deck:ch.starter.slice(),relics:[ch.relic],pending:null,eventsSeen:[],map:{floors:genMap(),floor:0,chosen:{}}};
   showMap();
+}
+function rpool(){return (CHARACTERS[R.char]&&CHARACTERS[R.char].pool)||REWARD_POOL;}
+function openSelect(){show('select');renderSelect();}
+function renderSelect(){
+  const box=$('charlist');box.innerHTML='';
+  Object.values(CHARACTERS).forEach(ch=>{
+    const el=document.createElement('div');el.className='charcard'+(ch.locked?' locked':'');el.style.setProperty('--ac',ch.accent);
+    el.innerHTML='<div class="ch-icon">'+ch.icon+'</div>'+
+      '<div class="ch-body"><div class="ch-name disp">'+ch.name+'</div><div class="ch-role">'+ch.sub+' · '+ch.role+'</div><div class="ch-desc">'+ch.desc+'</div></div>'+
+      (ch.locked?'<div class="ch-lock">준비 중</div>':'<div class="ch-go">선택</div>');
+    if(!ch.locked)el.onclick=()=>newRun(ch.id);
+    box.appendChild(el);
+  });
 }
 function genMap(){
   const layout=[['combat','combat'],['anomaly','cache'],['combat','elite'],['safe','anomaly'],['elite','cache'],['boss']];
@@ -551,7 +615,7 @@ function winCombat(){
 /* ---- 렌더 (전투) ---- */
 const TAG={exploit:'EXPLOIT',script:'SCRIPT',daemon:'DAEMON'};
 function cardInner(c){return '<span class="cost disp">'+c.cost+'</span><div class="chead">'+TAG[c.type]+'<span class="dot"></span></div><div class="cbody"><div class="cname">'+c.name+'</div><div class="cdesc">'+c.desc+'<span class="cur"></span></div></div>';}
-function stHtml(u){let s='';if(u.st.exp>0)s+='<span class="chip exp">노출 '+u.st.exp+'</span>';if(u.st.jam>0)s+='<span class="chip jam">교란 '+u.st.jam+'</span>';if(u.st.ovc>0)s+='<span class="chip ovc">오버클럭 '+u.st.ovc+'</span>';return s;}
+function stHtml(u){let s='';if(u.st.exp>0)s+='<span class="chip exp">노출 '+u.st.exp+'</span>';if(u.st.jam>0)s+='<span class="chip jam">스로틀 '+u.st.jam+'</span>';if(u.st.ovc>0)s+='<span class="chip ovc">오버클럭 '+u.st.ovc+'</span>';return s;}
 function renderCombat(){
   const P=C.player,E=C.enemy;
   $('efill').style.transform='scaleX('+(E.integ/E.max)+')';$('etxt').textContent=E.integ+' / '+E.max;
@@ -587,7 +651,7 @@ let rewardNext=null;
 function finishReward(){const n=rewardNext;rewardNext=null;if(n)n();}
 function openCardReward(next){
   rewardNext=next;$('rwh').textContent='프로그램 획득';$('rwsub').textContent='하나를 덱에 추가하세요';
-  const picks=pickN(REWARD_POOL,3),box=$('rwchoices');box.innerHTML='';
+  const picks=pickN(rpool(),3),box=$('rwchoices');box.innerHTML='';
   picks.forEach(id=>{const c=CARDS[id];const el=document.createElement('div');el.className='card '+c.type+' able';
     el.innerHTML=cardInner(c);
     el.onclick=()=>{R.deck.push(id);finishReward();};box.appendChild(el);});
@@ -676,10 +740,10 @@ function resolveEffect(eff){
     case 'heal_big':{const b=R.integ;R.integ=Math.min(R.max,R.integ+25);return '무결성 +'+(R.integ-b);}
     case 'damage_small':{R.integ=Math.max(1,R.integ-8);return '무결성 -8';}
     case 'damage_big':{R.integ=Math.max(1,R.integ-16);return '무결성 -16';}
-    case 'gain_card':{const id=pickN(REWARD_POOL,1)[0];R.deck.push(id);return CARDS[id].name+' 획득';}
+    case 'gain_card':{const id=pickN(rpool(),1)[0];R.deck.push(id);return CARDS[id].name+' 획득';}
     case 'lose_card':{if(R.deck.length>5){const i=rint(R.deck.length),n=CARDS[R.deck[i]].name;R.deck.splice(i,1);return n+' 제거';}return '제거할 카드가 없다';}
-    case 'gain_relic':{const av=RELIC_POOL.filter(id=>!R.relics.includes(id));if(av.length){const id=pickN(av,1)[0];R.relics.push(id);return RELICS[id].name+' 획득 (유물)';}const id=pickN(REWARD_POOL,1)[0];R.deck.push(id);return CARDS[id].name+' 획득';}
-    case 'risk_relic':{let s;const av=RELIC_POOL.filter(id=>!R.relics.includes(id));if(av.length){const id=pickN(av,1)[0];R.relics.push(id);s=RELICS[id].name+' 획득';}else{const id=pickN(REWARD_POOL,1)[0];R.deck.push(id);s=CARDS[id].name+' 획득';}R.integ=Math.max(1,R.integ-12);return s+', 무결성 -12';}
+    case 'gain_relic':{const av=RELIC_POOL.filter(id=>!R.relics.includes(id));if(av.length){const id=pickN(av,1)[0];R.relics.push(id);return RELICS[id].name+' 획득 (유물)';}const id=pickN(rpool(),1)[0];R.deck.push(id);return CARDS[id].name+' 획득';}
+    case 'risk_relic':{let s;const av=RELIC_POOL.filter(id=>!R.relics.includes(id));if(av.length){const id=pickN(av,1)[0];R.relics.push(id);s=RELICS[id].name+' 획득';}else{const id=pickN(rpool(),1)[0];R.deck.push(id);s=CARDS[id].name+' 획득';}R.integ=Math.max(1,R.integ-12);return s+', 무결성 -12';}
     case 'buff_firewall':{R.pending=R.pending||{fw:0,ovc:0};R.pending.fw+=12;return '다음 전투 방화벽 +12';}
     case 'buff_overclock':{R.pending=R.pending||{fw:0,ovc:0};R.pending.ovc+=2;return '다음 전투 오버클럭 +2';}
     default:return '아무 일도 일어나지 않았다';
@@ -714,7 +778,7 @@ function chooseAnomaly(ev,i){
 }
 function endRun(res){
   if(res==='win'){$('endh').textContent='코어 장악';$('endh').style.color='var(--cyan)';
-    $('endp').innerHTML='블랙아이스 케르베로스를 무력화하고 코어를 장악했습니다.<br>다이브 성공 — 시스템은 이제 당신의 것입니다.';}
+    $('endp').innerHTML='커베로스를 무력화하고 코어를 장악했습니다.<br>다이브 성공 — 시스템은 이제 당신의 것입니다.';}
   else{$('endh').textContent='플랫라인';$('endh').style.color='var(--danger)';
     $('endp').innerHTML='무결성이 0에 도달했습니다. 접속이 강제 종료되었습니다.<br>계층 '+(R.map.floor+1)+'에서 다이브 실패.';}
   show('end');
@@ -726,6 +790,23 @@ function pileRows(arr){
   const cnt={};arr.forEach(id=>cnt[id]=(cnt[id]||0)+1);
   return Object.keys(cnt).sort((a,b)=>CARDS[a].cost-CARDS[b].cost||CARDS[a].name.localeCompare(CARDS[b].name)).map(id=>{const c=CARDS[id];
     return '<div class="pcard '+c.type+'"><span class="pc-cost">'+c.cost+'</span><span class="pc-main"><span class="pc-name">'+c.name+'</span><span class="pc-desc">'+c.desc.replace(/\n/g,' · ')+'</span></span><span class="pc-cnt">×'+cnt[id]+'</span></div>';}).join('');
+}
+function moveDesc(mv){
+  const p=[];
+  if(mv.dmg)p.push('피해 '+mv.dmg+(mv.hits&&mv.hits>1?(' ×'+mv.hits):''));
+  if(mv.gainFw)p.push('방화벽 +'+mv.gainFw);
+  if(mv.ovc)p.push('자신 오버클럭 +'+mv.ovc);
+  if(mv.exp)p.push('당신에게 노출 +'+mv.exp);
+  if(mv.jam)p.push('당신에게 스로틀 +'+mv.jam);
+  return p.join(' · ')||'행동 없음';
+}
+function openSkills(){
+  if(!C)return;const E=C.enemy;
+  let h='<div class="sk-enemy disp">'+esc(E.name)+' <span class="sk-sub">'+esc(E.sub)+'</span></div>';
+  Object.keys(E.moves).forEach(k=>{const mv=E.moves[k],cur=(k===E.key);
+    h+='<div class="sk-row'+(cur?' cur':'')+'"><span class="sk-name">'+esc(mv.label)+(cur?' <span class="sk-now">다음</span>':'')+'</span><span class="sk-eff">'+moveDesc(mv)+'</span></div>';});
+  h+='<div class="htip">피해 수치는 기본값이며 노출·오버클럭 등으로 달라질 수 있습니다</div>';
+  $('skillsbody').innerHTML=h;$('skills').classList.add('show');
 }
 function openPiles(){
   if(!C)return;
@@ -747,14 +828,17 @@ function openStatus(){
 }
 
 /* ============ 와이어링 ============ */
-$('startbtn').onclick=newRun;
-$('newrun').onclick=newRun;
+$('startbtn').onclick=openSelect;
+$('newrun').onclick=openSelect;
 $('statusbtn').onclick=openStatus;
 $('statusclose').onclick=()=>$('status').classList.remove('show');
 $('status').onclick=e=>{if(e.target.id==='status')$('status').classList.remove('show');};
 $('piles').onclick=openPiles;
 $('pilesmclose').onclick=()=>$('pilesm').classList.remove('show');
 $('pilesm').onclick=e=>{if(e.target.id==='pilesm')$('pilesm').classList.remove('show');};
+$('intent').onclick=openSkills;
+$('skillsclose').onclick=()=>$('skills').classList.remove('show');
+$('skills').onclick=e=>{if(e.target.id==='skills')$('skills').classList.remove('show');};
 document.querySelectorAll('.jhelp').forEach(b=>b.onclick=()=>$('help').classList.add('show'));
 $('helpclose').onclick=()=>$('help').classList.remove('show');
 $('help').onclick=e=>{if(e.target.id==='help')$('help').classList.remove('show');};
