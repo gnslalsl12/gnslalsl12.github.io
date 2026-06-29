@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>ZERO DAY · 제로데이</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#060912;--void2:#0a1020;--cyan:#16f0e0;--magenta:#ff2d95;--purple:#9b6bff;
+  --warn:#ffcf2d;--danger:#ff3a55;--green:#4fe0c0;--ink:#dff6ff;--muted:#5d7d92;--line:rgba(22,240,224,.18);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{background:var(--void);color:var(--ink);font-family:'Share Tech Mono',ui-monospace,'Courier New',monospace;overflow:hidden;position:relative}
+.disp{font-family:'Orbitron','Arial Black',system-ui,sans-serif;letter-spacing:.04em}
+
+/* background */
+.void{position:fixed;inset:0;background:radial-gradient(120% 80% at 50% 6%, #11203a 0%, var(--void2) 38%, var(--void) 75%);z-index:0}
+.grid{position:fixed;left:-25%;right:-25%;bottom:-10%;height:62%;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:46px 46px;transform:perspective(420px) rotateX(62deg);transform-origin:bottom center;
+  animation:gridrun 6s linear infinite;-webkit-mask-image:linear-gradient(to top,#000,transparent 92%);mask-image:linear-gradient(to top,#000,transparent 92%);z-index:0;opacity:.7}
+@keyframes gridrun{from{background-position:0 0}to{background-position:0 46px}}
+.scan{position:fixed;inset:0;pointer-events:none;z-index:40;background:repeating-linear-gradient(0deg,rgba(0,0,0,.16) 0 1px,transparent 1px 3px);animation:flick 5s steps(60) infinite;opacity:.5}
+@keyframes flick{0%,97%{opacity:.5}98%{opacity:.28}100%{opacity:.5}}
+
+/* screens */
+.screen{display:none}
+.screen.active{display:flex;flex-direction:column;height:100%;position:relative;z-index:10;max-width:760px;margin:0 auto;width:100%}
+#combat.active{padding:10px 12px}
+
+/* header (combat) */
+header{display:flex;align-items:baseline;justify-content:space-between;gap:8px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.logo{font-weight:900;font-size:18px;color:var(--cyan);text-shadow:0 0 14px rgba(22,240,224,.5)}
+.logo .glx{position:relative;animation:glitch 4.5s infinite}
+@keyframes glitch{0%,92%,100%{text-shadow:0 0 14px rgba(22,240,224,.5)}93%{text-shadow:2px 0 var(--magenta),-2px 0 var(--cyan)}95%{text-shadow:-2px 0 var(--magenta),2px 0 var(--cyan)}97%{text-shadow:0 0 14px rgba(22,240,224,.5)}}
+.sub{font-size:10px;color:var(--muted);letter-spacing:.18em}
+.turn{font-size:11px;color:var(--warn)}
+.hgrp{display:flex;align-items:center;gap:10px}
+.qbtn{width:26px;height:26px;border-radius:50%;border:1px solid var(--cyan);background:transparent;color:var(--cyan);font-family:'Orbitron';font-weight:700;font-size:13px;cursor:pointer;line-height:1;display:grid;place-items:center;flex:0 0 auto}
+.qbtn:hover{background:var(--cyan);color:#04121a;box-shadow:0 0 12px var(--cyan)}
+
+/* enemy */
+.enemy{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;padding:14px 0 6px;position:relative}
+.intent{display:flex;align-items:center;gap:7px;font-size:13px;padding:5px 12px;border:1px solid var(--danger);border-radius:3px;background:rgba(255,58,85,.08);color:#ffd0d8;margin-bottom:10px;min-height:30px}
+.intent.guard{border-color:var(--cyan);background:rgba(22,240,224,.07);color:#cdf}
+.intent .ic{font-size:15px}
+.intent b{color:#fff;font-family:'Orbitron';font-size:15px}
+.ice{position:relative;width:128px;height:128px;display:grid;place-items:center;margin:2px 0 12px}
+.ice i{position:absolute;border:2px solid;border-radius:6px;inset:0;margin:auto}
+.ice .r1{width:108px;height:108px;border-color:var(--magenta);box-shadow:0 0 22px rgba(255,45,149,.45),inset 0 0 18px rgba(255,45,149,.25);animation:spin 9s linear infinite}
+.ice .r2{width:74px;height:74px;border-color:var(--cyan);box-shadow:0 0 18px rgba(22,240,224,.5),inset 0 0 14px rgba(22,240,224,.3);animation:spin 6s linear infinite reverse}
+.ice .core{position:absolute;width:26px;height:26px;background:var(--ink);border:0;border-radius:3px;box-shadow:0 0 24px var(--cyan),0 0 40px var(--magenta);animation:pulse 1.6s ease-in-out infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:.95}50%{transform:scale(.7);opacity:.6}}
+.ename{font-size:11px;color:var(--muted);letter-spacing:.13em;margin-bottom:6px;text-align:center}
+
+/* bars */
+.bar{position:relative;width:230px;max-width:64vw;height:16px;border:1px solid var(--line);background:rgba(0,0,0,.35);border-radius:2px;overflow:hidden}
+.bar .fill{position:absolute;inset:0;width:100%;transform-origin:left;transition:transform .35s ease}
+.bar.ico .fill{background:linear-gradient(90deg,#7a0d1c,var(--danger))}
+.bar.pco .fill{background:linear-gradient(90deg,#0a6a60,var(--cyan))}
+.bar .txt{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;text-shadow:0 1px 2px #000;letter-spacing:.05em}
+.fw{display:inline-flex;align-items:center;gap:4px;font-size:12px;color:#bfe9ff;margin-left:8px}
+.fw .sh{color:var(--cyan)}
+
+.status{display:flex;gap:6px;margin-top:7px;min-height:20px;flex-wrap:wrap;justify-content:center}
+.chip{font-size:10px;padding:2px 7px;border-radius:2px;border:1px solid;letter-spacing:.04em;cursor:pointer}
+.chip.exp{color:#ffb3c8;border-color:var(--magenta);background:rgba(255,45,149,.12)}
+.chip.jam{color:#cdd6ff;border-color:#6b78ff;background:rgba(107,120,255,.12)}
+.chip.ovc{color:#ffe39a;border-color:var(--warn);background:rgba(255,207,45,.12)}
+
+.mid{flex:1 1 auto;display:flex;align-items:center;justify-content:center;position:relative;min-height:10px;padding:6px 8px}
+
+/* player HUD */
+.phud{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 4px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.phud .left{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.ram{display:flex;gap:8px;align-items:center}
+.ram .lab{font-size:10px;color:var(--muted);letter-spacing:.12em}
+.ram .num{font-family:'Orbitron';font-weight:900;font-size:22px;line-height:1;color:var(--cyan);text-shadow:0 0 12px rgba(22,240,224,.55)}
+.ram .num .mx{font-size:12px;color:var(--muted);font-weight:500}
+.ram .pips{display:flex;gap:4px;align-items:center}
+.ram .pip{width:9px;height:20px;border:1px solid rgba(22,240,224,.5);border-radius:2px;background:rgba(0,0,0,.4);transform:skewX(-12deg)}
+.ram .pip.on{background:var(--cyan);box-shadow:0 0 9px var(--cyan);border-color:var(--cyan)}
+.piles{font-size:10px;color:var(--muted);text-align:right;line-height:1.5;cursor:pointer}
+.pview{font-size:9px;color:var(--cyan);letter-spacing:.04em}
+.piles b{color:#bfe9ff}
+.crelics{display:flex;gap:5px;justify-content:center;padding:6px 0 2px;flex-wrap:wrap}
+
+/* hand */
+.hand{flex:0 0 auto;display:flex;gap:8px;justify-content:center;align-items:flex-end;padding:10px 2px 4px;overflow-x:auto;min-height:158px}
+/* 카드 — 칩 × 터미널 하이브리드 */
+.card{flex:0 0 112px;height:154px;position:relative;display:flex;flex-direction:column;cursor:pointer;user-select:none;
+  background:linear-gradient(160deg,#1b212c,#0d1118);border:1px solid #2b3543;
+  -webkit-clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,0 100%);clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,0 100%);
+  font-family:'Share Tech Mono',monospace;filter:drop-shadow(0 5px 11px rgba(0,0,0,.5));transition:transform .12s ease,filter .12s ease}
+.card::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,.26) 0 1px,transparent 1px 3px)}
+.card::before{content:'';position:absolute;left:5px;top:29px;bottom:14px;width:6px;border-radius:1px;z-index:2;opacity:.92}
+.card .cost{position:absolute;top:1px;left:5px;width:21px;height:21px;display:grid;place-items:center;z-index:4;font-family:'Orbitron';font-weight:700;font-size:12px;color:#0a0d12;background:var(--c);border-radius:3px;box-shadow:0 0 8px var(--cf)}
+.card .chead{position:relative;z-index:3;height:23px;display:flex;align-items:center;padding:0 8px 0 30px;background:linear-gradient(180deg,var(--ch),rgba(0,0,0,.12));border-bottom:1px solid var(--cb);font-family:'Orbitron';font-weight:700;font-size:9.5px;letter-spacing:.15em;color:var(--c);text-shadow:0 0 8px var(--cf)}
+.card .chead .dot{width:5px;height:5px;border-radius:50%;background:var(--c);box-shadow:0 0 6px var(--c);margin-left:auto}
+.card .cbody{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;padding:8px 8px 8px 18px}
+.card .cname{font-size:12px;font-weight:700;color:var(--c);text-shadow:0 0 7px var(--cf);line-height:1.25}
+.card .cname::before{content:'> ';opacity:.55}
+.card .cdesc{margin-top:auto;font-size:10.5px;line-height:1.45;white-space:pre-line;color:#cfe6f2}
+.card .cdesc .cur{display:inline-block;width:6px;height:11px;vertical-align:-1px;margin-left:3px;background:var(--c);box-shadow:0 0 7px var(--c);animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.card.able:hover{transform:translateY(-12px);filter:drop-shadow(0 12px 18px rgba(0,0,0,.55)) drop-shadow(0 0 12px var(--cf))}
+.card.unable{opacity:.5;cursor:not-allowed;filter:saturate(.6) drop-shadow(0 3px 8px rgba(0,0,0,.5))}
+.card.exploit{--c:#ff3a55;--cb:rgba(255,58,85,.55);--cf:rgba(255,58,85,.16);--ch:rgba(255,58,85,.24)}
+.card.script{--c:#16f0e0;--cb:rgba(22,240,224,.55);--cf:rgba(22,240,224,.13);--ch:rgba(22,240,224,.22)}
+.card.daemon{--c:#9b6bff;--cb:rgba(155,107,255,.6);--cf:rgba(155,107,255,.18);--ch:rgba(155,107,255,.26)}
+.card.exploit::before{background:repeating-linear-gradient(0deg,var(--c) 0 6px,transparent 6px 9px)}
+.card.script::before{background:repeating-linear-gradient(0deg,var(--c) 0 2px,transparent 2px 4px)}
+.card.daemon::before{background:linear-gradient(90deg,var(--c) 0 1.5px,transparent 1.5px 4.5px,var(--c) 4.5px 6px)}
+
+.ctl{flex:0 0 auto;display:flex;justify-content:center;padding:4px 0 8px}
+#endbtn{font-family:'Orbitron';font-weight:700;font-size:13px;letter-spacing:.1em;padding:11px 30px;color:#04121a;background:var(--cyan);border:0;border-radius:4px;cursor:pointer;box-shadow:0 0 18px rgba(22,240,224,.45);text-transform:uppercase}
+#endbtn:disabled{background:#1d3340;color:#577;box-shadow:none;cursor:default}
+
+#log{width:100%;max-width:360px;margin:0 auto;font-size:11px;color:#9fc0d4;line-height:1.55;text-align:center;max-height:60px;overflow:hidden}
+#log p{margin-bottom:2px}#log .hi{color:#bfe9ff}
+
+.float{position:absolute;left:50%;top:30%;transform:translateX(-50%);font-family:'Orbitron';font-weight:900;font-size:26px;pointer-events:none;z-index:25;animation:floatup 1s ease-out forwards;text-shadow:0 0 10px currentColor}
+@keyframes floatup{0%{opacity:0;transform:translate(-50%,6px) scale(.7)}20%{opacity:1}100%{opacity:0;transform:translate(-50%,-46px) scale(1.1)}}
+.hit{animation:shake .3s}
+@keyframes shake{0%,100%{transform:translate(0,0)}25%{transform:translate(-5px,2px)}50%{transform:translate(4px,-2px)}75%{transform:translate(-3px,1px)}}
+
+/* modals (help + status) */
+.modal{position:fixed;inset:0;z-index:70;display:none;place-items:center;background:rgba(3,6,12,.86);backdrop-filter:blur(4px);padding:18px}
+.modal.show{display:grid}
+.hbox{width:100%;max-width:460px;max-height:84vh;overflow-y:auto;background:linear-gradient(180deg,#0c1626,#0a1018);border:1px solid var(--cyan);border-radius:8px;box-shadow:0 0 40px rgba(22,240,224,.22)}
+.htop{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;position:sticky;top:0;border-bottom:1px solid var(--line);background:#0c1626;color:var(--cyan);font-size:13px;letter-spacing:.08em}
+.htop button{background:transparent;border:0;color:var(--muted);font-size:16px;cursor:pointer}.htop button:hover{color:var(--ink)}
+.hbody{padding:14px 16px}
+.hsec{margin-bottom:16px}
+.hsec h3{font-family:'Orbitron';font-size:11px;color:var(--magenta);letter-spacing:.14em;margin-bottom:8px;border-left:2px solid var(--magenta);padding-left:8px}
+.hrow{display:flex;gap:10px;margin-bottom:7px;font-size:11.5px;line-height:1.55}
+.hrow .k{flex:0 0 96px;color:var(--cyan);font-weight:700}
+.hrow .v{color:#bcd6e6}
+.htip{font-size:10px;color:var(--muted);text-align:center;padding:0 16px 14px}
+.pempty{font-size:11px;color:var(--muted);padding:8px 2px}
+.pcard{display:flex;align-items:center;gap:11px;padding:9px 11px;border:1px solid var(--line);border-radius:7px;margin-bottom:8px;background:rgba(255,255,255,.02)}
+.pcard .pc-cost{flex:0 0 auto;width:26px;height:26px;display:grid;place-items:center;font-family:'Orbitron';font-weight:700;font-size:13px;border-radius:5px}
+.pcard .pc-main{flex:1 1 auto;min-width:0;display:flex;flex-direction:column}
+.pcard .pc-name{font-size:13.5px;color:#fff;font-weight:700;line-height:1.2}
+.pcard .pc-desc{font-size:11px;color:#9fc0d4;margin-top:3px;line-height:1.35}
+.pcard .pc-cnt{flex:0 0 auto;font-family:'Orbitron';font-weight:700;font-size:15px;color:#fff;opacity:.85}
+.pcard.exploit .pc-cost{color:#ff8a98;background:rgba(255,58,85,.14);border:1px solid rgba(255,58,85,.45)}
+.pcard.script .pc-cost{color:#7fece0;background:rgba(22,240,224,.12);border:1px solid rgba(22,240,224,.45)}
+.pcard.daemon .pc-cost{color:#c9b3ff;background:rgba(155,107,255,.14);border:1px solid rgba(155,107,255,.45)}
+
+/* run hud (map) */
+.rhud{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px;border-bottom:1px solid var(--line)}
+.rhud .ml{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.relics{display:flex;gap:5px;flex-wrap:wrap}
+.relic{width:26px;height:26px;border:1px solid var(--purple);border-radius:5px;display:grid;place-items:center;font-size:13px;color:#d6c6ff;background:rgba(155,107,255,.12);cursor:pointer}
+.rlabel{font-size:8px;color:var(--muted);letter-spacing:.12em;align-self:center;margin-right:3px}
+.rbtns{display:flex;gap:8px;align-items:center}
+.sbtn{font-size:11px;padding:6px 12px;border:1px solid var(--cyan);background:transparent;color:var(--cyan);border-radius:4px;cursor:pointer;letter-spacing:.04em}
+.sbtn:hover{background:var(--cyan);color:#04121a}
+
+/* map */
+.mapwrap{flex:1 1 auto;overflow-y:auto;padding:16px 12px 28px}
+.mtitle{text-align:center;font-size:10px;color:var(--muted);letter-spacing:.16em;margin-bottom:16px}
+.floor{display:flex;flex-direction:column;align-items:center}
+.flabel{font-size:9px;color:var(--muted);letter-spacing:.16em;margin-bottom:7px}
+.fnodes{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.conduit{width:1px;height:22px;background:repeating-linear-gradient(0deg,var(--line) 0 4px,transparent 4px 8px);margin:7px auto}
+.node{width:96px;padding:10px 8px;border-radius:8px;border:1px solid var(--line);background:linear-gradient(180deg,#0d1626,#0a1119);display:flex;flex-direction:column;align-items:center;gap:5px;cursor:default;opacity:.4;transition:transform .12s,box-shadow .12s,opacity .12s}
+.node .ni{font-size:22px;line-height:1}
+.node .nl{font-size:10px;letter-spacing:.06em;color:#aecbe0}
+.node.cur{opacity:1;cursor:pointer;border-color:var(--cyan);box-shadow:0 0 16px rgba(22,240,224,.25)}
+.node.cur:hover{transform:translateY(-4px);box-shadow:0 8px 22px rgba(0,0,0,.5),0 0 18px rgba(22,240,224,.4)}
+.node.done{opacity:.9;border-color:rgba(22,240,224,.3)}.node.done .nl{color:var(--muted)}
+.node.faded{opacity:.26}
+.node.t-elite{border-color:rgba(255,58,85,.4)}.node.t-elite .ni{color:var(--danger)}
+.node.t-boss{border-color:rgba(255,45,149,.55);width:140px}.node.t-boss .ni{color:var(--magenta);font-size:28px}
+.node.cur.t-boss{box-shadow:0 0 22px rgba(255,45,149,.4)}
+.node.t-cache .ni{color:var(--purple)}.node.t-safe .ni{color:var(--green)}.node.t-combat .ni{color:var(--cyan)}
+.node.t-anomaly{border-color:rgba(255,45,149,.4)}.node.t-anomaly .ni{color:var(--magenta)}
+
+/* center screens (reward/event/title/end) */
+.center-screen{flex:1 1 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px;text-align:center;overflow-y:auto}
+.scr-h{font-family:'Orbitron';font-weight:900;font-size:22px;letter-spacing:.05em;margin-bottom:6px;color:var(--cyan)}
+.scr-sub{font-size:11px;color:var(--muted);margin-bottom:22px;letter-spacing:.06em;line-height:1.6}
+.choices{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:20px}
+.skip{font-family:'Orbitron';font-size:12px;padding:9px 22px;border:1px solid var(--muted);background:transparent;color:var(--muted);border-radius:4px;cursor:pointer;letter-spacing:.06em}
+.skip:hover{border-color:var(--ink);color:var(--ink)}
+.go{font-family:'Orbitron';font-weight:700;font-size:13px;padding:12px 30px;border:0;background:var(--cyan);color:#04121a;border-radius:4px;cursor:pointer;box-shadow:0 0 18px rgba(22,240,224,.4);letter-spacing:.06em}
+.relicpick{width:150px;padding:14px;border:1px solid var(--purple);border-radius:8px;background:rgba(155,107,255,.08);cursor:pointer}
+.relicpick:hover{box-shadow:0 0 18px rgba(155,107,255,.35);transform:translateY(-4px)}
+.relicpick .ic{font-size:26px}
+.relicpick .nm{font-size:12px;color:#e3d6ff;margin:6px 0 4px;font-weight:700}
+.relicpick .ds{font-size:10px;color:#b9a9e0;line-height:1.4}
+.bigheal{font-family:'Orbitron';font-weight:900;font-size:40px;color:var(--green);text-shadow:0 0 20px rgba(79,224,192,.5);margin:8px 0 18px}
+.anom-title{font-family:'Orbitron';font-weight:700;font-size:16px;color:#fff;margin:6px 0 12px;letter-spacing:.02em}
+.anom-text{max-width:420px;font-size:12.5px;line-height:1.8;color:#cfe6f2;margin:0 auto}
+.anom-choices{display:flex;flex-direction:column;gap:10px;width:100%;max-width:360px;margin:20px auto 0}
+.anom-btn{display:flex;justify-content:space-between;align-items:center;gap:10px;font-family:'Share Tech Mono',monospace;font-size:12.5px;text-align:left;padding:12px 14px;border:1px solid var(--purple);background:rgba(155,107,255,.08);color:#e6d9ff;border-radius:6px;cursor:pointer;line-height:1.45;transition:transform .1s,box-shadow .1s,background .1s}
+.anom-btn .al::before{content:'> ';color:var(--purple)}
+.anom-btn:hover{background:rgba(155,107,255,.18);box-shadow:0 0 16px rgba(155,107,255,.3);transform:translateX(3px)}
+.anom-dim{flex:0 0 auto;font-family:'Orbitron';font-weight:700;font-size:8.5px;letter-spacing:.08em;color:#c9b8ef;border:1px solid rgba(155,107,255,.55);border-radius:3px;padding:3px 7px;white-space:nowrap}
+.anom-mech{display:inline-block;font-family:'Orbitron';font-weight:700;font-size:13px;padding:8px 18px;border-radius:4px;border:1px solid}
+.anom-mech.pos{color:var(--cyan);border-color:rgba(22,240,224,.5);background:rgba(22,240,224,.08);box-shadow:0 0 14px rgba(22,240,224,.15)}
+.anom-mech.neg{color:var(--danger);border-color:rgba(255,58,85,.5);background:rgba(255,58,85,.08);box-shadow:0 0 14px rgba(255,58,85,.15)}
+.anom-mech.neu{color:#c9b8ef;border-color:rgba(155,107,255,.5);background:rgba(155,107,255,.08);box-shadow:0 0 14px rgba(155,107,255,.12)}
+
+@media (max-width:520px){.sub{display:none}}
+@media (max-width:480px){.card{flex-basis:96px;height:140px}.bar{width:180px}.ram .num{font-size:20px}}
+</style>
+</head>
+<body>
+<div class="void"></div><div class="grid"></div><div class="scan"></div>
+
+<!-- TITLE -->
+<div id="title" class="screen">
+  <div class="center-screen">
+    <div class="logo disp" style="font-size:42px;margin-bottom:8px">ZERO <span class="glx">DAY</span></div>
+    <div class="scr-sub" style="margin-bottom:18px">사이버펑크 덱빌딩 // 네트워크 다이브</div>
+    <p style="font-size:12px;color:#9ab;max-width:380px;line-height:1.8;margin-bottom:26px">
+      넷러너로 기업 메인프레임에 잠입합니다. 보안 계층을 한 겹씩 뚫고 코어로 하강하세요.<br>손에 쥔 프로그램이 곧 무기입니다.</p>
+    <button class="go" id="startbtn">접속 시작</button>
+    <div style="margin-top:18px"><button class="sbtn jhelp">용어 설명</button></div>
+  </div>
+</div>
+
+<!-- MAP -->
+<div id="map" class="screen">
+  <div class="rhud">
+    <div class="ml">
+      <div class="bar pco" style="width:150px"><div class="fill" id="rfill"></div><div class="txt" id="rtxt">80 / 80</div></div>
+      <div class="relics" id="relics"></div>
+    </div>
+    <div class="rbtns">
+      <button class="sbtn" id="statusbtn">현황 · 덱 <span id="deckn">0</span></button>
+      <button class="qbtn jhelp">?</button>
+    </div>
+  </div>
+  <div class="mapwrap"><div class="mtitle">// 다이브 경로 — 계층마다 노드 하나를 선택</div><div id="maptrack"></div></div>
+</div>
+
+<!-- COMBAT -->
+<div id="combat" class="screen">
+  <header>
+    <div class="logo disp">ZERO <span class="glx">DAY</span></div>
+    <div class="sub">DEEP DIVE</div>
+    <div class="hgrp"><span class="turn disp" id="turn">TURN 1</span><button class="qbtn jhelp">?</button></div>
+  </header>
+  <section class="enemy">
+    <div class="intent" id="intent"></div>
+    <div class="ice" id="ice"><i class="r1"></i><i class="r2"></i><i class="core"></i></div>
+    <div class="ename disp" id="ename"></div>
+    <div class="bar ico"><div class="fill" id="efill"></div><div class="txt" id="etxt"></div></div>
+    <div class="status" id="estatus"></div>
+  </section>
+  <div class="mid"><div id="log"></div></div>
+  <div class="phud">
+    <div class="left">
+      <div class="bar pco"><div class="fill" id="pfill"></div><div class="txt" id="ptxt"></div></div>
+      <span class="fw">방화벽 <span class="sh" id="pfw">0</span></span>
+    </div>
+    <div class="ram"><span class="lab disp">RAM</span><span class="num"><span id="ramcur">3</span><span class="mx">/<span id="rammax">3</span></span></span><span class="pips" id="rampips"></span></div>
+  </div>
+  <div class="status" id="pstatus" style="justify-content:flex-start;padding-left:4px"></div>
+  <div class="crelics" id="crelics"></div>
+  <div class="hand" id="hand"></div>
+  <div class="phud" style="border-top:0;border-bottom:0;padding-top:0">
+    <div class="piles" id="piles"></div>
+    <div class="ctl" style="padding:0"><button id="endbtn" class="disp">턴 종료</button></div>
+    <div class="piles" style="opacity:0">.</div>
+  </div>
+</div>
+
+<!-- REWARD (cards or relics) -->
+<div id="reward" class="screen">
+  <div class="center-screen">
+    <div class="scr-h" id="rwh">프로그램 획득</div>
+    <div class="scr-sub" id="rwsub">하나를 선택하세요</div>
+    <div class="choices" id="rwchoices"></div>
+    <button class="skip" id="rwskip">건너뛰기</button>
+  </div>
+</div>
+
+<!-- EVENT (safe / cache) -->
+<div id="event" class="screen"><div class="center-screen" id="evbody"></div></div>
+
+<!-- END -->
+<div id="end" class="screen">
+  <div class="center-screen">
+    <div class="scr-h" id="endh"></div>
+    <p class="scr-sub" id="endp" style="max-width:380px;line-height:1.8"></p>
+    <button class="go" id="newrun">다시 다이브</button>
+  </div>
+</div>
+
+<!-- modals -->
+<div id="help" class="modal"><div class="hbox">
+  <div class="htop"><span class="disp">용어 설명 // CODEX</span><button id="helpclose">✕</button></div>
+  <div class="hbody">
+    <div class="hsec"><h3>자원 // RESOURCES</h3>
+      <div class="hrow"><span class="k">무결성</span><span class="v">접속 체력입니다. 0이 되면 플랫라인(패배). 전투 사이에도 유지됩니다.</span></div>
+      <div class="hrow"><span class="k">램 (RAM)</span><span class="v">매 턴 3씩 충전되는 에너지. 카드 실행 비용. (체력 바 우측 시안색 숫자)</span></div>
+      <div class="hrow"><span class="k">방화벽</span><span class="v">피해를 먼저 흡수하는 방어. 매 턴 0으로 초기화되며 누적되지 않습니다.</span></div>
+    </div>
+    <div class="hsec"><h3>상태이상 // STATUS</h3>
+      <div class="hrow"><span class="k">노출</span><span class="v">대상이 받는 피해 +50%. 매 턴 1씩 감소.</span></div>
+      <div class="hrow"><span class="k">교란</span><span class="v">대상이 주는 피해 -25%. 매 턴 1씩 감소.</span></div>
+      <div class="hrow"><span class="k">오버클럭</span><span class="v">익스플로잇 피해 +수치. 전투가 끝날 때까지 지속.</span></div>
+    </div>
+    <div class="hsec"><h3>카드 타입 // CARDS</h3>
+      <div class="hrow"><span class="k">익스플로잇</span><span class="v">적에게 피해를 주는 공격 프로그램.</span></div>
+      <div class="hrow"><span class="k">스크립트</span><span class="v">방화벽·디버프·드로우 등 일회성 효과.</span></div>
+      <div class="hrow"><span class="k">데몬</span><span class="v">전투 동안 지속되는 상주 프로그램.</span></div>
+    </div>
+    <div class="hsec"><h3>노드 // MAP</h3>
+      <div class="hrow"><span class="k">⚔ 전투</span><span class="v">일반 ICE와 교전. 승리 시 프로그램 보상.</span></div>
+      <div class="hrow"><span class="k">☠ 정예</span><span class="v">강한 적. 승리 시 유물 + 프로그램.</span></div>
+      <div class="hrow"><span class="k">✚ 세이프</span><span class="v">무결성 30% 복구.</span></div>
+      <div class="hrow"><span class="k">▣ 캐시</span><span class="v">유물을 발견합니다.</span></div>
+      <div class="hrow"><span class="k">◇ 이상</span><span class="v">돌발 상황이 생성됩니다. 선택에 따라 보상 또는 위험.</span></div>
+      <div class="hrow"><span class="k">◈ 코어 ICE</span><span class="v">계층의 보스. 격파 시 다이브 성공.</span></div>
+    </div>
+  </div>
+  <div class="htip">전투 중 상태 칩을 눌러도 이 설명이 열립니다</div>
+</div></div>
+
+<div id="status" class="modal"><div class="hbox">
+  <div class="htop"><span class="disp">현황 // STATUS</span><button id="statusclose">✕</button></div>
+  <div class="hbody" id="statusbody"></div>
+</div></div>
+
+<div id="pilesm" class="modal"><div class="hbox">
+  <div class="htop"><span class="disp">카드 더미 // PILES</span><button id="pilesmclose">✕</button></div>
+  <div class="hbody" id="pilesmbody"></div>
+</div></div>
+
+<script>
+"use strict";
+const $=id=>document.getElementById(id);
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+
+/* ============ 데이터 ============ */
+const CARDS={
+  inject:{name:'인젝션',cost:1,type:'exploit',tag:'EXPLOIT',desc:'적에게 6 피해',e:{dmg:6}},
+  patch:{name:'패치',cost:1,type:'script',tag:'SCRIPT',desc:'방화벽 5',e:{block:5}},
+  overflow:{name:'버퍼 오버플로',cost:2,type:'exploit',tag:'EXPLOIT',desc:'적에게 8 피해\n노출 +2',e:{dmg:8,exp:2}},
+  overdrive:{name:'오버드라이브',cost:0,type:'script',tag:'SCRIPT',desc:'오버클럭 +2\n공격 피해 +2 (지속)',e:{ovc:2}},
+  forkbomb:{name:'포크 밤',cost:1,type:'exploit',tag:'EXPLOIT',desc:'적에게 4 피해 ×2',e:{dmg:4,hits:2}},
+  zeroday:{name:'제로데이',cost:2,type:'exploit',tag:'EXPLOIT',desc:'적에게 14 피해',e:{dmg:14}},
+  adaptarmor:{name:'적응형 방벽',cost:1,type:'script',tag:'SCRIPT',desc:'방화벽 8\n다음 턴 방화벽 +4',e:{block:8,nextFw:4}},
+  jammer:{name:'재밍 신호',cost:1,type:'script',tag:'SCRIPT',desc:'적 교란 +2',e:{jam:2}},
+  portscan:{name:'포트 스캔',cost:0,type:'script',tag:'SCRIPT',desc:'적 노출 +3',e:{exp:3}},
+  leech:{name:'데이터 추출',cost:1,type:'exploit',tag:'EXPLOIT',desc:'적에게 7 피해\n준 피해만큼 회복',e:{dmg:7,leech:true}},
+  worm:{name:'웜',cost:2,type:'daemon',tag:'DAEMON',desc:'매 턴 종료 시\n적에게 5 피해',e:{daemon:'worm'}},
+  guardian:{name:'가디언 데몬',cost:2,type:'daemon',tag:'DAEMON',desc:'매 턴 시작 시\n방화벽 +5',e:{daemon:'guardian'}},
+  hotfix:{name:'핫픽스',cost:0,type:'script',tag:'SCRIPT',desc:'방화벽 4',e:{block:4}},
+  backdoor:{name:'백도어',cost:1,type:'script',tag:'SCRIPT',desc:'카드 2장 드로우',e:{draw:2}},
+  sysdown:{name:'시스템 다운',cost:2,type:'script',tag:'SCRIPT',desc:'적 노출 +2\n적 교란 +2',e:{exp:2,jam:2}},
+  bruteforce:{name:'브루트포스',cost:2,type:'exploit',tag:'EXPLOIT',desc:'적에게 16 피해',e:{dmg:16}},
+};
+const STARTER_DECK=['inject','inject','inject','inject','inject','patch','patch','patch','overflow','overdrive'];
+const REWARD_POOL=['forkbomb','zeroday','adaptarmor','jammer','portscan','leech','worm','guardian','hotfix','backdoor','sysdown','bruteforce'];
+
+const ENEMIES={
+  watchdog:{name:'감시 프로세스',sub:'WATCHDOG',hp:44,
+    moves:{scan:{label:'스캔',dmg:9},trace:{label:'추적',gainFw:6,jam:1},pulse:{label:'과부하 펄스',dmg:15}},pat:['scan','trace','scan','pulse']},
+  tracer:{name:'트레이서',sub:'TRACER',hp:36,
+    moves:{ping:{label:'핑',dmg:7},lock:{label:'락온',gainFw:5,jam:1},burst:{label:'버스트',dmg:12}},pat:['ping','lock','burst']},
+  hk:{name:'헌터킬러',sub:'HUNTER-KILLER',hp:50,
+    moves:{slash:{label:'슬래시',dmg:11},charge:{label:'차징',ovc:3},execute:{label:'처형',dmg:16}},pat:['slash','charge','execute']},
+  barrier:{name:'방벽 ICE',sub:'BARRIER ICE',hp:80,elite:1,
+    moves:{rampart:{label:'성벽',gainFw:12},twin:{label:'트윈 빔',dmg:7,hits:2},fortify:{label:'강화',ovc:2,gainFw:8},smash:{label:'스매시',dmg:17}},pat:['rampart','twin','fortify','smash']},
+  cerberus:{name:'블랙아이스 케르베로스',sub:'BLACK ICE // CERBERUS',hp:132,boss:1,enrageAt:0.5,
+    moves:{bite:{label:'바이트',dmg:13},wall:{label:'방화벽 가동',gainFw:14},triple:{label:'트리플 클로',dmg:6,hits:3},corrupt:{label:'커럽트',jam:2,exp:0},maul:{label:'마울',dmg:20}},pat:['bite','wall','triple','corrupt','maul']},
+};
+
+const RELICS={
+  startup:{name:'시동 칩',icon:'🔋',desc:'전투 승리 시 무결성 6 회복',onWin(){R.integ=Math.min(R.max,R.integ+6);}},
+  ocmod:{name:'오버클럭 모듈',icon:'▲',desc:'전투 시작 시 오버클럭 +1',onCombatStart(){addS(C.player,'ovc',1);}},
+  cacheb:{name:'캐시 부스터',icon:'＋',desc:'전투 첫 턴 카드 +1 드로우',onFirstTurn(){drawCards(1);}},
+  fwchip:{name:'방화벽 칩',icon:'🛡',desc:'전투 시작 시 방화벽 +8',onFirstTurn(){C.player.fw+=8;}},
+  rammod:{name:'증설 램',icon:'◆',desc:'램 최대치 +1',onCombatStart(){C.player.maxRam+=1;}},
+};
+const RELIC_POOL=['ocmod','cacheb','fwchip','rammod'];
+const NODEICON={combat:'⚔',elite:'☠',safe:'✚',cache:'▣',anomaly:'◇',boss:'◈'};
+const NODELABEL={combat:'전투',elite:'정예',safe:'세이프',cache:'캐시',anomaly:'이상',boss:'코어 ICE'};
+
+/* ============ 상태 ============ */
+let R=null, C=null, logs=[];
+
+/* ============ 유틸 ============ */
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(R.rng()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function rint(n){return Math.floor(R.rng()*n);}
+function pickN(arr,n){const c=arr.slice(),out=[];for(let i=0;i<n&&c.length;i++)out.push(c.splice(rint(c.length),1)[0]);return out;}
+function addS(u,k,n){u.st[k]=(u.st[k]||0)+n;}
+function tick(u){['exp','jam'].forEach(k=>{if(u.st[k]>0)u.st[k]--;});}
+function heal(u,n){u.integ=Math.min(u.max,u.integ+n);}
+function rawDamage(src,tgt,base){let d=base+(src.st.ovc||0);if(src.st.jam>0)d=Math.floor(d*.75);if(tgt.st.exp>0)d=Math.floor(d*1.5);return Math.max(0,d);}
+function applyHit(tgt,amount){
+  let rem=amount;
+  if(tgt.fw>0){const a=Math.min(tgt.fw,rem);tgt.fw-=a;rem-=a;}
+  tgt.integ=Math.max(0,tgt.integ-rem);
+  const who=(tgt===C.enemy)?'enemy':'player';
+  floatDmg(who,rem>0?('-'+rem):'BLOCK',rem>0?'#ff3a55':'#16f0e0');glitch(who);
+  if(who==='enemy'&&C.enemy.boss&&!C.enemy.enraged&&C.enemy.enrageAt>0&&C.enemy.integ<=C.enemy.max*C.enemy.enrageAt){
+    C.enemy.enraged=true;addS(C.enemy,'ovc',3);log('<span class="hi">케르베로스 과부하 — 출력 폭주!</span>');
+  }
+  checkOver();
+  return rem;
+}
+function hit(src,tgt,base){return applyHit(tgt,rawDamage(src,tgt,base));}
+
+/* ============ 화면 전환 ============ */
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));$(id).classList.add('active');}
+
+/* ============ 런(맵) ============ */
+function newRun(){
+  R={rng:mulberry32((Math.random()*1e9)|0),integ:80,max:80,deck:STARTER_DECK.slice(),relics:['startup'],pending:null,eventsSeen:[],map:{floors:genMap(),floor:0,chosen:{}}};
+  showMap();
+}
+function genMap(){
+  const layout=[['combat','combat'],['anomaly','cache'],['combat','elite'],['safe','anomaly'],['elite','cache'],['boss']];
+  return layout.map(f=>f.map(t=>({type:t})));
+}
+function showMap(){show('map');renderMap();}
+function relicChips(){if(!R||R.relics.length===0)return '';return '<span class="rlabel">유물</span>'+R.relics.map(id=>{const r=RELICS[id];return '<span class="relic" title="'+r.name+' — '+r.desc+'">'+r.icon+'</span>';}).join('');}
+function renderMap(){
+  $('rfill').style.transform='scaleX('+(R.integ/R.max)+')';
+  $('rtxt').textContent=R.integ+' / '+R.max;
+  $('relics').innerHTML=relicChips();
+  $('deckn').textContent=R.deck.length;
+  const t=$('maptrack');t.innerHTML='';
+  R.map.floors.forEach((floor,fi)=>{
+    if(fi>0){const c=document.createElement('div');c.className='conduit';t.appendChild(c);}
+    const fd=document.createElement('div');fd.className='floor';if(fi===R.map.floor)fd.id='curfloor';
+    const lab=document.createElement('div');lab.className='flabel';
+    lab.textContent=(fi===R.map.floors.length-1)?'코어 게이트':('계층 '+(fi+1));
+    fd.appendChild(lab);
+    const fn=document.createElement('div');fn.className='fnodes';
+    floor.forEach((node,ni)=>{
+      let state=fi<R.map.floor?'faded':(fi===R.map.floor?'cur':'faded');
+      if(fi<R.map.floor)state=(R.map.chosen[fi]===ni)?'done':'faded';
+      const el=document.createElement('div');el.className='node t-'+node.type+' '+state;
+      el.innerHTML='<div class="ni">'+NODEICON[node.type]+'</div><div class="nl">'+NODELABEL[node.type]+'</div>';
+      if(state==='cur')el.onclick=()=>onNode(ni);
+      fn.appendChild(el);
+    });
+    fd.appendChild(fn);t.appendChild(fd);
+  });
+  const cf=$('curfloor');if(cf)cf.scrollIntoView({block:'center',behavior:'smooth'});
+}
+function onNode(ni){
+  const node=R.map.floors[R.map.floor][ni];R.map.chosen[R.map.floor]=ni;
+  const t=node.type;
+  if(t==='combat')startCombat(['watchdog','tracer','hk'][rint(3)]);
+  else if(t==='elite')startCombat('barrier');
+  else if(t==='boss')startCombat('cerberus');
+  else if(t==='safe')openSafe();
+  else if(t==='anomaly')openAnomaly();
+  else if(t==='cache')openRelicReward('데이터 캐시',()=>{advanceFloor();showMap();});
+}
+function advanceFloor(){R.map.floor++;}
+function afterNode(){advanceFloor();showMap();}
+
+/* ============ 전투 ============ */
+function startCombat(enemyId){
+  const ed=ENEMIES[enemyId];
+  C={player:{integ:R.integ,max:R.max,ram:0,maxRam:3,fw:0,st:{exp:0,jam:0,ovc:0},daemons:[],nextFw:0},
+     enemy:{name:ed.name,sub:ed.sub,integ:ed.hp,max:ed.hp,fw:0,st:{exp:0,jam:0,ovc:0},moves:ed.moves,pat:ed.pat,idx:0,key:ed.pat[0],boss:!!ed.boss,elite:!!ed.elite,enraged:false,enrageAt:ed.enrageAt||0},
+     draw:[],hand:[],discard:[],turn:0,firstTurn:true,over:null,busy:false};
+  C.draw=shuffle(R.deck.slice());
+  R.relics.forEach(id=>{const r=RELICS[id];if(r.onCombatStart)r.onCombatStart();});
+  C._pendFw=0;if(R.pending){if(R.pending.ovc)addS(C.player,'ovc',R.pending.ovc);C._pendFw=R.pending.fw||0;R.pending=null;}
+  logs=[];$('log').innerHTML='';log('<span class="hi">// 조우</span> — '+ed.name);
+  show('combat');
+  startPlayerTurn();
+}
+function drawCards(n){
+  for(let i=0;i<n;i++){
+    if(C.draw.length===0){if(C.discard.length===0)break;C.draw=shuffle(C.discard.slice());C.discard=[];}
+    C.hand.push(C.draw.pop());
+  }
+}
+function startPlayerTurn(){
+  C.turn++;C.player.fw=0;C.player.ram=C.player.maxRam;
+  if(C.player.nextFw){C.player.fw+=C.player.nextFw;C.player.nextFw=0;}
+  C.player.daemons.forEach(d=>{if(d==='guardian')C.player.fw+=5;});
+  drawCards(5);
+  if(C.firstTurn){R.relics.forEach(id=>{const r=RELICS[id];if(r.onFirstTurn)r.onFirstTurn();});if(C._pendFw)C.player.fw+=C._pendFw;C.firstTurn=false;}
+  C.busy=false;renderCombat();
+}
+function applyCard(e){
+  if(!e)return;
+  if(e.dmg){const h=e.hits||1;for(let i=0;i<h;i++){const dealt=hit(C.player,C.enemy,e.dmg);if(e.leech)heal(C.player,dealt);if(C.over)break;}}
+  if(e.block)C.player.fw+=e.block;
+  if(e.exp)addS(C.enemy,'exp',e.exp);
+  if(e.jam)addS(C.enemy,'jam',e.jam);
+  if(e.ovc)addS(C.player,'ovc',e.ovc);
+  if(e.draw)drawCards(e.draw);
+  if(e.nextFw)C.player.nextFw=(C.player.nextFw||0)+e.nextFw;
+  if(e.daemon)C.player.daemons.push(e.daemon);
+}
+function playCard(i){
+  if(C.over||C.busy)return;
+  const id=C.hand[i],c=CARDS[id];if(!c||C.player.ram<c.cost)return;
+  C.player.ram-=c.cost;C.hand.splice(i,1);C.discard.push(id);
+  log('· '+c.name);applyCard(c.e);renderCombat();
+}
+function endTurn(){
+  if(C.over||C.busy)return;
+  C.player.daemons.forEach(d=>{if(d==='worm')applyHit(C.enemy,5);});
+  if(C.over)return;
+  tick(C.player);
+  C.busy=true;C.discard.push(...C.hand);C.hand=[];renderCombat();
+  setTimeout(enemyTurn,520);
+}
+function runMove(en,mv){
+  if(mv.dmg){const h=mv.hits||1;for(let i=0;i<h;i++){hit(en,C.player,mv.dmg);if(C.over)break;}}
+  if(mv.gainFw)en.fw+=mv.gainFw;
+  if(mv.ovc)addS(en,'ovc',mv.ovc);
+  if(mv.jam)addS(C.player,'jam',mv.jam);
+  if(mv.exp)addS(C.player,'exp',mv.exp);
+}
+function enemyTurn(){
+  if(C.over)return;
+  C.enemy.fw=0;
+  const mv=C.enemy.moves[C.enemy.key];
+  log('<span class="hi">▶ '+C.enemy.name+'</span> : '+mv.label);
+  runMove(C.enemy,mv);renderCombat();
+  if(C.over)return;
+  tick(C.enemy);
+  C.enemy.idx=(C.enemy.idx+1)%C.enemy.pat.length;C.enemy.key=C.enemy.pat[C.enemy.idx];
+  setTimeout(startPlayerTurn,640);
+}
+function checkOver(){
+  if(C.enemy.integ<=0&&!C.over){C.over='win';setTimeout(winCombat,600);}
+  else if(C.player.integ<=0&&!C.over){C.over='lose';setTimeout(()=>endRun('lose'),600);}
+}
+function winCombat(){
+  R.integ=C.player.integ;
+  R.relics.forEach(id=>{const r=RELICS[id];if(r.onWin)r.onWin();});
+  if(C.enemy.boss){endRun('win');return;}
+  if(C.enemy.elite){openRelicReward('정예 처치 — 유물 획득',()=>openCardReward(afterNode));}
+  else{openCardReward(afterNode);}
+}
+
+/* ---- 렌더 (전투) ---- */
+const TAG={exploit:'EXPLOIT',script:'SCRIPT',daemon:'DAEMON'};
+function cardInner(c){return '<span class="cost disp">'+c.cost+'</span><div class="chead">'+TAG[c.type]+'<span class="dot"></span></div><div class="cbody"><div class="cname">'+c.name+'</div><div class="cdesc">'+c.desc+'<span class="cur"></span></div></div>';}
+function stHtml(u){let s='';if(u.st.exp>0)s+='<span class="chip exp">노출 '+u.st.exp+'</span>';if(u.st.jam>0)s+='<span class="chip jam">교란 '+u.st.jam+'</span>';if(u.st.ovc>0)s+='<span class="chip ovc">오버클럭 '+u.st.ovc+'</span>';return s;}
+function renderCombat(){
+  const P=C.player,E=C.enemy;
+  $('efill').style.transform='scaleX('+(E.integ/E.max)+')';$('etxt').textContent=E.integ+' / '+E.max;
+  $('pfill').style.transform='scaleX('+(P.integ/P.max)+')';$('ptxt').textContent=P.integ+' / '+P.max;
+  $('pfw').textContent=P.fw;$('turn').textContent='TURN '+C.turn;
+  $('ename').innerHTML=E.name+' // '+E.sub+(E.fw>0?' &nbsp;<span style="color:#16f0e0">[방화벽 '+E.fw+']</span>':'')+(E.enraged?' &nbsp;<span style="color:#ff3a55">[폭주]</span>':'');
+  const mv=E.moves[E.key],it=$('intent');
+  if(mv.dmg){it.className='intent';const v=rawDamage(E,P,mv.dmg);it.innerHTML='<span class="ic">⚔</span> <b>'+v+'</b>'+((mv.hits&&mv.hits>1)?(' <span style="font-size:12px">× '+mv.hits+'</span>'):'')+' 피해';}
+  else{it.className='intent guard';const ic=(mv.jam||mv.exp)?'⚠':'🛡';it.innerHTML='<span class="ic">'+ic+'</span> '+mv.label;}
+  $('estatus').innerHTML=stHtml(E);$('pstatus').innerHTML=stHtml(P);
+  $('ramcur').textContent=P.ram;$('rammax').textContent=P.maxRam;
+  let pips='';for(let i=0;i<P.maxRam;i++)pips+='<span class="pip'+(i<P.ram?' on':'')+'"></span>';$('rampips').innerHTML=pips;
+  $('piles').innerHTML='덱 <b>'+C.draw.length+'</b> · 버림 <b>'+C.discard.length+'</b><br><span class="pview">▤ 더미 보기</span>';
+  $('crelics').innerHTML=relicChips();
+  const h=$('hand');h.innerHTML='';
+  C.hand.forEach((id,i)=>{const c=CARDS[id],able=!C.over&&!C.busy&&P.ram>=c.cost;
+    const el=document.createElement('div');el.className='card '+c.type+' '+(able?'able':'unable');
+    el.innerHTML=cardInner(c);
+    if(able)el.onclick=()=>playCard(i);h.appendChild(el);});
+  $('endbtn').disabled=C.over||C.busy;
+}
+function floatDmg(who,txt,col){
+  const host=who==='enemy'?$('ice'):$('combat');
+  const f=document.createElement('div');f.className='float';f.textContent=txt;f.style.color=col;
+  if(who==='player'){f.style.top='auto';f.style.bottom='150px';}
+  host.appendChild(f);setTimeout(()=>f.remove(),1000);
+}
+function glitch(who){const el=who==='enemy'?$('ice'):$('combat');el.classList.add('hit');setTimeout(()=>el.classList.remove('hit'),300);}
+function log(html){logs.unshift(html);logs=logs.slice(0,8);$('log').innerHTML=logs.map(l=>'<p>'+l+'</p>').join('');}
+
+/* ============ 보상 / 이벤트 ============ */
+let rewardNext=null;
+function finishReward(){const n=rewardNext;rewardNext=null;if(n)n();}
+function openCardReward(next){
+  rewardNext=next;$('rwh').textContent='프로그램 획득';$('rwsub').textContent='하나를 덱에 추가하세요';
+  const picks=pickN(REWARD_POOL,3),box=$('rwchoices');box.innerHTML='';
+  picks.forEach(id=>{const c=CARDS[id];const el=document.createElement('div');el.className='card '+c.type+' able';
+    el.innerHTML=cardInner(c);
+    el.onclick=()=>{R.deck.push(id);finishReward();};box.appendChild(el);});
+  $('rwskip').style.display='';show('reward');
+}
+function openRelicReward(title,next){
+  const avail=RELIC_POOL.filter(id=>!R.relics.includes(id));
+  if(avail.length===0){openCardReward(next);return;}
+  rewardNext=next;$('rwh').textContent=title;$('rwsub').textContent='하나를 선택하세요';
+  const picks=pickN(avail,Math.min(2,avail.length)),box=$('rwchoices');box.innerHTML='';
+  picks.forEach(id=>{const r=RELICS[id];const el=document.createElement('div');el.className='relicpick';
+    el.innerHTML='<div class="ic">'+r.icon+'</div><div class="nm">'+r.name+'</div><div class="ds">'+r.desc+'</div>';
+    el.onclick=()=>{R.relics.push(id);finishReward();};box.appendChild(el);});
+  $('rwskip').style.display='';show('reward');
+}
+function openSafe(){
+  const before=R.integ,after=Math.min(R.max,before+Math.round(R.max*0.3));
+  $('evbody').innerHTML='<div class="scr-h" style="color:var(--green)">세이프 노드</div>'+
+    '<div class="scr-sub">안전 구역에 접속해 무결성을 복구합니다</div>'+
+    '<div class="bigheal">+'+(after-before)+'</div>'+
+    '<div class="scr-sub">무결성 '+before+' → '+after+' / '+R.max+'</div>'+
+    '<button class="go" id="safego">복구 // 다음 계층</button>';
+  show('event');
+  $('safego').onclick=()=>{R.integ=after;afterNode();};
+}
+/* ============================================================
+   PHASE 2 — 로컬 랜덤 이벤트 DB (외부 API 비관여 · 단독 배포용)
+   설계: 선택지는 "정답"이 아니라 "건드릴 영역(dim)"을 고르는 것.
+         결과는 그 영역 안에서 랜덤한 긍정/부정으로 나온다.
+         → 외워서 좋은 것만 고르는 플레이를 막고, 상황에 필요한 영역을 의도적으로 고르게.
+   · 새 이벤트: EVENTS에 {id, title, text, choices:[{label, dim}]} 추가.
+   · dim 종류와 결과 풀은 아래 DIM 테이블(vit/power/guard/gear/code).
+   · 효과 수치는 resolveEffect, 결과 문구/부호는 FX_FLAVOR/FX_SIGN.
+   ============================================================ */
+const DIM={
+  vit:  {tag:'무결성', rolls:['heal_big','heal_small','damage_small','damage_big']},
+  power:{tag:'전투력', rolls:['buff_overclock','buff_overclock','damage_small','damage_big']},
+  guard:{tag:'방어',   rolls:['buff_firewall','buff_firewall','damage_small','nothing']},
+  gear: {tag:'장비',   rolls:['gain_relic','risk_relic','nothing','damage_small']},
+  code: {tag:'코드',   rolls:['gain_card','gain_card','lose_card','nothing']},
+};
+const FX_FLAVOR={
+  heal_small:'노이즈가 잦아들며 시스템이 조금 안정된다.',
+  heal_big:'복구 코드가 퍼지며 무결성이 깊게 차오른다.',
+  damage_small:'예상치 못한 잡음이 무결성을 긁고 지나간다.',
+  damage_big:'역류가 회선을 타고 무결성을 강타한다.',
+  gain_card:'잔해 속에서 쓸 만한 프로그램을 건져냈다.',
+  lose_card:'불안정한 코드 한 조각이 떨어져 나간다.',
+  gain_relic:'단단히 봉인돼 있던 장비가 손에 들어온다.',
+  risk_relic:'장비를 손에 넣었지만 추적 부하가 따라붙는다.',
+  buff_firewall:'방어 루틴이 예열된다. 다음 교전이 한결 든든하다.',
+  buff_overclock:'출력이 끌어올려진다. 다음 교전의 칼날이 매서워진다.',
+  nothing:'신호가 흩어진다. 아무 일도 일어나지 않았다.',
+};
+const FX_SIGN={heal_small:1,heal_big:1,gain_card:1,gain_relic:1,risk_relic:1,buff_firewall:1,buff_overclock:1,nothing:0,lose_card:0,damage_small:-1,damage_big:-1};
+const EVENTS=[
+  {id:'flicker_node',title:'깜빡이는 노드',text:'정체불명의 노드가 불안정하게 깜빡인다. 건드리는 방식에 따라 전혀 다른 게 흘러나올 것 같다.',choices:[
+    {label:'복구 신호에 동조한다',dim:'vit'},{label:'전투 캐시를 흡수한다',dim:'power'},{label:'장비 잔해를 헤집는다',dim:'gear'}]},
+  {id:'broken_archive',title:'손상된 아카이브',text:'부서진 아카이브에서 정체 모를 데이터가 새어나온다. 무엇이 걸릴지는 열어봐야 안다.',choices:[
+    {label:'코드 조각을 긁어모은다',dim:'code'},{label:'방어 루틴을 복원한다',dim:'guard'}]},
+  {id:'overload_line',title:'과부하 라인',text:'전력선이 과부하로 떨고 있다. 어디로 흘려보낼지 정해야 한다.',choices:[
+    {label:'출력으로 돌린다',dim:'power'},{label:'방패로 돌린다',dim:'guard'},{label:'몸으로 받아낸다',dim:'vit'}]},
+  {id:'dead_runner',title:'죽은 러너의 흔적',text:'먼저 들어왔던 러너의 잔해가 떠다닌다. 쓸 만한 게 남았을지도, 함정이 깔렸을지도.',choices:[
+    {label:'장비를 회수한다',dim:'gear'},{label:'남은 코드를 흡수한다',dim:'code'}]},
+  {id:'unstable_patch',title:'불안정한 패치',text:'출처 불명의 패치가 자동으로 깔리려 한다. 막을 시간은 없다. 어느 쪽으로 유도할까.',choices:[
+    {label:'무결성 쪽으로 흘린다',dim:'vit'},{label:'방어 쪽으로 흘린다',dim:'guard'}]},
+  {id:'siren_signal',title:'유혹하는 신호',text:'깊은 곳에서 달콤한 신호가 손짓한다. 보물일 수도, 미끼일 수도.',choices:[
+    {label:'신호를 따라 장비를 노린다',dim:'gear'},{label:'신호를 화력으로 바꾼다',dim:'power'}]},
+  {id:'corrupted_cache',title:'오염된 캐시',text:'캐시 블록이 반쯤 오염된 채 열려 있다. 안의 코드가 멀쩡할 보장은 없다.',choices:[
+    {label:'코드를 추출한다',dim:'code'},{label:'정수만 뽑아 흡수한다',dim:'vit'}]},
+  {id:'feedback_loop',title:'피드백 루프',text:'회로가 피드백 루프에 빠졌다. 끊는 방식에 따라 결과가 갈린다.',choices:[
+    {label:'출력을 끌어올려 끊는다',dim:'power'},{label:'방벽을 세워 끊는다',dim:'guard'},{label:'장비로 차단한다',dim:'gear'}]},
+  {id:'ghost_protocol',title:'유령 프로토콜',text:'죽은 줄 알았던 프로토콜이 되살아나 접근한다. 협조할지, 이용할지.',choices:[
+    {label:'회복 루틴을 빌린다',dim:'vit'},{label:'코드를 빼낸다',dim:'code'}]},
+  {id:'surge_vault',title:'과전류 볼트',text:'과전류가 흐르는 볼트가 열려 있다. 안에 뭔가 있지만 손대면 튄다.',choices:[
+    {label:'장비를 노린다',dim:'gear'},{label:'전류를 출력으로 흡수한다',dim:'power'},{label:'충격을 무결성으로 받는다',dim:'vit'}]},
+  {id:'salvage_field',title:'잔해 지대',text:'폐코드가 부유하는 잔해 지대. 줍다 보면 보물일 수도, 쓰레기일 수도.',choices:[
+    {label:'코드를 줍는다',dim:'code'},{label:'방어 부품을 줍는다',dim:'guard'}]},
+  {id:'mirror_node',title:'거울 노드',text:'너 자신의 복제본이 거울처럼 마주 선다. 무언가를 교환하자고 한다.',choices:[
+    {label:'화력을 교환한다',dim:'power'},{label:'장비를 교환한다',dim:'gear'},{label:'코드를 교환한다',dim:'code'}]},
+];
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));}
+function resolveEffect(eff){
+  switch(eff){
+    case 'heal_small':{const b=R.integ;R.integ=Math.min(R.max,R.integ+12);return '무결성 +'+(R.integ-b);}
+    case 'heal_big':{const b=R.integ;R.integ=Math.min(R.max,R.integ+25);return '무결성 +'+(R.integ-b);}
+    case 'damage_small':{R.integ=Math.max(1,R.integ-8);return '무결성 -8';}
+    case 'damage_big':{R.integ=Math.max(1,R.integ-16);return '무결성 -16';}
+    case 'gain_card':{const id=pickN(REWARD_POOL,1)[0];R.deck.push(id);return CARDS[id].name+' 획득';}
+    case 'lose_card':{if(R.deck.length>5){const i=rint(R.deck.length),n=CARDS[R.deck[i]].name;R.deck.splice(i,1);return n+' 제거';}return '제거할 카드가 없다';}
+    case 'gain_relic':{const av=RELIC_POOL.filter(id=>!R.relics.includes(id));if(av.length){const id=pickN(av,1)[0];R.relics.push(id);return RELICS[id].name+' 획득 (유물)';}const id=pickN(REWARD_POOL,1)[0];R.deck.push(id);return CARDS[id].name+' 획득';}
+    case 'risk_relic':{let s;const av=RELIC_POOL.filter(id=>!R.relics.includes(id));if(av.length){const id=pickN(av,1)[0];R.relics.push(id);s=RELICS[id].name+' 획득';}else{const id=pickN(REWARD_POOL,1)[0];R.deck.push(id);s=CARDS[id].name+' 획득';}R.integ=Math.max(1,R.integ-12);return s+', 무결성 -12';}
+    case 'buff_firewall':{R.pending=R.pending||{fw:0,ovc:0};R.pending.fw+=12;return '다음 전투 방화벽 +12';}
+    case 'buff_overclock':{R.pending=R.pending||{fw:0,ovc:0};R.pending.ovc+=2;return '다음 전투 오버클럭 +2';}
+    default:return '아무 일도 일어나지 않았다';
+  }
+}
+function pickEvent(){
+  R.eventsSeen=R.eventsSeen||[];
+  let pool=EVENTS.filter(e=>!R.eventsSeen.includes(e.id));
+  if(pool.length===0){R.eventsSeen=[];pool=EVENTS;}
+  const ev=pool[rint(pool.length)];R.eventsSeen.push(ev.id);return ev;
+}
+function openAnomaly(){show('event');renderAnomaly(pickEvent());}
+function renderAnomaly(ev){
+  let h='<div class="scr-h" style="color:var(--magenta)">◇ 이상 신호</div>';
+  h+='<div class="anom-title disp">'+esc(ev.title||'알 수 없는 신호')+'</div>';
+  h+='<div class="anom-text">'+esc(ev.text||'')+'</div>';
+  h+='<div class="anom-choices">';
+  ev.choices.forEach((c,i)=>{const d=DIM[c.dim]||{tag:'?'};h+='<button class="anom-btn" data-i="'+i+'"><span class="al">'+esc(c.label)+'</span><span class="anom-dim">'+d.tag+'</span></button>';});
+  h+='</div>';
+  $('evbody').innerHTML=h;
+  $('evbody').querySelectorAll('.anom-btn').forEach(b=>b.onclick=()=>chooseAnomaly(ev,+b.dataset.i));
+}
+function chooseAnomaly(ev,i){
+  const c=ev.choices[i],d=DIM[c.dim]||{rolls:['nothing']};
+  const eff=d.rolls[rint(d.rolls.length)],mech=resolveEffect(eff),sign=FX_SIGN[eff]||0;
+  const cls=sign>0?'pos':(sign<0?'neg':'neu');
+  $('evbody').innerHTML='<div class="scr-h" style="color:var(--magenta)">◇ 이상 신호</div>'+
+    '<div class="anom-text" style="margin-bottom:16px">'+esc(FX_FLAVOR[eff]||'')+'</div>'+
+    '<div class="anom-mech '+cls+'">'+esc(mech)+'</div>'+
+    '<button class="go" id="anomgo" style="margin-top:24px">계속 // 다음 계층</button>';
+  $('anomgo').onclick=()=>afterNode();
+}
+function endRun(res){
+  if(res==='win'){$('endh').textContent='코어 장악';$('endh').style.color='var(--cyan)';
+    $('endp').innerHTML='블랙아이스 케르베로스를 무력화하고 코어를 장악했습니다.<br>다이브 성공 — 시스템은 이제 당신의 것입니다.';}
+  else{$('endh').textContent='플랫라인';$('endh').style.color='var(--danger)';
+    $('endp').innerHTML='무결성이 0에 도달했습니다. 접속이 강제 종료되었습니다.<br>계층 '+(R.map.floor+1)+'에서 다이브 실패.';}
+  show('end');
+}
+
+/* ============ 현황 모달 ============ */
+function pileRows(arr){
+  if(!arr.length)return '<div class="pempty">비어 있음</div>';
+  const cnt={};arr.forEach(id=>cnt[id]=(cnt[id]||0)+1);
+  return Object.keys(cnt).sort((a,b)=>CARDS[a].cost-CARDS[b].cost||CARDS[a].name.localeCompare(CARDS[b].name)).map(id=>{const c=CARDS[id];
+    return '<div class="pcard '+c.type+'"><span class="pc-cost">'+c.cost+'</span><span class="pc-main"><span class="pc-name">'+c.name+'</span><span class="pc-desc">'+c.desc.replace(/\n/g,' · ')+'</span></span><span class="pc-cnt">×'+cnt[id]+'</span></div>';}).join('');
+}
+function openPiles(){
+  if(!C)return;
+  $('pilesmbody').innerHTML=
+    '<div class="hsec"><h3>뽑을 더미 // DRAW ('+C.draw.length+'장)</h3>'+pileRows(C.draw)+'</div>'+
+    '<div class="hsec"><h3>버린 더미 // DISCARD ('+C.discard.length+'장)</h3>'+pileRows(C.discard)+'</div>';
+  $('pilesm').classList.add('show');
+}
+function openStatus(){
+  let h='<div class="hsec"><h3>보유 유물 // RELICS</h3>';
+  if(R.relics.length===0)h+='<div class="hrow"><span class="v">없음</span></div>';
+  R.relics.forEach(id=>{const r=RELICS[id];h+='<div class="hrow"><span class="k">'+r.icon+' '+r.name+'</span><span class="v">'+r.desc+'</span></div>';});
+  h+='</div><div class="hsec"><h3>덱 // DECK ('+R.deck.length+'장)</h3>';
+  const cnt={};R.deck.forEach(id=>cnt[id]=(cnt[id]||0)+1);
+  Object.keys(cnt).sort((a,b)=>CARDS[a].cost-CARDS[b].cost).forEach(id=>{const c=CARDS[id];
+    h+='<div class="hrow"><span class="k">'+c.name+' ×'+cnt[id]+'</span><span class="v">'+c.cost+'램 · '+c.desc.replace(/\n/g,' / ')+'</span></div>';});
+  h+='</div>';
+  $('statusbody').innerHTML=h;$('status').classList.add('show');
+}
+
+/* ============ 와이어링 ============ */
+$('startbtn').onclick=newRun;
+$('newrun').onclick=newRun;
+$('statusbtn').onclick=openStatus;
+$('statusclose').onclick=()=>$('status').classList.remove('show');
+$('status').onclick=e=>{if(e.target.id==='status')$('status').classList.remove('show');};
+$('piles').onclick=openPiles;
+$('pilesmclose').onclick=()=>$('pilesm').classList.remove('show');
+$('pilesm').onclick=e=>{if(e.target.id==='pilesm')$('pilesm').classList.remove('show');};
+document.querySelectorAll('.jhelp').forEach(b=>b.onclick=()=>$('help').classList.add('show'));
+$('helpclose').onclick=()=>$('help').classList.remove('show');
+$('help').onclick=e=>{if(e.target.id==='help')$('help').classList.remove('show');};
+document.addEventListener('click',e=>{if(e.target.closest('.chip'))$('help').classList.add('show');});
+document.addEventListener('click',e=>{if(e.target.closest('.relic'))openStatus();});
+$('endbtn').onclick=endTurn;
+$('rwskip').onclick=finishReward;
+show('title');
+</script>
+</body>
+</html>
