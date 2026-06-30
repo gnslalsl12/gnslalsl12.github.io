@@ -74,15 +74,25 @@ header{display:flex;align-items:baseline;justify-content:space-between;gap:8px;p
 .ice.r-elite svg{width:134px;height:134px}
 .ice.r-boss svg{width:150px;height:150px}
 .ice.enraged svg{filter:drop-shadow(0 0 9px color-mix(in srgb,currentColor 85%,#fff))}
-.ice .ring-o{transform-origin:50px 50px;animation:spin 15s linear infinite}
-.ice .ring-i{transform-origin:50px 50px;animation:spin 9s linear infinite reverse}
-.ice .ring-m{transform-origin:50px 50px;animation:spin 26s linear infinite}
-.ice .sigil{transform-origin:50px 50px;animation:breathe 3.4s ease-in-out infinite}
-.ice .coreglow{transform-origin:50px 50px;animation:pulse 1.9s ease-in-out infinite}
+.ice .ring-o{transform-box:fill-box;transform-origin:center;will-change:transform;animation:spin 15s linear infinite}
+.ice .ring-i{transform-box:fill-box;transform-origin:center;will-change:transform;animation:spin 9s linear infinite reverse}
+.ice .ring-m{transform-box:fill-box;transform-origin:center;will-change:transform;animation:spin 26s linear infinite}
+.ice .sigil{transform-box:fill-box;transform-origin:center;will-change:transform;animation:breathe 3.4s ease-in-out infinite}
+.ice .coreglow{transform-box:fill-box;transform-origin:center;will-change:transform;animation:pulse 1.9s ease-in-out infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes pulse{0%,100%{transform:scale(1);opacity:.95}50%{transform:scale(.7);opacity:.6}}
 @keyframes breathe{0%,100%{opacity:.92}50%{opacity:.6}}
-@media(prefers-reduced-motion:reduce){.ice .ring-o,.ice .ring-i,.ice .ring-m,.ice .sigil,.ice .coreglow{animation:none}}
+@keyframes sigspin{to{transform:rotate(360deg)}}
+@keyframes sigthrob{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+@keyframes sigflick{0%,40%,100%{opacity:.95}44%{opacity:.5}48%{opacity:.9}68%{opacity:.45}72%{opacity:.92}}
+@keyframes sigbob{0%,100%{transform:translateY(-2.6px)}50%{transform:translateY(2.6px)}}
+@keyframes sigsway{0%,100%{transform:rotate(-10deg)}50%{transform:rotate(10deg)}}
+.ice .sig-spin{transform-box:fill-box;transform-origin:center;will-change:transform;animation:sigspin 13s linear infinite}
+.ice .sig-throb{transform-box:fill-box;transform-origin:center;will-change:transform;animation:sigthrob 2.1s ease-in-out infinite}
+.ice .sig-flick{animation:sigflick 3.8s steps(1,end) infinite}
+.ice .sig-bob{will-change:transform;animation:sigbob 3.1s ease-in-out infinite}
+.ice .sig-sway{transform-box:fill-box;transform-origin:center;will-change:transform;animation:sigsway 4.6s ease-in-out infinite}
+@media(prefers-reduced-motion:reduce){.ice .ring-o,.ice .ring-i,.ice .ring-m,.ice .sigil,.ice .coreglow,.ice .sig-spin,.ice .sig-throb,.ice .sig-flick,.ice .sig-bob,.ice .sig-sway{animation:none}}
 .ename{font-size:11px;color:var(--muted);letter-spacing:.13em;margin-bottom:6px;text-align:center}
 
 /* bars */
@@ -113,13 +123,13 @@ header{display:flex;align-items:baseline;justify-content:space-between;gap:8px;p
 .mid{flex:1 1 auto;display:flex;align-items:center;justify-content:center;position:relative;min-height:10px;padding:6px 8px}
 
 /* player HUD */
-.phud{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 4px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.phud .left{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.ram{display:flex;gap:8px;align-items:center}
+.phud{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:10px 14px;padding:8px 4px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);flex-wrap:wrap}
+.phud .left{display:flex;align-items:center;gap:10px;flex-wrap:wrap;flex:1 1 auto;min-width:150px}
+.ram{display:flex;gap:8px;align-items:center;flex-shrink:0}
 .ram .lab{font-size:10px;color:var(--muted);letter-spacing:.12em}
 .ram .num{font-family:'Orbitron';font-weight:900;font-size:22px;line-height:1;color:var(--cyan);text-shadow:0 0 12px rgba(22,240,224,.55)}
 .ram .num .mx{font-size:12px;color:var(--muted);font-weight:500}
-.ram .pips{display:flex;gap:4px;align-items:center}
+.ram .pips{display:flex;gap:4px;align-items:center;flex-wrap:wrap;max-width:160px}
 .ram .pip{width:9px;height:20px;border:1px solid rgba(22,240,224,.5);border-radius:2px;background:rgba(0,0,0,.4);transform:skewX(-12deg)}
 .ram .pip.on{background:var(--cyan);box-shadow:0 0 9px var(--cyan);border-color:var(--cyan)}
 .piles{font-size:10px;color:var(--muted);text-align:right;line-height:1.5;cursor:pointer}
@@ -128,7 +138,7 @@ header{display:flex;align-items:baseline;justify-content:space-between;gap:8px;p
 .crelics{display:flex;gap:5px;justify-content:center;padding:6px 0 2px;flex-wrap:wrap}
 
 /* hand */
-.hand{flex:0 0 auto;display:flex;gap:8px;justify-content:center;align-items:flex-end;padding:10px 2px 4px;overflow-x:auto;min-height:158px}
+.hand{flex:0 0 auto;display:flex;gap:8px;justify-content:flex-start;align-items:flex-end;padding:10px 2px 4px;overflow-x:auto;min-height:158px}
 /* 카드 — 칩 × 터미널 하이브리드 */
 .card{flex:0 0 112px;height:154px;position:relative;display:flex;flex-direction:column;cursor:pointer;user-select:none;
   background:linear-gradient(160deg,#1b212c,#0d1118);border:1px solid #2b3543;
@@ -317,7 +327,7 @@ body.theme-daemon .d-desc{position:relative;z-index:2;text-align:center;margin-t
 .rdbtn:disabled{opacity:.32;cursor:not-allowed}
 .rdbtn b{font-family:'Orbitron',sans-serif;color:var(--cyan)}
 .rdbtn.active b{color:var(--magenta)}
-.card.rdsel{cursor:pointer;outline:1px dashed color-mix(in srgb,var(--magenta) 60%,transparent);outline-offset:2px}
+.card.rdsel{cursor:pointer;outline:2px dashed color-mix(in srgb,var(--magenta) 70%,transparent);outline-offset:2px;border:1px dashed var(--magenta)!important}
 .card.rdsel:hover{transform:translateY(-6px);box-shadow:0 0 16px color-mix(in srgb,var(--magenta) 40%,transparent)}
 /* 적 스킬 버튼 */
 .skbtn{margin-top:9px;font-family:'Share Tech Mono',monospace;font-size:10.5px;letter-spacing:.05em;color:var(--muted);background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:6px;padding:5px 11px;cursor:pointer;transition:.18s}
@@ -501,7 +511,7 @@ const CARDS={
   overflow:{name:'버퍼 오버플로',cost:2,type:'exploit',tag:'EXPLOIT',desc:'적에게 8 피해\n노출 +2',e:{dmg:8,exp:2}},
   overdrive:{name:'코어 튜닝',cost:1,type:'script',tag:'SCRIPT',desc:'오버클럭 +2\n공격 피해 +2 (지속)',e:{ovc:2}},
   forkbomb:{name:'포크 밤',cost:1,type:'exploit',tag:'EXPLOIT',desc:'적에게 4 피해 ×2',e:{dmg:4,hits:2}},
-  zeroday:{name:'제로데이',cost:2,type:'exploit',tag:'EXPLOIT',desc:'적에게 14 피해',e:{dmg:14}},
+  zeroday:{name:'제로데이',cost:2,type:'exploit',tag:'EXPLOIT',desc:'방화벽 무시\n적에게 14 피해',e:{dmg:14,pierce:true}},
   adaptarmor:{name:'샌드박스',cost:1,type:'script',tag:'SCRIPT',desc:'방화벽 8\n다음 턴 방화벽 +4',e:{block:8,nextFw:4}},
   jammer:{name:'레이트 리미터',cost:1,type:'script',tag:'SCRIPT',desc:'적 스로틀 +2',e:{jam:2}},
   portscan:{name:'포트 스캔',cost:0,type:'script',tag:'SCRIPT',desc:'적 노출 +2',e:{exp:2}},
@@ -583,7 +593,7 @@ const RELICS={
   rammod:{name:'증설 램',desc:'램 최대치 +1 · 모든 램 소진 시 다음 2턴 휴지',ram:1},
   rootcert:{name:'루트 인증서',desc:'전투 시작 시 적에게 메모리 누수 +2',onCombatStart(){addS(C.enemy,'leak',2);}},
   initd:{name:'init 데몬',desc:'전투 시작 시 봇넷 1기 자동 배포',onCombatStart(){C.player.daemons.push('botnet');}},
-  fwchip2:{name:'강화 방화벽 어레이',desc:'전투 첫 턴 방화벽 +14',onFirstTurn(){C.player.fw+=14;}},
+  fwchip2:{name:'강화 방화벽 어레이',desc:'매 턴 시작 시 방화벽 +4',onTurnStart(){C.player.fw+=4;}},
   ramx2:{name:'듀얼 채널 램',desc:'램 최대치 +2 · 모든 램 소진 시 다음 2턴 휴지',ram:2},
   vitals:{name:'바이탈 모니터',desc:'전투 승리 시 무결성 10 회복',onWin(){R.integ=Math.min(R.max,R.integ+10);}},
   coolant:{name:'리퀴드 쿨링',desc:'전투 시작 시 오버클럭 +2',onCombatStart(){addS(C.player,'ovc',2);}},
@@ -655,7 +665,7 @@ const ACT_MAPS={1:[['combat','combat'],['anomaly','cache'],['combat','elite'],['
 function hexPts(r){let p=[];for(let k=0;k<6;k++){const a=(Math.PI/180)*(60*k-90);p.push((50+r*Math.cos(a)).toFixed(1)+','+(50+r*Math.sin(a)).toFixed(1));}return p.join(' ');}
 function eshape(kind,r,cls,dash){const da=dash?' stroke-dasharray="'+dash+'"':'';const c=cls?' class="'+cls+'"':'';if(kind==='circle')return '<circle cx="50" cy="50" r="'+r+'"'+c+da+'/>';if(kind==='square')return '<rect x="'+(50-r)+'" y="'+(50-r)+'" width="'+(2*r)+'" height="'+(2*r)+'" rx="5"'+c+da+'/>';if(kind==='diamond')return '<rect x="'+(50-r)+'" y="'+(50-r)+'" width="'+(2*r)+'" height="'+(2*r)+'" rx="4" transform="rotate(45 50 50)"'+c+da+'/>';if(kind==='hex')return '<polygon points="'+hexPts(r)+'"'+c+da+'/>';return '';}
 function ebrk(r,len){const a=r,b=r-len;return '<g class="brk">'+'<path d="M'+(50-a)+' '+(50-b)+'V'+(50-a)+'H'+(50-b)+'"/>'+'<path d="M'+(50+b)+' '+(50-a)+'H'+(50+a)+'V'+(50-b)+'"/>'+'<path d="M'+(50+a)+' '+(50+b)+'V'+(50+a)+'H'+(50+b)+'"/>'+'<path d="M'+(50-b)+' '+(50+a)+'H'+(50-a)+'V'+(50+b)+'"/>'+'</g>';}
-function construct(d){let f='';if(d.role==='boss'){f+='<polygon points="'+hexPts(47)+'" opacity=".28"/>';f+='<polygon points="'+hexPts(47)+'" class="ring-m" opacity=".55"/>';f+=eshape(d.outer,40,'ring-o','5 7');f+=eshape(d.inner,30,'ring-i');f+=ebrk(45,11);}else if(d.role==='elite'){f+=eshape(d.outer,45,'ring-o','5 7');f+=eshape('hex',37,'ring-m');f+=eshape(d.inner,27,'ring-i');f+=ebrk(44,10);}else{f+=eshape(d.outer,44,'ring-o','5 8');f+=eshape(d.inner,28,'ring-i');}const sw=d.role==='normal'?2.1:2.3;return '<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="'+sw+'" stroke-linecap="round" stroke-linejoin="round"><g opacity=".95">'+f+'</g><g class="sigil" stroke-width="2.2">'+(SIG[d.sigil]||'')+'</g></svg>';}
+function construct(d){let f='';if(d.role==='boss'){f+='<polygon points="'+hexPts(47)+'" opacity=".28"/>';f+='<polygon points="'+hexPts(47)+'" class="ring-m" opacity=".55"/>';f+=eshape(d.outer,40,'ring-o','5 7');f+=eshape(d.inner,30,'ring-i');f+=ebrk(45,11);}else if(d.role==='elite'){f+=eshape(d.outer,45,'ring-o','5 7');f+=eshape('hex',37,'ring-m');f+=eshape(d.inner,27,'ring-i');f+=ebrk(44,10);}else{f+=eshape(d.outer,44,'ring-o','5 8');f+=eshape(d.inner,28,'ring-i');}const sw=d.role==='normal'?2.1:2.3;return '<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="'+sw+'" stroke-linecap="round" stroke-linejoin="round"><g opacity=".95">'+f+'</g><g class="sigil '+(d.mo||'')+'" stroke-width="2.2">'+(SIG[d.sigil]||'')+'</g></svg>';}
 const SIG={
 eye:'<path d="M30 50q20-15 40 0q-20 15-40 0z"/><circle cx="50" cy="50" r="5.5" fill="currentColor" stroke="none"/>',
 radar:'<circle cx="50" cy="50" r="13" opacity=".45"/><circle cx="50" cy="50" r="6.5"/><path d="M50 50L62 39"/><circle cx="62" cy="39" r="2.6" fill="currentColor" stroke="none"/>',
@@ -674,21 +684,21 @@ layers:'<path d="M50 33l15 6.5v8.5c0 9.5-6.5 14.5-15 17.5c-8.5-3-15-8-15-17.5v-8
 master:'<polygon points="'+hexPts(17)+'" opacity=".5"/><path d="M38 50q12-9 24 0q-12 9-24 0z"/><circle cx="50" cy="50" r="4.5" fill="currentColor" stroke="none" class="coreglow"/>'
 };
 const EDESIGN={
-watchdog:{c:'#16f0e0',outer:'circle',inner:'square',sigil:'eye',role:'normal'},
-tracer:{c:'#16f0e0',outer:'diamond',inner:'circle',sigil:'radar',role:'normal'},
-hk:{c:'#16f0e0',outer:'square',inner:'diamond',sigil:'kill',role:'normal'},
-barrier:{c:'#ffb454',outer:'square',inner:'square',sigil:'wall',role:'elite'},
-cerberus:{c:'#ff2d95',outer:'hex',inner:'diamond',sigil:'trihead',role:'boss'},
-sentry:{c:'#9b6bff',outer:'diamond',inner:'square',sigil:'scan',role:'normal'},
-zombie:{c:'#9b6bff',outer:'square',inner:'circle',sigil:'glitch',role:'normal'},
-ransom:{c:'#9b6bff',outer:'circle',inner:'diamond',sigil:'lock',role:'normal'},
-lbwall:{c:'#4fc3ff',outer:'hex',inner:'circle',sigil:'fanout',role:'elite'},
-hydra:{c:'#c14fff',outer:'hex',inner:'hex',sigil:'cluster',role:'boss'},
-kernel:{c:'#ff6b4a',outer:'square',inner:'square',sigil:'chip',role:'normal'},
-rootd:{c:'#ff6b4a',outer:'circle',inner:'circle',sigil:'root',role:'normal'},
-cipher:{c:'#ff6b4a',outer:'hex',inner:'diamond',sigil:'key',role:'normal'},
-ngfw:{c:'#ff4f9d',outer:'hex',inner:'hex',sigil:'layers',role:'elite'},
-overseer:{c:'#ff2d55',outer:'hex',inner:'hex',sigil:'master',role:'boss'}
+watchdog:{c:'#16f0e0',outer:'circle',inner:'square',sigil:'eye',role:'normal',mo:'sig-flick'},
+tracer:{c:'#16f0e0',outer:'diamond',inner:'circle',sigil:'radar',role:'normal',mo:'sig-spin'},
+hk:{c:'#16f0e0',outer:'square',inner:'diamond',sigil:'kill',role:'normal',mo:'sig-throb'},
+barrier:{c:'#ffb454',outer:'square',inner:'square',sigil:'wall',role:'elite',mo:'sig-bob'},
+cerberus:{c:'#ff2d95',outer:'hex',inner:'diamond',sigil:'trihead',role:'boss',mo:'sig-sway'},
+sentry:{c:'#9b6bff',outer:'diamond',inner:'square',sigil:'scan',role:'normal',mo:'sig-spin'},
+zombie:{c:'#9b6bff',outer:'square',inner:'circle',sigil:'glitch',role:'normal',mo:'sig-flick'},
+ransom:{c:'#9b6bff',outer:'circle',inner:'diamond',sigil:'lock',role:'normal',mo:'sig-throb'},
+lbwall:{c:'#4fc3ff',outer:'hex',inner:'circle',sigil:'fanout',role:'elite',mo:'sig-spin'},
+hydra:{c:'#c14fff',outer:'hex',inner:'hex',sigil:'cluster',role:'boss',mo:'sig-throb'},
+kernel:{c:'#ff6b4a',outer:'square',inner:'square',sigil:'chip',role:'normal',mo:'sig-flick'},
+rootd:{c:'#ff6b4a',outer:'circle',inner:'circle',sigil:'root',role:'normal',mo:'sig-bob'},
+cipher:{c:'#ff6b4a',outer:'hex',inner:'diamond',sigil:'key',role:'normal',mo:'sig-sway'},
+ngfw:{c:'#ff4f9d',outer:'hex',inner:'hex',sigil:'layers',role:'elite',mo:'sig-bob'},
+overseer:{c:'#ff2d55',outer:'hex',inner:'hex',sigil:'master',role:'boss',mo:'sig-sway'}
 };
 /* ===== 난이도 ===== */
 const DIFF={
@@ -717,9 +727,9 @@ function addS(u,k,n){u.st[k]=(u.st[k]||0)+n;}
 function tick(u){['exp','jam'].forEach(k=>{if(u.st[k]>0)u.st[k]--;});}
 function heal(u,n){u.integ=Math.min(u.max,u.integ+n);}
 function rawDamage(src,tgt,base){let d=base+(src.st.ovc||0);if(src.st.jam>0)d=Math.floor(d*.75);if(tgt.st.exp>0)d=Math.floor(d*1.5);return Math.max(0,d);}
-function applyHit(tgt,amount){
+function applyHit(tgt,amount,pierce){
   let rem=amount;
-  if(tgt.fw>0){const a=Math.min(tgt.fw,rem);tgt.fw-=a;rem-=a;}
+  if(!pierce&&tgt.fw>0){const a=Math.min(tgt.fw,rem);tgt.fw-=a;rem-=a;}
   tgt.integ=Math.max(0,tgt.integ-rem);
   const who=(tgt===C.enemy)?'enemy':'player';
   floatDmg(who,rem>0?('-'+rem):'BLOCK',rem>0?'#ff3a55':'#16f0e0');glitch(who);
@@ -729,7 +739,7 @@ function applyHit(tgt,amount){
   checkOver();
   return rem;
 }
-function hit(src,tgt,base){return applyHit(tgt,rawDamage(src,tgt,base));}
+function hit(src,tgt,base,pierce){return applyHit(tgt,rawDamage(src,tgt,base),pierce);}
 
 /* ============ 화면 전환 ============ */
 function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));$(id).classList.add('active');}
@@ -833,7 +843,7 @@ function startCombat(enemyId){
   const ed=ENEMIES[enemyId];const dc=curDiff();const ehp=Math.max(1,Math.round(ed.hp*dc.ehp));
   C={player:{integ:R.integ,max:R.max,ram:0,baseRam:3+dc.ram,maxRam:3+dc.ram,fw:0,st:{exp:0,jam:0,ovc:0,leak:0},daemons:[],nextFw:0},
      enemy:{name:ed.name,sub:ed.sub,integ:ehp,max:ehp,fw:0,st:{exp:0,jam:0,ovc:0,leak:0},moves:ed.moves,pat:ed.pat,idx:0,key:ed.pat[0],boss:!!ed.boss,elite:!!ed.elite,enraged:false,enrageAt:ed.enrageAt||0,enrageMsg:ed.enrageMsg||''},
-     draw:[],hand:[],discard:[],exhaust:[],ramRest:0,turn:0,firstTurn:true,over:null,busy:false};
+     draw:[],hand:[],discard:[],exhaust:[],ramRest:0,ramActive:false,turn:0,firstTurn:true,over:null,busy:false};
   C.draw=shuffle(R.deck.slice());C.redrawMax=redrawMaxCalc();C.redrawMode=false;
   R.relics.forEach(id=>{const r=RELICS[id];if(r.onCombatStart)r.onCombatStart();});
   C._pendFw=0;if(R.pending){if(R.pending.ovc)addS(C.player,'ovc',R.pending.ovc);C._pendFw=R.pending.fw||0;R.pending=null;}
@@ -857,16 +867,17 @@ function redrawCard(i){
   renderCombat();
 }
 function startPlayerTurn(){
-  C.turn++;C.player.fw=0;let _rb=0;if(C.ramRest>0){C.ramRest--;}else{R.relics.forEach(id=>{if(RELICS[id]&&RELICS[id].ram)_rb+=RELICS[id].ram;});}C.player.maxRam=C.player.baseRam+_rb;C.player.ram=C.player.maxRam;C.redrawLeft=C.redrawMax;C.redrawMode=false;
+  C.turn++;C.player.fw=0;let _rb=0;if(C.ramRest>0){C.ramRest--;}else{R.relics.forEach(id=>{if(RELICS[id]&&RELICS[id].ram)_rb+=RELICS[id].ram;});}C.player.maxRam=C.player.baseRam+_rb;C.ramActive=_rb>0;C.player.ram=C.player.maxRam;C.redrawLeft=C.redrawMax;C.redrawMode=false;
   if(C.player.nextFw){C.player.fw+=C.player.nextFw;C.player.nextFw=0;}
   C.player.daemons.forEach(d=>{if(d==='guardian')C.player.fw+=5;if(d==='miner')C.player.ram+=1;if(d==='healthcheck')heal(C.player,2);});
+  R.relics.forEach(id=>{const r=RELICS[id];if(r&&r.onTurnStart)r.onTurnStart();});
   drawCards(5);
   if(C.firstTurn){R.relics.forEach(id=>{const r=RELICS[id];if(r.onFirstTurn)r.onFirstTurn();});if(C._pendFw)C.player.fw+=C._pendFw;C.firstTurn=false;}
   C.busy=false;renderCombat();
 }
 function applyCard(e){
   if(!e)return;
-  if(e.dmg){const h=e.hits||1;for(let i=0;i<h;i++){const dealt=hit(C.player,C.enemy,e.dmg);if(e.leech)heal(C.player,dealt);if(C.over)break;}}
+  if(e.dmg){const h=e.hits||1;for(let i=0;i<h;i++){const dealt=hit(C.player,C.enemy,e.dmg,e.pierce);if(e.leech)heal(C.player,dealt);if(C.over)break;}}
   if(e.leakHit){const b=Math.floor((C.enemy.st.leak||0)*e.leakHit);if(b>0)hit(C.player,C.enemy,b);}
   if(e.block)C.player.fw+=e.block;
   if(e.exp)addS(C.enemy,'exp',e.exp);
@@ -887,7 +898,7 @@ function playCard(i){
 }
 function endTurn(){
   if(C.over||C.busy)return;
-  if(C.player.ram<=0&&R.relics.some(id=>RELICS[id]&&RELICS[id].ram)){C.ramRest=2;log('<span class="hi">증설 램 과부하</span> — 다음 2턴 최대 램 보너스 휴지');}
+  if(C.player.ram<=0&&C.ramActive){C.ramRest=2;log('<span class="hi">증설 램 과부하</span> — 다음 2턴 최대 램 보너스 휴지');}
   C.player.daemons.forEach(d=>{if(d==='worm'){applyHit(C.enemy,5);if(!C.over)applyHit(C.player,2);}if(d==='rootkit')addS(C.enemy,'leak',2);if(d==='botnet')applyHit(C.enemy,3);});
   if(C.over)return;
   tick(C.player);
@@ -1194,6 +1205,8 @@ function onLoadFile(e){
   fr.readAsText(f);e.target.value='';
 }
 const PATCHES=[
+ {v:'v0.6.4',t:'수정 · 밸런스',n:['손패가 항상 가장 왼쪽부터 표시되도록 정렬을 고쳤습니다.','좁은 화면에서 체력·램 표시가 깨지지 않도록 레이아웃을 보강했습니다.','증설 램 휴지가 2턴 뒤 정상 복귀하도록 수정했습니다.','강화 방화벽 어레이를 매 턴 지속형으로 바꿔 방화벽 칩과 차별화했습니다.','제로데이가 방화벽을 무시하도록 변경했습니다 — 브루트포스와 역할을 구분.']},
+ {v:'v0.6.3',t:'연출 · 수정',n:['적마다 고유한 움직임을 추가했습니다 — 시질이 회전·맥동·명멸 등으로 살아 움직입니다.','카드 스왑 선택 시 점선 표시가 모든 넷러너 카드에서 보이도록 수정했습니다.']},
  {v:'v0.6.2',t:'해금 · 개선',n:['넷러너 해금을 추가했습니다 — 하드 클리어 시 고스트, 익스트림 클리어 시 데몬콜러가 열립니다.','데몬콜러 카드도 타입별로 색이 구분되도록 했습니다 — 익스플로잇·스크립트·데몬.','카드 "교체"의 명칭을 "스왑"으로 변경했습니다.']},
  {v:'v0.6.1',t:'밸런스 조정',n:['데몬(보라) 카드는 사용 후 소멸합니다 — 같은 카드로 무한 중첩 불가.','웜 데몬의 능력이 조절되었습니다 — 여전히 강력하지만 매 턴 자신도 2 피해를 받습니다.','증설 램이 조절되었습니다 — 모든 램을 소진하면 다음 2턴간 보너스가 휴지하고, 등장 빈도도 낮췄습니다.','코어 튜닝과 포트 스캔의 수치가 하향되었습니다.','버전별 패치 노트를 추가했습니다.']},
  {v:'v0.6.0',t:'운영 시스템',n:['매 턴 카드를 버리고 다시 뽑는 스왑(리드로우)를 추가했습니다.','난이도 4단계(노말·하드·익스트림·마스터)와 단계별 해금을 도입했습니다.','블랙햇 전용 특수 능력 — 적의 행동 패턴 전체를 읽는 디컴파일을 추가했습니다.','진행 상황을 JSON 파일로 저장하고 불러올 수 있습니다.']},

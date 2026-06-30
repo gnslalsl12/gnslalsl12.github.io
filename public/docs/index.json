@@ -1,20 +1,20 @@
 {
   "docs": [
     {
+      "slug": "zero-day-제로데이",
+      "title": "ZERO DAY · 제로데이 (ver.0.6.4_",
+      "category": "etc",
+      "description": "06.30 13:12 업데이트",
+      "path": "docs/etc/zero-day-제로데이.html",
+      "date": "2026-06-30"
+    },
+    {
       "slug": "심연의-미궁",
       "title": "심연의 미궁 (ver.0.9.5)",
       "category": "etc",
       "description": "06.30 10:40 업데이트",
       "path": "docs/etc/심연의-미궁.html",
       "date": "2026-06-30"
-    },
-    {
-      "slug": "zero-day-제로데이",
-      "title": "ZERO DAY · 제로데이 (ver.0.6.2)",
-      "category": "etc",
-      "description": "06.30 08:49 업데이트",
-      "path": "docs/etc/zero-day-제로데이.html",
-      "date": "2026-06-29"
     },
     {
       "slug": "capcut-mac-데스크톱-가이드",
