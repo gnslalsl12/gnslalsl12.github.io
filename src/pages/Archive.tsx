@@ -219,7 +219,7 @@ export default function Archive() {
                       </a>
 
                       {canUpload && (
-                        <div className="absolute bottom-3 right-3 flex items-center gap-1.5 opacity-0 transition-all focus-within:opacity-100 group-hover:opacity-100 [@media(hover:none)]:opacity-100">
+                        <div className="absolute bottom-3 right-3 flex items-center gap-1.5">
                           <Link
                             to={`/archive/edit/${doc.category}/${doc.slug}`}
                             aria-label="문서 수정"
