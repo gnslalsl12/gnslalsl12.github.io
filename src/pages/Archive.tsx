@@ -7,6 +7,7 @@ import {
   Code2,
   FileText,
   Loader2,
+  Pencil,
   Plane,
   Trash2,
   Upload,
@@ -218,20 +219,30 @@ export default function Archive() {
                       </a>
 
                       {canUpload && (
-                        <button
-                          type="button"
-                          onClick={() => handleDelete(doc)}
-                          disabled={deletingPath === doc.path}
-                          aria-label="문서 삭제"
-                          title="문서 삭제"
-                          className="absolute bottom-3 right-3 grid h-8 w-8 place-items-center rounded-lg border border-white/10 bg-white/5 text-muted opacity-0 transition-all hover:border-red-500/40 hover:bg-red-500/10 hover:text-red-300 focus-visible:opacity-100 group-hover:opacity-100 disabled:opacity-100 [@media(hover:none)]:opacity-100"
-                        >
-                          {deletingPath === doc.path ? (
-                            <Loader2 size={15} className="animate-spin" />
-                          ) : (
-                            <Trash2 size={15} />
-                          )}
-                        </button>
+                        <div className="absolute bottom-3 right-3 flex items-center gap-1.5 opacity-0 transition-all focus-within:opacity-100 group-hover:opacity-100 [@media(hover:none)]:opacity-100">
+                          <Link
+                            to={`/archive/edit/${doc.category}/${doc.slug}`}
+                            aria-label="문서 수정"
+                            title="문서 수정"
+                            className="grid h-8 w-8 place-items-center rounded-lg border border-white/10 bg-white/5 text-muted transition-all hover:border-brand/40 hover:bg-brand/10 hover:text-brand"
+                          >
+                            <Pencil size={15} />
+                          </Link>
+                          <button
+                            type="button"
+                            onClick={() => handleDelete(doc)}
+                            disabled={deletingPath === doc.path}
+                            aria-label="문서 삭제"
+                            title="문서 삭제"
+                            className="grid h-8 w-8 place-items-center rounded-lg border border-white/10 bg-white/5 text-muted transition-all hover:border-red-500/40 hover:bg-red-500/10 hover:text-red-300 disabled:opacity-100"
+                          >
+                            {deletingPath === doc.path ? (
+                              <Loader2 size={15} className="animate-spin" />
+                            ) : (
+                              <Trash2 size={15} />
+                            )}
+                          </button>
+                        </div>
                       )}
                     </motion.div>
                   ))}
