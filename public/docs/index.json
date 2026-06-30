@@ -1,6 +1,14 @@
 {
   "docs": [
     {
+      "slug": "심연의-미궁",
+      "title": "심연의 미궁 (ver.0.9.4)",
+      "category": "etc",
+      "description": "0630 10.13 업데이트",
+      "path": "docs/etc/심연의-미궁.html",
+      "date": "2026-06-30"
+    },
+    {
       "slug": "zero-day-제로데이",
       "title": "ZERO DAY · 제로데이 (ver.0.6.2)",
       "category": "etc",
