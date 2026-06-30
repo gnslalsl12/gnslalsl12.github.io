@@ -219,6 +219,66 @@ export async function publishDoc(input: PublishInput): Promise<ArchiveDoc> {
   return entry;
 }
 
+/* ------------------------------ updating -------------------------------- */
+
+export type UpdateInput = {
+  original: ArchiveDoc; // the document being edited (its current path/date)
+  slug: string;
+  title: string;
+  category: string;
+  description: string;
+  html: string; // full HTML to commit — either the unchanged original or a replacement
+};
+
+// Owner-only. Re-commits the document's HTML (replaced or kept) and updates its
+// manifest entry in a single commit. If the slug/category changed the file is
+// moved: the new path is written and the old file removed (unless another entry
+// still points at it). The original publish date is preserved.
+export async function updateDoc(input: UpdateInput): Promise<ArchiveDoc> {
+  const token = getToken();
+  if (!token) throw new Error("수정하려면 GitHub 토큰이 필요합니다.");
+
+  const newPath = `docs/${input.category}/${input.slug}.html`;
+  const entry: ArchiveDoc = {
+    slug: input.slug,
+    title: input.title.trim(),
+    category: input.category,
+    description: input.description.trim(),
+    path: newPath,
+    date: input.original.date,
+  };
+
+  // Replace the original entry in place (preserving list order); drop any other
+  // entry that collides with the new path so the edit wins.
+  const existing = await readSourceDocs(token, DEPLOY_BRANCH);
+  const next: ArchiveDoc[] = [];
+  let replaced = false;
+  for (const d of existing) {
+    if (d.path === input.original.path) {
+      next.push(entry);
+      replaced = true;
+    } else if (d.path === newPath) {
+      continue;
+    } else {
+      next.push(d);
+    }
+  }
+  if (!replaced) next.unshift(entry);
+  const manifest = JSON.stringify({ docs: next }, null, 2) + "\n";
+
+  const files: CommitFile[] = [
+    { path: `public/${newPath}`, content: input.html },
+    { path: `public/docs/index.json`, content: manifest },
+  ];
+  // Path changed → remove the old file, unless something still references it.
+  if (input.original.path !== newPath && !next.some((d) => d.path === input.original.path)) {
+    files.push({ path: `public/${input.original.path}`, content: null });
+  }
+
+  await commitFiles(token, files, `docs: update ${entry.title}`, DEPLOY_BRANCH);
+  return entry;
+}
+
 /* ------------------------------ deleting -------------------------------- */
 
 // Owner-only. Removes a document's HTML file and drops it from the manifest in
