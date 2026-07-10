@@ -26,7 +26,13 @@ export type ArchiveDoc = {
   description: string;
   path: string; // e.g. "docs/dev/vue-project-guide.html"
   date: string; // YYYY-MM-DD
+  visibility?: "public" | "private"; // absent === "public"
 };
+
+/** True when a doc is marked private (hidden from the public hub listing). */
+export function isPrivateDoc(doc: ArchiveDoc): boolean {
+  return doc.visibility === "private";
+}
 
 export type Category = { id: string; label: string };
 
@@ -246,6 +252,7 @@ export async function updateDoc(input: UpdateInput): Promise<ArchiveDoc> {
     description: input.description.trim(),
     path: newPath,
     date: input.original.date,
+    visibility: input.original.visibility,
   };
 
   // Replace the original entry in place (preserving list order); drop any other
@@ -277,6 +284,39 @@ export async function updateDoc(input: UpdateInput): Promise<ArchiveDoc> {
 
   await commitFiles(token, files, `docs: update ${entry.title}`, DEPLOY_BRANCH);
   return entry;
+}
+
+/* ----------------------------- visibility -------------------------------- */
+
+// Owner-only. Flips a document's public/private flag in the manifest (a
+// one-file commit — the HTML itself is untouched). Note this only hides the
+// doc from the `/archive` hub listing: since the site has no backend, the
+// manifest and the static HTML file remain fetchable directly by anyone who
+// has (or guesses) the URL.
+export async function setDocVisibility(
+  doc: ArchiveDoc,
+  visibility: "public" | "private"
+): Promise<ArchiveDoc> {
+  const token = getToken();
+  if (!token) throw new Error("공개 설정을 변경하려면 GitHub 토큰이 필요합니다.");
+
+  const existing = await readSourceDocs(token, DEPLOY_BRANCH);
+  let updated: ArchiveDoc | undefined;
+  const next = existing.map((d) => {
+    if (d.path !== doc.path) return d;
+    updated = { ...d, visibility };
+    return updated;
+  });
+  if (!updated) throw new Error("문서를 찾을 수 없습니다.");
+  const manifest = JSON.stringify({ docs: next }, null, 2) + "\n";
+
+  await commitFiles(
+    token,
+    [{ path: `public/docs/index.json`, content: manifest }],
+    `docs: ${visibility === "private" ? "hide" : "unhide"} ${doc.title}`,
+    DEPLOY_BRANCH
+  );
+  return updated;
 }
 
 /* ------------------------------ deleting -------------------------------- */

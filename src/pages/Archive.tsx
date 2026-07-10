@@ -5,8 +5,11 @@ import {
   AlertCircle,
   ArrowUpRight,
   Code2,
+  Eye,
+  EyeOff,
   FileText,
   Loader2,
+  Lock,
   Pencil,
   Plane,
   Trash2,
@@ -20,6 +23,8 @@ import {
   fetchDocs,
   getToken,
   isAllowedAuthor,
+  isPrivateDoc,
+  setDocVisibility,
   verifyToken,
   type ArchiveDoc,
 } from "../lib/archive";
@@ -50,6 +55,7 @@ export default function Archive() {
   const [canUpload, setCanUpload] = useState(false);
   const [secretOpen, setSecretOpen] = useState(false);
   const [deletingPath, setDeletingPath] = useState<string | null>(null);
+  const [togglingPath, setTogglingPath] = useState<string | null>(null);
   const reduceMotion = useReducedMotion();
   const tapsRef = useRef(0);
   const timerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
@@ -92,10 +98,13 @@ export default function Archive() {
     };
   }, []);
 
-  // Group docs by category, ordered by CATEGORIES then any extras.
+  // Group docs by category, ordered by CATEGORIES then any extras. Private
+  // docs are only shown to the verified owner — everyone else never sees them
+  // listed (the toggle lives in `setDocVisibility`, gated the same way).
   const groups = useMemo(() => {
+    const visible = canUpload ? docs : docs.filter((d) => !isPrivateDoc(d));
     const byCat = new Map<string, ArchiveDoc[]>();
-    for (const d of docs) {
+    for (const d of visible) {
       const list = byCat.get(d.category) ?? [];
       list.push(d);
       byCat.set(d.category, list);
@@ -103,7 +112,23 @@ export default function Archive() {
     const known = CATEGORIES.map((c) => c.id).filter((id) => byCat.has(id));
     const extras = [...byCat.keys()].filter((id) => !CATEGORIES.some((c) => c.id === id));
     return [...known, ...extras].map((id) => ({ id, docs: byCat.get(id)! }));
-  }, [docs]);
+  }, [docs, canUpload]);
+
+  // Owner-only public/private toggle. Commits the manifest change, then
+  // optimistically updates the card's visibility in place.
+  const handleToggleVisibility = async (doc: ArchiveDoc) => {
+    if (togglingPath) return;
+    const nextVisibility = isPrivateDoc(doc) ? "public" : "private";
+    setTogglingPath(doc.path);
+    try {
+      const updated = await setDocVisibility(doc, nextVisibility);
+      setDocs((prev) => prev.map((d) => (d.path === doc.path ? updated : d)));
+    } catch (e: unknown) {
+      window.alert(e instanceof Error ? e.message : String(e));
+    } finally {
+      setTogglingPath(null);
+    }
+  };
 
   // Owner-only delete. Commits to `main` (file + manifest), then optimistically
   // drops the card; the live deploy catches up in 1~2 minutes.
@@ -202,7 +227,14 @@ export default function Archive() {
                         className="bento flex h-full flex-col p-5"
                       >
                         <div className="flex items-start justify-between gap-2">
-                          <h3 className="font-semibold leading-snug transition-colors group-hover:text-brand">
+                          <h3 className="flex items-center gap-1.5 font-semibold leading-snug transition-colors group-hover:text-brand">
+                            {isPrivateDoc(doc) && (
+                              <Lock
+                                size={13}
+                                className="shrink-0 text-amber-400"
+                                aria-label="비공개 (목록에서만 숨김, 직접 URL로는 접근 가능)"
+                              />
+                            )}
                             {doc.title}
                           </h3>
                           <ArrowUpRight
@@ -220,6 +252,30 @@ export default function Archive() {
 
                       {canUpload && (
                         <div className="absolute bottom-3 right-3 flex items-center gap-1.5">
+                          <button
+                            type="button"
+                            onClick={() => handleToggleVisibility(doc)}
+                            disabled={togglingPath === doc.path || deletingPath === doc.path}
+                            aria-label={
+                              isPrivateDoc(doc)
+                                ? "비공개 문서 · 클릭하면 공개로 전환"
+                                : "공개 문서 · 클릭하면 비공개로 전환 (목록에서만 숨겨짐, 직접 URL로는 접근 가능)"
+                            }
+                            title={
+                              isPrivateDoc(doc)
+                                ? "비공개 문서 · 클릭하면 공개로 전환"
+                                : "공개 문서 · 클릭하면 비공개로 전환 (목록에서만 숨겨짐, 직접 URL로는 접근 가능)"
+                            }
+                            className="grid h-8 w-8 place-items-center rounded-lg border border-white/10 bg-white/5 text-muted transition-all hover:border-amber-400/40 hover:bg-amber-400/10 hover:text-amber-300 disabled:opacity-100"
+                          >
+                            {togglingPath === doc.path ? (
+                              <Loader2 size={15} className="animate-spin" />
+                            ) : isPrivateDoc(doc) ? (
+                              <EyeOff size={15} />
+                            ) : (
+                              <Eye size={15} />
+                            )}
+                          </button>
                           <Link
                             to={`/archive/edit/${doc.category}/${doc.slug}`}
                             aria-label="문서 수정"
@@ -231,7 +287,7 @@ export default function Archive() {
                           <button
                             type="button"
                             onClick={() => handleDelete(doc)}
-                            disabled={deletingPath === doc.path}
+                            disabled={deletingPath === doc.path || togglingPath === doc.path}
                             aria-label="문서 삭제"
                             title="문서 삭제"
                             className="grid h-8 w-8 place-items-center rounded-lg border border-white/10 bg-white/5 text-muted transition-all hover:border-red-500/40 hover:bg-red-500/10 hover:text-red-300 disabled:opacity-100"
