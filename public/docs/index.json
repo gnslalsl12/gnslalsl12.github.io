@@ -30,7 +30,8 @@
       "category": "dev",
       "description": "",
       "path": "docs/dev/부업-프로젝트-파이프라인~4773a25b.html",
-      "date": "2026-06-17"
+      "date": "2026-06-17",
+      "visibility": "private"
     },
     {
       "slug": "ios-실기기-빌드-가이드~dd735729",
