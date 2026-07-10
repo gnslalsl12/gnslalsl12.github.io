@@ -18,6 +18,7 @@ import {
   CATEGORIES,
   docUrl,
   fetchDocs,
+  fetchDocsAsOwner,
   getToken,
   setToken,
   verifyToken,
@@ -25,6 +26,7 @@ import {
   updateDoc,
   slugify,
   htmlTitle,
+  docWillMove,
   REPO_OWNER,
   REPO_NAME,
   type ArchiveDoc,
@@ -79,12 +81,16 @@ export default function ArchiveEdit() {
 
   // Resolve the target document from the manifest and pre-fill the form, then
   // fetch its current HTML so the preview works and the unchanged file can be
-  // re-committed verbatim if the owner doesn't replace it.
+  // re-committed verbatim if the owner doesn't replace it. Private docs are
+  // stripped from the public manifest at build time, so a stored token tries
+  // the authenticated (source-of-truth) read first, falling back to the plain
+  // public one if that fails (no/invalid token, or the doc really is public).
   useEffect(() => {
     let alive = true;
     const targetPath = `docs/${routeCategory}/${routeSlug}.html`;
     setLoadState("loading");
-    fetchDocs()
+    const load = getToken() ? fetchDocsAsOwner().catch(() => fetchDocs()) : fetchDocs();
+    load
       .then(async (docs) => {
         if (!alive) return;
         const doc = docs.find((d) => d.path === targetPath);
@@ -364,11 +370,14 @@ export default function ArchiveEdit() {
               </button>
               <p className="text-xs text-muted">
                 저장 위치: <code>docs/{category}/{effectiveSlug || "..."}.html</code>
-                {original && `docs/${category}/${effectiveSlug}.html` !== original.path && (
+                {original && docWillMove(category, effectiveSlug, original) ? (
                   <>
                     {" "}
-                    · 기존 <code>{original.path}</code> 에서 이동
+                    · 예측 방지용 임의 문자열이 새로 붙어 기존 <code>{original.path}</code> 에서
+                    이동합니다
                   </>
+                ) : (
+                  " · URL을 바꾸지 않으면 기존 위치가 그대로 유지됩니다"
                 )}
               </p>
             </div>

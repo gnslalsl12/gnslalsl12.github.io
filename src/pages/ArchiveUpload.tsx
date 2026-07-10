@@ -277,7 +277,8 @@ export default function ArchiveUpload() {
             {publishing ? "게시 중…" : "게시하기"}
           </button>
           <p className="text-xs text-muted">
-            저장 위치: <code>archive/{category}/{effectiveSlug || "..."}.html</code>
+            저장 위치: <code>docs/{category}/{effectiveSlug || "..."}.html</code> · URL 예측을
+            막기 위해 임의 문자열이 자동으로 덧붙습니다
           </p>
         </div>
 

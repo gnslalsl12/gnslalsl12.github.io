@@ -21,6 +21,7 @@ import {
   deleteDoc,
   docUrl,
   fetchDocs,
+  fetchDocsAsOwner,
   getToken,
   isAllowedAuthor,
   isPrivateDoc,
@@ -76,11 +77,10 @@ export default function Archive() {
 
   useEffect(() => {
     let alive = true;
-    if (getToken()) {
-      verifyToken().then((login) => {
-        if (alive) setCanUpload(!!login && isAllowedAuthor(login));
-      });
-    }
+
+    // Public path: the deployed manifest never contains private docs (stripped
+    // at build time — see the strip-private-docs Vite plugin), so this is safe
+    // and fast for every visitor, owner included.
     setStatus("loading");
     fetchDocs()
       .then((d) => {
@@ -93,6 +93,27 @@ export default function Archive() {
         setError(e instanceof Error ? e.message : String(e));
         setStatus("error");
       });
+
+    // Owner path: once the token verifies, re-fetch the source-of-truth
+    // manifest straight from git so private docs show up for management too.
+    if (getToken()) {
+      verifyToken().then(async (login) => {
+        const owner = !!login && isAllowedAuthor(login);
+        if (!alive) return;
+        setCanUpload(owner);
+        if (!owner) return;
+        try {
+          const full = await fetchDocsAsOwner();
+          if (alive) {
+            setDocs(full);
+            setStatus("ready");
+          }
+        } catch {
+          /* the public list above already loaded; owner-only extras are best-effort */
+        }
+      });
+    }
+
     return () => {
       alive = false;
     };

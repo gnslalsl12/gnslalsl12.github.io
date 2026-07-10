@@ -70,6 +70,30 @@ export function slugify(input: string): string {
   );
 }
 
+// Every document's real slug/path carries a random suffix so its URL can't be
+// guessed from the title alone (e.g. by appending a likely title to the site's
+// base URL) — this matters most for docs marked private, which are otherwise
+// only kept off the `/archive` listing, not actually access-controlled.
+// `~` (not `-`) marks the boundary so a human slug that happens to already end
+// in 8 hex-looking characters is never mistaken for a tagged one.
+const TOKEN_RE = /~[0-9a-f]{8}$/;
+
+function randomToken(): string {
+  const bytes = new Uint8Array(4);
+  crypto.getRandomValues(bytes);
+  return Array.from(bytes, (b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+/** Strip a previously-appended random suffix, if present, to recover the human slug. */
+function stripToken(slug: string): string {
+  return slug.replace(TOKEN_RE, "");
+}
+
+/** True when saving `slug`/`category` over `original` would move the file (rename). */
+export function docWillMove(category: string, slug: string, original: ArchiveDoc): boolean {
+  return stripToken(slug.trim()) !== stripToken(original.slug) || category !== original.category;
+}
+
 /** Pull a <title> out of an HTML document, if present. */
 export function htmlTitle(html: string): string {
   const m = /<title[^>]*>([\s\S]*?)<\/title>/i.exec(html);
@@ -78,6 +102,11 @@ export function htmlTitle(html: string): string {
 
 /* ------------------------------ reading --------------------------------- */
 
+// Plain unauthenticated fetch of the *deployed* manifest. The `strip-private-
+// docs` Vite plugin (vite.config.ts) removes private entries from this file
+// at build time, so private docs' titles/paths never reach an ordinary
+// visitor's network tab — only the owner's authenticated fetchDocsAsOwner()
+// below sees them.
 export async function fetchDocs(): Promise<ArchiveDoc[]> {
   const res = await fetch(`${BASE}docs/index.json?t=${Date.now()}`, { cache: "no-store" });
   if (res.status === 404) return [];
@@ -141,6 +170,16 @@ async function readSourceDocs(token: string, branch: string): Promise<ArchiveDoc
   }
 }
 
+// Owner-only. Reads the full manifest (including private docs) straight from
+// git via the authenticated Contents API, bypassing the build-filtered public
+// manifest fetchDocs() reads. Lets the owner still see/manage their own
+// private docs on `/archive` even though ordinary visitors never receive them.
+export async function fetchDocsAsOwner(): Promise<ArchiveDoc[]> {
+  const token = getToken();
+  if (!token) throw new Error("문서 목록을 불러오려면 GitHub 토큰이 필요합니다.");
+  return readSourceDocs(token, DEPLOY_BRANCH);
+}
+
 // Commit several files in a single commit via the Git Data API. Handles files
 // larger than the Contents API's ~1MB limit. A `content` of null deletes the
 // file (the tree entry is sent with `sha: null`).
@@ -198,9 +237,10 @@ export async function publishDoc(input: PublishInput): Promise<ArchiveDoc> {
   const token = getToken();
   if (!token) throw new Error("업로드하려면 GitHub 토큰이 필요합니다.");
 
-  const path = `docs/${input.category}/${input.slug}.html`;
+  const slug = `${stripToken(input.slug.trim())}~${randomToken()}`;
+  const path = `docs/${input.category}/${slug}.html`;
   const entry: ArchiveDoc = {
-    slug: input.slug,
+    slug,
     title: input.title.trim(),
     category: input.category,
     description: input.description.trim(),
@@ -240,13 +280,20 @@ export type UpdateInput = {
 // manifest entry in a single commit. If the slug/category changed the file is
 // moved: the new path is written and the old file removed (unless another entry
 // still points at it). The original publish date is preserved.
+//
+// The slug's random suffix (see randomToken) is kept as-is when the owner
+// didn't actually rename the document, so bookmarked/shared links survive
+// unrelated edits (description, category-unchanged title tweaks, …). A
+// deliberate rename gets a freshly rotated suffix, same as a new upload.
 export async function updateDoc(input: UpdateInput): Promise<ArchiveDoc> {
   const token = getToken();
   if (!token) throw new Error("수정하려면 GitHub 토큰이 필요합니다.");
 
-  const newPath = `docs/${input.category}/${input.slug}.html`;
+  const renamed = docWillMove(input.category, input.slug, input.original);
+  const slug = renamed ? `${stripToken(input.slug.trim())}~${randomToken()}` : input.original.slug;
+  const newPath = `docs/${input.category}/${slug}.html`;
   const entry: ArchiveDoc = {
-    slug: input.slug,
+    slug,
     title: input.title.trim(),
     category: input.category,
     description: input.description.trim(),
