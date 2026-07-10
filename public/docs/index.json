@@ -1,91 +1,91 @@
 {
   "docs": [
     {
-      "slug": "심연의-미궁",
+      "slug": "심연의-미궁~f3241e7f",
       "title": "심연의 미궁",
       "category": "etc",
       "description": "07.01 08:51 업데이트",
-      "path": "docs/etc/심연의-미궁.html",
+      "path": "docs/etc/심연의-미궁~f3241e7f.html",
       "date": "2026-06-30"
     },
     {
-      "slug": "zero-day-제로데이",
+      "slug": "zero-day-제로데이~47af8138",
       "title": "ZERO DAY · 제로데이 (ver.0.6.4_",
       "category": "etc",
       "description": "06.30 13:12 업데이트",
-      "path": "docs/etc/zero-day-제로데이.html",
+      "path": "docs/etc/zero-day-제로데이~47af8138.html",
       "date": "2026-06-30"
     },
     {
-      "slug": "capcut-mac-데스크톱-가이드",
+      "slug": "capcut-mac-데스크톱-가이드~e24dede7",
       "title": "CapCut Mac 데스크톱 가이드",
       "category": "dev",
       "description": "",
-      "path": "docs/dev/capcut-mac-데스크톱-가이드.html",
+      "path": "docs/dev/capcut-mac-데스크톱-가이드~e24dede7.html",
       "date": "2026-06-20"
     },
     {
-      "slug": "부업-프로젝트-파이프라인",
+      "slug": "부업-프로젝트-파이프라인~4773a25b",
       "title": "CLAUDE 프로젝트 파이프라인",
       "category": "dev",
       "description": "",
-      "path": "docs/dev/부업-프로젝트-파이프라인.html",
+      "path": "docs/dev/부업-프로젝트-파이프라인~4773a25b.html",
       "date": "2026-06-17"
     },
     {
-      "slug": "ios-실기기-빌드-가이드",
+      "slug": "ios-실기기-빌드-가이드~dd735729",
       "title": "iOS 실기기 빌드 가이드",
       "category": "dev",
       "description": "",
-      "path": "docs/dev/ios-실기기-빌드-가이드.html",
+      "path": "docs/dev/ios-실기기-빌드-가이드~dd735729.html",
       "date": "2026-06-11"
     },
     {
-      "slug": "이집트-9박-10일-겨울-여행-완전-가이드",
+      "slug": "이집트-9박-10일-겨울-여행-완전-가이드~556e54ec",
       "title": "이집트 9박 10일 겨울 여행 완전 가이드",
       "category": "travel",
       "description": "",
-      "path": "docs/travel/이집트-9박-10일-겨울-여행-완전-가이드.html",
+      "path": "docs/travel/이집트-9박-10일-겨울-여행-완전-가이드~556e54ec.html",
       "date": "2026-06-10"
     },
     {
-      "slug": "vue-데이터-다루기-직접-만져보는-데모",
+      "slug": "vue-데이터-다루기-직접-만져보는-데모~56e0a383",
       "title": "Vue 데이터 다루기 — 직접 만져보는 데모",
       "category": "dev",
       "description": "",
-      "path": "docs/dev/vue-데이터-다루기-직접-만져보는-데모.html",
+      "path": "docs/dev/vue-데이터-다루기-직접-만져보는-데모~56e0a383.html",
       "date": "2026-06-10"
     },
     {
-      "slug": "나트랑-4박-5일-커플여행-완전-가이드-2026년-7월",
+      "slug": "나트랑-4박-5일-커플여행-완전-가이드-2026년-7월~b577d28c",
       "title": "나트랑 4박 5일 커플여행 완전 가이드 (2026년 7월)",
       "category": "travel",
       "description": "",
-      "path": "docs/travel/나트랑-4박-5일-커플여행-완전-가이드-2026년-7월.html",
+      "path": "docs/travel/나트랑-4박-5일-커플여행-완전-가이드-2026년-7월~b577d28c.html",
       "date": "2026-06-09"
     },
     {
-      "slug": "sapporo-winter-couple-2026",
+      "slug": "sapporo-winter-couple-2026~f9c06608",
       "title": "삿포로 4박5일 커플 겨울여행 완전가이드 · 온천·먹거리·볼거리",
       "category": "travel",
       "description": "2026년 12월 초·중순 출발, 휴양형 커플 4박5일 삿포로 겨울 여행 가이드. 최적 시기·연말 휴무 회피·조잔케이 온천·맛집·예산까지 정리.",
-      "path": "docs/travel/sapporo-winter-couple-2026.html",
+      "path": "docs/travel/sapporo-winter-couple-2026~f9c06608.html",
       "date": "2026-06-09"
     },
     {
-      "slug": "japan-small-cities-2026",
+      "slug": "japan-small-cities-2026~814fc6fd",
       "title": "일본 소도시 여행 도감 · 2026년 8~10월 커플 3박 4일",
       "category": "travel",
       "description": "2026년 8~10월, 커플 3박 4일 일정으로 정리한 일본 소도시 여행 정보 도감.",
-      "path": "docs/travel/japan-small-cities-2026.html",
+      "path": "docs/travel/japan-small-cities-2026~814fc6fd.html",
       "date": "2026-06-08"
     },
     {
-      "slug": "vue-project-guide",
+      "slug": "vue-project-guide~a89c2345",
       "title": "Vue 프로젝트 길잡이 — 메뉴에서 화면까지",
       "category": "dev",
       "description": "메뉴 클릭에서 화면 렌더링까지, Vue 프로젝트의 동작 흐름을 따라가며 정리한 가이드.",
-      "path": "docs/dev/vue-project-guide.html",
+      "path": "docs/dev/vue-project-guide~a89c2345.html",
       "date": "2026-06-08"
     }
   ]
