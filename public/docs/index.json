@@ -14,7 +14,8 @@
       "category": "etc",
       "description": "06.30 13:12 업데이트",
       "path": "docs/etc/zero-day-제로데이~47af8138.html",
-      "date": "2026-06-30"
+      "date": "2026-06-30",
+      "visibility": "private"
     },
     {
       "slug": "capcut-mac-데스크톱-가이드~e24dede7",
