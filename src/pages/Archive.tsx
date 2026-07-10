@@ -60,6 +60,7 @@ export default function Archive() {
   const reduceMotion = useReducedMotion();
   const tapsRef = useRef(0);
   const timerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const ownerDocsLoadedRef = useRef(false);
 
   const handleTitleTap = () => {
     if (secretOpen) return;
@@ -77,19 +78,22 @@ export default function Archive() {
 
   useEffect(() => {
     let alive = true;
+    ownerDocsLoadedRef.current = false;
 
     // Public path: the deployed manifest never contains private docs (stripped
     // at build time — see the strip-private-docs Vite plugin), so this is safe
-    // and fast for every visitor, owner included.
+    // and fast for every visitor, owner included. Guarded against the owner
+    // path below resolving first: whichever order the two settle in, the
+    // owner's fuller list (once verified) always wins.
     setStatus("loading");
     fetchDocs()
       .then((d) => {
-        if (!alive) return;
+        if (!alive || ownerDocsLoadedRef.current) return;
         setDocs(d);
         setStatus("ready");
       })
       .catch((e: unknown) => {
-        if (!alive) return;
+        if (!alive || ownerDocsLoadedRef.current) return;
         setError(e instanceof Error ? e.message : String(e));
         setStatus("error");
       });
@@ -105,6 +109,7 @@ export default function Archive() {
         try {
           const full = await fetchDocsAsOwner();
           if (alive) {
+            ownerDocsLoadedRef.current = true;
             setDocs(full);
             setStatus("ready");
           }

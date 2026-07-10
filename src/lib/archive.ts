@@ -336,10 +336,14 @@ export async function updateDoc(input: UpdateInput): Promise<ArchiveDoc> {
 /* ----------------------------- visibility -------------------------------- */
 
 // Owner-only. Flips a document's public/private flag in the manifest (a
-// one-file commit — the HTML itself is untouched). Note this only hides the
-// doc from the `/archive` hub listing: since the site has no backend, the
-// manifest and the static HTML file remain fetchable directly by anyone who
-// has (or guesses) the URL.
+// one-file commit — the HTML itself is untouched). "Private" only means: (1)
+// left off the `/archive` listing for non-owners, and (2) stripped from the
+// manifest the deployed site fetches (see the strip-private-docs Vite
+// plugin), so a normal visit/curl of the live site won't surface it. It is
+// NOT real access control — this repo is public, so the doc's HTML file and
+// its entry in the *source* manifest are still sitting in plain sight in the
+// git history for anyone who browses the repo directly on GitHub, no URL-
+// guessing required.
 export async function setDocVisibility(
   doc: ArchiveDoc,
   visibility: "public" | "private"
