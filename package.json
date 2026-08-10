@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node scripts/spa-static-routes.mjs",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "predeploy": "npm run build",
