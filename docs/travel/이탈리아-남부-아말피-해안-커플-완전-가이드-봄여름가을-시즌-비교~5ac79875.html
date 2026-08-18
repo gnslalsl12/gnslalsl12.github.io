@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>이탈리아 남부 아말피 해안 커플 완전 가이드 | 봄·여름·가을 시즌 비교</title>
+<!--
+========================================================================
+문서 정보
+========================================================================
+최초 생성일시 : 2026-08-18 (KST)
+최종 수정일시 : 2026-08-18 (KST)
+수정 이력 :
+  - 2026-08-18 : 최초 작성 (심층 리서치 기반 종합 HTML 가이드, 봄/여름/가을 시즌 비교 포함)
+작성 관점   : 이탈리아 남부(아말피 해안 중심) 커플 6박7일~7박8일 여행, 2026년 봄·여름·가을 출발 비교
+========================================================================
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sea-deep:#0B3A40;
+    --sea:#14545C;
+    --sea-light:#1F7A82;
+    --sea-tint:#E4EFEF;
+    --lemon:#C99A2E;
+    --lemon-soft:#F0DBA0;
+    --lemon-tint:#FBF3DE;
+    --majolica:#2B5C8A;
+    --majolica-soft:#A9C6DD;
+    --majolica-tint:#EAF1F6;
+    --terracotta:#A8481F;
+    --terracotta-soft:#D08856;
+    --terracotta-tint:#F5E6DC;
+    --limewash:#FAF6EC;
+    --stone:#F1E9D8;
+    --card:#FFFFFF;
+    --ink:#1E2A2A;
+    --ink-soft:#52605F;
+    --ink-faint:#8A968F;
+    --success:#2F6E4F;
+    --success-bg:#E8F1EA;
+    --warn:#B23A2E;
+    --warn-bg:#FBEAE6;
+    --line:rgba(30,42,42,0.14);
+    --radius:14px;
+    --shadow:0 6px 24px rgba(11,58,64,0.10);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--limewash);
+    color:var(--ink);
+    font-family:'IBM Plex Sans KR','Pretendard',-apple-system,BlinkMacSystemFont,'Malgun Gothic',sans-serif;
+    font-size:17px;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+    padding-bottom:64px;
+  }
+  h1,h2,h3,h4{
+    font-family:'Gowun Batang',serif;
+    color:var(--sea-deep);
+    line-height:1.35;
+    margin:0 0 .5em;
+  }
+  a{color:var(--sea);}
+  .wrap{max-width:720px;margin:0 auto;padding:0 20px;}
+
+  /* ---------- 타일 패턴 (시그니처 요소: 마욜리카 세라믹 타일 돔 모티프) ---------- */
+  .tile-strip{
+    height:13px;
+    background-image:
+      linear-gradient(45deg, var(--majolica) 25%, transparent 25%),
+      linear-gradient(-45deg, var(--majolica) 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, var(--lemon) 75%),
+      linear-gradient(-45deg, transparent 75%, var(--lemon) 75%);
+    background-size:18px 18px;
+    background-position:0 0, 0 9px, 9px -9px, -9px 0px;
+    background-color:var(--limewash);
+  }
+  .tile-strip.thin{height:7px;background-size:12px 12px;background-position:0 0,0 6px,6px -6px,-6px 0;}
+
+  /* ---------- 상단 고정 내비 ---------- */
+  .topbar{
+    position:sticky;top:0;z-index:60;
+    background:rgba(250,246,236,0.92);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar-inner{
+    max-width:720px;margin:0 auto;padding:10px 16px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .brand{
+    display:flex;align-items:center;gap:8px;
+    font-family:'Gowun Batang',serif;font-weight:700;font-size:15px;color:var(--sea-deep);
+  }
+  .brand-dot{width:8px;height:8px;border-radius:50%;background:var(--terracotta);}
+  .menu-btn{
+    display:flex;align-items:center;gap:6px;
+    background:var(--sea-deep);color:#fff;border:none;
+    padding:9px 16px;border-radius:999px;font-size:14px;font-weight:600;
+    font-family:'IBM Plex Sans KR',sans-serif;
+  }
+
+  /* ---------- 슬라이드 드로어(목차) ---------- */
+  .drawer-overlay{
+    position:fixed;inset:0;background:rgba(11,58,64,0.45);
+    opacity:0;pointer-events:none;transition:opacity .25s ease;z-index:80;
+  }
+  .drawer-overlay.open{opacity:1;pointer-events:auto;}
+  .drawer{
+    position:fixed;top:0;right:0;bottom:0;width:84%;max-width:340px;
+    background:var(--limewash);z-index:90;
+    transform:translateX(100%);transition:transform .28s ease;
+    overflow-y:auto;box-shadow:-8px 0 30px rgba(0,0,0,0.2);
+  }
+  .drawer.open{transform:translateX(0);}
+  .drawer-head{
+    padding:18px 20px 14px;border-bottom:1px solid var(--line);
+    display:flex;align-items:center;justify-content:space-between;
+    position:sticky;top:0;background:var(--limewash);
+  }
+  .drawer-head h3{margin:0;font-size:17px;}
+  .drawer-close{background:none;border:none;font-size:22px;color:var(--ink-soft);padding:4px 8px;}
+  .drawer nav{padding:8px 10px 30px;}
+  .drawer nav a{
+    display:block;padding:11px 12px;border-radius:10px;
+    color:var(--ink);text-decoration:none;font-size:15.5px;
+  }
+  .drawer nav a:active{background:var(--sea-tint);}
+  .drawer nav .toc-cat{
+    margin:16px 8px 4px;font-size:12px;letter-spacing:.04em;
+    color:var(--terracotta);font-weight:700;text-transform:uppercase;
+  }
+
+  /* ---------- 히어로 ---------- */
+  .hero{
+    background:var(--sea-deep);
+    color:#fff;
+    padding:38px 20px 26px;
+    position:relative;
+  }
+  .hero-inner{max-width:720px;margin:0 auto;}
+  .eyebrow{
+    font-size:13px;letter-spacing:.08em;color:var(--lemon-soft);
+    font-weight:600;text-transform:uppercase;margin-bottom:10px;
+  }
+  .hero h1{
+    color:#fff;font-size:30px;margin:0 0 10px;line-height:1.3;
+  }
+  .hero p.sub{
+    color:rgba(255,255,255,0.82);font-size:16px;margin:0 0 18px;line-height:1.6;
+  }
+  .badge-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:4px;}
+  .hbadge{
+    display:inline-flex;align-items:center;gap:5px;
+    background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.28);
+    color:#fff;padding:6px 12px;border-radius:999px;font-size:13px;font-weight:500;
+  }
+
+  /* ---------- 메타 박스 ---------- */
+  .meta-bar{
+    max-width:720px;margin:0 auto;padding:12px 20px;
+    font-size:12.5px;color:var(--ink-faint);
+    display:flex;flex-wrap:wrap;gap:4px 14px;
+    border-bottom:1px solid var(--line);
+  }
+  .meta-bar b{color:var(--ink-soft);font-weight:600;}
+
+  /* ---------- 섹션 공통 ---------- */
+  section.block{padding:30px 0 6px;}
+  section.block h2{
+    font-size:22px;display:flex;align-items:baseline;gap:8px;
+  }
+  section.block h2 .num{
+    font-family:'IBM Plex Sans KR',sans-serif;font-size:13px;font-weight:700;
+    color:var(--terracotta);letter-spacing:.05em;
+  }
+  section.block .lead{color:var(--ink-soft);font-size:15.5px;margin:2px 0 18px;}
+  h3.sub-h{font-size:18px;margin:26px 0 10px;color:var(--sea);}
+
+  /* ---------- TL;DR ---------- */
+  .tldr{
+    background:var(--card);border:1px solid var(--line);border-left:4px solid var(--terracotta);
+    border-radius:var(--radius);padding:18px 18px 16px;box-shadow:var(--shadow);
+  }
+  .tldr h2{font-size:18px;margin-bottom:10px;color:var(--terracotta);}
+  .tldr ul{margin:0;padding-left:20px;}
+  .tldr li{margin-bottom:8px;font-size:15.5px;}
+  .tldr li:last-child{margin-bottom:0;}
+
+  /* ---------- Quick Facts 벤토 그리드 ---------- */
+  .bento{
+    display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px;
+  }
+  .bento .fact{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:16px;box-shadow:var(--shadow);
+  }
+  .bento .fact.wide{grid-column:1 / -1;display:flex;align-items:center;justify-content:space-between;gap:14px;}
+  .fact .flabel{font-size:12.5px;color:var(--ink-faint);font-weight:600;margin-bottom:6px;}
+  .fact .fvalue{font-size:19px;font-weight:700;color:var(--sea-deep);font-family:'Gowun Batang',serif;}
+  .fact .fnote{font-size:12.5px;color:var(--ink-soft);margin-top:4px;}
+  .fact.accent-lemon{border-top:3px solid var(--lemon);}
+  .fact.accent-sea{border-top:3px solid var(--sea);}
+  .fact.accent-majolica{border-top:3px solid var(--majolica);}
+  .fact.accent-terracotta{border-top:3px solid var(--terracotta);}
+
+  /* ---------- 배지 시스템 ---------- */
+  .badge{
+    display:inline-flex;align-items:center;gap:4px;
+    font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;
+    line-height:1.5;white-space:nowrap;
+  }
+  .badge.hot{background:var(--terracotta-tint);color:var(--terracotta);}
+  .badge.must{background:var(--sea-tint);color:var(--sea-deep);}
+  .badge.couple{background:var(--lemon-tint);color:#7A5A0C;}
+  .badge.michelin{background:var(--majolica-tint);color:var(--majolica);}
+  .badge.free{background:var(--success-bg);color:var(--success);}
+  .badge.season{background:var(--stone);color:var(--ink-soft);}
+  .time-pill{
+    display:inline-block;background:var(--sea);color:#fff;font-size:12.5px;font-weight:700;
+    padding:3px 9px;border-radius:999px;margin-right:8px;white-space:nowrap;flex-shrink:0;
+  }
+
+  /* ---------- 콜아웃 ---------- */
+  .callout{
+    border-radius:var(--radius);padding:14px 16px;margin:16px 0;font-size:15px;
+    border:1px solid transparent;
+  }
+  .callout b{display:block;font-size:13px;letter-spacing:.03em;margin-bottom:4px;font-weight:700;}
+  .callout.ok{background:var(--success-bg);color:#1F4A34;border-color:rgba(47,110,79,0.25);}
+  .callout.ok b{color:var(--success);}
+  .callout.warn{background:var(--warn-bg);color:#5A2019;border-color:rgba(178,58,46,0.25);}
+  .callout.warn b{color:var(--warn);}
+  .callout.info{background:var(--majolica-tint);color:#1F3B54;border-color:rgba(43,92,138,0.22);}
+  .callout.info b{color:var(--majolica);}
+
+  /* ---------- 시즌 탭 ---------- */
+  .season-tabs{display:flex;gap:8px;margin:18px 0 16px;}
+  .season-tab{
+    flex:1;padding:11px 6px;border-radius:12px;border:1.5px solid var(--line);
+    background:var(--card);text-align:center;font-weight:700;font-size:14.5px;color:var(--ink-soft);
+  }
+  .season-tab .se{display:block;font-size:11.5px;font-weight:500;color:var(--ink-faint);margin-top:2px;}
+  .season-tab[data-active="true"]{
+    background:var(--sea-deep);border-color:var(--sea-deep);color:#fff;
+  }
+  .season-tab[data-active="true"] .se{color:rgba(255,255,255,0.75);}
+  .season-panel{display:none;}
+  .season-panel[data-active="true"]{display:block;}
+
+  /* ---------- 카드 ---------- */
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:16px 17px;margin-bottom:12px;box-shadow:var(--shadow);
+  }
+  .card.t-sea{border-top:3px solid var(--sea);}
+  .card.t-lemon{border-top:3px solid var(--lemon);}
+  .card.t-majolica{border-top:3px solid var(--majolica);}
+  .card.t-terracotta{border-top:3px solid var(--terracotta);}
+  .card h4{font-size:16.5px;margin:0 0 6px;display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
+  .card .stars{color:var(--lemon);letter-spacing:1px;font-size:13px;}
+  .card p{margin:6px 0;font-size:14.5px;color:var(--ink-soft);}
+  .card .meta-line{font-size:13.5px;color:var(--ink-faint);margin-top:8px;line-height:1.6;}
+  .card .meta-line b{color:var(--ink-soft);}
+  .card a.maplink{
+    display:inline-block;margin-top:8px;font-size:13px;font-weight:600;color:var(--sea);text-decoration:none;
+    border-bottom:1px solid var(--sea-light);
+  }
+
+  /* ---------- 표 ---------- */
+  .tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:var(--radius);box-shadow:var(--shadow);margin:14px 0;}
+  table{width:100%;border-collapse:collapse;background:var(--card);font-size:14px;min-width:520px;}
+  table.narrow{min-width:480px;}
+  table th:first-child,table td:first-child{min-width:76px;}
+  th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top;}
+  th{background:var(--sea-deep);color:#fff;font-weight:600;font-size:13px;white-space:nowrap;}
+  tr:last-child td{border-bottom:none;}
+  tr.sum td{background:#FDF6E3;font-weight:700;}
+  td.num{font-variant-numeric:tabular-nums;white-space:nowrap;}
+
+  /* ---------- 예산 3단 카드 ---------- */
+  .budget-grid{display:grid;grid-template-columns:1fr;gap:12px;margin:14px 0;}
+  .budget-card{
+    border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);border:1px solid var(--line);
+  }
+  .budget-card.b1{background:var(--limewash);border-top:4px solid var(--ink-faint);}
+  .budget-card.b2{background:#fff;border-top:4px solid var(--sea);}
+  .budget-card.b3{background:#fff;border-top:4px solid var(--lemon);}
+  .budget-card .btitle{font-family:'Gowun Batang',serif;font-size:17px;color:var(--sea-deep);margin-bottom:2px;}
+  .budget-card .btotal{font-size:24px;font-weight:700;color:var(--terracotta);margin:6px 0 10px;}
+  .budget-card .btotal small{font-size:13px;font-weight:500;color:var(--ink-faint);}
+  .budget-card ul{margin:0;padding-left:18px;font-size:14px;color:var(--ink-soft);}
+  .budget-card li{margin-bottom:4px;}
+
+  /* ---------- 타임라인(일정) ---------- */
+  .timeline{list-style:none;margin:0;padding:0;}
+  .timeline li{
+    display:flex;gap:10px;padding:9px 0;border-bottom:1px dashed var(--line);font-size:14.5px;
+    align-items:flex-start;
+  }
+  .timeline li:last-child{border-bottom:none;}
+  .timeline .time{flex-shrink:0;}
+
+  /* ---------- 체크리스트 ---------- */
+  .checklist{list-style:none;margin:0;padding:0;}
+  .checklist li{
+    display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--line);font-size:15px;
+  }
+  .checklist li:last-child{border-bottom:none;}
+  .checklist .cb{
+    flex-shrink:0;width:19px;height:19px;border-radius:5px;border:2px solid var(--sea);margin-top:2px;
+  }
+
+  /* ---------- 코스 비교 카드 ---------- */
+  .course-card{border-radius:var(--radius);border:1px solid var(--line);box-shadow:var(--shadow);margin-bottom:14px;overflow:hidden;}
+  .course-head{padding:14px 17px;color:#fff;}
+  .course-head h4{color:#fff;margin:0;font-size:17px;}
+  .course-head span{font-size:12.5px;opacity:.85;}
+  .course-body{padding:15px 17px;background:#fff;}
+  .course-card.opt-a .course-head{background:var(--sea-deep);}
+  .course-card.opt-b .course-head{background:var(--majolica);}
+  .course-card.opt-c .course-head{background:var(--terracotta);}
+  .pro-con{display:grid;grid-template-columns:1fr;gap:10px;margin-top:10px;font-size:13.8px;}
+  .pro-con div b{display:block;font-size:12.5px;margin-bottom:3px;}
+  .pro-con .pro b{color:var(--success);}
+  .pro-con .con b{color:var(--warn);}
+
+  /* ---------- 출처 ---------- */
+  .src-list{font-size:13px;color:var(--ink-soft);columns:1;padding-left:18px;}
+  .src-list li{margin-bottom:6px;}
+
+  /* ---------- 푸터 ---------- */
+  footer{
+    margin-top:40px;padding:30px 20px 40px;background:var(--sea-deep);color:rgba(255,255,255,0.85);
+    text-align:center;
+  }
+  footer .fmsg{font-family:'Gowun Batang',serif;font-size:17px;color:#fff;margin-bottom:10px;}
+  footer .fcopy{font-size:12px;color:rgba(255,255,255,0.5);margin-top:14px;}
+
+  /* ---------- 목차(TOC) 인라인 섹션 ---------- */
+  .toc-inline{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:6px 8px;box-shadow:var(--shadow);}
+  .toc-inline a{
+    display:block;padding:10px 12px;font-size:14.5px;color:var(--ink);text-decoration:none;
+    border-bottom:1px solid var(--line);
+  }
+  .toc-inline a:last-child{border-bottom:none;}
+  .toc-inline a span{color:var(--terracotta);font-weight:700;margin-right:6px;}
+
+  /* ---------- 유틸 ---------- */
+  .divider{height:1px;background:var(--line);margin:34px 0 0;}
+  .small{font-size:13px;color:var(--ink-faint);}
+  .center{text-align:center;}
+  .mt0{margin-top:0;}
+
+  @media (min-width:600px){
+    .bento{grid-template-columns:repeat(4,1fr);}
+    .bento .fact.wide{grid-column:span 2;}
+    .hero h1{font-size:36px;}
+    .budget-grid{grid-template-columns:repeat(3,1fr);}
+    .pro-con{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= 상단 고정 내비 ================= -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand"><span class="brand-dot"></span>COSTIERA AMALFITANA GUIDE</div>
+    <button class="menu-btn" onclick="toggleDrawer(true)">☰ 목차</button>
+  </div>
+</div>
+
+<!-- ================= 슬라이드 드로어 (목차) ================= -->
+<div class="drawer-overlay" id="drawerOverlay" onclick="toggleDrawer(false)"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-head">
+    <h3>목차</h3>
+    <button class="drawer-close" onclick="toggleDrawer(false)">✕</button>
+  </div>
+  <nav>
+    <a href="#tldr" onclick="toggleDrawer(false)">핵심 요약 (TL;DR)</a>
+    <a href="#quickfacts" onclick="toggleDrawer(false)">Quick Facts</a>
+    <div class="toc-cat">시즌 · 항공 · 예산</div>
+    <a href="#season" onclick="toggleDrawer(false)">01 · 봄·여름·가을 시즌 비교</a>
+    <a href="#flight" onclick="toggleDrawer(false)">02 · 항공권 &amp; 이동 경로</a>
+    <a href="#budget" onclick="toggleDrawer(false)">03 · 예상 경비 (3단계)</a>
+    <div class="toc-cat">먹고 보고 즐기기</div>
+    <a href="#food" onclick="toggleDrawer(false)">04 · 맛집 &amp; 먹거리</a>
+    <a href="#activity" onclick="toggleDrawer(false)">05 · 액티비티 &amp; 하이킹</a>
+    <a href="#sight" onclick="toggleDrawer(false)">06 · 볼거리 &amp; 명소</a>
+    <a href="#shopping" onclick="toggleDrawer(false)">07 · 쇼핑</a>
+    <div class="toc-cat">실전 준비</div>
+    <a href="#practical" onclick="toggleDrawer(false)">08 · 실용 정보</a>
+    <a href="#couple" onclick="toggleDrawer(false)">09 · 커플 특화 팁</a>
+    <a href="#course" onclick="toggleDrawer(false)">10 · 추천 여행 코스 3안</a>
+    <a href="#checklist" onclick="toggleDrawer(false)">11 · 체크리스트</a>
+    <a href="#caveats" onclick="toggleDrawer(false)">12 · 주의사항</a>
+    <a href="#sources" onclick="toggleDrawer(false)">13 · 참고 출처</a>
+  </nav>
+</div>
+
+<!-- ================= 히어로 ================= -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">COSTIERA AMALFITANA · 커플 여행 가이드</div>
+    <h1>이탈리아 남부,<br>아말피 해안의 시간</h1>
+    <p class="sub">포지타노·아말피·라벨로·카프리를 중심으로 한 커플 6박7일 완전 가이드. 봄·여름·가을, 언제 떠나야 할지부터 항공권·예산·맛집·동선까지 한 문서로 정리해 드립니다.</p>
+    <div class="badge-row">
+      <span class="hbadge">💑 커플 2인</span>
+      <span class="hbadge">🗓️ 6박7일~7박8일</span>
+      <span class="hbadge">🌸☀️🍂 3시즌 비교</span>
+      <span class="hbadge">✈️ 인천 출발</span>
+    </div>
+  </div>
+</div>
+<div class="tile-strip"></div>
+
+<!-- ================= 메타 정보 바 ================= -->
+<div class="meta-bar">
+  <span><b>최초 생성</b> 2026-08-18</span>
+  <span><b>최종 수정</b> 2026-08-18</span>
+  <span><b>작성 관점</b> 커플 6박7일~7박8일, 2026년 봄·여름·가을 비교</span>
+</div>
+
+<div class="wrap">
+
+  <!-- ================= TL;DR ================= -->
+  <section class="block" id="tldr">
+    <div class="tldr">
+      <h2>⭐ 핵심 요약 (TL;DR)</h2>
+      <ul>
+        <li><b>가장 좋은 시즌은 5월과 9월 중순~10월 초입니다.</b> 날씨·항공권·혼잡도의 균형이 가장 좋고, 신들의 오솔길 하이킹과 해변 액티비티를 모두 즐길 수 있습니다.</li>
+        <li><b>7~8월은 날씨는 최고, 혼잡도는 최악입니다.</b> 특히 8월 15일 페라고스토 전후로 아말피 해안도로가 정체되고 숙박료가 급등하니 피하는 것을 권합니다.</li>
+        <li><b>인천-나폴리 직항은 없습니다.</b> 로마 경유 후 고속열차(약 1시간, €9~15)로 나폴리·살레르노로 이동하는 것이 표준 루트입니다.</li>
+        <li><b>2인 7일 총예산은 시즌·등급에 따라 약 550만~2,500만원 이상까지 폭넓게 차이납니다.</b> 항공권 예약 시점(2~3개월 전)이 예산을 가장 크게 좌우합니다.</li>
+        <li><b>렌터카보다 페리·SITA버스·프라이빗 트랜스퍼 조합을 권합니다.</b> 아말피 해안도로는 협소하고 성수기 정체가 심합니다.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= Quick Facts ================= -->
+  <section class="block" id="quickfacts">
+    <h2 style="font-size:18px;color:var(--ink-soft);font-family:'IBM Plex Sans KR',sans-serif;font-weight:700;">QUICK FACTS</h2>
+    <div class="bento">
+      <div class="fact wide accent-sea">
+        <div>
+          <div class="flabel">✈️ 비행시간 (인천 → 로마, 직항)</div>
+          <div class="fvalue">약 13시간 40분</div>
+        </div>
+        <div class="fnote">로마 도착 후 고속열차로<br>나폴리까지 약 1시간 10분 추가</div>
+      </div>
+      <div class="fact accent-lemon">
+        <div class="flabel">🛂 비자</div>
+        <div class="fvalue">무비자 90일</div>
+        <div class="fnote">셍겐 180일 중 90일<br>ETIAS는 2026년 미시행</div>
+      </div>
+      <div class="fact accent-majolica">
+        <div class="flabel">🌡️ 여름 평균기온</div>
+        <div class="fvalue">25.8~30.2°C</div>
+        <div class="fnote">8월 해수온 26°C(연중 최고)</div>
+      </div>
+      <div class="fact accent-terracotta">
+        <div class="flabel">💶 환율 (참고)</div>
+        <div class="fvalue">1€ ≈ 1,640원</div>
+        <div class="fnote">2026년 1월 기준, 출발 전 재확인 필수</div>
+      </div>
+      <div class="fact accent-sea">
+        <div class="flabel">🕐 시차</div>
+        <div class="fvalue">−8시간 (서머타임 −7)</div>
+        <div class="fnote">3월 말~10월 말 서머타임 적용</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 01. 시즌 비교 ================= -->
+  <section class="block" id="season">
+    <h2><span class="num">01</span> 봄 · 여름 · 가을, 언제 떠날까요</h2>
+    <p class="lead">아말피 해안은 지중해성 기후로 사계절 여행이 가능하지만, 시즌마다 날씨·혼잡도·항공권 가격이 크게 다릅니다. 아래 탭을 눌러 시즌별로 비교해 보세요.</p>
+
+    <div class="season-tabs">
+      <button class="season-tab" data-season="spring" data-active="true" onclick="showSeason('spring')">🌸 봄<span class="se">4~5월</span></button>
+      <button class="season-tab" data-season="summer" onclick="showSeason('summer')">☀️ 여름<span class="se">6~8월</span></button>
+      <button class="season-tab" data-season="fall" onclick="showSeason('fall')">🍂 가을<span class="se">9~10월</span></button>
+    </div>
+
+    <!-- 봄 패널 -->
+    <div class="season-panel" data-season="spring" data-active="true">
+      <div class="card t-sea">
+        <h4>🌸 봄(4~5월) <span class="badge free">커플 추천 시즌</span></h4>
+        <p><b>날씨</b>: 최고기온 3월 14.4°C → 5월 21.3°C, 최저 8.3~13.6°C. 봄비가 종종 내리며, 5월은 습도가 연중 최고(약 76%)입니다. 해수온은 아직 차가워 수영에는 다소 이르고, 대신 신들의 오솔길 하이킹 최적기(야생화가 만개)입니다.</p>
+        <p><b>항공권(2인 왕복 추정)</b>: 약 160만~200만원 (인천-로마 직항, shoulder 구간). 정확한 월별 최저가는 데이터 스냅샷상 확인되지 않아 추정치이니 예약 시점에 재확인해 주세요.</p>
+        <p><b>혼잡도</b>: 낮음~보통. 부활절 연휴(4월) 주간은 예외적으로 혼잡할 수 있습니다.</p>
+        <div class="pro-con">
+          <div class="pro"><b>장점</b>하이킹 최적기 · 저렴한 항공권·숙박 · 여유로운 관광 · 신선한 봄 채소·아티초크 요리</div>
+          <div class="con"><b>단점</b>바다 수영엔 다소 추움 · 봄비 가능성 · 일부 시설 시즌 오픈 직후라 운영시간 짧을 수 있음</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 여름 패널 -->
+    <div class="season-panel" data-season="summer">
+      <div class="card t-terracotta">
+        <h4>☀️ 여름(6~8월) <span class="badge hot">최고 성수기</span></h4>
+        <p><b>날씨</b>: 6월 25.8°C → 8월 30.2°C, 최저 8월 21.6°C. 7월이 강수 최저(연중 가장 건조)이며 일조시간도 최대(약 12시간). 해수온은 8월 26°C로 연중 최고, UV지수 8로 강한 자외선 대비가 필요합니다.</p>
+        <p><b>항공권(2인 왕복 추정)</b>: 최저가 기준 7월 약 166만원·8월 약 182만원선이나, 레거시 항공사(대한항공·아시아나) 실구매가는 성수기에 <b>2인 500만~560만원</b>까지 치솟은 사례가 확인됩니다.</p>
+        <p><b>혼잡도</b>: 매우 높음. 특히 8월 15일 페라고스토 전후로 이탈리아 전국민이 휴가를 떠나며, 아말피 코스트가드 기록상 주말 하루 28,000명 이상이 해안을 오간 사례가 있습니다.</p>
+        <div class="callout warn">
+          <b>⚠ 성수기 주의</b>
+          SS163 해안도로(비에트리 술 마레~포지타노 37km)는 여름 성수기에 홀짝 번호판 통행제한이 시행될 정도로 정체가 심합니다. 포지타노 5성 호텔 소유주 살바토레 갈리아노는 이 혼잡을 "제3세계 풍경 같다"고 표현하기도 했습니다. 렌터카는 비추천합니다.
+        </div>
+        <div class="pro-con">
+          <div class="pro"><b>장점</b>완벽한 해변 날씨 · 모든 레스토랑·비치클럽·투어 정상 운영 · 야간까지 활기찬 분위기</div>
+          <div class="con"><b>단점</b>극심한 인파·정체 · 숙박료 급등(성수기 프리미엄 평균 2배 가까이) · 폭염·강한 자외선</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 가을 패널 -->
+    <div class="season-panel" data-season="fall">
+      <div class="card t-lemon">
+        <h4>🍂 가을(9~10월) <span class="badge free">커플 추천 시즌</span></h4>
+        <p><b>날씨</b>: 9월 약 27°C → 10월 17~22°C로 점진 하강. 바다는 여름 동안 데워진 열을 유지해 9월에도 수영하기 좋고, 10월 초까지도 가능합니다. 10월부터 구름과 비가 서서히 늘어납니다.</p>
+        <p><b>항공권(2인 왕복 추정)</b>: 9월이 연중 가장 비싼 달 중 하나로 약 184만원선(추석 연휴 등과 겹치면 더 상승), 10월은 약 156만원선으로 하락합니다.</p>
+        <p><b>혼잡도</b>: 9월 초는 여전히 붐비나 9월 중순부터 빠르게 한산해지고, 현지 투어 업계에서는 <b>9월 중순~30일</b>을 첫 방문 커플에게 최적기로 꼽습니다.</p>
+        <div class="pro-con">
+          <div class="pro"><b>장점</b>따뜻한 바다+선선한 관광 동시 가능 · 황금빛 사진 최적기 · 인파 감소 · 트러플 등 가을 별미</div>
+          <div class="con"><b>단점</b>9월 항공권은 비싼 편(추석 시기 회피 필요) · 10월 중순 이후 우천 증가</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sub-h">시즌 한눈에 비교</h3>
+    <div class="tbl-wrap">
+      <table class="narrow">
+        <tr><th>구분</th><th>봄(4~5월)</th><th>여름(6~8월)</th><th>가을(9~10월)</th></tr>
+        <tr><td>평균 최고기온</td><td class="num">14~21°C</td><td class="num">26~30°C</td><td class="num">17~27°C</td></tr>
+        <tr><td>수영 가능 여부</td><td>다소 추움</td><td>최적(해수온 26°C)</td><td>9월 가능·10월초까지</td></tr>
+        <tr><td>2인 항공권(추정)</td><td class="num">160만~200만원</td><td class="num">330만~560만원</td><td class="num">310만~370만원</td></tr>
+        <tr><td>혼잡도</td><td>낮음~보통</td><td>매우 높음</td><td>9월초 높음→하순 완화</td></tr>
+        <tr><td>추천도(커플)</td><td>★★★★★</td><td>★★★☆☆</td><td>★★★★★</td></tr>
+      </table>
+    </div>
+    <p class="small">* 여름·가을 항공권은 레거시 항공사 실구매 사례를 포함한 범위이며, 경유편 활용 시 더 낮아질 수 있습니다.</p>
+  </section>
+
+  <!-- ================= 02. 항공권 & 이동 ================= -->
+  <section class="block" id="flight">
+    <h2><span class="num">02</span> 항공권 &amp; 이동 경로</h2>
+    <p class="lead">인천에서 나폴리까지 직항은 없습니다. 로마를 경유해 고속열차로 이동하는 것이 가장 합리적입니다.</p>
+
+    <h3 class="sub-h">✈️ 노선 구조</h3>
+    <div class="card t-sea">
+      <p class="mt0"><b>인천 → 로마(FCO)</b>: 대한항공·아시아나·티웨이 3사 직항, 약 13시간 40분. 티웨이는 2024년 8월 로마 취항으로 프로모션 시 레거시 대비 저렴합니다.</p>
+      <p><b>로마 → 나폴리</b>: <span class="badge must">권장</span> 고속열차(프레차로사·이탈로) 약 1시간 10분, 사전예매 €9~15. 또는 ITA항공 국내선 약 55분(편도 약 12만~14만원, 공항 이동시간 고려 시 열차가 유리).</p>
+      <p class="mt0" style="margin-bottom:0;"><b>경유편</b>: 중국동방·중국국제 등 경유 시 총 18~20시간+ 소요되나 직항 대비 약 30~40% 저렴합니다.</p>
+    </div>
+
+    <h3 class="sub-h">💰 시즌별 항공권 가격 (2인 왕복 추정, 원화)</h3>
+    <div class="tbl-wrap">
+      <table class="narrow">
+        <tr><th>시즌</th><th>직항 2인 왕복</th><th>경유 2인 왕복</th><th>비고</th></tr>
+        <tr><td>봄(4~5월)</td><td class="num">160만~200만원</td><td class="num">115만~130만원</td><td>shoulder 구간, 정확한 월별 최저가는 미확인·추정치</td></tr>
+        <tr><td>여름(7월)</td><td class="num">약 166만원~</td><td class="num">약 120만원~</td><td>최저가 기준. 실구매가는 상승 가능</td></tr>
+        <tr><td>여름(8월)</td><td class="num">182만원~560만원</td><td class="num">약 130만원~</td><td>페라고스토 성수기 최고가 포함</td></tr>
+        <tr><td>가을(9월)</td><td class="num">약 184만원~</td><td class="num">약 135만원~</td><td>연중 최고가 편, 추석 겹침 주의</td></tr>
+        <tr><td>가을(10월)</td><td class="num">약 156만원~</td><td class="num">약 115만원~</td><td>가을 중 가장 저렴</td></tr>
+        <tr><td>11월(참고)</td><td class="num">약 155만원~</td><td class="num">-</td><td>연중 최저가 구간</td></tr>
+      </table>
+    </div>
+
+    <div class="callout info">
+      <b>💡 예약 타이밍 팁</b>
+      국제선은 출발 약 2~3개월 전(약 84일 전) 예약 시 평균 10~12% 절감 효과가 있습니다. 일요일에 예약하는 것이 금요일보다 6~13% 저렴한 경향이 있으며, 로마-나폴리 구간 열차는 약 6주 전 예약을 권장합니다.
+    </div>
+
+    <h3 class="sub-h">🚌 공항 → 아말피 해안 이동</h3>
+    <div class="tbl-wrap">
+      <table class="narrow">
+        <tr><th>구간</th><th>방법</th><th>비용(1인)</th><th>소요시간</th></tr>
+        <tr><td>나폴리 공항→소렌토</td><td>Curreri 버스</td><td class="num">€10~13</td><td class="num">약 80분</td></tr>
+        <tr><td>소렌토→포지타노</td><td>SITA 버스</td><td class="num">€2.40</td><td class="num">약 40~50분</td></tr>
+        <tr><td>나폴리 공항→포지타노</td><td>프라이빗 트랜스퍼</td><td class="num">€120~220(차량당)</td><td class="num">약 75~90분</td></tr>
+        <tr><td>로마→포지타노</td><td>프라이빗 트랜스퍼</td><td class="num">€238~500(차량당)</td><td class="num">약 3.5~4시간</td></tr>
+      </table>
+    </div>
+    <p class="small">* SITA 버스 티켓은 차내 구매가 불가능해 매점(타바키)에서 사전 구매해야 합니다.</p>
+
+    <div class="callout warn">
+      <b>🚗 렌터카, 커플에겐 비추천</b>
+      아말피 해안도로(SS163)는 급커브가 많고 매우 협소하며, 포지타노·아말피 시내는 ZTL(차량통제구역)·주차난이 심각합니다. 성수기엔 정체가 극심하니 페리·SITA버스·프라이빗 트랜스퍼 조합을 권해 드립니다. (단, 풀리아 확장 코스를 계획한다면 그 구간만 렌터카가 유용합니다 — 10번 추천 코스 참고)
+    </div>
+  </section>
+
+  <!-- ================= 03. 예상 경비 ================= -->
+  <section class="block" id="budget">
+    <h2><span class="num">03</span> 예상 경비 (2인 7일 기준)</h2>
+    <p class="lead">가성비 · 중급 · 럭셔리 3단계로 정리했습니다. 여름 성수기는 각 단계에서 20~40% 추가 상승할 수 있습니다.</p>
+
+    <div class="budget-grid">
+      <div class="budget-card b1">
+        <div class="btitle">🎒 가성비형</div>
+        <div class="btotal">약 550만~750만원<br><small>2인 · 6박7일 · 항공 포함</small></div>
+        <ul>
+          <li>경유 항공편 활용</li>
+          <li>프라이아노·소렌토 등 인근 숙소</li>
+          <li>로컬 트라토리아·피제리아 위주</li>
+          <li>SITA버스·페리 등 대중교통</li>
+        </ul>
+      </div>
+      <div class="budget-card b2">
+        <div class="btitle">🌊 중급형</div>
+        <div class="btotal">약 900만~1,400만원<br><small>2인 · 6박7일 · 항공 포함</small></div>
+        <ul>
+          <li>직항 항공편</li>
+          <li>4성급·바다뷰 숙소 1~2박 포함</li>
+          <li>중급 레스토랑 + 파인다이닝 1회</li>
+          <li>프라이빗 트랜스퍼 일부 활용</li>
+        </ul>
+      </div>
+      <div class="budget-card b3">
+        <div class="btitle">💎 럭셔리형</div>
+        <div class="btotal">약 2,500만원 이상<br><small>2인 · 6박7일 · 항공 포함</small></div>
+        <ul>
+          <li>직항 프리미엄 이코노미~비즈니스</li>
+          <li>5성 리조트(Le Sirenuse 등급)</li>
+          <li>미슐랭 파인다이닝 중심</li>
+          <li>프라이빗 트랜스퍼·보트투어</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="sub-h">카테고리별 상세 (1박 또는 1회 기준)</h3>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>항목</th><th>가성비</th><th>중급</th><th>럭셔리</th></tr>
+        <tr><td>숙박(1박, 2인)</td><td class="num">€110~200</td><td class="num">€300~500</td><td class="num">€800 이상</td></tr>
+        <tr><td>식사(2인, 1식)</td><td class="num">€20~40</td><td class="num">€60~120</td><td class="num">€200~800</td></tr>
+        <tr><td>공항→아말피 이동</td><td class="num">€12(버스 조합)</td><td class="num">€120~220(트랜스퍼)</td><td class="num">€238~500(프라이빗)</td></tr>
+        <tr><td>현지 액티비티(1회)</td><td class="num">€0~20</td><td class="num">€20~70</td><td class="num">€100~300</td></tr>
+        <tr class="sum"><td>2인 7일 총합(항공 포함)</td><td class="num">약 550만~750만원</td><td class="num">약 900만~1,400만원</td><td class="num">약 2,500만원+</td></tr>
+      </table>
+    </div>
+    <p class="small">* 원화 환산은 1유로≈1,640원(2026년 1월) 기준이며, 항공권 가격 변동이 총 예산에 가장 큰 영향을 줍니다.</p>
+  </section>
+
+  <!-- ================= 04. 맛집 & 먹거리 ================= -->
+  <section class="block" id="food">
+    <h2><span class="num">04</span> 맛집 &amp; 먹거리</h2>
+    <p class="lead">나폴리 피자의 본고장, 그리고 레몬과 해산물이 어우러진 아말피 해안의 맛을 소개합니다.</p>
+
+    <h3 class="sub-h">🍕 나폴리 원조 피자</h3>
+
+    <div class="card t-terracotta">
+      <h4>L'Antica Pizzeria da Michele <span class="badge hot">1870년 원조</span></h4>
+      <p><b>시그니처</b>: 마르게리타 · 마리나라 (딱 2종류만 판매)</p>
+      <div class="meta-line"><b>가격</b> 1인 €5 내외 · <b>팁</b> 번호표 방식, 대기 30분~2시간, 현금 위주</div>
+      <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=L%27Antica+Pizzeria+da+Michele+Napoli" target="_blank" rel="noopener">📍 구글맵에서 보기</a>
+    </div>
+
+    <div class="card t-terracotta">
+      <h4>Gino e Toto Sorbillo <span class="badge michelin">미슐랭 가이드 등재</span></h4>
+      <p><b>위치</b>: Via dei Tribunali 32, 80138 Napoli · 유기농 캄파니아 재료 사용</p>
+      <div class="meta-line"><b>가격</b> 1인 약 €11~13 · <b>영업</b> 월~토 · 피크시간 대기 발생</div>
+      <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=Gino+e+Toto+Sorbillo+Via+dei+Tribunali+32+Napoli" target="_blank" rel="noopener">📍 구글맵에서 보기</a>
+    </div>
+
+    <div class="card t-terracotta">
+      <h4>50 Kalò · Starita · Di Matteo</h4>
+      <p>도우 마니아라면 50 Kalò(정교한 발효 도우), 전통 화덕 스타일은 Starita, 길거리식으로 즐기려면 Di Matteo의 <b>피자 아 포르타폴리오</b>(반으로 접어 종이에 싸주는 길거리 피자, €2 내외)를 추천합니다.</p>
+    </div>
+
+    <h3 class="sub-h">🦐 포지타노 · 아말피 로맨틱 디너 &amp; 해산물</h3>
+
+    <div class="card t-lemon">
+      <h4>La Sponda (Le Sirenuse 호텔) <span class="badge michelin">★ 미슐랭 1스타</span> <span class="badge couple">커플 최고 추천</span></h4>
+      <p>포지타노 최고의 로맨틱 다이닝. 셰프 젠나로 루소가 이끄는 미슐랭 1스타 레스토랑으로, 매일 저녁 서비스 전 약 400개의 촛불을 밝히고 라이브 기타·만돌린 연주가 함께합니다.</p>
+      <div class="meta-line">
+        <b>가격</b> 8코스 테이스팅 €280(+와인페어링 €180) · 커플 디너 예산 1인 €350, 2인 €800 밴드(와인 포함)<br>
+        <b>시간</b> 런치 13:00~14:30 · 디너 19:30~ (라스트 시팅 22:30)<br>
+        <b>드레스코드</b> 세미포멀 (플립플롭 불가) · <b>예약</b> 성수기 1개월 전 권장 · Tel +39 089 875066
+      </div>
+      <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=La+Sponda+Le+Sirenuse+Positano" target="_blank" rel="noopener">📍 구글맵에서 보기</a>
+    </div>
+
+    <div class="card t-lemon">
+      <h4>Da Vincenzo · Il Ritrovo · Saraceno d'Oro</h4>
+      <p>Il Ritrovo는 몬테페르투소 언덕에 위치해 자체 텃밭 재료를 사용하며, Saraceno d'Oro는 현지에서 "포지타노 최고의 피자"로 알려진 가족 운영 식당입니다. 세 곳 모두 La Sponda보다 합리적인 가격(2인 €60~120대)으로 아말피 해안 분위기를 즐길 수 있습니다.</p>
+    </div>
+
+    <h3 class="sub-h">🍋 카프리 맛집</h3>
+    <div class="card t-sea">
+      <h4>Da Paolino (Lemon Trees) <span class="badge hot">셀럽 단골</span></h4>
+      <p>레몬나무 캐노피 아래에서 식사하는 카프리 대표 레스토랑. 시그니처는 레몬소스 라비올리 카프레제, 씨푸드 스칼라티엘리, Bomba di Paolino입니다.</p>
+      <div class="meta-line">
+        <b>가격</b> 프리모 €30~50 · 스테이크 €45<br>
+        <b>영업</b> 4~10월 디너, 4~6월은 런치도 가능 · 11~3월 휴업(예약 필수, 몇 달 전 권장)<br>
+        <b>업데이트</b> 2026년 5월부터 인근 Casa Paolino(Hotel La Canasta)가 신규 오픈했습니다.
+      </div>
+      <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=Da+Paolino+Lemon+Trees+Capri" target="_blank" rel="noopener">📍 구글맵에서 보기</a>
+    </div>
+
+    <h3 class="sub-h">🍰 남부 특산 먹거리</h3>
+    <div class="card t-majolica">
+      <p class="mt0" style="margin-bottom:0;">
+        <b>레몬첼로</b> — 아말피 특산 스푸사토 레몬으로 만든 리큐르, 식후주로 즐깁니다.<br>
+        <b>카프레제 샐러드</b> — 모차렐라·토마토·바질의 캄파니아 원조 조합.<br>
+        <b>스폴리아텔라 · 바바(babà)</b> — 나폴리 대표 페이스트리·럼 케이크.<br>
+        <b>델리치아 알 리모네</b> — 레몬 스펀지케이크, Sal De Riso(미노리) 매장이 특히 유명합니다.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= 05. 액티비티 & 하이킹 ================= -->
+  <section class="block" id="activity">
+    <h2><span class="num">05</span> 액티비티 &amp; 하이킹</h2>
+
+    <div class="card t-sea">
+      <h4>🥾 신들의 오솔길 (Sentiero degli Dei) <span class="badge free">무료</span></h4>
+      <p>보메라노(아제롤라)에서 노첼레까지 약 6.5~8km, 소요 2~5시간(사진 촬영 포함 시 4~5시간)의 중간 난이도 하이킹입니다. <b>보메라노→노첼레 방향</b>(주로 내리막, 전망이 정면으로 보임)을 권장하며, 산불·산사태 시에는 폐쇄될 수 있습니다.</p>
+      <div class="meta-line"><b>최적 시즌</b> 봄·가을 (여름은 더위·그늘 부족으로 비추천) · <b>하산</b> 노첼레→포지타노 약 1,500계단 또는 미니버스 €1.80</div>
+    </div>
+
+    <div class="card t-sea">
+      <h4>🌊 블루그로토 (푸른 동굴, 카프리)</h4>
+      <p>카프리 섬의 상징적인 해식동굴로, 뱃사공이 직접 노를 저어 좁은 입구를 통과합니다.</p>
+      <div class="meta-line"><b>입장료</b> €18(뱃사공 €14 + 지자체·문화부 €4) · <b>개방</b> 3~10월, 해상 조건에 따라 입장 불가 가능 · <b>대기</b> 성수기 최대 2시간, 카프리 보트투어 오픈 바우처는 €26부터</div>
+    </div>
+
+    <div class="card t-lemon">
+      <h4>🌅 라벨로 빌라 루폴로 &amp; 빌라 침브로네</h4>
+      <p>라벨로는 아말피 해안에서 가장 아름다운 일몰 명소로 꼽힙니다. 빌라 침브로네의 "무한의 테라스(Terrazza dell'Infinito)"는 특히 커플에게 추천합니다.</p>
+      <div class="meta-line"><b>입장료</b> 각 €10 · <b>개방</b> 빌라 침브로네 연중 09:00~일몰(마지막 입장 약 19:30) · 예약 불필요, 현장 결제 · 드론·전문 카메라 금지</div>
+    </div>
+
+    <div class="card t-majolica">
+      <h4>🏛️ 폼페이 &amp; 헤르쿨라네움 유적</h4>
+      <p>서기 79년 베수비오 화산 폭발로 묻힌 고대 도시. 반나절이면 핵심을 둘러볼 수 있습니다.</p>
+      <div class="meta-line">
+        <b>폼페이</b> Express €18(고대도시 전체) · Plus €25(신비의 저택 등 교외 빌라 포함)<br>
+        <b>시간대</b> 09:00~13:00(최대 15,000명) / 13:00~17:30(최대 5,000명) · 여권 대조 필수<br>
+        <b>무료입장</b> 매월 첫째 일요일(혼잡 주의) · <b>티켓처</b> 2026년 3월부터 Vivaticket으로 변경<br>
+        <b>헤르쿨라네움</b> €13~16 · <b>콤보</b> 폼페이+헤르쿨라네움 약 €22(48시간 유효)<br>
+        <b>가이드 투어</b>(고고학자 동반) €28부터
+      </div>
+    </div>
+
+    <div class="card t-terracotta">
+      <h4>🏖️ 비치클럽</h4>
+      <p>마이오리·미노리는 €15~40대로 합리적이고, 포지타노는 €25~400까지 가격대가 넓습니다.</p>
+      <div class="meta-line">
+        Lido L'Incanto(Spiaggia Grande, 2인 €40~80) · Arienzo Beach Club(오렌지 선베드, 인생샷 명소) · La Scogliera(고급) · Da Ferdinando(2인 €70~120)<br>
+        <b>예약</b> 6~9월은 사전예약 필수 · <b>업데이트</b> Da Adolfo 인근 비치클럽은 2026년 리노베이션으로 휴업 중입니다.
+      </div>
+    </div>
+
+    <div class="callout info">
+      <b>🇰🇷 한국 OTA 예약 옵션</b>
+      마이리얼트립에 나폴리 출발 카프리+블루그로토 당일투어, 폼페이 반나절/전일 투어, 아말피 해안 당일투어, 로마 출발 나폴리+폼페이 당일투어 등이 있습니다. 클룩·KKday도 카프리·폼페이 상품을 취급하며, 한국인 차량 투어(부오나투어 등)도 운영됩니다.
+    </div>
+  </section>
+
+  <!-- ================= 06. 볼거리 & 명소 ================= -->
+  <section class="block" id="sight">
+    <h2><span class="num">06</span> 볼거리 &amp; 인생샷 스팟</h2>
+    <p class="lead">액티비티 섹션의 하이킹·유적 외에, 마을 자체를 둘러보며 만나는 풍경들입니다.</p>
+
+    <div class="card t-sea">
+      <h4>포지타노 (Positano)</h4>
+      <p>절벽을 따라 파스텔톤 건물이 쌓인 아말피 해안의 상징적인 마을. Spiaggia Grande 해변과, 마욜리카 타일 돔 지붕이 인상적인 산타 마리아 아순타 성당이 중심 포토스팟입니다. 계단식 골목마다 부겐빌레아가 늘어져 있어 사진이 특히 잘 나옵니다.</p>
+    </div>
+
+    <div class="card t-sea">
+      <h4>아말피 타운 (Amalfi)</h4>
+      <p>과거 해양 공화국의 수도. 아말피 대성당(두오모 디 산탄드레아)의 화려한 계단과 무어 양식 회랑이 볼거리이며, 중세 제지 공장이 있던 계곡(발레 델레 페리에레)도 산책하기 좋습니다.</p>
+    </div>
+
+    <div class="card t-lemon">
+      <h4>소렌토 (Sorrento)</h4>
+      <p>아말피 해안의 관문 도시. 타소 광장과 절벽 위 마리나 그란데 항구, 나폴리만 전망이 아름답습니다. 숙박 거점으로도 인기가 높습니다(포지타노 대비 상대적으로 합리적인 가격).</p>
+    </div>
+
+    <div class="card t-majolica">
+      <h4>나폴리 역사지구 (옵션 B 코스)</h4>
+      <p>스파카나폴리(구시가 골목)와 폼페이 유물을 대거 소장한 국립고고학박물관이 대표적입니다. 활기차고 다소 혼잡한 대도시 분위기로, 아말피의 여유로움과는 대조적인 매력이 있습니다.</p>
+    </div>
+
+    <div class="card t-terracotta">
+      <h4>베트리 술 마레 (Vietri sul Mare)</h4>
+      <p>15세기부터 이어진 캄파니아 도자기의 수도. 마을 자체가 화려한 세라믹 타일로 장식되어 있어 걷는 것만으로도 볼거리입니다. (쇼핑 정보는 07번 섹션 참고)</p>
+    </div>
+
+    <div class="callout info">
+      <b>ℹ️ 안내</b>
+      성당·박물관 등 정확한 입장료·운영시간은 시즌과 공휴일에 따라 자주 변동되므로, 방문 전 각 시설 공식 채널로 재확인해 주세요.
+    </div>
+  </section>
+
+  <!-- ================= 07. 쇼핑 ================= -->
+  <section class="block" id="shopping">
+    <h2><span class="num">07</span> 쇼핑</h2>
+
+    <div class="card t-terracotta">
+      <h4>🏺 베트리 술 마레 세라믹</h4>
+      <p>캄파니아 도자기(마욜리카)의 수도로, Corso Umberto I 거리에 도자기·구르메 상점이 밀집해 있습니다. Ceramica Solimene, 콘카 데이 마리니의 Ceramiche Piccadilly가 유명합니다.</p>
+    </div>
+
+    <div class="card t-lemon">
+      <h4>🍋 레몬첼로 &amp; 구르메 식품</h4>
+      <p>포지타노·아말피·소렌토 어디서든 구입 가능합니다. 레몬첼로 외에 건파스타, 앤초비 소스, 올리브유도 인기 기념품입니다.</p>
+    </div>
+
+    <div class="card t-sea">
+      <h4>👞 소렌토 가죽 · 수제 샌들</h4>
+      <p>포지타노의 L'Artigianato Rallo를 비롯해 소렌토 곳곳의 부티크에서 수제 가죽 제품·샌들을 맞춤 제작할 수 있습니다.</p>
+    </div>
+
+    <div class="card t-majolica">
+      <h4>👗 "Moda Positano" &amp; 카프리 액세서리</h4>
+      <p>포지타노는 크로셰 비키니·리넨 드레스·수제 샌들로 유명한 패션 발상지입니다. 카프리에서는 수제 향수와 주얼리도 눈여겨볼 만합니다.</p>
+    </div>
+  </section>
+
+  <!-- ================= 08. 실용 정보 ================= -->
+  <section class="block" id="practical">
+    <h2><span class="num">08</span> 실용 정보</h2>
+
+    <h3 class="sub-h">🛂 비자 &amp; 입국</h3>
+    <div class="card t-sea">
+      <p class="mt0"><b>셍겐 무비자</b>: 한국 여권 소지자는 셍겐 지역에서 180일 중 90일 무비자 체류가 가능합니다.</p>
+      <p><b>ETIAS</b>: 당초 2026년 4분기 시행이 목표였으나, 2026년 7월 EU가 공식 사이트에서 해당 일정을 삭제했고 현실적으로 2027년으로 전망됩니다. 시행 후에도 최소 6개월의 전환기가 예정되어 있어, <b>2026년 여행에는 ETIAS가 사실상 필요하지 않을 가능성이 높습니다.</b> ETIAS 발급을 유료로 대행한다는 사이트는 사기이니 주의하세요.</p>
+      <p class="mt0" style="margin-bottom:0;"><b>EES(입출국시스템)</b>: 2026년 4월 10일부터 전면 가동 중이므로, 입국 시 지문·안면 등 생체정보 등록 절차가 있을 수 있습니다.</p>
+    </div>
+
+    <h3 class="sub-h">🚌 현지 교통</h3>
+    <div class="card t-majolica">
+      <p class="mt0" style="margin-bottom:0;">SITA Sud 버스 시간표, Trenitalia·Italo 앱(고속열차), Travelmar·Alilauro 등 페리 예약 사이트를 미리 확인해 두면 편리합니다. 렌터카는 협소한 해안도로·ZTL·주차난으로 커플 여행에는 권하지 않습니다(02번 섹션 참고).</p>
+    </div>
+
+    <h3 class="sub-h">💳 결제 &amp; 통신</h3>
+    <div class="card t-lemon">
+      <p class="mt0"><b>결제</b>: 카드 결제가 보편적이나, 소규모 피자집·SITA 버스 티켓 구매 시에는 현금이 필요합니다.</p>
+      <p class="mt0" style="margin-bottom:0;"><b>유심/이심</b>: TIM·Vodafone·WindTre 현지 유심 또는 Airalo 등 이심(eSIM) 서비스를 사전에 준비하면 편리합니다.</p>
+    </div>
+
+    <h3 class="sub-h">🚨 치안 &amp; 응급 연락처</h3>
+    <div class="card t-terracotta">
+      <p class="mt0"><b>치안</b>: 아말피 해안 자체는 비교적 안전하나, 나폴리는 중앙역·번화가 소매치기에 주의해야 합니다.</p>
+      <div class="meta-line" style="margin-top:8px;">
+        <b>이탈리아 통합응급번호</b> 112<br>
+        <b>주이탈리아 대한민국 대사관(로마)</b> 나폴리에는 별도 총영사관이 없어 로마 대사관이 아말피 해안 지역을 관할합니다.<br>
+        <b>영사콜센터(24시간)</b> +82-2-3210-0404<br>
+        <b>재외동포청 365</b> +82-2-6747-0404
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 09. 커플 특화 팁 ================= -->
+  <section class="block" id="couple">
+    <h2><span class="num">09</span> 커플 특화 팁</h2>
+
+    <div class="card t-lemon">
+      <h4>🕯️ 로맨틱 디너</h4>
+      <p>포지타노의 La Sponda(약 400개 촛불, 04번 섹션 참고), 카프리의 Da Paolino(레몬나무 아래 다이닝)가 대표적입니다.</p>
+    </div>
+
+    <div class="card t-sea">
+      <h4>🌅 일몰 &amp; 야경 명소</h4>
+      <p>산타 마리아 아순타 성당 위 포지타노 전망대, 라벨로의 빌라 침브로네 "무한의 테라스", 서향으로 트여있는 프라이아노의 비치클럽들이 일몰 명소로 꼽힙니다.</p>
+    </div>
+
+    <div class="card t-majolica">
+      <h4>💆 커플 스파 &amp; 럭셔리 데이패스</h4>
+      <p>Le Sirenuse, Il San Pietro 등 5성 리조트에서 투숙객이 아니어도 이용 가능한 스파·데이패스 상품을 운영하는 경우가 많습니다. 프라이빗 보트투어로 카프리·에메랄드 그로토를 둘러보는 코스도 커플에게 인기입니다.</p>
+    </div>
+
+    <div class="card t-terracotta">
+      <h4>📸 인생샷 스팟</h4>
+      <p>포지타노 계단·부겐빌레아 골목, Arienzo 비치클럽의 오렌지 선베드, 카프리의 파라글리오니 바위가 대표적인 포토스팟입니다.</p>
+    </div>
+  </section>
+
+  <!-- ================= 10. 추천 코스 3안 ================= -->
+  <section class="block" id="course">
+    <h2><span class="num">10</span> 추천 여행 코스 3안</h2>
+    <p class="lead">동선 스타일에 따라 세 가지 조합을 제안합니다.</p>
+
+    <div class="course-card opt-a">
+      <div class="course-head"><h4>옵션 A · 아말피 해안 집중형</h4><span>6박7일 · 이동 최소</span></div>
+      <div class="course-body">
+        <p class="mt0">소렌토 또는 포지타노를 베이스로 삼고 아말피·라벨로·카프리를 당일로 오가는 구성입니다.</p>
+        <div class="pro-con">
+          <div class="pro"><b>장점</b>이동 최소화 · 휴양 집중 · 가장 로맨틱한 구성</div>
+          <div class="con"><b>단점</b>다양성이 다소 부족 · 성수기엔 혼잡·고비용 체감이 큼</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-card opt-b">
+      <div class="course-head"><h4>옵션 B · 아말피 + 나폴리·폼페이</h4><span>7박8일 · 역사+휴양 균형</span></div>
+      <div class="course-body">
+        <p class="mt0">나폴리 1~2박(피자·고고학박물관)과 폼페이·베수비오를 둘러본 뒤 아말피 해안에서 4~5박을 보내는 구성입니다.</p>
+        <div class="pro-con">
+          <div class="pro"><b>장점</b>역사와 휴양의 균형 · 로마 경유 동선과 자연스럽게 연결</div>
+          <div class="con"><b>단점</b>이동이 다소 늘어남</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-card opt-c">
+      <div class="course-head"><h4>옵션 C · 아말피 + 풀리아 확장형</h4><span>7박8일 · 로드트립형</span></div>
+      <div class="course-body">
+        <p class="mt0">아말피 해안 3~4박 후 풀리아(폴리냐노 아 마레·알베로벨로·오스투니·레체)로 이동해 3~4박을 더하는 구성입니다.</p>
+        <div class="pro-con">
+          <div class="pro"><b>장점</b>상대적으로 한산·저렴 · 트룰리·백색 도시 등 독특한 풍경</div>
+          <div class="con"><b>단점</b>나폴리↔바리 이동에 약 3시간 소요 · 렌터카 필요</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 11. 체크리스트 ================= -->
+  <section class="block" id="checklist">
+    <h2><span class="num">11</span> 체크리스트</h2>
+
+    <h3 class="sub-h">🗓️ 예약 타임라인</h3>
+    <ul class="timeline">
+      <li><span class="time-pill">2~3개월 전</span>항공권 예약(가장 큰 절감 구간) · La Sponda 등 인기 레스토랑 예약(성수기 기준)</li>
+      <li><span class="time-pill">1개월 전</span>숙소 확정 · 블루그로토·카프리 보트투어 예약 · 폼페이 시간대 티켓 구매</li>
+      <li><span class="time-pill">2주 전</span>비치클럽 예약(6~9월 방문 시) · 이심(eSIM) 준비 · 로마-나폴리 열차 예약</li>
+      <li><span class="time-pill">전날</span>공항 이동 경로·SITA 버스 시간표 재확인 · 여권·바우처 출력</li>
+      <li><span class="time-pill">도착 후</span>유심/이심 활성화 · 현금(소액) 환전 · SITA 버스 티켓 매점에서 미리 구매</li>
+    </ul>
+
+    <h3 class="sub-h">🧳 짐 체크리스트</h3>
+    <ul class="checklist">
+      <li><span class="cb"></span>여권(유효기간 6개월 이상) · 여행자보험 증서</li>
+      <li><span class="cb"></span>편한 워킹화 (신들의 오솔길·계단이 많은 해안 마을 대비)</li>
+      <li><span class="cb"></span>수영복·래시가드 (여름·초가을 방문 시)</li>
+      <li><span class="cb"></span>선크림·모자·선글라스 (여름 UV지수 8 대비)</li>
+      <li><span class="cb"></span>가벼운 우비·접이식 우산 (봄·10월 이후 강수 대비)</li>
+      <li><span class="cb"></span>세미포멀 의상 1벌 (La Sponda 등 파인다이닝 드레스코드)</li>
+      <li><span class="cb"></span>변환 플러그(C/F 타입) · 보조배터리</li>
+      <li><span class="cb"></span>현금(소액 유로) — SITA 버스·소규모 식당용</li>
+    </ul>
+  </section>
+
+  <!-- ================= 12. 주의사항 ================= -->
+  <section class="block" id="caveats">
+    <h2><span class="num">12</span> 주의사항 (Caveats)</h2>
+    <div class="callout warn">
+      <b>⚠ 가격·일정 정보는 변동될 수 있습니다</b>
+      모든 가격은 2026년 시점 추정치이며 예약 시점에 재확인이 필요합니다. 특히 항공권·숙박은 실시간 변동 폭이 큽니다. 원화 환산은 1유로≈1,640원(2026년 1월) 기준이므로 출발 전 최신 환율을 반드시 확인해 주세요.
+    </div>
+    <div class="callout warn">
+      <b>⚠ 봄 항공권 수치는 추정치입니다</b>
+      봄(4~5월) 인천-로마 항공권의 정확한 월별 최저가는 검색 스냅샷상 확인되지 않아, 성수기와 최저점 사이 shoulder 구간으로 추정해 제시했습니다.
+    </div>
+    <div class="callout warn">
+      <b>⚠ ETIAS 시행 일정은 유동적입니다</b>
+      EU가 공식 일정을 삭제한 상태로, 출발 전 EU 공식 사이트(europa.eu)에서 최신 상태를 재확인해 주세요.
+    </div>
+    <div class="callout warn">
+      <b>⚠ 레스토랑·비치클럽 휴업 정보를 확인하세요</b>
+      Da Adolfo 인근 비치클럽은 2026년 리노베이션으로 휴업 중이며, Da Paolino는 11~3월 휴업합니다. 다수의 아말피 해안 호텔·레스토랑이 겨울철에 휴업하니 비수기 방문 시 개별 확인이 필요합니다.
+    </div>
+  </section>
+
+  <!-- ================= 13. 참고 출처 ================= -->
+  <section class="block" id="sources">
+    <h2><span class="num">13</span> 참고 출처</h2>
+    <ul class="src-list">
+      <li>기상·기후: Weather Atlas, Climate-Data.org, Weather and Climate, WhereIsWarm</li>
+      <li>항공권: 호텔스컴바인, 스투비플래너, 여행신문 실사례 보도</li>
+      <li>숙박·비치클럽: BudgetYourTrip, Momondo, Tripadvisor, Booking 기반 가이드</li>
+      <li>맛집: MICHELIN Guide, Restaurant Guru, ckanani, Doeatbetterexperience, Capri.com</li>
+      <li>액티비티·티켓: Pompeii Tickets, Untold Italy, Bluegrotto.tours, HP Travel(Capri.com)</li>
+      <li>쇼핑: Charming Italy, Praiano Online, exploredbymarta</li>
+      <li>실용 정보: EU 공식 ETIAS 페이지, iVisa, Financial Times 보도, 주이탈리아 대한민국 대사관</li>
+      <li>혼잡도 관련 보도: The Telegraph</li>
+    </ul>
+    <p class="small">본 문서는 2026년 8월 시점 공개 자료를 바탕으로 작성되었으며, 최신 정보는 각 공식 채널에서 재확인하시기 바랍니다.</p>
+  </section>
+
+</div>
+
+<!-- ================= 푸터 ================= -->
+<footer>
+  <div class="fmsg">Buon Viaggio! 🍋</div>
+  <div style="font-size:14px;max-width:420px;margin:0 auto;line-height:1.7;">
+    아말피 해안의 절벽과 레몬 향, 그리고 지중해의 푸른빛이 두 분의 여행을 특별하게 만들어 줄 거예요.<br>즐거운 여행 되세요!
+  </div>
+  <div class="fcopy">이탈리아 남부 아말피 해안 커플 완전 가이드 · 최종 수정 2026-08-18</div>
+</footer>
+
+<script>
+  function toggleDrawer(open){
+    document.getElementById('drawer').classList.toggle('open', open);
+    document.getElementById('drawerOverlay').classList.toggle('open', open);
+  }
+  function showSeason(season){
+    document.querySelectorAll('.season-tab').forEach(function(el){
+      el.setAttribute('data-active', el.getAttribute('data-season') === season ? 'true' : 'false');
+    });
+    document.querySelectorAll('.season-panel').forEach(function(el){
+      el.setAttribute('data-active', el.getAttribute('data-season') === season ? 'true' : 'false');
+    });
+  }
+</script>
+
+</body>
+</html>
